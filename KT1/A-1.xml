@@ -1,0 +1,48 @@
+<!-- slucaj kada je podnosilac ujedno i autor | fizicko lice | jeste delo prerade -->
+
+<zahtev>
+    <naziv></naziv>
+
+    <zavod>
+        <naziv></naziv>
+        <adresa>
+            <grad></grad>
+            <ulica></ulica>
+        </adresa>
+    </zavod>
+
+    <podnosilac>
+        <ime></ime>
+        <prezime></prezime>
+        <adresa>
+            <grad></grad>
+            <ulica></ulica>
+        </adresa>
+        <drzavljanstvo></drzavljanstvo>
+        <telefon></telefon>
+        <email></email>
+        <pseudonim></pseudonim>
+    </podnosilac>
+
+    <autorsko_delo>
+        <naslov alt=""></naslov> <!--alt oznacava alt.naslov--> 
+        <delo_prerade>
+            <naslov></naslov>
+            <originalni_autor></originalni_autor>
+        </delo_prerade>
+        <vrsta></vrsta>
+        <forma_zapisa></forma_zapisa>
+        <stvoreno_u_radnom_odnosu></stvoreno_u_radnom_odnosu>
+        <nacin_koriscenja></nacin_koriscenja>
+    </autorsko_delo>
+
+    <prilozi>
+        <prilog>
+            <naziv></naziv>
+            <sadrzaj></sadrzaj>
+        </prilog>
+    </prilozi>
+    
+    <broj_prijave></broj_prijave>
+    <datum_podnosenja></datum_podnosenja>
+</zahtev>

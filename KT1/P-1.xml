@@ -1,0 +1,125 @@
+<!-- podnosilac -> pravno lice | 3 pronalazaca | zastupnik -> fizicko lice | bez adrese za dostavljanje -->
+
+<zahtev>
+    <naziv></naziv>
+
+    <zavod>
+        <naziv></naziv>
+        <adresa>
+            <drzava></drzava>
+            <grad></grad>
+            <postanski_broj></postanski_broj>
+            <ulica></ulica>
+        </adresa>
+    </zavod>
+
+    <patent>
+        <naziv_pronalaska_srb></naziv_pronalaska_srb>
+        <naziv_pronalaska_eng></naziv_pronalaska_eng>
+    </patent>
+
+    <podnosilac>
+        <poslovno_ime></poslovno_ime>
+
+        <adresa>
+            <drzava></drzava>
+            <grad></grad>
+            <postanski_broj></postanski_broj>
+            <ulica></ulica>
+        </adresa>
+
+        <telefon></telefon>
+        <broj_faksa></broj_faksa>
+        <email></email>
+    </podnosilac>
+
+    <ostali_podnosioci></ostali_podnosioci>
+
+    <pronalazaci>
+
+        <predstavnik>
+            <ime></ime>
+            <prezime></prezime>
+
+            <adresa>
+                <drzava></drzava>
+                <grad></grad>
+                <postanski_broj></postanski_broj>
+                <ulica></ulica>
+            </adresa>
+
+            <telefon></telefon>
+            <broj_faksa></broj_faksa>
+            <email></email>
+        </predstavnik>
+
+        <pronalazac>
+            <ime></ime>
+            <prezime></prezime>
+
+            <adresa>
+                <drzava></drzava>
+                <grad></grad>
+                <postanski_broj></postanski_broj>
+                <ulica></ulica>
+            </adresa>
+
+            <telefon></telefon>
+            <broj_faksa></broj_faksa>
+            <email></email>
+            <naveden></naveden>
+        </pronalazac>
+
+        <pronalazac>
+            <ime></ime>
+            <prezime></prezime>
+
+            <adresa>
+                <drzava></drzava>
+                <grad></grad>
+                <postanski_broj></postanski_broj>
+                <ulica></ulica>
+            </adresa>
+
+            <telefon></telefon>
+            <broj_faksa></broj_faksa>
+            <email></email>
+            <naveden></naveden>    
+        </pronalazac>
+
+    </pronalazaci>
+
+    <zastupnik>
+        <ime></ime>
+        <prezime></prezime>
+
+        <adresa>
+            <grad></grad>
+            <postanski_broj></postanski_broj>
+            <ulica></ulica>
+        </adresa>
+
+        <telefon></telefon>
+        <email></email>
+        <vrsta>zajednicki predstavnik</vrsta>
+    </zastupnik>
+
+    <nacin_dostavljanja></nacin_dostavljanja>
+
+    <prijava>
+        <broj_prijave></broj_prijave>
+        <datum_prijema></datum_prijema>
+        <datum_podnosenja></datum_podnosenja>
+        <priznati_datum_podnosenja></priznati_datum_podnosenja>
+        <vrsta_prijave>dopunska prijava</vrsta_prijave>
+    </prijava>
+
+    <zahtevi_za_priznanje_prava_prvenstva_iz_ranijih_prijava>
+        <zahtev>
+            <broj_prijave></broj_prijave>
+            <datum_podnosenja></datum_podnosenja>
+            <dvoslovna_oznaka tip="drzava"></dvoslovna_oznaka>
+        </zahtev>
+    </zahtevi_za_priznanje_prava_prvenstva_iz_ranijih_prijava>
+
+</zahtev>
