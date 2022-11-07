@@ -1,13 +1,13 @@
 <!-- slucaj kada je podnosilac ujedno i autor | fizicko lice | jeste delo prerade -->
 
 <zahtev>
-    <naziv></naziv>
+    <naziv>ЗАХТЕВ ЗА УНОШЕЊЕ У ЕВИДЕНЦИЈУ И ДЕПОНОВАЊЕ АУТОРСКИХ ДЕЛА</naziv>
 
     <zavod>
-        <naziv></naziv>
+        <naziv>ЗАВОД ЗА ИНТЕЛЕКТУАЛНУ СВОЈИНУ                                             </naziv>
         <adresa>
-            <grad></grad>
-            <ulica></ulica>
+            <grad>Београд</grad>
+            <ulica>Кнегиње Љубице 5</ulica>
         </adresa>
     </zavod>
 
@@ -37,10 +37,7 @@
     </autorsko_delo>
 
     <prilozi>
-        <prilog>
-            <naziv></naziv>
-            <sadrzaj></sadrzaj>
-        </prilog>
+        <primer path="../nekaputanja"></primer>
     </prilozi>
     
     <broj_prijave></broj_prijave>

@@ -1,7 +1,7 @@
+<!-- podnosilac - pravno lice | punomocnik - pravno lice | vise podnosilaca prijave-->
+
 <zahtev>
-    <naziv></naziv>
-    <broj_prijave_ziga></broj_prijave_ziga>
-    <datum_podnosenja_ziga></datum_podnosenja_ziga>
+    <naziv>Zаводу за интелектуалну својину</naziv>
 
     <zavod>
         <naziv></naziv>
@@ -12,20 +12,22 @@
         </adresa>
     </zavod>
 
-    <podnosilac>
-        <poslovno_ime></poslovno_ime>
-
-        <adresa>
-            <drzava></drzava>
-            <grad></grad>
-            <postanski_broj></postanski_broj>
-            <ulica></ulica>
-        </adresa>
-
-        <telefon></telefon>
-        <faks></faks>
-        <email></email>
-    </podnosilac>
+    <podnosioci>
+        <podnosilac>
+            <poslovno_ime></poslovno_ime>
+    
+            <adresa>
+                <drzava></drzava>
+                <grad></grad>
+                <postanski_broj></postanski_broj>
+                <ulica></ulica>
+            </adresa>
+    
+            <telefon></telefon>
+            <faks></faks>
+            <email></email>
+        </podnosilac>
+    </podnosioci>
 
     <punomocnik>
         <poslovno_ime></poslovno_ime>
@@ -43,13 +45,22 @@
     </punomocnik>
 
     <zajednicki_predstavnik>
+        <poslovno_ime></poslovno_ime>
+    
+            <adresa>
+                <drzava></drzava>
+                <grad></grad>
+                <postanski_broj></postanski_broj>
+                <ulica></ulica>
+            </adresa>
+
         <telefon></telefon>
         <faks></faks>
         <email></email>
     </zajednicki_predstavnik>
 
     <zig>
-        <tip_ziga></tip_ziga>
+        <tip_ziga>колективни жиг</tip_ziga>
         <znak>
             <tip_znaka></tip_znaka>
             <izgled_znaka src="putanja_do_slike"></izgled_znaka>
@@ -71,12 +82,14 @@
             <tip_takse></tip_takse>
             <iznos valuta="RSD"></iznos>
         </taksa>
-        <ukupan_iznos></ukupan_iznos>
+        <ukupan_iznos valuta="RSD"></ukupan_iznos>
     </placene_takse>
 
     <prilozi>
         <primerak_znaka src=""></primerak_znaka>
-        <spisak_robe_i_usluga src=""></spisak_robe_i_usluga>
+        <spisak_robe_i_usluga>
+            <roba src=""></roba>
+        </spisak_robe_i_usluga>
         <punomocje src=""></punomocje>
         <generalno_punomocje src=""></generalno_punomocje>
         <punomocje_naknadno_dostavljeno></punomocje_naknadno_dostavljeno>
@@ -84,5 +97,8 @@
         <dokaz_o_pravu_prvenstva src=""></dokaz_o_pravu_prvenstva>
         <dokaz_o_uplati_takse src=""></dokaz_o_uplati_takse>
     </prilozi>
+
+    <broj_prijave_ziga></broj_prijave_ziga>
+    <datum_podnosenja_ziga></datum_podnosenja_ziga>
 
 </zahtev>
