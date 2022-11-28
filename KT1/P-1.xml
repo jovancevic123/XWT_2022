@@ -1,26 +1,26 @@
 <!-- 1 podnosilac ujedno mora imati i punomocnika -> pravno lice | 3 pronalazaca | zastupnik -> fizicko lice | bez adrese za dostavljanje -->
 
 <zahtev>
-    <naziv>ЗАХТЕВ
-        ЗА ПРИЗНАЊЕ ПАТЕНТА
-    </naziv>
+    <naziv> ЗАХТЕВ ЗА ПРИЗНАЊЕ ПАТЕНТА </naziv>
 
     <prijava>
         <broj_prijave></broj_prijave>
         <datum_prijema></datum_prijema>
         <datum_podnosenja></datum_podnosenja>
         <priznati_datum_podnosenja></priznati_datum_podnosenja>
+        <!-- dopunska/izdvojena -->
         <vrsta_prijave>dopunska prijava</vrsta_prijave>
     </prijava>
 
     <zavod>
         <naziv></naziv>
         <adresa>
-            <drzava></drzava>
-            <grad></grad>
-            <postanski_broj></postanski_broj>
-            <ulica></ulica>
-        </adresa>
+                <ulica></ulica>
+                <broj></broj>
+                <postanski_broj></postanski_broj>
+                <mesto></mesto>
+                <drzava></drzava>
+            </adresa>
     </zavod>
 
     <patent>
@@ -29,97 +29,86 @@
     </patent>
 
     <podnosioci>
-        <podnosilac predstavnik="da">
+        <podnosilac pronalazac="da">
             <poslovno_ime></poslovno_ime>
-    
+            <drzavljanstvo></drzavljanstvo>
             <adresa>
-                <drzava></drzava>
-                <grad></grad>
-                <postanski_broj></postanski_broj>
                 <ulica></ulica>
+                <broj></broj>
+                <postanski_broj></postanski_broj>
+                <mesto></mesto>
+                <drzava></drzava>
             </adresa>
     
-            <telefon></telefon>
-            <broj_faksa></broj_faksa>
-            <email></email>
+            <kontakt>
+                <telefon></telefon>
+                <fax></fax>
+                <email></email>
+            </kontakt>
+
         </podnosilac>
     </podnosioci>
 
     <pronalazaci>
 
-        <pronalazac predstavnik="da">
-            <ime></ime>
-            <prezime></prezime>
-    
-            <adresa>
-                <drzava></drzava>
-                <grad></grad>
-                <postanski_broj></postanski_broj>
-                <ulica></ulica>
-            </adresa>
-    
-            <telefon></telefon>
-            <broj_faksa></broj_faksa>
-            <email></email>
-        </pronalazac>
+        <pronalazac prijavljen="ne"> </pronalazac>
 
-        <pronalazac predstavnik="ne">
+        <pronalazac>
             <ime></ime>
             <prezime></prezime>
 
-            <adresa>
-                <drzava></drzava>
-                <grad></grad>
-                <postanski_broj></postanski_broj>
+           <adresa>
                 <ulica></ulica>
+                <broj></broj>
+                <postanski_broj></postanski_broj>
+                <mesto></mesto>
+                <drzava></drzava>
             </adresa>
 
-            <telefon></telefon>
-            <broj_faksa></broj_faksa>
-            <email></email>
-            <naveden></naveden>
-        </pronalazac>
-
-        <pronalazac predstavnik="ne">
-            <ime></ime>
-            <prezime></prezime>
-
-            <adresa>
-                <drzava></drzava>
-                <grad></grad>
-                <postanski_broj></postanski_broj>
-                <ulica></ulica>
-            </adresa>
-
-            <telefon></telefon>
-            <broj_faksa></broj_faksa>
-            <email></email>
-            <naveden></naveden>    
+            <kontakt>
+                <telefon></telefon>
+                <fax></fax>
+                <email></email>
+            </kontakt>
         </pronalazac>
 
     </pronalazaci>
 
+    <!-- Kako nazvati ovaj tag? -->
     <punomocnik_za_zastupanje>
-        <poslovno_ime></poslovno_ime>
+        <uloga></uloga>
 
-        <adresa>
-            <grad></grad>
-            <postanski_broj></postanski_broj>
+       <adresa>
             <ulica></ulica>
+            <broj></broj>
+            <postanski_broj></postanski_broj>
+            <mesto></mesto>
+            <drzava></drzava>
         </adresa>
 
-        <telefon></telefon>
-        <email></email>
+       <kontakt>
+            <telefon></telefon>
+            <fax></fax>
+            <email></email>
+        </kontakt>
     </punomocnik_za_zastupanje>
+
+        <!-- <adresa_dostave> UKOLIKO SE DOSTAVLJANJE VRSI NA DRUGOJ ADRESI OD PREDSTAVNIKOVE(PUNOMOCNIKOVE)
+            <ulica></ulica>
+            <broj></broj>
+            <postanski_broj></postanski_broj>
+            <mesto></mesto>
+            <drzava></drzava>
+        </adresa_dostaveul> -->
 
     <nacin_dostavljanja></nacin_dostavljanja>
 
-    <zahtevi_za_priznanje_prava_prvenstva_iz_ranijih_prijava>
-        <zahtev>
+    <ranije_prijave>
+        <prijava>
             <broj_prijave></broj_prijave>
             <datum_podnosenja></datum_podnosenja>
-            <dvoslovna_oznaka tip="drzava"></dvoslovna_oznaka>
-        </zahtev>
-    </zahtevi_za_priznanje_prava_prvenstva_iz_ranijih_prijava>
+            <dvoslovna_oznaka></dvoslovna_oznaka>
+        </prijava>
+    </ranije_prijave>
 
 </zahtev>
