@@ -28,51 +28,44 @@
         <naziv_pronalaska_eng></naziv_pronalaska_eng>
     </patent>
 
-    <podnosioci>
-        <podnosilac pronalazac="da">
-            <poslovno_ime></poslovno_ime>
-            <drzavljanstvo></drzavljanstvo>
-            <adresa>
-                <ulica></ulica>
-                <broj></broj>
-                <postanski_broj></postanski_broj>
-                <mesto></mesto>
-                <drzava></drzava>
-            </adresa>
-    
-            <kontakt>
-                <telefon></telefon>
-                <fax></fax>
-                <email></email>
-            </kontakt>
+    <podnosilac pronalazac="da">
+        <poslovno_ime></poslovno_ime>
+        <drzavljanstvo></drzavljanstvo>
+        <adresa>
+            <ulica></ulica>
+            <broj></broj>
+            <postanski_broj></postanski_broj>
+            <mesto></mesto>
+            <drzava></drzava>
+        </adresa>
 
-        </podnosilac>
-    </podnosioci>
+        <kontakt>
+            <telefon></telefon>
+            <fax></fax>
+            <email></email>
+        </kontakt>
 
-    <pronalazaci>
+    </podnosilac>
 
-        <pronalazac prijavljen="ne"> </pronalazac>
+    <pronalazac>
+        <ime></ime>
+        <prezime></prezime>
 
-        <pronalazac>
-            <ime></ime>
-            <prezime></prezime>
+        <adresa>
+            <ulica></ulica>
+            <broj></broj>
+            <postanski_broj></postanski_broj>
+            <mesto></mesto>
+            <drzava></drzava>
+        </adresa>
 
-           <adresa>
-                <ulica></ulica>
-                <broj></broj>
-                <postanski_broj></postanski_broj>
-                <mesto></mesto>
-                <drzava></drzava>
-            </adresa>
+        <kontakt>
+            <telefon></telefon>
+            <fax></fax>
+            <email></email>
+        </kontakt>
+    </pronalazac>
 
-            <kontakt>
-                <telefon></telefon>
-                <fax></fax>
-                <email></email>
-            </kontakt>
-        </pronalazac>
-
-    </pronalazaci>
 
     <!-- Kako nazvati ovaj tag? -->
     <punomocnik_za_zastupanje>

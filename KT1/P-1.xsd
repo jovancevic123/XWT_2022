@@ -7,20 +7,8 @@
                 <xs:element name="prijava" type="TPrijava"/>
                 <xs:element name="zavod" type="TZavod"/>
                 <xs:element name="patent" type="TPatent"/>
-                <xs:element name="podnosioci">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="podnosioc"/>
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element name="pronalazaci">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="pronalazac"/>
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
+                <xs:element name="podnosioc" type="TPodnosioc"> </xs:element>
+                <xs:element name="pronalazac" type="TPronalazac"> </xs:element>
                 <xs:element name="polje6" type="TPolje6"/>
                 <xs:element name="ranije_prijave">
                     <xs:complexType>
@@ -118,4 +106,28 @@
             <xs:element name="dvoslovna_oznaka" type="xs:string"/>
         </xs:sequence>
     </xs:complexType>
+    <xs:complexType name="TPronalazac">
+        <xs:sequence>
+            <xs:element ref="adresa"/>
+            <xs:element ref="kontakt"/>
+            <xs:element minOccurs="0" name="drzavljanstvo" type="xs:string"/>
+            <xs:choice>
+                <xs:element name="poslovno_ime"/>
+                <xs:group ref="ImePrezime"/>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TPodnosioc">
+        <xs:complexContent>
+            <xs:extension base="TPronalazac">
+                <xs:attribute name="pronalazac" type="xs:boolean"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:group name="ImePrezime">
+        <xs:sequence>
+            <xs:element name="ime" type="xs:string"/>
+            <xs:element name="prezime" type="xs:string"/>
+        </xs:sequence>
+    </xs:group>
 </xs:schema>
