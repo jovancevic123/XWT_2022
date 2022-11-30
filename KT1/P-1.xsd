@@ -6,10 +6,10 @@
             <xs:sequence>
                 <xs:element name="prijava" type="TPrijava"/>
                 <xs:element name="zavod" type="TZavod"/>
-                <xs:element name="patent" type="TPatent"/>
-                <xs:element name="podnosioc" type="TPodnosioc"> </xs:element>
+                <xs:element name="pronalazak" type="TPronalazak"/>
+                <xs:element name="podnosilac" type="TPodnosilac"> </xs:element>
                 <xs:element name="pronalazac" type="TPronalazac"> </xs:element>
-                <xs:element name="polje6" type="TPolje6"/>
+                <xs:element name="punomoc" type="Punomoc"/>
                 <xs:element name="ranije_prijave">
                     <xs:complexType>
                         <xs:sequence>
@@ -30,12 +30,10 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-    <xs:element name="adresa" type="TAdresa"/>
     <xs:complexType name="TPrijava">
         <xs:sequence>
             <xs:element name="broj_prijave" type="xs:positiveInteger"/>
             <xs:element name="datum_prijema" type="xs:date"/>
-            <xs:element name="datum_podnosenja" type="xs:date"/>
             <xs:element name="priznati_datum_podnosenja" type="xs:date"/>
             <xs:element name="vrsta_prijave">
                 <xs:simpleType>
@@ -45,32 +43,29 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:element>
+            <xs:element minOccurs="0" name="broj_prvobitne_prijave" type="xs:positiveInteger"/>
+            <xs:element minOccurs="0" name="datum_podnosenja_prvobitne_prijave" type="xs:date"/>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="TZavod">
         <xs:sequence>
             <xs:element name="naziv" type="xs:string"/>
-            <xs:element ref="adresa"/>
+            <xs:element name="adresa" type="TAdresa"/>
         </xs:sequence>
     </xs:complexType>
-    <xs:complexType name="TPatent">
+    <xs:complexType name="TPronalazak">
         <xs:sequence>
             <xs:element name="naziv_pronalaska_srb" type="xs:string"/>
             <xs:element name="naziv_pronalaska_eng" type="xs:string"/>
         </xs:sequence>
     </xs:complexType>
-    <xs:element name="kontakt">
-        <xs:complexType>
-            <xs:all>
-                <xs:element name="telefon" type="xs:string"/>
-                <xs:element name="email" type="xs:string"/>
-                <xs:element minOccurs="0" name="fax" type="xs:string"/>
-            </xs:all>
-        </xs:complexType>
-    </xs:element>
-    <xs:complexType name="TPolje6">
+    <xs:complexType name="Punomoc">
         <xs:sequence>
-            <xs:element name="uloga">
+            <xs:choice>
+                <xs:element name="poslovno_ime"/>
+                <xs:group ref="ImePrezime"/>
+            </xs:choice>
+            <xs:element name="tip">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
                         <xs:enumeration value="punomocnik_za_zastupanje"/>
@@ -79,8 +74,8 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:element>
-            <xs:element ref="adresa"/>
-            <xs:element ref="kontakt"/>
+            <xs:element name="adresa" type="TAdresa"/>
+            <xs:element name="kontakt" type="TKontakt"/>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="TAdresa">
@@ -107,19 +102,18 @@
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="TPronalazac">
-        <xs:sequence>
-            <xs:element ref="adresa"/>
-            <xs:element ref="kontakt"/>
-            <xs:element minOccurs="0" name="drzavljanstvo" type="xs:string"/>
-            <xs:choice>
-                <xs:element name="poslovno_ime"/>
-                <xs:group ref="ImePrezime"/>
-            </xs:choice>
-        </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="TPodnosioc">
         <xs:complexContent>
-            <xs:extension base="TPronalazac">
+            <xs:extension base="TLice">
+                <xs:attribute name="naveden_u_prijavi" type="xs:boolean"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="TPodnosilac">
+        <xs:complexContent>
+            <xs:extension base="TLice">
+                <xs:sequence>
+                    <xs:element name="drzavljanstvo" type="xs:string"/>
+                </xs:sequence>
                 <xs:attribute name="pronalazac" type="xs:boolean"/>
             </xs:extension>
         </xs:complexContent>
@@ -130,4 +124,21 @@
             <xs:element name="prezime" type="xs:string"/>
         </xs:sequence>
     </xs:group>
+    <xs:complexType name="TKontakt">
+        <xs:all>
+            <xs:element name="telefon" type="xs:string"/>
+            <xs:element name="email" type="xs:string"/>
+            <xs:element minOccurs="0" name="fax" type="xs:string"/>
+        </xs:all>
+    </xs:complexType>
+    <xs:complexType abstract="true" name="TLice">
+        <xs:sequence>
+            <xs:element name="adresa" type="TAdresa"/>
+            <xs:element name="kontakt" type="TKontakt"/>
+            <xs:choice>
+                <xs:element name="poslovno_ime"/>
+                <xs:group ref="ImePrezime"/>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
 </xs:schema>

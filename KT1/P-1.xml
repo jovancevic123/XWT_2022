@@ -6,10 +6,11 @@
     <prijava>
         <broj_prijave></broj_prijave>
         <datum_prijema></datum_prijema>
-        <datum_podnosenja></datum_podnosenja>
         <priznati_datum_podnosenja></priznati_datum_podnosenja>
         <!-- dopunska/izdvojena -->
-        <vrsta_prijave>dopunska prijava</vrsta_prijave>
+        <vrsta_prijave>dopunska</vrsta_prijave>
+        <broj_prvobitne_prijave></broj_prvobitne_prijave>
+        <datum_podnosenja_prvobitne_prijave></datum_podnosenja_prvobitne_prijave>
     </prijava>
 
     <zavod>
@@ -23,10 +24,10 @@
             </adresa>
     </zavod>
 
-    <patent>
+    <pronalazak>
         <naziv_pronalaska_srb></naziv_pronalaska_srb>
         <naziv_pronalaska_eng></naziv_pronalaska_eng>
-    </patent>
+    </pronalazak>
 
     <podnosilac pronalazac="da">
         <poslovno_ime></poslovno_ime>
@@ -66,10 +67,10 @@
         </kontakt>
     </pronalazac>
 
-
-    <!-- Kako nazvati ovaj tag? -->
-    <punomocnik_za_zastupanje>
-        <uloga></uloga>
+    <punomoc>
+    
+        <poslovno_ime></poslovno_ime>
+        <tip></tip>
 
        <adresa>
             <ulica></ulica>
@@ -84,7 +85,7 @@
             <fax></fax>
             <email></email>
         </kontakt>
-    </punomocnik_za_zastupanje>
+    </punomoc>
 
         <!-- <adresa_dostave> UKOLIKO SE DOSTAVLJANJE VRSI NA DRUGOJ ADRESI OD PREDSTAVNIKOVE(PUNOMOCNIKOVE)
             <ulica></ulica>
@@ -97,11 +98,11 @@
     <nacin_dostavljanja></nacin_dostavljanja>
 
     <ranije_prijave>
-        <prijava>
+        <ranija_prijava>
             <broj_prijave></broj_prijave>
             <datum_podnosenja></datum_podnosenja>
             <dvoslovna_oznaka></dvoslovna_oznaka>
-        </prijava>
+        </ranija_prijava>
     </ranije_prijave>
 
 </zahtev>
