@@ -1,85 +1,82 @@
 <!-- podnosilac - pravno lice | punomocnik - pravno lice | vise podnosilaca prijave-->
 
 <zahtev>
-    <naziv>Zаводу за интелектуалну својину</naziv>
+    <naziv>ЗАХТЕВ ЗА ПРИЗНАЊЕ ЖИГА</naziv>
 
     <zavod>
         <naziv></naziv>
         <adresa>
-            <grad></grad>
-            <postanski_broj></postanski_broj>
             <ulica></ulica>
+            <broj></broj>
+            <postanski_broj></postanski_broj>
+            <mesto></mesto>
+            <drzava></drzava>
         </adresa>
     </zavod>
 
-    <podnosioci>
-        <podnosilac>
-            <poslovno_ime></poslovno_ime>
-    
-            <adresa>
-                <drzava></drzava>
-                <grad></grad>
-                <postanski_broj></postanski_broj>
-                <ulica></ulica>
-            </adresa>
-    
+    <podnosilac>
+        <poslovno_ime></poslovno_ime>
+
+        <adresa>
+            <ulica></ulica>
+            <broj></broj>
+            <postanski_broj></postanski_broj>
+            <mesto></mesto>
+            <drzava></drzava>
+        </adresa>
+
+        <kontakt>
             <telefon></telefon>
-            <faks></faks>
+            <fax></fax>
             <email></email>
-        </podnosilac>
-    </podnosioci>
+        </kontakt>
+    </podnosilac>
 
     <punomocnik>
         <poslovno_ime></poslovno_ime>
 
         <adresa>
-            <drzava></drzava>
-            <grad></grad>
-            <postanski_broj></postanski_broj>
             <ulica></ulica>
+            <broj></broj>
+            <postanski_broj></postanski_broj>
+            <mesto></mesto>
+            <drzava></drzava>
         </adresa>
 
-        <telefon></telefon>
-        <faks></faks>
-        <email></email>
+        <kontakt>
+            <telefon></telefon>
+            <fax></fax>
+            <email></email>
+        </kontakt>
     </punomocnik>
-
-    <zajednicki_predstavnik>
-        <poslovno_ime></poslovno_ime>
-    
-            <adresa>
-                <drzava></drzava>
-                <grad></grad>
-                <postanski_broj></postanski_broj>
-                <ulica></ulica>
-            </adresa>
-
-        <telefon></telefon>
-        <faks></faks>
-        <email></email>
-    </zajednicki_predstavnik>
 
     <zig>
         <tip_ziga>колективни жиг</tip_ziga>
         <znak>
-            <tip_znaka></tip_znaka>
+            <tip_znaka>комбиновани знак</tip_znaka>
             <izgled_znaka src="putanja_do_slike"></izgled_znaka>
             <boje>
                 <boja></boja>
             </boje>
             <transliteracija_znaka></transliteracija_znaka>
             <prevod_znaka></prevod_znaka>
-            <opis_znaka></opis_znaka>
+            <opis_znaka>остали знакови</opis_znaka>
         </znak>
         <brojevi_klasa_robe>
             <broj></broj>
         </brojevi_klasa_robe>
         <zatrazeno_pravo></zatrazeno_pravo>
+        <broj_prijave_ziga></broj_prijave_ziga>
+        <datum_podnosenja_ziga></datum_podnosenja_ziga>
     </zig>
 
     <placene_takse>
         <taksa>
-            <tip_takse></tip_takse>
+            <tip_takse>основна такса</tip_takse>
+            <iznos valuta="RSD"></iznos>
+        </taksa>
+        <taksa>
+            <tip_takse>за графичко решење</tip_takse>
             <iznos valuta="RSD"></iznos>
         </taksa>
         <ukupan_iznos valuta="RSD"></ukupan_iznos>
@@ -97,8 +94,5 @@
         <dokaz_o_pravu_prvenstva src=""></dokaz_o_pravu_prvenstva>
         <dokaz_o_uplati_takse src=""></dokaz_o_uplati_takse>
     </prilozi>
-
-    <broj_prijave_ziga></broj_prijave_ziga>
-    <datum_podnosenja_ziga></datum_podnosenja_ziga>
 
 </zahtev>

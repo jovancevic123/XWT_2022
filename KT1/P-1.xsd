@@ -136,7 +136,7 @@
             <xs:element name="adresa" type="TAdresa"/>
             <xs:element name="kontakt" type="TKontakt"/>
             <xs:choice>
-                <xs:element name="poslovno_ime"/>
+                <xs:element name="poslovno_ime" type="xs:string"/>
                 <xs:group ref="ImePrezime"/>
             </xs:choice>
         </xs:sequence>
