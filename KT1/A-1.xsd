@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://www.ftn.uns.ac.rs/xwt" xmlns="http://www.ftn.uns.ac.rs/xwt">
 
     <xs:element name="zahtev">
         <xs:complexType>
@@ -58,10 +59,7 @@
             <xs:element name="forma_zapisa_dela" type="xs:string"/>
             <xs:element name="stvoreno_u_radnom_odnosu">
                 <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:enumeration value="da"/>
-                        <xs:enumeration value="ne"/>
-                    </xs:restriction>
+                    <xs:restriction base="xs:boolean"> </xs:restriction>
                 </xs:simpleType>
             </xs:element>
             <xs:element name="nacin_koriscenja" type="xs:string"/>
@@ -75,10 +73,7 @@
             </xs:element>
             <xs:element name="anoniman_autor">
                 <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:enumeration value="da"/>
-                        <xs:enumeration value="ne"/>
-                    </xs:restriction>
+                    <xs:restriction base="xs:boolean"> </xs:restriction>
                 </xs:simpleType>
             </xs:element>
         </xs:sequence>
@@ -122,18 +117,8 @@
         </xs:all>
     </xs:complexType>
     <xs:complexType name="TPodnosilac">
-        <xs:complexContent>
-            <xs:extension base="TLice">
-                <xs:attribute name="podnosilac_je_autor">
-                    <xs:simpleType>
-                        <xs:restriction base="xs:string">
-                            <xs:enumeration value="da"/>
-                            <xs:enumeration value="ne"/>
-                        </xs:restriction>
-                    </xs:simpleType>
-                </xs:attribute>
-            </xs:extension>
-        </xs:complexContent>
+        <xs:choice/>
+        <xs:attribute name="podnosilac_je_autor" type="xs:boolean"> </xs:attribute>
     </xs:complexType>
     <xs:complexType name="TPrilog">
         <xs:attribute name="vrsta_priloga"/>
