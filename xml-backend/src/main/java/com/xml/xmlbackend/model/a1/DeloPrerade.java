@@ -1,6 +1,7 @@
 package com.xml.xmlbackend.model.a1;
 
 import javax.xml.bind.annotation.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,4 +18,19 @@ public class DeloPrerade {
     @XmlElement(name="autor", required=true)
     private List<Autor> autori = new ArrayList<Autor>();
 
+    public String getNaslovDelaPrerade() {
+        return naslovDelaPrerade;
+    }
+
+    public void setNaslovDelaPrerade(String naslovDelaPrerade) {
+        this.naslovDelaPrerade = naslovDelaPrerade;
+    }
+
+    public List<Autor> getAutori() {
+        return autori;
+    }
+
+    public void setAutori(List<Autor> autori) {
+        this.autori = autori;
+    }
 }

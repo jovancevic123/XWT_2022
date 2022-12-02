@@ -1,13 +1,18 @@
 package com.xml.xmlbackend.model.a1;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
+
 
 @XmlTransient
-@XmlSeeAlso({FizickoLice.class, PravnoLice.class})
 public abstract class Lice{
-    @XmlElement(required = true)
-    private Kontakt kontakt;
+
+    protected Kontakt kontakt;
+
+    public Kontakt getKontakt() {
+        return kontakt;
+    }
+
+    public void setKontakt(Kontakt kontakt) {
+        this.kontakt = kontakt;
+    }
 }

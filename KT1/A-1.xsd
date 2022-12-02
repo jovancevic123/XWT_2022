@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-    targetNamespace="http://www.ftn.uns.ac.rs/xwt" xmlns="http://www.ftn.uns.ac.rs/xwt">
+    targetNamespace="http://www.ftn.uns.ac.rs/xwt" xmlns:zah="http://www.ftn.uns.ac.rs/xwt">
 
     <xs:element name="zahtev">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="prijava" type="TPrijava"/>
-                <xs:element name="podnosilac" type="TPodnosilac"/>
-                <xs:element minOccurs="0" name="punomocnik" type="TLice"/>
-                <xs:element name="autorsko_delo" type="TAutorskoDelo"/>
+                <xs:element name="prijava" type="zah:TPrijava"/>
+                <xs:element name="podnosilac" type="zah:TPodnosilac"/>
+                <xs:element minOccurs="0" name="punomocnik" type="zah:TLice"/>
+                <xs:element name="autorsko_delo" type="zah:TAutorskoDelo"/>
                 <xs:element name="prilozi">
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element maxOccurs="unbounded" name="prilog" type="TPrilog"/>
+                            <xs:element maxOccurs="unbounded" name="prilog" type="zah:TPrilog"/>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
+                <xs:element name="zavod" type="zah:TZavod"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
     <xs:complexType abstract="true" name="TLice">
         <xs:sequence>
-            <xs:element name="kontakt" type="TKontakt"/>
+            <xs:element name="kontakt" type="zah:TKontakt"/>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="TPrijava">
@@ -32,7 +33,7 @@
     </xs:complexType>
     <xs:complexType name="TFizickoLice">
         <xs:complexContent>
-            <xs:extension base="TLice">
+            <xs:extension base="zah:TLice">
                 <xs:sequence>
                     <xs:element name="ime" type="xs:string"/>
                     <xs:element name="prezime" type="xs:string"/>
@@ -43,7 +44,7 @@
     </xs:complexType>
     <xs:complexType name="TPravnoLice">
         <xs:complexContent>
-            <xs:extension base="TLice">
+            <xs:extension base="zah:TLice">
                 <xs:sequence>
                     <xs:element name="poslovno_ime" type="xs:string"/>
                     <xs:element name="sediste" type="xs:string"/>
@@ -54,7 +55,7 @@
     <xs:complexType name="TAutorskoDelo">
         <xs:sequence>
             <xs:element name="naslov" type="xs:string"/>
-            <xs:element name="delo_prerade" type="TDeloPrerade"/>
+            <xs:element name="delo_prerade" type="zah:TDeloPrerade"/>
             <xs:element name="vrsta_dela" type="xs:string"/>
             <xs:element name="forma_zapisa_dela" type="xs:string"/>
             <xs:element name="stvoreno_u_radnom_odnosu">
@@ -67,7 +68,7 @@
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element form="qualified" maxOccurs="unbounded" name="autor"
-                            type="TAutor"/>
+                            type="zah:TAutor"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -81,10 +82,10 @@
     <xs:complexType name="TDeloPrerade">
         <xs:sequence>
             <xs:element name="naslov_dela_prerade" type="xs:string"/>
-            <xs:element name="autori">
+            <xs:element name="autori" minOccurs="0">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element maxOccurs="unbounded" name="autor" type="TAutor"/>
+                        <xs:element maxOccurs="unbounded" name="autor" type="zah:TAutor"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -92,10 +93,10 @@
     </xs:complexType>
     <xs:complexType name="TAutor">
         <xs:complexContent>
-            <xs:extension base="TFizickoLice">
+            <xs:extension base="zah:TFizickoLice">
                 <xs:sequence>
-                    <xs:element name="adresa" type="TAdresa"/>
-                    <xs:element name="pseudonim" type="xs:string"/>
+                    <xs:element name="adresa" type="zah:TAdresa"/>
+                    <xs:element name="pseudonim" type="xs:string" minOccurs="0"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -116,10 +117,6 @@
             <xs:element name="drzava" type="xs:string"/>
         </xs:all>
     </xs:complexType>
-    <xs:complexType name="TPodnosilac">
-        <xs:choice/>
-        <xs:attribute name="podnosilac_je_autor" type="xs:boolean"> </xs:attribute>
-    </xs:complexType>
     <xs:complexType name="TPrilog">
         <xs:attribute name="vrsta_priloga"/>
         <xs:attribute name="src"/>
@@ -130,5 +127,17 @@
             <xs:element name="email" type="xs:string"/>
             <xs:element minOccurs="0" name="fax" type="xs:string"/>
         </xs:all>
+    </xs:complexType>
+    <xs:complexType name="TZavod">
+        <xs:sequence>
+            <xs:element name="naziv" type="xs:string"/>
+            <xs:element name="adresa" type="zah:TAdresa"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TPodnosilac">
+        <xs:sequence>
+            <xs:element name="lice" type="zah:TLice"/>
+        </xs:sequence>
+        <xs:attribute name="podnosilac_je_autor" type="xs:boolean"> </xs:attribute>
     </xs:complexType>
 </xs:schema>

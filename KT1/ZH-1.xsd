@@ -7,8 +7,8 @@
             <xs:sequence>
                 <xs:element name="naziv" type="xs:string"/>
                 <xs:element name="zavod" type="TZavod"/>
-                <xs:element name="podnosilac" type="TPodnosilac"/>
-                <xs:element name="punomocnik" type="TPunomocnik"/>
+                <xs:element name="podnosilac" type="TLice"/>
+                <xs:element name="punomocnik" type="TLice"/>
                 <xs:element name="zig" type="TZig"/>
                 <xs:element name="placene_takse">
                     <xs:complexType>
@@ -50,37 +50,11 @@
             <xs:element minOccurs="0" name="fax" type="xs:string"/>
         </xs:all>
     </xs:complexType>
-    <xs:group name="ImePrezime">
-        <xs:sequence>
-            <xs:element name="ime" type="xs:string"/>
-            <xs:element name="prezime" type="xs:string"/>
-        </xs:sequence>
-    </xs:group>
-    <xs:group name="transIPrevod">
-        <xs:sequence>
-            <xs:element name="transliteracija_znaka" type="xs:string"/>
-            <xs:element name="prevod_znaka" type="xs:string"/>
-        </xs:sequence>
-    </xs:group>
     <xs:complexType abstract="true" name="TLice">
         <xs:sequence>
             <xs:element name="adresa" type="TAdresa"/>
             <xs:element name="kontakt" type="TKontakt"/>
-            <xs:choice>
-                <xs:element name="poslovno_ime" type="xs:string"/>
-                <xs:group ref="ImePrezime"/>
-            </xs:choice>
         </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="TPunomocnik">
-        <xs:complexContent>
-            <xs:extension base="TLice"/>
-        </xs:complexContent>
-    </xs:complexType>
-    <xs:complexType name="TPodnosilac">
-        <xs:complexContent>
-            <xs:extension base="TLice"/>
-        </xs:complexContent>
     </xs:complexType>
     <xs:complexType name="TZnak">
         <xs:sequence>
@@ -111,18 +85,9 @@
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-            <xs:choice>
-                <xs:group ref="transIPrevod"/>
-            </xs:choice>
-            <xs:element name="opis_znaka">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:enumeration value="cirilicni_znak"/>
-                        <xs:enumeration value="latinicni_znak"/>
-                        <xs:enumeration value="ostali_znakovi"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
+            <xs:element name="opis_znaka" type="xs:string"> </xs:element>
+            <xs:element name="transliteracija_znaka" type="xs:string" minOccurs="0"/>
+            <xs:element name="prevod_znaka" type="xs:string" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="TZig">
@@ -216,7 +181,15 @@
                     </xs:simpleContent>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="punomocje_naknadno_dostavljeno" type="xs:string"/>
+            <xs:element name="punomocje_naknadno_dostavljeno">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute name="src"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
             <xs:element name="opsti_akt">
                 <xs:complexType>
                     <xs:simpleContent>
@@ -245,5 +218,24 @@
                 </xs:complexType>
             </xs:element>
         </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TFizickoLice">
+        <xs:complexContent>
+            <xs:extension base="TLice">
+                <xs:sequence>
+                    <xs:element name="ime" type="xs:string"/>
+                    <xs:element name="prezime" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="TPravnoLice">
+        <xs:complexContent>
+            <xs:extension base="TLice">
+                <xs:sequence>
+                    <xs:element name="poslovno_ime" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
 </xs:schema>

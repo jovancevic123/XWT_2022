@@ -1,14 +1,33 @@
 package com.xml.xmlbackend.model.a1;
 
+
 import javax.xml.bind.annotation.*;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-        "podnosilacJeAutor"
+        "podnosilacJeAutor", "lice"
 })
-public class Podnosilac extends Lice{
+public class Podnosilac{
 
-    @XmlAttribute(required=true, name = "podnosilac_je_autor")
+    @XmlAttribute(required=false, name = "podnosilac_je_autor")
     private String podnosilacJeAutor;
 
+    @XmlElement(required = true)
+    private Lice lice;
+
+    public String getPodnosilacJeAutor() {
+        return podnosilacJeAutor;
+    }
+
+    public void setPodnosilacJeAutor(String podnosilacJeAutor) {
+        this.podnosilacJeAutor = podnosilacJeAutor;
+    }
+
+    public Lice getLice() {
+        return lice;
+    }
+
+    public void setLice(Lice lice) {
+        this.lice = lice;
+    }
 }

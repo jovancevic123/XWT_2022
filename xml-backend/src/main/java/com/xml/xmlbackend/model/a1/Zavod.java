@@ -2,17 +2,24 @@ package com.xml.xmlbackend.model.a1;
 
 import javax.xml.bind.annotation.*;
 
-
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-        "adresa", "pseudonim"
+        "naziv", "adresa"
 })
-public class Autor extends FizickoLice{
+public class Zavod {
+    @XmlElement(required=true)
+    private String naziv;
+
     @XmlElement(required=true)
     private Adresa adresa;
 
-    @XmlElement(required=false)
-    private String pseudonim;
+    public String getNaziv() {
+        return naziv;
+    }
+
+    public void setNaziv(String naziv) {
+        this.naziv = naziv;
+    }
 
     public Adresa getAdresa() {
         return adresa;
@@ -20,13 +27,5 @@ public class Autor extends FizickoLice{
 
     public void setAdresa(Adresa adresa) {
         this.adresa = adresa;
-    }
-
-    public String getPseudonim() {
-        return pseudonim;
-    }
-
-    public void setPseudonim(String pseudonim) {
-        this.pseudonim = pseudonim;
     }
 }

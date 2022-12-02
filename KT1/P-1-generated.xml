@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<zahtev xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="file:/C:/Users/Joco/Desktop/IV/XML/Projekat/XWT_2022/KT1/P-1.xsd">
+<zahtev xmlns="http://www.ftn.uns.ac.rs/xwt"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.ftn.uns.ac.rs/xwt P-1.xsd">
     <prijava>
         <broj_prijave></broj_prijave>
         <datum_prijema></datum_prijema>
@@ -49,6 +50,7 @@
         </kontakt>
     </pronalazac>
     <punomoc>
+        <poslovno_ime></poslovno_ime>
         <tip></tip>
         <adresa>
             <ulica></ulica>

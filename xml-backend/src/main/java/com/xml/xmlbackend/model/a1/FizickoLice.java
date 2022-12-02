@@ -1,21 +1,51 @@
 package com.xml.xmlbackend.model.a1;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
-
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name="", propOrder={"ime", "prezime", "drzavljanstvo"})
+@XmlAccessorType(XmlAccessType.PROPERTY)
+@XmlType(name="TFizickoLice", propOrder={"kontakt", "ime", "prezime", "drzavljanstvo"})
 public class FizickoLice extends Lice{
 
-    @XmlElement(required = true)
     private String ime;
 
-    @XmlElement(required = true)
     private String prezime;
 
-    @XmlElement(required = true)
     private String drzavljanstvo;
+
+    @Override
+    @XmlElement(required = true)
+    public Kontakt getKontakt() {
+        return super.kontakt;
+    }
+    @Override
+    public void setKontakt(Kontakt kontakt) {
+        this.kontakt = kontakt;
+    }
+
+    @XmlElement(required = true)
+    public String getIme() {
+        return ime;
+    }
+
+    public void setIme(String ime) {
+        this.ime = ime;
+    }
+
+    @XmlElement(required = true)
+    public String getPrezime() {
+        return prezime;
+    }
+
+    public void setPrezime(String prezime) {
+        this.prezime = prezime;
+    }
+
+    @XmlElement(required = true)
+    public String getDrzavljanstvo() {
+        return drzavljanstvo;
+    }
+
+    public void setDrzavljanstvo(String drzavljanstvo) {
+        this.drzavljanstvo = drzavljanstvo;
+    }
 }
