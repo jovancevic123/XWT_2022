@@ -1,26 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-    targetNamespace="http://www.ftn.uns.ac.rs/xwt" xmlns="http://www.ftn.uns.ac.rs/xwt">
+    targetNamespace="http://www.ftn.uns.ac.rs/xwt" xmlns:zh-1="http://www.ftn.uns.ac.rs/xwt">
 
     <xs:element name="zahtev">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="naziv" type="xs:string"/>
-                <xs:element name="zavod" type="TZavod"/>
-                <xs:element name="podnosilac" type="TLice"/>
-                <xs:element name="punomocnik" type="TLice"/>
-                <xs:element name="zig" type="TZig"/>
+                <xs:element name="zavod" type="zh-1:TZavod"/>
+                <xs:element name="podnosilac" type="zh-1:TLice" minOccurs="1"/>
+                <xs:element name="punomocnik" type="zh-1:TLice"/>
+                <xs:element name="zig" type="zh-1:TZig"/>
                 <xs:element name="placene_takse">
                     <xs:complexType>
-                        <xs:sequence maxOccurs="unbounded" minOccurs="0">
-                            <xs:element name="taksa" type="TTaksa"/>
+                        <xs:sequence maxOccurs="unbounded" minOccurs="1">
+                            <xs:element name="taksa" type="zh-1:TTaksa"/>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
-                <xs:element name="prilozi" type="TPrilozi"/>
+                <xs:element name="prilozi" type="zh-1:TPrilozi" maxOccurs="1" minOccurs="1"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
+    <xs:complexType name="TPrilozi">
+        <xs:sequence>
+            <xs:element name="primerak_znaka" type="zh-1:TPrilog"> </xs:element>
+            <xs:element name="spisak_robe_i_usluga" type="zh-1:TPrilog"> </xs:element>
+            <xs:element name="punomocje" type="zh-1:TPrilog"> </xs:element>
+            <xs:element name="generalno_punomocje" type="zh-1:TPrilog"> </xs:element>
+            <xs:element name="punomocje_naknadno_dostavljeno" type="zh-1:TPrilog"> </xs:element>
+            <xs:element name="opsti_akt" type="zh-1:TPrilog"> </xs:element>
+            <xs:element name="dokaz_o_pravu_prvenstva" type="zh-1:TPrilog"> </xs:element>
+            <xs:element name="dokaz_o_uplati_takse" type="zh-1:TPrilog"> </xs:element>
+        </xs:sequence>
+    </xs:complexType>
     <xs:complexType name="TAdresa">
         <xs:all>
             <xs:element name="ulica" type="xs:string"/>
@@ -40,47 +52,29 @@
     <xs:complexType name="TZavod">
         <xs:sequence>
             <xs:element name="naziv" type="xs:string"/>
-            <xs:element name="adresa" type="TAdresa"/>
+            <xs:element name="adresa" type="zh-1:TAdresa"/>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="TKontakt">
         <xs:all>
             <xs:element name="telefon" type="xs:string"/>
             <xs:element name="email" type="xs:string"/>
-            <xs:element minOccurs="0" name="fax" type="xs:string"/>
+            <xs:element minOccurs="1" name="fax" type="xs:string"/>
         </xs:all>
     </xs:complexType>
-    <xs:complexType abstract="true" name="TLice">
+    <xs:complexType abstract="true" name="TLice" mixed="false">
         <xs:sequence>
-            <xs:element name="adresa" type="TAdresa"/>
-            <xs:element name="kontakt" type="TKontakt"/>
+            <xs:element name="adresa" type="zh-1:TAdresa"/>
+            <xs:element name="kontakt" type="zh-1:TKontakt"/>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="TZnak">
         <xs:sequence>
-            <xs:element name="tip_znaka">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:enumeration value="verbalni_znak"/>
-                        <xs:enumeration value="graficki_znak"/>
-                        <xs:enumeration value="kombinovani_znak"/>
-                        <xs:enumeration value="trodimenzionalni_znak"/>
-                        <xs:enumeration value="drugi_znak"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
-            <xs:element name="izgled_znaka">
-                <xs:complexType>
-                    <xs:simpleContent>
-                        <xs:extension base="xs:string">
-                            <xs:attribute name="src"/>
-                        </xs:extension>
-                    </xs:simpleContent>
-                </xs:complexType>
-            </xs:element>
+            <xs:element name="tip_znaka" type="xs:string"> </xs:element>
+            <xs:element name="izgled_znaka" type="zh-1:TIzgledZnaka"> </xs:element>
             <xs:element name="boje">
                 <xs:complexType>
-                    <xs:sequence maxOccurs="unbounded" minOccurs="0">
+                    <xs:sequence maxOccurs="unbounded" minOccurs="1">
                         <xs:element name="boja" type="xs:string"/>
                     </xs:sequence>
                 </xs:complexType>
@@ -92,17 +86,8 @@
     </xs:complexType>
     <xs:complexType name="TZig">
         <xs:sequence>
-            <xs:element name="tip_ziga">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:enumeration value="individualni_zig"/>
-                        <xs:pattern value=""/>
-                        <xs:enumeration value="kolektivni_zig"/>
-                        <xs:enumeration value="zig_garancije"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
-            <xs:element name="newElement" type="TZnak"/>
+            <xs:element name="tip_ziga" default="" type="xs:string"> </xs:element>
+            <xs:element name="znak" type="zh-1:TZnak"/>
             <xs:element name="brojevi_klasa_robe">
                 <xs:complexType>
                     <xs:sequence>
@@ -117,111 +102,14 @@
     </xs:complexType>
     <xs:complexType name="TTaksa">
         <xs:sequence>
-            <xs:element name="tip_takse">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:enumeration value="osnovna_taksa"/>
-                        <xs:enumeration value="za____klasa"/>
-                        <xs:enumeration value="za_graficko_resenje"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
-            <xs:element name="iznos">
-                <xs:complexType>
-                    <xs:simpleContent>
-                        <xs:extension base="xs:double">
-                            <xs:attribute name="valuta"/>
-                        </xs:extension>
-                    </xs:simpleContent>
-                </xs:complexType>
-            </xs:element>
+            <xs:element name="tip_takse" type="xs:string"> </xs:element>
+            <xs:element name="iznos" type="xs:double"> </xs:element>
         </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="TPrilozi">
-        <xs:sequence>
-            <xs:element name="primerak_znaka">
-                <xs:complexType>
-                    <xs:simpleContent>
-                        <xs:extension base="xs:string">
-                            <xs:attribute name="src"/>
-                        </xs:extension>
-                    </xs:simpleContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="spisak_robe_i_usluga">
-                <xs:complexType>
-                    <xs:sequence maxOccurs="unbounded" minOccurs="0">
-                        <xs:element name="roba">
-                            <xs:complexType>
-                                <xs:simpleContent>
-                                    <xs:extension base="xs:string">
-                                        <xs:attribute name="src"/>
-                                    </xs:extension>
-                                </xs:simpleContent>
-                            </xs:complexType>
-                        </xs:element>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="punomocje">
-                <xs:complexType>
-                    <xs:simpleContent>
-                        <xs:extension base="xs:string">
-                            <xs:attribute name="src"/>
-                        </xs:extension>
-                    </xs:simpleContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="generalno_punomocje">
-                <xs:complexType>
-                    <xs:simpleContent>
-                        <xs:extension base="xs:string">
-                            <xs:attribute name="src"/>
-                        </xs:extension>
-                    </xs:simpleContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="punomocje_naknadno_dostavljeno">
-                <xs:complexType>
-                    <xs:simpleContent>
-                        <xs:extension base="xs:string">
-                            <xs:attribute name="src"/>
-                        </xs:extension>
-                    </xs:simpleContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="opsti_akt">
-                <xs:complexType>
-                    <xs:simpleContent>
-                        <xs:extension base="xs:string">
-                            <xs:attribute name="src"/>
-                        </xs:extension>
-                    </xs:simpleContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="dokaz_o_pravu_prvenstva">
-                <xs:complexType>
-                    <xs:simpleContent>
-                        <xs:extension base="xs:string">
-                            <xs:attribute name="src"/>
-                        </xs:extension>
-                    </xs:simpleContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="dokaz_o_uplati_takse">
-                <xs:complexType>
-                    <xs:simpleContent>
-                        <xs:extension base="xs:string">
-                            <xs:attribute name="src"/>
-                        </xs:extension>
-                    </xs:simpleContent>
-                </xs:complexType>
-            </xs:element>
-        </xs:sequence>
+        <xs:attribute name="valuta"/>
     </xs:complexType>
     <xs:complexType name="TFizickoLice">
         <xs:complexContent>
-            <xs:extension base="TLice">
+            <xs:extension base="zh-1:TLice">
                 <xs:sequence>
                     <xs:element name="ime" type="xs:string"/>
                     <xs:element name="prezime" type="xs:string"/>
@@ -231,11 +119,17 @@
     </xs:complexType>
     <xs:complexType name="TPravnoLice">
         <xs:complexContent>
-            <xs:extension base="TLice">
+            <xs:extension base="zh-1:TLice">
                 <xs:sequence>
                     <xs:element name="poslovno_ime" type="xs:string"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="TIzgledZnaka">
+        <xs:attribute name="src" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="TPrilog">
+        <xs:attribute name="src"/>
     </xs:complexType>
 </xs:schema>
