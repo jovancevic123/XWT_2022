@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="12e35c0f-1964-4f9a-924e-dfe491fa7d91" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/P-1-generated.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/P-1.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xml/backend/p1/XmlBackendP1Application.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xml/backend/p1/model/Adresa.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xml/backend/p1/model/FizickoLice.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xml/backend/p1/model/Kontakt.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xml/backend/p1/model/Lice.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xml/backend/p1/model/Podnosilac.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xml/backend/p1/model/PravnoLice.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xml/backend/p1/model/Prijava.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xml/backend/p1/model/Pronalazac.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xml/backend/p1/model/Pronalazak.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xml/backend/p1/model/Punomoc.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xml/backend/p1/model/RanijaPrijava.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xml/backend/p1/model/Zahtev.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xml/backend/p1/model/Zavod.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xml/backend/p1/model/jaxb.index" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xml/backend/p1/model/package-info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xml/backend/p1/utility/LocalDateAdapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/xml/backend/p1/XmlBackendP1ApplicationTests.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="2IOvPtnIfA4DRxja569D5rOHYAI" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.xml.backend.p1" />
+      <recent name="" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.XmlBackendP1Application (1)">
+    <configuration name="XmlBackendP1Application (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="xml-backend-p1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.xml.backend.p1.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.xml.backend.p1.XmlBackendP1Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="XmlBackendP1Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="xml-backend-p1" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.xmlbackendp1.XmlBackendP1Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.XmlBackendP1Application (1)" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="12e35c0f-1964-4f9a-924e-dfe491fa7d91" name="Changes" comment="" />
+      <created>1670065428643</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1670065428643</updated>
+      <workItem from="1670065430519" duration="8026000" />
+      <workItem from="1670399555809" duration="234000" />
+      <workItem from="1670425562506" duration="1490000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+</project>

@@ -33,7 +33,6 @@
                                     <xs:restriction base="xs:string">
                                         <xs:enumeration value="punomocnik_za_zastupanje"/>
                                         <xs:enumeration value="punomocnik_za_prijem_pismena"/>
-                                        <xs:enumeration value="zajednicki_predstavnik"/>
                                     </xs:restriction>
                                 </xs:simpleType>
                             </xs:element>
