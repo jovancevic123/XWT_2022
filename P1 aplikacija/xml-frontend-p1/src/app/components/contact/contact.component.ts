@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import { Kontakt } from 'src/app/model/Kontakt';
 
 
 @Component({
@@ -9,6 +10,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class ContactComponent implements OnInit{
 
+  @Output() formRawValue = new EventEmitter<Kontakt>();
   @Output() form: FormGroup;
 
   ngOnInit(){
@@ -18,6 +20,9 @@ export class ContactComponent implements OnInit{
       fax: new FormControl('',[Validators.required]),
     });
   }
-   
+
+  onChange(){
+    this.formRawValue.emit(this.form.getRawValue());
+  }   
 
 }

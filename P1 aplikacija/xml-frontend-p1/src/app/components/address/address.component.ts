@@ -1,5 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import { Adresa } from 'src/app/model/Adresa';
 
 @Component({
   selector: 'app-address',
@@ -8,7 +9,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class AddressComponent implements OnInit{
 
-    @Output() form: FormGroup;
+    @Output() formRawValue = new EventEmitter<Adresa>();
+    form: FormGroup; 
 
     ngOnInit(){
       this.form = new FormGroup({
@@ -20,4 +22,7 @@ export class AddressComponent implements OnInit{
       });
     }
    
+    onChange(){
+      this.formRawValue.emit(this.form.getRawValue());
+    }
 }
