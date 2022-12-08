@@ -92,3 +92,15 @@ h3{
     flex-direction: column;
     justify-content: center;
 }
+
+.ranije-prijave{
+    margin-top: 2rem;
+}
+
+.submit-button-div{
+    margin-top: 5rem;    
+}
+
+.mdc-button{
+    background-color: #ffd740 !important;
+}

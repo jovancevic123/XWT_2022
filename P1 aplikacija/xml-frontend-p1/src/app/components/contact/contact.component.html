@@ -1,16 +1,16 @@
 <form [formGroup]="form" class="container">
     <mat-form-field [style.width.%]="60">
         <mat-label>Email:</mat-label>
-        <input matInput>
+        <input matInput (change)="onChange()" formControlName="email">
     </mat-form-field>
 
     <mat-form-field [style.width.%]="60">
         <mat-label>Broj telefona:</mat-label>
-        <input matInput type="number">
+        <input matInput (change)="onChange()" formControlName="broj">
     </mat-form-field>
 
     <mat-form-field [style.width.%]="60">
         <mat-label>Fax:</mat-label>
-        <input matInput>
+        <input matInput (change)="onChange()" formControlName="fax">
     </mat-form-field>
 </form>
