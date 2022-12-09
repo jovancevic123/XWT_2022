@@ -49,7 +49,7 @@ public class XmlBackendZh1Application {
 		Zahtev zahtev = new Zahtev();
 		zahtev.setNaziv("ZAHTEV ZA PRIZNANJE ZIGA");
 
-		zahtev.setZavod(createZavod());
+//		zahtev.setZavod(createZavod());
 
 		zahtev.setPodnosilac(createPodnosilac());
 
