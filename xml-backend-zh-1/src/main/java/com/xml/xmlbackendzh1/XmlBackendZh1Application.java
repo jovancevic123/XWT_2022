@@ -120,7 +120,7 @@ public class XmlBackendZh1Application {
 
 	private Znak createZnak() {
 		Znak znak = new Znak();
-		znak.setTipZnaka("графички знак; боју, комбинацију боја");
+		znak.setTipZnaka("graficki znak; boju; kombinaciju boja");
 		znak.setIzgledZnaka(createIzgledZnaka());
 		znak.getBoje().add("crna");
 		znak.getBoje().add("siva");
