@@ -1,5 +1,7 @@
 package com.xml.xmlbackendzh1.model.zh1;
 
+import org.apache.catalina.Manager;
+
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +32,7 @@ public class Zahtev {
     private List<Taksa> placeneTakse = new ArrayList<Taksa>();
 
     @XmlElement(name="prilozi", required=true)
-    private List<Prilog> prilozi = new ArrayList<Prilog>();
+    private Prilozi prilozi = new Prilozi();
 
     public String getNaziv() {
         return naziv;
@@ -64,11 +66,11 @@ public class Zahtev {
         this.placeneTakse = placeneTakse;
     }
 
-    public List<Prilog> getPrilozi() {
+    public Prilozi getPrilozi() {
         return prilozi;
     }
 
-    public void setPrilozi(List<Prilog> prilozi) {
+    public void setPrilozi(Prilozi prilozi) {
         this.prilozi = prilozi;
     }
 
