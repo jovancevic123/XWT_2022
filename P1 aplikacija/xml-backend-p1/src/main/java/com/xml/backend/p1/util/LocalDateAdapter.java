@@ -1,4 +1,4 @@
-package com.xml.backend.p1.utility;
+package com.xml.backend.p1.util;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 import java.time.LocalDate;

@@ -80,6 +80,11 @@
             <datum_podnosenja>2022-07-07</datum_podnosenja>
             <dvoslovna_oznaka>hl</dvoslovna_oznaka>
         </ranija_prijava>
+        <ranija_prijava>
+            <broj_prijave>123</broj_prijave>
+            <datum_podnosenja>2022-07-07</datum_podnosenja>
+            <dvoslovna_oznaka>hl</dvoslovna_oznaka>
+        </ranija_prijava>
     </ranije_prijave>
     <nacin_dostavljanja>elektronska_forma</nacin_dostavljanja>
 </zahtev>

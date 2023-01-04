@@ -8,10 +8,7 @@ import org.xmldb.api.base.Collection;
 import org.xmldb.api.base.Database;
 import org.xmldb.api.base.XMLDBException;
 import org.xmldb.api.modules.XMLResource;
-
 import javax.xml.transform.OutputKeys;
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 
 @Repository
 public class P1DocumentDAO {
