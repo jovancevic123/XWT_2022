@@ -1,6 +1,6 @@
 package com.xml.backend.p1.model;
 
-import com.xml.backend.p1.utility.LocalDateAdapter;
+import com.xml.backend.p1.util.LocalDateAdapter;
 
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
