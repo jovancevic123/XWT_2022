@@ -9,48 +9,48 @@
         <vrsta_prijave>dopunska</vrsta_prijave>
     </prijava>
     <zavod>
-        <naziv></naziv>
+        <naziv>Zavod za intelektualnu svojinu</naziv>
         <adresa>
-            <ulica></ulica>
-            <broj>37</broj>
-            <postanski_broj>21000</postanski_broj>
-            <mesto></mesto>
-            <drzava></drzava>
+            <ulica>Kneginje Ljubice</ulica>
+            <broj>5</broj>
+            <postanski_broj>11000</postanski_broj>
+            <mesto>Beograd</mesto>
+            <drzava>Srbija</drzava>
         </adresa>
     </zavod>
     <pronalazak>
-        <naziv_pronalaska_srb></naziv_pronalaska_srb>
-        <naziv_pronalaska_eng></naziv_pronalaska_eng>
+        <naziv_pronalaska_srb>Naziv na srpskom</naziv_pronalaska_srb>
+        <naziv_pronalaska_eng>Naziv na engleskom</naziv_pronalaska_eng>
     </pronalazak>
-    <podnosilac>
-        <drzavljanstvo></drzavljanstvo>
+    <podnosilac pronalazac="false">
+        <drzavljanstvo>srpsko</drzavljanstvo>
         <lice xsi:type="TPravnoLice">
             <adresa>
-                <ulica></ulica>
+                <ulica>Vojvode Stepe</ulica>
                 <broj>1</broj>
-                <postanski_broj>21203</postanski_broj>
-                <mesto></mesto>
-                <drzava></drzava>
+                <postanski_broj>21000</postanski_broj>
+                <mesto>Novi Sad</mesto>
+                <drzava>Srbija</drzava>
             </adresa>
             <kontakt>
-                <telefon></telefon>
-                <email></email>
+                <telefon>021 824854</telefon>
+                <email>aktiva@gmail.com</email>
             </kontakt>
-            <poslovno_ime>STR BLA</poslovno_ime>
+            <poslovno_ime>Aktiva DOO</poslovno_ime>
         </lice>
     </podnosilac>
-    <pronalazac>
+    <pronalazac naveden_u_prijavi="true">
         <lice xsi:type="TFizickoLice">
             <adresa>
-                <ulica></ulica>
-                <broj>33</broj>
-                <postanski_broj>21000</postanski_broj>
-                <mesto></mesto>
-                <drzava></drzava>
+                <ulica>Kralja Petra I</ulica>
+                <broj>17</broj>
+                <postanski_broj>21203</postanski_broj>
+                <mesto>Veternik</mesto>
+                <drzava>Srbija</drzava>
             </adresa>
             <kontakt>
-                <telefon></telefon>
-                <email></email>
+                <telefon>0631899381</telefon>
+                <email>jovancevicjovan5@gmail.com</email>
             </kontakt>
             <ime>Jovan</ime>
             <prezime>Jovancevic</prezime>
@@ -60,18 +60,18 @@
         <tip>punomocnik_za_zastupanje</tip>
         <lice xsi:type="TFizickoLice">
             <adresa>
-                <ulica></ulica>
-                <broj>55</broj>
-                <postanski_broj>11000</postanski_broj>
-                <mesto></mesto>
-                <drzava></drzava>
+                <ulica>Omladinska</ulica>
+                <broj>15</broj>
+                <postanski_broj>21203</postanski_broj>
+                <mesto>Veternik</mesto>
+                <drzava>Srbija</drzava>
             </adresa>
             <kontakt>
-                <telefon></telefon>
-                <email></email>
+                <telefon>062123789</telefon>
+                <email>milanpanic@gmail.com</email>
             </kontakt>
-            <ime>Jovan</ime>
-            <prezime>Jovancevic</prezime>
+            <ime>Milan</ime>
+            <prezime>Panic</prezime>
         </lice>
     </punomoc>
     <ranije_prijave>

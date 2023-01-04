@@ -16,4 +16,20 @@ public class Pronalazak {
 
     @XmlElement(name="naziv_pronalaska_eng", required = true)
     private String nazivPronalaskaENG;
+
+    public String getNazivPronalaskaSRB() {
+        return nazivPronalaskaSRB;
+    }
+
+    public void setNazivPronalaskaSRB(String nazivPronalaskaSRB) {
+        this.nazivPronalaskaSRB = nazivPronalaskaSRB;
+    }
+
+    public String getNazivPronalaskaENG() {
+        return nazivPronalaskaENG;
+    }
+
+    public void setNazivPronalaskaENG(String nazivPronalaskaENG) {
+        this.nazivPronalaskaENG = nazivPronalaskaENG;
+    }
 }
