@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet type="text/xsl" href="bookstore.xsl"?>
 <zahtev xmlns="http://www.ftn.uns.ac.rs/xwt"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.ftn.uns.ac.rs/xwt file:/C:/Users/Joco/Desktop/IV/XML/Projekat/XWT_2022/xml-backend-p1/data/P-1.xsd">
