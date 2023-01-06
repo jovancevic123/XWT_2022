@@ -14,7 +14,7 @@
                     }
 
                     body{
-                    margin: 5%;
+                    margin: 5%rem;
                     }
 
                     td, th {
@@ -40,7 +40,7 @@
                     }
 
                     .zavod-info{
-                    margin-bottom: 10%;
+                    margin-bottom: 10rem;
                     }
 
                     .ranije-prijave{
@@ -51,13 +51,13 @@
                     .podnosioc{
                     width: 80%;
                     margin: auto;
-                    margin-bottom: 10%;
+                    margin-bottom: 10rem;
                     }
 
                     .pronalazac{
                     width: 80%;
                     margin: auto;
-                    margin-bottom: 10%;
+                    margin-bottom: 10rem;
                     }
 
                     .opis{
@@ -77,7 +77,7 @@
                     .punomocnik{
                     width: 80%;
                     margin: auto;
-                    margin-bottom: 3%;
+                    margin-bottom: 5rem;
                     }
 
                 </style>

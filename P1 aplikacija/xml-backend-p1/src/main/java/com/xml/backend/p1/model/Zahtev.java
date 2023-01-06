@@ -1,9 +1,18 @@
 package com.xml.backend.p1.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
         "prijava", "zavod", "pronalazak", "podnosilac", "pronalazac",
@@ -37,78 +46,6 @@ public class Zahtev {
     @XmlElement(name="nacin_dostavljanja", required = true)
     private String nacinDostavljanja;
 
-    @XmlElement(name="adresa_dostave", required = true)
+    @XmlElement(name="adresa_dostave", required = false)
     private Adresa adresaDostave;
-
-    public Prijava getPrijava() {
-        return prijava;
-    }
-
-    public void setPrijava(Prijava prijava) {
-        this.prijava = prijava;
-    }
-
-    public Zavod getZavod() {
-        return zavod;
-    }
-
-    public void setZavod(Zavod zavod) {
-        this.zavod = zavod;
-    }
-
-    public Pronalazak getPronalazak() {
-        return pronalazak;
-    }
-
-    public void setPronalazak(Pronalazak pronalazak) {
-        this.pronalazak = pronalazak;
-    }
-
-    public Podnosilac getPodnosilac() {
-        return podnosilac;
-    }
-
-    public void setPodnosilac(Podnosilac podnosilac) {
-        this.podnosilac = podnosilac;
-    }
-
-    public Pronalazac getPronalazac() {
-        return pronalazac;
-    }
-
-    public void setPronalazac(Pronalazac pronalazac) {
-        this.pronalazac = pronalazac;
-    }
-
-    public Punomoc getPunomoc() {
-        return punomoc;
-    }
-
-    public void setPunomoc(Punomoc punomoc) {
-        this.punomoc = punomoc;
-    }
-
-    public List<RanijaPrijava> getRanijePrijave() {
-        return ranijePrijave;
-    }
-
-    public void setRanijePrijave(List<RanijaPrijava> ranijePrijave) {
-        this.ranijePrijave = ranijePrijave;
-    }
-
-    public String getNacinDostavljanja() {
-        return nacinDostavljanja;
-    }
-
-    public void setNacinDostavljanja(String nacinDostavljanja) {
-        this.nacinDostavljanja = nacinDostavljanja;
-    }
-
-    public Adresa getAdresaDostave() {
-        return adresaDostave;
-    }
-
-    public void setAdresaDostave(Adresa adresaDostave) {
-        this.adresaDostave = adresaDostave;
-    }
 }

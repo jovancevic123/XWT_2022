@@ -41,4 +41,9 @@ public class PravnoLice extends Lice{
         this.poslovnoIme = poslovnoIme;
     }
 
+    public PravnoLice(Adresa adresa, Kontakt kontakt, String poslovnoIme){
+        super(adresa, kontakt);
+        this.poslovnoIme = poslovnoIme;
+    }
+
 }

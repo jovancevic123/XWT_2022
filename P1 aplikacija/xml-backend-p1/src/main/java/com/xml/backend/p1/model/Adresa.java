@@ -1,8 +1,18 @@
 package com.xml.backend.p1.model;
 
 
+import com.xml.backend.p1.dto.AdresaDto;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.xml.bind.annotation.*;
 
+@AllArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
         "ulica", "broj", "postanskiBroj", "mesto", "drzava"
@@ -24,43 +34,11 @@ public class Adresa {
     @XmlElement(required=true)
     private String drzava;
 
-    public String getUlica() {
-        return ulica;
-    }
-
-    public void setUlica(String ulica) {
-        this.ulica = ulica;
-    }
-
-    public int getBroj() {
-        return broj;
-    }
-
-    public void setBroj(int broj) {
-        this.broj = broj;
-    }
-
-    public int getPostanskiBroj() {
-        return postanskiBroj;
-    }
-
-    public void setPostanskiBroj(int postanskiBroj) {
-        this.postanskiBroj = postanskiBroj;
-    }
-
-    public String getMesto() {
-        return mesto;
-    }
-
-    public void setMesto(String mesto) {
-        this.mesto = mesto;
-    }
-
-    public String getDrzava() {
-        return drzava;
-    }
-
-    public void setDrzava(String drzava) {
-        this.drzava = drzava;
+    public Adresa(AdresaDto dto){
+        this.ulica = dto.getUlica();
+        this.broj = dto.getBroj();
+        this.postanskiBroj = dto.getPostanskiBroj();
+        this.mesto = dto.getMesto();
+        this.drzava = dto.getDrzava();
     }
 }
