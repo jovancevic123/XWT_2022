@@ -25,4 +25,6 @@ public class Kontakt {
         this.email = dto.getEmail();
         this.fax = dto.getFax();
     }
+
+    public Kontakt(){}
 }

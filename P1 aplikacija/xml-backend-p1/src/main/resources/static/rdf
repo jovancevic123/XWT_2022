@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="bookstore.xsl"?><zahtev xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:p1="http://www.ftn.uns.ac.rs/xwt" about="http://www.ftn.uns.ac.rs/xwt/zahtev" vocab="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" xsi:schemaLocation="http://www.ftn.uns.ac.rs/xwt file:/C:/Users/Joco/Desktop/IV/XML/Projekat/XWT_2022/xml-backend-p1/data/P-1.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <prijava xmlns="http://www.ftn.uns.ac.rs/xwt">
+        <BrojPrijave xmlns="" content="123" datatype="xs:string" property="pred:broj_prijave">123</BrojPrijave>
+        <datum_prijema>2022-11-25</datum_prijema>
+        <priznati_datum_podnosenja>2022-11-26</priznati_datum_podnosenja>
+        <vrsta_prijave>dopunska</vrsta_prijave>
+    </prijava>
+    <zavod xmlns="http://www.ftn.uns.ac.rs/xwt">
+        <naziv>Zavod za intelektualnu svojinu</naziv>
+        <adresa>
+            <ulica>Kneginje Ljubice</ulica>
+            <broj>5</broj>
+            <postanski_broj>11000</postanski_broj>
+            <mesto>Beograd</mesto>
+            <drzava>Srbija</drzava>
+        </adresa>
+    </zavod>
+    <pronalazak xmlns="http://www.ftn.uns.ac.rs/xwt">
+        <naziv_pronalaska_srb>Naziv na srpskom</naziv_pronalaska_srb>
+        <naziv_pronalaska_eng>Naziv na engleskom</naziv_pronalaska_eng>
+    </pronalazak>
+    <podnosilac xmlns="http://www.ftn.uns.ac.rs/xwt" pronalazac="false">
+        <drzavljanstvo>srpsko</drzavljanstvo>
+        <lice xsi:type="TPravnoLice">
+            <adresa>
+                <ulica>Vojvode Stepe</ulica>
+                <broj>1</broj>
+                <postanski_broj>21000</postanski_broj>
+                <mesto>Novi Sad</mesto>
+                <drzava>Srbija</drzava>
+            </adresa>
+            <kontakt>
+                <telefon>021 824854</telefon>
+                <email>aktiva@gmail.com</email>
+            </kontakt>
+            <poslovno_ime>Aktiva DOO</poslovno_ime>
+        </lice>
+    </podnosilac>
+    <pronalazac xmlns="http://www.ftn.uns.ac.rs/xwt" naveden_u_prijavi="true">
+        <lice xsi:type="TFizickoLice">
+            <adresa>
+                <ulica>Kralja Petra I</ulica>
+                <broj>17</broj>
+                <postanski_broj>21203</postanski_broj>
+                <mesto>Veternik</mesto>
+                <drzava>Srbija</drzava>
+            </adresa>
+            <kontakt>
+                <telefon>0631899381</telefon>
+                <email>jovancevicjovan5@gmail.com</email>
+            </kontakt>
+            <ime>Jovan</ime>
+            <prezime>Jovancevic</prezime>
+        </lice>
+    </pronalazac>
+    <punomoc xmlns="http://www.ftn.uns.ac.rs/xwt">
+        <tip>punomocnik_za_zastupanje</tip>
+        <lice xsi:type="TFizickoLice">
+            <adresa>
+                <ulica>Omladinska</ulica>
+                <broj>15</broj>
+                <postanski_broj>21203</postanski_broj>
+                <mesto>Veternik</mesto>
+                <drzava>Srbija</drzava>
+            </adresa>
+            <kontakt>
+                <telefon>062123789</telefon>
+                <email>milanpanic@gmail.com</email>
+            </kontakt>
+            <ime>Milan</ime>
+            <prezime>Panic</prezime>
+        </lice>
+    </punomoc>
+    <ranije_prijave xmlns="http://www.ftn.uns.ac.rs/xwt">
+        <ranija_prijava>
+            <broj_prijave>123</broj_prijave>
+            <datum_podnosenja>2022-07-07</datum_podnosenja>
+            <dvoslovna_oznaka>hl</dvoslovna_oznaka>
+        </ranija_prijava>
+        <ranija_prijava>
+            <broj_prijave>123</broj_prijave>
+            <datum_podnosenja>2022-07-07</datum_podnosenja>
+            <dvoslovna_oznaka>hl</dvoslovna_oznaka>
+        </ranija_prijava>
+    </ranije_prijave>
+    <nacin_dostavljanja xmlns="http://www.ftn.uns.ac.rs/xwt">elektronska_forma</nacin_dostavljanja>
+</zahtev>
