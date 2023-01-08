@@ -1,9 +1,5 @@
 package com.xml.backend.p1.transformers;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -43,7 +39,7 @@ public class XmlToPdfTransformer {
         documentFactory = DocumentBuilderFactory.newInstance();
         documentFactory.setNamespaceAware(true);
         documentFactory.setIgnoringComments(true);
-        documentFactory.setIgnoringElementContentWhitespace(true);
+        documentFactory.setIgnoringElementContentWhitespace(false);
 
         /* Inicijalizacija Transformer fabrike */
         transformerFactory = TransformerFactory.newInstance();
@@ -60,7 +56,6 @@ public class XmlToPdfTransformer {
 
         // Step 1
         Document document = new Document();
-
         // Step 2
         PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(filePath));
 

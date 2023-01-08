@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import { RanijaPrijava } from 'src/app/model/RanijaPrijava';
 import { Adresa } from 'src/app/model/Adresa';
 import { Kontakt } from 'src/app/model/Kontakt';
+import { PatentService } from 'src/app/app/services/patent.service';
 
 @Component({
   selector: 'app-form-page',
@@ -26,16 +27,18 @@ export class FormPageComponent implements OnInit{
     fizikoLicePodnosilacChecked: boolean = true;
     fizikoLicePronalazacChecked: boolean = true;
     fizikoLicePunomocChecked: boolean = true;
-    elektronskaDostavaChecked: boolean = false;
+    elektronskaDostavaChecked: boolean = true;
+    tipPunomocnikaZaZastupanjeChecked: boolean = true;
     dopunskaPrijavaChecked: boolean = true;
     ranijePrijave: RanijaPrijava[] = [];
 
-    constructor(){}
+    constructor(private patentService: PatentService){}
 
     ngOnInit(){
       this.form = new FormGroup({
         nazivSRB: new FormControl('',[Validators.required]),
         nazivENG: new FormControl('',[Validators.required]),
+
         //podnosilac
         imePodnosilac: new FormControl('',[Validators.required]),
         prezimePodnosilac: new FormControl('',[Validators.required]),
@@ -59,6 +62,7 @@ export class FormPageComponent implements OnInit{
         poslovnoImePunomoc: new FormControl('',[Validators.required]),
         tipLicaPunomoc: new FormControl('1',[Validators.required]),
         drugaAdresaDostave: new FormControl(false),
+        tipPunomocnika: new FormControl('1'),
 
         //ostalo
         elektronskaDostava: new FormControl('1'),
@@ -94,10 +98,17 @@ export class FormPageComponent implements OnInit{
          "punomocAdresa": this.punomocAdresa,
          "podnosilacKontakt": this.podnosilacKontakt,
          "pronalazacKontakt": this.pronalazacKontakt,
-         "punomocKontakt": this.punomocKontakt
+         "punomocKontakt": this.punomocKontakt,
+         "ranijePrijave": this.ranijePrijave,
         }
-      console.log(body);
-      
+      this.patentService.submitRequest(body).subscribe({
+          next: data => {
+            console.log(data);           
+          },
+          error: error => {
+            console.error(error);
+            }
+        });
     }
 
     onTipLicaChangedPodnosilac(){
@@ -116,13 +127,17 @@ export class FormPageComponent implements OnInit{
       this.elektronskaDostavaChecked = !this.elektronskaDostavaChecked;
     }
 
+    onTipPunomocnikaChanged(){
+      this.tipPunomocnikaZaZastupanjeChecked = !this.tipPunomocnikaZaZastupanjeChecked;
+    }
+
     onVrstaPrijaveChanged(){
       this.dopunskaPrijavaChecked = !this.dopunskaPrijavaChecked;
     }
 
     onNewRanijaPrijava(){
       this.ranijePrijave.push({
-        datumPodnosenja: new Date(),
+        datumPodnosenja: "",
         brojPrijave: 0,
         dvoslovnaOznaka: ""
       });
@@ -135,7 +150,6 @@ export class FormPageComponent implements OnInit{
     // Address events
     onPodnosilacAdresa(event: Adresa){
       this.podnosilacAdresa = event;
-      console.log(this.podnosilacAdresa);
       
     }
 

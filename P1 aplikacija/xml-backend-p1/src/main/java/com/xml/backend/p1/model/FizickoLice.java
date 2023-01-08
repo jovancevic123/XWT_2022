@@ -1,6 +1,9 @@
 package com.xml.backend.p1.model;
 
 
+import com.xml.backend.p1.dto.AdresaDto;
+import com.xml.backend.p1.dto.KontaktDto;
+
 import javax.xml.bind.annotation.*;
 
 @XmlAccessorType(XmlAccessType.PROPERTY)
@@ -45,6 +48,12 @@ public class FizickoLice extends Lice{
     }
 
     public void setPrezime(String prezime) {
+        this.prezime = prezime;
+    }
+
+    public FizickoLice(Adresa adresa, Kontakt kontakt, String ime, String prezime){
+        super(adresa, kontakt);
+        this.ime = ime;
         this.prezime = prezime;
     }
 }

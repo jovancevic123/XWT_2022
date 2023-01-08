@@ -1,5 +1,7 @@
 package com.xml.backend.p1.model;
 
+import com.xml.backend.p1.dto.KontaktDto;
+
 import javax.xml.bind.annotation.*;
 
 
@@ -17,4 +19,10 @@ public class Kontakt {
 
     @XmlElement(name="fax")
     private String fax;
+
+    public Kontakt(KontaktDto dto){
+        this.telefon = dto.getBroj();
+        this.email = dto.getEmail();
+        this.fax = dto.getFax();
+    }
 }

@@ -1,6 +1,15 @@
 package com.xml.backend.p1.model;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.xml.bind.annotation.*;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
         "tip", "lice"
@@ -12,20 +21,4 @@ public class Punomoc {
 
     @XmlElement(name = "tip", required=true)
     private String tip;
-
-    public Lice getLice() {
-        return lice;
-    }
-
-    public void setLice(Lice lice) {
-        this.lice = lice;
-    }
-
-    public String getTip() {
-        return tip;
-    }
-
-    public void setTip(String tip) {
-        this.tip = tip;
-    }
 }

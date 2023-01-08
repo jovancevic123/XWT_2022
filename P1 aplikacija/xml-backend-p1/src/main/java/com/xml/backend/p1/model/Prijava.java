@@ -1,11 +1,20 @@
 package com.xml.backend.p1.model;
 
 import com.xml.backend.p1.util.LocalDateAdapter;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.stereotype.Service;
 
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
         "brojPrijave", "datumPrijema", "priznatiDatumPodnosenja", "vrstaPrijave",

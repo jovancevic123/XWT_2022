@@ -1,5 +1,5 @@
 export interface RanijaPrijava{
-    datumPodnosenja: Date,
+    datumPodnosenja: string,
     brojPrijave: number,
     dvoslovnaOznaka: string
 }
