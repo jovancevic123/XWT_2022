@@ -8,6 +8,7 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
 
+import com.xml.backend.p1.dto.SearchMetadataDto;
 import com.xml.backend.p1.exceptions.OperationFailedException;
 import com.xml.backend.p1.model.Zahtev;
 import com.xml.backend.p1.service.MetadataService;
@@ -107,5 +108,9 @@ public class XmlTransformer {
 //        String resultMeta = service.extractMetadataToRdf(new FileInputStream(new File("./src/main/resources/static/rdf")), "123");
 //
 //        service.uploadMetadata();
+
+//        ------------select metadata
+        MetadataService service = new MetadataService();
+        service.metaDataSelect(new SearchMetadataDto("123"));
     }
 }
