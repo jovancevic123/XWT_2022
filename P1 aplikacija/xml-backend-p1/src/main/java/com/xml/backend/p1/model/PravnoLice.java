@@ -46,4 +46,6 @@ public class PravnoLice extends Lice{
         this.poslovnoIme = poslovnoIme;
     }
 
+    public PravnoLice(){}
+
 }

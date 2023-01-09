@@ -56,4 +56,6 @@ public class FizickoLice extends Lice{
         this.ime = ime;
         this.prezime = prezime;
     }
+
+    public FizickoLice(){}
 }

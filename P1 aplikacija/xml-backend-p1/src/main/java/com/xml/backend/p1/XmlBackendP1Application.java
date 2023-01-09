@@ -8,13 +8,31 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 import org.xmldb.api.base.XMLDBException;
 import javax.xml.bind.JAXBException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Arrays;
+
+import static com.xml.backend.p1.transformers.XmlTransformer.*;
 
 @SpringBootApplication
 public class XmlBackendP1Application {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
+
+		String xmlData = null;
+		try {
+			xmlData = new String(Files.readAllBytes(Paths.get("./src/main/resources/xml/P-1-generated.xml")), StandardCharsets.UTF_8);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		String xsltFIlePath = "./src/main/resources/xml/metadata.xsl";
+		String outputPath = "./src/main/resources/static/rdf/";
+
 		SpringApplication.run(com.xml.backend.p1.XmlBackendP1Application.class, args);
 //		try{
 //

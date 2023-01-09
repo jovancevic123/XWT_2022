@@ -32,4 +32,6 @@ public class RanijaPrijava {
         }
         this.dvoslovnaOznaka = dto.getDvoslovnaOznaka();
     }
+
+    public RanijaPrijava(){}
 }
