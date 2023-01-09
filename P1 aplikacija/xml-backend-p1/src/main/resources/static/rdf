@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="bookstore.xsl"?><zahtev xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:p1="http://www.ftn.uns.ac.rs/xwt" about="http://www.ftn.uns.ac.rs/xwt/zahtev" vocab="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" xsi:schemaLocation="http://www.ftn.uns.ac.rs/xwt file:/C:/Users/Joco/Desktop/IV/XML/Projekat/XWT_2022/xml-backend-p1/data/P-1.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="bookstore.xsl"?><zahtev xmlns:sh="https://schema.org/" xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:p1="http://www.ftn.uns.ac.rs/xwt" about="http://www.ftn.uns.ac.rs/xwt/zahtev" vocab="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" xsi:schemaLocation="http://www.ftn.uns.ac.rs/xwt file:/C:/Users/Joco/Desktop/IV/XML/Projekat/XWT_2022/xml-backend-p1/data/P-1.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <prijava xmlns="http://www.ftn.uns.ac.rs/xwt">
-        <BrojPrijave xmlns="" content="888" datatype="xs:string" property="pred:broj_prijave">888</BrojPrijave>
-        <datum_prijema>2022-11-25</datum_prijema>
+        <BrojPrijave xmlns="" datatype="xs:string" property="pred:broj_prijave">888</BrojPrijave>
+        <DatumPrijema xmlns="" datatype="xs:date" property="pred:datum_prijema">2022-11-25</DatumPrijema>
         <priznati_datum_podnosenja>2022-11-26</priznati_datum_podnosenja>
         <vrsta_prijave>dopunska</vrsta_prijave>
     </prijava>
@@ -16,8 +16,8 @@
         </adresa>
     </zavod>
     <pronalazak xmlns="http://www.ftn.uns.ac.rs/xwt">
-        <naziv_pronalaska_srb>Naziv na srpskom</naziv_pronalaska_srb>
-        <naziv_pronalaska_eng>Naziv na engleskom</naziv_pronalaska_eng>
+        <NazivSRB xmlns="" datatype="xs:string" property="pred:naziv_srb">Naziv na srpskom je srb</NazivSRB>
+        <NazivENG xmlns="" datatype="xs:string" property="pred:naziv_eng">Naziv na engleskom</NazivENG>
     </pronalazak>
     <podnosilac xmlns="http://www.ftn.uns.ac.rs/xwt" pronalazac="false">
         <drzavljanstvo>srpsko</drzavljanstvo>
@@ -31,7 +31,7 @@
             </adresa>
             <kontakt>
                 <telefon>021 824854</telefon>
-                <email>aktiva@gmail.com</email>
+                <PodnosilacEmail xmlns="" datatype="xs:string" property="pred:podnosilac_email">aktiva@gmail.com</PodnosilacEmail>
             </kontakt>
             <poslovno_ime>Aktiva DOO</poslovno_ime>
         </lice>
@@ -47,7 +47,7 @@
             </adresa>
             <kontakt>
                 <telefon>0631899381</telefon>
-                <email>jovancevicjovan5@gmail.com</email>
+                <PronalazacEmail xmlns="" datatype="xs:string" property="pred:pronalazac_email">jovancevicjovan5@gmail.com</PronalazacEmail>
             </kontakt>
             <ime>Jovan</ime>
             <prezime>Jovancevic</prezime>
@@ -65,7 +65,7 @@
             </adresa>
             <kontakt>
                 <telefon>062123789</telefon>
-                <email>milanpanic@gmail.com</email>
+                <PunomocEmail xmlns="" datatype="xs:string" property="pred:punomoc_email">milanpanic@gmail.com</PunomocEmail>
             </kontakt>
             <ime>Milan</ime>
             <prezime>Panic</prezime>

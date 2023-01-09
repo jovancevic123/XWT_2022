@@ -20,7 +20,7 @@
         </adresa>
     </zavod>
     <pronalazak>
-        <naziv_pronalaska_srb>Naziv na srpskom</naziv_pronalaska_srb>
+        <naziv_pronalaska_srb>Naziv na srpskom je srb</naziv_pronalaska_srb>
         <naziv_pronalaska_eng>Naziv na engleskom</naziv_pronalaska_eng>
     </pronalazak>
     <podnosilac pronalazac="false">
