@@ -1,5 +1,7 @@
 package com.xml.backend.p1;
 
+import com.xml.backend.p1.dao.P1DocumentDAO;
+import com.xml.backend.p1.service.ExistService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -27,13 +29,22 @@ public class XmlBackendP1Application {
 		String xmlData = null;
 		try {
 			xmlData = new String(Files.readAllBytes(Paths.get("./src/main/resources/xml/P-1-generated.xml")), StandardCharsets.UTF_8);
+
+			P1DocumentDAO dao = new P1DocumentDAO();
+			dao.save("787", xmlData);
+
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		String xsltFIlePath = "./src/main/resources/xml/metadata.xsl";
 		String outputPath = "./src/main/resources/static/rdf/";
 
-		SpringApplication.run(com.xml.backend.p1.XmlBackendP1Application.class, args);
+
+//		SpringApplication.run(com.xml.backend.p1.XmlBackendP1Application.class, args);
+
+
 //		try{
 //
 //			// Unmarshalling
