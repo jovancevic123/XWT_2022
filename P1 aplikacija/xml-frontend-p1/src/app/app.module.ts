@@ -20,13 +20,18 @@ import { AddressComponent } from './components/address/address.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { XonomyFormComponent } from './components/xonomy-form/xonomy-form.component';
+import { RequestListComponent } from './components/request-list/request-list.component';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
     AppComponent,
     FormPageComponent,
     AddressComponent,
-    ContactComponent
+    ContactComponent,
+    XonomyFormComponent,
+    RequestListComponent
   ],
   imports: [
     HttpClientModule,
@@ -43,7 +48,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatCheckboxModule,
     FormsModule,
     ReactiveFormsModule,
-    MatIconModule
+    MatIconModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,41 @@
+<table mat-table [dataSource]="requests" class="mat-elevation-z8">
+
+
+    <ng-container matColumnDef="brojPrijave">
+      <th mat-header-cell *matHeaderCellDef> Broj prijave </th>
+      <td mat-cell *matCellDef="let element"> {{element.brojPrijave}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="nazivPodnosioca">
+      <th mat-header-cell *matHeaderCellDef> Naziv podnosioca </th>
+      <td mat-cell *matCellDef="let element"> {{element.nazivPodnosioca}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="nazivPatenta">
+      <th mat-header-cell *matHeaderCellDef> Naziv patenta</th>
+      <td mat-cell *matCellDef="let element"> {{element.nazivPatenta}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="html">
+        <th mat-header-cell *matHeaderCellDef> HTML </th>
+        <td mat-cell *matCellDef="let element">
+            <button mat-flat-button (click)="downloadHTML(element.brojPrijave)">
+                <mat-icon>cloud_download</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="pdf">
+        <th mat-header-cell *matHeaderCellDef> PDF </th>
+        <td mat-cell *matCellDef="let element">
+            <button mat-flat-button (click)="downloadPDF(element.brojPrijave)">
+                <mat-icon>cloud_download</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  
+  

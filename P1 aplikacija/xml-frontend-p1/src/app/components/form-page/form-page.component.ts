@@ -3,7 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import { RanijaPrijava } from 'src/app/model/RanijaPrijava';
 import { Adresa } from 'src/app/model/Adresa';
 import { Kontakt } from 'src/app/model/Kontakt';
-import { PatentService } from 'src/app/app/services/patent.service';
+import { PatentService } from 'src/app/services/patent.service';
 
 @Component({
   selector: 'app-form-page',
