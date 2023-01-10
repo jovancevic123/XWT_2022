@@ -16,7 +16,7 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
         "prijava", "zavod", "pronalazak", "podnosilac", "pronalazac",
-        "punomoc", "ranijePrijave", "nacinDostavljanja", "adresaDostave"
+        "punomoc", "ranijePrijave", "nacinDostavljanja", "brojResenja", "adresaDostave"
 })
 @XmlRootElement(name = "zahtev")
 public class Zahtev {
@@ -45,6 +45,9 @@ public class Zahtev {
 
     @XmlElement(name="nacin_dostavljanja", required = true)
     private String nacinDostavljanja;
+
+    @XmlElement(name="broj_resenja", required = true)
+    private String brojResenja;
 
     @XmlElement(name="adresa_dostave", required = false)
     private Adresa adresaDostave;

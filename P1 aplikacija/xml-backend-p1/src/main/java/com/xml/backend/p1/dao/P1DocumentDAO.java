@@ -36,10 +36,10 @@ public class P1DocumentDAO {
         collection.setProperty(OutputKeys.INDENT, "yes");
     }
 
-    public void findById(String resourceId) throws XMLDBException {
+    public XMLResource findById(String resourceId) throws XMLDBException {
         XMLResource res = (XMLResource)collection.getResource(resourceId);
-        System.out.println("[INFO] Showing the document as XML resource: ");
-        System.out.println(res.getContent());
+
+        return res;
     }
 
     public void save(String documentId, String xmlData) throws Exception {

@@ -10,6 +10,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SearchMetadataDto {
-
     private String brojPrijave;
+    private String brojResenja;
 }
