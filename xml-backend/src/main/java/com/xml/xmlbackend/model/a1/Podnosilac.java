@@ -10,16 +10,16 @@ import javax.xml.bind.annotation.*;
 public class Podnosilac{
 
     @XmlAttribute(required=false, name = "podnosilac_je_autor")
-    private String podnosilacJeAutor;
+    private boolean podnosilacJeAutor;
 
     @XmlElement(required = true)
     private Lice lice;
 
-    public String getPodnosilacJeAutor() {
+    public boolean getPodnosilacJeAutor() {
         return podnosilacJeAutor;
     }
 
-    public void setPodnosilacJeAutor(String podnosilacJeAutor) {
+    public void setPodnosilacJeAutor(boolean podnosilacJeAutor) {
         this.podnosilacJeAutor = podnosilacJeAutor;
     }
 

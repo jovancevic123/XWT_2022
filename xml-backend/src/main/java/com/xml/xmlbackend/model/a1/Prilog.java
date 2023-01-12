@@ -14,4 +14,20 @@ public class Prilog {
 
     @XmlAttribute(required=true)
     private String src;
+
+    public String getVrstaPriloga() {
+        return vrstaPriloga;
+    }
+
+    public void setVrstaPriloga(String vrstaPriloga) {
+        this.vrstaPriloga = vrstaPriloga;
+    }
+
+    public String getSrc() {
+        return src;
+    }
+
+    public void setSrc(String src) {
+        this.src = src;
+    }
 }
