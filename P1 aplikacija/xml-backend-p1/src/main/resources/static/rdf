@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="bookstore.xsl"?><zahtev xmlns:sh="https://schema.org/" xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:p1="http://www.ftn.uns.ac.rs/xwt" about="http://www.ftn.uns.ac.rs/xwt/zahtev" vocab="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" xsi:schemaLocation="http://www.ftn.uns.ac.rs/xwt file:/C:/Users/Joco/Desktop/IV/XML/Projekat/XWT_2022/xml-backend-p1/data/P-1.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <prijava xmlns="http://www.ftn.uns.ac.rs/xwt">
-        <BrojPrijave xmlns="" datatype="xs:string" property="pred:broj_prijave">888</BrojPrijave>
+        <BrojPrijave xmlns="" datatype="xs:string" property="pred:broj_prijave">99999</BrojPrijave>
         <DatumPrijema xmlns="" datatype="xs:date" property="pred:datum_prijema">2022-11-25</DatumPrijema>
         <priznati_datum_podnosenja>2022-11-26</priznati_datum_podnosenja>
         <vrsta_prijave>dopunska</vrsta_prijave>
@@ -84,4 +84,5 @@
         </ranija_prijava>
     </ranije_prijave>
     <nacin_dostavljanja xmlns="http://www.ftn.uns.ac.rs/xwt">elektronska_forma</nacin_dostavljanja>
+    <BrojResenja datatype="xs:string" property="pred:broj_resenja">-1</BrojResenja>
 </zahtev>

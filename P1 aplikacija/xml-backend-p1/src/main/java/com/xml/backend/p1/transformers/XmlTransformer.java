@@ -37,17 +37,55 @@ import com.itextpdf.html2pdf.HtmlConverter;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
+import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
 
+@Service
 public class XmlTransformer {
 
-    public static StringWriter transform(final String xml, final String xslt) {
+//    public static StringWriter transform(final String xml, final String xslt) {
+//        try{
+//            ClassLoader classloader = XmlTransformer.class.getClassLoader();
+//            InputStream xmlData = classloader.getResourceAsStream(xml);
+//            URL xsltURL = classloader.getResource(xslt);
+//
+//            Document.conve
+//            Document xmlDocument = convertStringToDocument();
+//            Source stylesource = new StreamSource(xsltURL.openStream(), xsltURL.toExternalForm());
+//            Transformer transformer = TransformerFactory.newInstance().newTransformer(stylesource);
+//
+//            StringWriter stringWriter = new StringWriter();
+//            StreamResult result = new StreamResult(stringWriter);
+//            transformer.transform(new DOMSource(xmlDocument), result);
+//
+//            return stringWriter;
+//        }catch(Exception e){
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
+
+    private Document convertStringToDocument(String xmlStr) {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder;
+        try
+        {
+            builder = factory.newDocumentBuilder();
+            Document doc = builder.parse( new InputSource( new StringReader( xmlStr ) ) );
+            return doc;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public StringWriter transform(final String xmlString) {
         try{
             ClassLoader classloader = XmlTransformer.class.getClassLoader();
-            InputStream xmlData = classloader.getResourceAsStream(xml);
-            URL xsltURL = classloader.getResource(xslt);
+            URL xsltURL = classloader.getResource("xml/xslt.xsl");
 
-            Document xmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(xmlData);
+            Document xmlDocument = convertStringToDocument(xmlString);
             Source stylesource = new StreamSource(xsltURL.openStream(), xsltURL.toExternalForm());
             Transformer transformer = TransformerFactory.newInstance().newTransformer(stylesource);
 
@@ -62,8 +100,8 @@ public class XmlTransformer {
         return null;
     }
 
-    public static void transformToHtml(final String xml, final String xslt) throws IOException {
-        StringWriter stringWriter = transform(xml, xslt);
+    public void transformToHtml(final String xmlString) throws IOException {
+        StringWriter stringWriter = transform(xmlString);
 
         File file = new File("src/main/resources/xml/GeneratedHTML.html");
         if (!file.exists()) {
@@ -76,19 +114,19 @@ public class XmlTransformer {
         bw.close();
     }
 
-    public static void transformToPdf(final String xml, final String xslt) throws IOException {
+    public void transformToPdf(final String xmlString) throws IOException {
 
-       StringWriter stringWriter = transform(xml, xslt);
+       StringWriter stringWriter = transform(xmlString);
 
-        ByteArrayInputStream is=new ByteArrayInputStream(stringWriter.toString().getBytes());
+        ByteArrayInputStream is = new ByteArrayInputStream(stringWriter.toString().getBytes());
         PdfDocument pdfDocument = new PdfDocument(new PdfWriter("src/main/resources/xml/GeneratedPDF.pdf"));
         pdfDocument.setDefaultPageSize(new PageSize(780, 2000));
         HtmlConverter.convertToPdf(is, pdfDocument);
     }
 
     public static void main(String[] args) throws Exception {
-        transformToPdf("xml/P-1-generated.xml", "xml/xslt.xsl");
-        transformToHtml("xml/P-1-generated.xml", "xml/xslt.xsl");
+//        transformToPdf("xml/P-1-generated.xml", "xml/xslt.xsl");
+//        transformToHtml("xml/P-1-generated.xml", "xml/xslt.xsl");
 //
 //        JAXBContext context = JAXBContext.newInstance(Zahtev.class);
 //        Unmarshaller unmarshaller = context.createUnmarshaller();
@@ -111,6 +149,6 @@ public class XmlTransformer {
 
 //        ------------select metadata
         MetadataService service = new MetadataService();
-        service.metaDataSelect(new SearchMetadataDto("123"));
+        service.metaDataSelect(new SearchMetadataDto("999", "-1"));
     }
 }

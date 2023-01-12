@@ -62,4 +62,10 @@
         </DatumPrijema>
     </xsl:template>
 
+    <xsl:template match="p1:zahtev/p1:broj_resenja">
+        <BrojResenja property="pred:broj_resenja" datatype="xs:string">
+            <xsl:apply-templates select="node()|@*"/>
+        </BrojResenja>
+    </xsl:template>
+
 </xsl:stylesheet>

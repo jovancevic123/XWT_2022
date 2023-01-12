@@ -4,7 +4,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.ftn.uns.ac.rs/xwt file:/C:/Users/Joco/Desktop/IV/XML/Projekat/XWT_2022/xml-backend-p1/data/P-1.xsd">
     <prijava>
-        <broj_prijave>888</broj_prijave>
+        <broj_prijave>99999</broj_prijave>
         <datum_prijema>2022-11-25</datum_prijema>
         <priznati_datum_podnosenja>2022-11-26</priznati_datum_podnosenja>
         <vrsta_prijave>dopunska</vrsta_prijave>
@@ -89,4 +89,5 @@
         </ranija_prijava>
     </ranije_prijave>
     <nacin_dostavljanja>elektronska_forma</nacin_dostavljanja>
+    <broj_resenja>-1</broj_resenja>
 </zahtev>

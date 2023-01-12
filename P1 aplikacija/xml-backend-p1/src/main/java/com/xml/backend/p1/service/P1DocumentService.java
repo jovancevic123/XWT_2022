@@ -1,19 +1,28 @@
 package com.xml.backend.p1.service;
 
+import com.itextpdf.text.Meta;
 import com.xml.backend.p1.dao.P1DocumentDAO;
+import com.xml.backend.p1.dto.PendingRequestDto;
 import com.xml.backend.p1.dto.RanijaPrijavaDto;
 import com.xml.backend.p1.dto.RequestDto;
+import com.xml.backend.p1.dto.SearchMetadataDto;
 import com.xml.backend.p1.model.*;
+import com.xml.backend.p1.transformers.XmlTransformer;
 import lombok.*;
-import org.checkerframework.checker.units.qual.K;
+import org.apache.jena.util.Metadata;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.stereotype.Service;
 import org.xmldb.api.base.XMLDBException;
+import org.xmldb.api.modules.XMLResource;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import javax.xml.bind.PropertyException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,14 +34,18 @@ import java.util.List;
 public class P1DocumentService {
 
     private final P1DocumentDAO repository;
+    private final XmlTransformer transformer;
+    private final MetadataService metadataService;
 
     @Autowired
-    public P1DocumentService(P1DocumentDAO repository) {
+    public P1DocumentService(P1DocumentDAO repository, XmlTransformer transformer, MetadataService metadataService) {
         this.repository = repository;
+        this.transformer = transformer;
+        this.metadataService = metadataService;
     }
 
-    public void findById(String resourceId) throws XMLDBException {
-        this.repository.findById(resourceId);
+    public XMLResource findById(String resourceId) throws XMLDBException {
+        return this.repository.findById(resourceId);
     }
 
     public void addPatent(RequestDto dto) throws JAXBException {
@@ -89,5 +102,44 @@ public class P1DocumentService {
         Marshaller m = context.createMarshaller();
         m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 		m.marshal(zahtev, System.out);
+    }
+
+    public void addPatentXonomy(Zahtev zahtev) throws JAXBException {
+        int brojPrijave = (int) new Date().getTime();
+        zahtev.getPrijava().setBrojPrijave(brojPrijave);
+        zahtev.getPrijava().setDatumPrijema(LocalDate.now());
+        Zavod zavod = new Zavod();
+        zahtev.setZavod(zavod);
+
+
+        JAXBContext context = JAXBContext.newInstance(Zahtev.class);
+        Marshaller m = context.createMarshaller();
+        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        m.marshal(zahtev, System.out);
+    }
+
+    public ByteArrayResource getRequestPDF(String brojPrijave) throws XMLDBException, IOException {
+        XMLResource res = this.findById(brojPrijave);
+        String xmlData = res.getContent().toString();
+
+        transformer.transformToPdf(xmlData);
+        File f = new File("src/main/resources/xml/GeneratedPDF.pdf");
+        byte[] fileContent = Files.readAllBytes(f.toPath());
+        ByteArrayResource body = new ByteArrayResource(fileContent);
+        return body;
+    }
+
+    public String getRequestHTML(String brojPrijave) throws XMLDBException, IOException {
+        XMLResource res = this.findById(brojPrijave);
+        String xmlData = res.getContent().toString();
+
+        transformer.transformToHtml(xmlData);
+        String html = Files.readString(Paths.get("src/main/resources/xml/GeneratedHTML.html"));
+        return html;
+    }
+
+    public List<PendingRequestDto> getPendingRequests() {
+        this.metadataService.metaDataSelect(new SearchMetadataDto("999", "-1"));
+        return new ArrayList<>();
     }
 }
