@@ -127,7 +127,7 @@ public class MetadataService {
     }
 
     public void transformRDF(String xmlData, String xsltFIlePath, String outputPath) {
-        String path = "./src/main/resources/static/data.xml";
+        String path = "./src/main/resources/xml/ZH-1-generated.xml";
         try{
             FileUtils.writeStringToFile(new File(path), xmlData);
             StreamSource streamSource = new StreamSource(new File(xsltFIlePath));

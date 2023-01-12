@@ -26,10 +26,10 @@
             <email>darkomitrovic@gmail.com</email>
             <fax>324</fax>
         </kontakt>
-        <ime>Darko</ime>
-        <prezime>Mitrovic</prezime>
+        <ime>Marija</ime>
+        <prezime>Stankovic</prezime>
     </podnosilac>
-    <punomocnik  xsi:type="TFizickoLice">
+    <punomocnik xsi:type="TPravnoLice">
         <adresa>
             <ulica>Brace Ribnikar</ulica>
             <broj>21</broj>
@@ -42,8 +42,7 @@
             <email>predragantonic@gmail.com</email>
             <fax>3412</fax>
         </kontakt>
-        <ime>Predrag</ime>
-        <prezime>Antonic</prezime>
+        <poslovno_ime>BIM Servis</poslovno_ime>
     </punomocnik>
     <zig>
         <tip_ziga>individualni_zig</tip_ziga>

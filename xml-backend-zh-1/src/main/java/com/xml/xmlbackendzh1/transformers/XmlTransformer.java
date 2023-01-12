@@ -68,7 +68,7 @@ public class XmlTransformer {
         transformToPdf("xml/ZH-1-generated.xml", "xml/xslt.xsl");    //transform to pdf
         transformToHtml("xml/ZH-1-generated.xml", "xml/xslt.xsl");   //transform to html
 
-        MetadataService service = new MetadataService();
-        service.metaDataSelect(new SearchMetadataDto("123"));       //extract metadata
+//        MetadataService service = new MetadataService();
+//        service.metaDataSelect(new SearchMetadataDto("123"));       //extract metadata
     }
 }
