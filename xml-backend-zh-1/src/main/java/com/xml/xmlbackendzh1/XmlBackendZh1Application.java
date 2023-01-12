@@ -5,18 +5,28 @@
 //Prilozi kao lista je tretirana drugacije, s obzirom da njeni elementi nisu isti i jedinstveno su navedeni u dokumentu
 
 package com.xml.xmlbackendzh1;
+import com.xml.xmlbackendzh1.dao.ZH1DocumentDAO;
 import com.xml.xmlbackendzh1.model.common.LocalDateAdapter;
 import com.xml.xmlbackendzh1.model.zh1.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @SpringBootApplication
@@ -24,8 +34,23 @@ public class XmlBackendZh1Application {
 
 	public static void main(String[] args) throws JAXBException {
 //		SpringApplication.run(XmlBackendZh1Application.class, args);
-		XmlBackendZh1Application xmlBackendZh1Application = new XmlBackendZh1Application();
-		xmlBackendZh1Application.kt2Demo();
+//		XmlBackendZh1Application xmlBackendZh1Application = new XmlBackendZh1Application();
+//		xmlBackendZh1Application.kt2Demo();
+
+		String xmlData = null;
+		try {
+			xmlData = new String(Files.readAllBytes(Paths.get("./src/main/resources/xml/P-1-generated.xml")), StandardCharsets.UTF_8);
+
+			ZH1DocumentDAO dao = new ZH1DocumentDAO();
+			dao.save("787", xmlData);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String xsltFIlePath = "./src/main/resources/xml/metadata.xsl";
+		String outputPath = "./src/main/resources/static/rdf/";
 	}
 
 	public void kt2Demo() throws JAXBException {
@@ -43,6 +68,22 @@ public class XmlBackendZh1Application {
 		// Serijalizacija objektnog modela u XML
 		System.out.println("\n\n\n=================[INFO] Marshalling customized zahtev: ==================================\n\n\n");
 		m.marshal(zahtev, System.out);
+	}
+
+	@Bean
+	public CorsFilter corsFilter() {
+		CorsConfiguration corsConfiguration = new CorsConfiguration();
+		corsConfiguration.setAllowCredentials(true);
+		corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+		corsConfiguration.setAllowedHeaders(Arrays.asList("Origin", "Access-Control-Allow-Origin", "Content-Type",
+				"Accept", "Authorization", "Origin, Accept", "X-Requested-With",
+				"Access-Control-Request-Method", "Access-Control-Request-Headers", "responseType"));
+		corsConfiguration.setExposedHeaders(Arrays.asList("Origin", "Content-Type", "Accept", "Authorization",
+				"Access-Control-Allow-Origin", "Access-Control-Allow-Origin", "Access-Control-Allow-Credentials", "responseType"));
+		corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+		UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
+		urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration);
+		return new CorsFilter(urlBasedCorsConfigurationSource);
 	}
 
 	private Zahtev createZahtev() {

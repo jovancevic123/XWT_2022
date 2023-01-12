@@ -11,6 +11,11 @@ public class PravnoLice extends Lice{
 
     private String poslovnoIme;
 
+    public PravnoLice(Adresa adresa, Kontakt kontakt, String poslovnoIme){
+        super(kontakt, adresa);
+        this.poslovnoIme = poslovnoIme;
+    }
+
     @Override
     @XmlElement(required = true)
     public Kontakt getKontakt() {

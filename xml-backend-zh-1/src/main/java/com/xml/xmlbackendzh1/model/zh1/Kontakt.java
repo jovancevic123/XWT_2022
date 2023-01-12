@@ -1,7 +1,10 @@
 package com.xml.xmlbackendzh1.model.zh1;
+import com.xml.xmlbackendzh1.dto.KontaktDto;
+import lombok.NoArgsConstructor;
+
 import javax.xml.bind.annotation.*;
 
-
+@NoArgsConstructor
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
         "telefon", "email", "fax"
@@ -38,5 +41,11 @@ public class Kontakt {
 
     public void setFax(String fax) {
         this.fax = fax;
+    }
+
+    public Kontakt(KontaktDto dto){
+        this.telefon = dto.getBroj();
+        this.email = dto.getEmail();
+        this.fax = dto.getFax();
     }
 }

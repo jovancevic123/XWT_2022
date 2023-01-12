@@ -1,4 +1,6 @@
 package com.xml.xmlbackendzh1.model.zh1;
+import com.xml.xmlbackendzh1.dto.TaksaDto;
+
 import javax.xml.bind.annotation.*;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -14,6 +16,14 @@ public class Taksa {
 
     @XmlElement(name="iznos", required=true)
     private double iznos;
+
+    public Taksa(){}
+
+    public Taksa(TaksaDto taksaDto) {
+        this.valuta = "RSD";
+        this.tipTakse = taksaDto.getTipTakse();
+        this.iznos = Double.parseDouble(taksaDto.getIznos());
+    }
 
     public String getValuta() {
         return valuta;

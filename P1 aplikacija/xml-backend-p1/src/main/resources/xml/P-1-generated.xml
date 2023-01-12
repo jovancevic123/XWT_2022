@@ -23,6 +23,7 @@
         <naziv_pronalaska_srb>Naziv na srpskom je srb</naziv_pronalaska_srb>
         <naziv_pronalaska_eng>Naziv na engleskom</naziv_pronalaska_eng>
     </pronalazak>
+
     <podnosilac pronalazac="false">
         <drzavljanstvo>srpsko</drzavljanstvo>
         <lice xsi:type="TPravnoLice">

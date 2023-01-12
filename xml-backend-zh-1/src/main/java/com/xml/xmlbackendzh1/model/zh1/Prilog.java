@@ -13,6 +13,12 @@ public class Prilog {
     @XmlAttribute(required=true, name = "src")
     private String src;
 
+    public Prilog(){}
+
+    public Prilog(String src) {
+        this.src = src;
+    }
+
     public String getSrc() {
         return src;
     }
