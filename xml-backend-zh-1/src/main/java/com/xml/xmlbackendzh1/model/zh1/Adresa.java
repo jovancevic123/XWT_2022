@@ -1,7 +1,11 @@
 package com.xml.xmlbackendzh1.model.zh1;
 
+import com.xml.xmlbackendzh1.dto.AdresaDto;
+import lombok.NoArgsConstructor;
+
 import javax.xml.bind.annotation.*;
 
+@NoArgsConstructor
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
         "ulica", "broj", "postanskiBroj", "mesto", "drzava"
@@ -22,6 +26,14 @@ public class Adresa {
 
     @XmlElement(required=true)
     private String drzava;
+
+    public Adresa(AdresaDto dto){
+        this.ulica = dto.getUlica();
+        this.broj = dto.getBroj();
+        this.postanskiBroj = dto.getPostanskiBroj();
+        this.mesto = dto.getMesto();
+        this.drzava = dto.getDrzava();
+    }
 
     public String getUlica() {
         return ulica;

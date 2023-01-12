@@ -1,9 +1,12 @@
 package com.xml.xmlbackendzh1.model.zh1;
+import lombok.NoArgsConstructor;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+@NoArgsConstructor
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(name="TFizickoLice", propOrder={"kontakt", "adresa", "ime", "prezime"})
 public class FizickoLice extends Lice{
@@ -11,6 +14,12 @@ public class FizickoLice extends Lice{
     private String ime;
 
     private String prezime;
+
+    public FizickoLice(Adresa adresa, Kontakt kontakt, String ime, String prezime){
+        super(kontakt, adresa);
+        this.ime = ime;
+        this.prezime = prezime;
+    }
 
     @Override
     @XmlElement(required = true)
