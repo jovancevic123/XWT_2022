@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xwt="http://www.ftn.uns.ac.rs/xwt">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xwt="http://www.ftn.uns.ac.rs/xwt"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="http://www.ftn.uns.ac.rs/xwt ZH-1.xsd">
     <xsl:template match="/">
         <html>
             <head>
@@ -12,7 +14,7 @@
                     }
 
                     body{
-                    margin: 5%rem;
+                    margin: 5rem;
                     }
 
                     td, th {
@@ -110,8 +112,15 @@
                     </tr>
                     <tr rowspan="2">
                         <td colspan="3" style="height: 40px">
-                            <b><xsl:value-of  select="zahtev/podnosilac/ime"/>, </b>
-                            <b><xsl:value-of  select="zahtev/podnosilac/prezime"/>, </b>
+                            <xsl:choose>
+                                <xsl:when test="zahtev/podnosilac/@type='TFizickoLice'">
+                                    <b><xsl:value-of  select="zahtev/podnosilac/ime"/>, </b>
+                                    <b><xsl:value-of  select="zahtev/podnosilac/prezime"/>, </b>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <b><xsl:value-of  select="zahtev/podnosilac/poslovno_ime"/>, </b>
+                                </xsl:otherwise>
+                            </xsl:choose>
                             <b><xsl:value-of  select="zahtev/podnosilac/adresa/ulica"/>, </b>
                             <b><xsl:value-of  select="zahtev/podnosilac/adresa/broj"/>, </b>
                             <b><xsl:value-of  select="zahtev/podnosilac/adresa/postanski_broj"/>, </b>
@@ -130,8 +139,15 @@
                     </tr>
                     <tr>
                         <td colspan="3" style="height: 40px">
-                            <b><xsl:value-of  select="zahtev/punomocnik/ime"/>, </b>
-                            <b><xsl:value-of  select="zahtev/punomocnik/prezime"/>, </b>
+                            <xsl:choose>
+                                <xsl:when test="zahtev/punomocnik/@type='TFizickoLice'">
+                                    <b><xsl:value-of  select="zahtev/punomocnik/ime"/>, </b>
+                                    <b><xsl:value-of  select="zahtev/punomocnik/prezime"/>, </b>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <b><xsl:value-of  select="zahtev/punomocnik/poslovno_ime"/>, </b>
+                                </xsl:otherwise>
+                            </xsl:choose>
                             <b><xsl:value-of  select="zahtev/punomocnik/adresa/ulica"/>, </b>
                             <b><xsl:value-of  select="zahtev/punomocnik/adresa/broj"/>, </b>
                             <b><xsl:value-of  select="zahtev/punomocnik/adresa/postanski_broj"/>, </b>
@@ -339,9 +355,7 @@
                         <td>UKUPNO</td>
                         <td>
                             <xsl:variable name="total" select="sum(zahtev/placene_takse/taksa/iznos)"/>
-                            <result>
-                                <xsl:value-of select="$total"/>
-                            </result>
+                            <xsl:value-of select="$total"/>
                         </td>
                     </tr>
                 </table>

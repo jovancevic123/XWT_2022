@@ -90,7 +90,7 @@
             <xs:element name="znak" type="zh-1:TZnak"/>
             <xs:element name="brojevi_klasa_robe">
                 <xs:complexType>
-                    <xs:sequence>
+                    <xs:sequence maxOccurs="unbounded" minOccurs="1">
                         <xs:element name="broj" type="xs:positiveInteger"/>
                     </xs:sequence>
                 </xs:complexType>

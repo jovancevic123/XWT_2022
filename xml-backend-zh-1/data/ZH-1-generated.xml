@@ -1,10 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<zahtev xmlns="http://www.ftn.uns.ac.rs/xwt"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.ftn.uns.ac.rs/xwt ZH-1.xsd">
-    <naziv></naziv>
+<zahtev xmlns="http://www.ftn.uns.ac.rs/xwt" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ftn.uns.ac.rs/xwt ZH-1.xsd">
+    <naziv/>
     <zavod>
-        <naziv></naziv>
+        <naziv/>
         <adresa>
             <ulica>Rumenacki put</ulica>
             <broj>125</broj>
@@ -29,7 +26,7 @@
         <ime>Darko</ime>
         <prezime>Mitrovic</prezime>
     </podnosilac>
-    <punomocnik  xsi:type="TFizickoLice">
+    <punomocnik xsi:type="TFizickoLice">
         <adresa>
             <ulica>Brace Ribnikar</ulica>
             <broj>21</broj>

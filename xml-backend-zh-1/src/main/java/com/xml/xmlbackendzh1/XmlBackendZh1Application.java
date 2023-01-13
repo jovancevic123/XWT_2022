@@ -39,7 +39,7 @@ public class XmlBackendZh1Application {
 
 		String xmlData = null;
 		try {
-			xmlData = new String(Files.readAllBytes(Paths.get("./src/main/resources/xml/P-1-generated.xml")), StandardCharsets.UTF_8);
+			xmlData = new String(Files.readAllBytes(Paths.get("./src/main/resources/xml/ZH-1-generated.xml")), StandardCharsets.UTF_8);
 
 			ZH1DocumentDAO dao = new ZH1DocumentDAO();
 			dao.save("787", xmlData);
@@ -50,7 +50,7 @@ public class XmlBackendZh1Application {
 			e.printStackTrace();
 		}
 		String xsltFIlePath = "./src/main/resources/xml/metadata.xsl";
-		String outputPath = "./src/main/resources/static/rdf/";
+//		String outputPath = "./src/main/resources/static/rdf/";
 	}
 
 	public void kt2Demo() throws JAXBException {
