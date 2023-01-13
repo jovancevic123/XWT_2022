@@ -1,10 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<zahtev xmlns="http://www.ftn.uns.ac.rs/xwt"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.ftn.uns.ac.rs/xwt ZH-1.xsd">
-    <naziv></naziv>
+<zahtev xmlns="http://www.ftn.uns.ac.rs/xwt" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ftn.uns.ac.rs/xwt ZH-1.xsd">
+    <naziv/>
     <zavod>
-        <naziv></naziv>
+        <naziv/>
         <adresa>
             <ulica>Rumenacki put</ulica>
             <broj>125</broj>
@@ -26,10 +23,10 @@
             <email>darkomitrovic@gmail.com</email>
             <fax>324</fax>
         </kontakt>
-        <ime>Marija</ime>
-        <prezime>Stankovic</prezime>
+        <ime>Darko</ime>
+        <prezime>Mitrovic</prezime>
     </podnosilac>
-    <punomocnik xsi:type="TPravnoLice">
+    <punomocnik xsi:type="TFizickoLice">
         <adresa>
             <ulica>Brace Ribnikar</ulica>
             <broj>21</broj>
@@ -42,7 +39,8 @@
             <email>predragantonic@gmail.com</email>
             <fax>3412</fax>
         </kontakt>
-        <poslovno_ime>BIM Servis</poslovno_ime>
+        <ime>Predrag</ime>
+        <prezime>Antonic</prezime>
     </punomocnik>
     <zig>
         <tip_ziga>individualni_zig</tip_ziga>

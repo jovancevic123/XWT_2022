@@ -14,7 +14,7 @@
                     }
 
                     body{
-                    margin: 5%rem;
+                    margin: 5rem;
                     }
 
                     td, th {
@@ -355,9 +355,7 @@
                         <td>UKUPNO</td>
                         <td>
                             <xsl:variable name="total" select="sum(zahtev/placene_takse/taksa/iznos)"/>
-                            <result>
-                                <xsl:value-of select="$total"/>
-                            </result>
+                            <xsl:value-of select="$total"/>
                         </td>
                     </tr>
                 </table>

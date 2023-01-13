@@ -1,5 +1,6 @@
 package com.xml.xmlbackendzh1.dao;
 
+import com.xml.xmlbackendzh1.service.MetadataService;
 import com.xml.xmlbackendzh1.util.AuthenticationUtilities;
 import org.xmldb.api.DatabaseManager;
 import org.xmldb.api.base.Collection;
@@ -8,6 +9,8 @@ import org.xmldb.api.base.XMLDBException;
 import org.xmldb.api.modules.XMLResource;
 import org.exist.xmldb.EXistResource;
 import javax.xml.transform.OutputKeys;
+import java.io.File;
+import java.io.FileInputStream;
 
 public class RetrieveExample {
 
@@ -68,7 +71,10 @@ public class RetrieveExample {
 
                 System.out.println("[INFO] Showing the document as XML resource: ");
                 System.out.println(res.getContent());
-
+                MetadataService metadataService = new MetadataService();
+                metadataService.transformRDF(res.getContent().toString(), "./src/main/resources/xml/metadata.xsl", "./src/main/resources/static/rdf");
+                metadataService.extractMetadataToRdf(new FileInputStream(new File("./src/main/resources/static/rdf")), "123");
+                metadataService.uploadMetadata();
             }
         } finally {
             //don't forget to clean up!
