@@ -4,9 +4,13 @@ import com.itextpdf.html2pdf.HtmlConverter;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
+import com.xml.xmlbackend.model.a1.Zahtev;
+import com.xml.xmlbackend.service.MetadataService;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Source;
@@ -63,7 +67,7 @@ public class XmlTransformer {
 
         ByteArrayInputStream is = new ByteArrayInputStream(stringWriter.toString().getBytes());
         PdfDocument pdfDocument = new PdfDocument(new PdfWriter("src/main/resources/xml/GeneratedPDF.pdf"));
-        pdfDocument.setDefaultPageSize(new PageSize(780, 2000));
+        pdfDocument.setDefaultPageSize(new PageSize(780, 3500));
         HtmlConverter.convertToPdf(is, pdfDocument);
     }
 
@@ -90,7 +94,7 @@ public class XmlTransformer {
 //        Zahtev zahtev = (Zahtev) unmarshaller.unmarshal(new File("src/main/resources/xml/P-1-generated.xml"));
 //
 //        String rdfFile = "src/main/resources/xml/123.rdf";
-//        generateRdf(rdfFile, zahtev);
+//        service.generateRdf(rdfFile, zahtev);
 
 
 // ------------------grddl

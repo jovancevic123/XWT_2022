@@ -48,8 +48,8 @@
                 </autor>
             </autori>
         </delo_prerade>
-        <vrsta_dela></vrsta_dela>
-        <forma_zapisa_dela></forma_zapisa_dela>
+        <vrsta_dela>književno delo</vrsta_dela>
+        <forma_zapisa_dela>štampani tekst</forma_zapisa_dela>
         <stvoreno_u_radnom_odnosu>true</stvoreno_u_radnom_odnosu>
         <nacin_koriscenja></nacin_koriscenja>
         <autori>

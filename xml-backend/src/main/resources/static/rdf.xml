@@ -1,17 +1,13 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?xml-stylesheet type="text/xsl" href="xslt.xsl"?>
-<zahtev xmlns="http://www.ftn.uns.ac.rs/xwt"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.ftn.uns.ac.rs/xwt A-1.xsd">
-    <prijava>
-        <broj_prijave>12</broj_prijave>
-        <datum_podnosenja>2022-12-15</datum_podnosenja>
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="xslt.xsl"?><zahtev xmlns:sh="https://schema.org/" xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:a1="http://www.ftn.uns.ac.rs/xwt" about="http://www.ftn.uns.ac.rs/xwt/zahtev" vocab="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" xsi:schemaLocation="http://www.ftn.uns.ac.rs/xwt A-1.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <prijava xmlns="http://www.ftn.uns.ac.rs/xwt">
+        <BrojPrijave xmlns="" datatype="xs:string" property="pred:broj_prijave">12</BrojPrijave>
+        <DatumPodnosenja xmlns="" datatype="xs:string" property="pred:datum_podnosenja">2022-12-15</DatumPodnosenja>
     </prijava>
-    <podnosilac podnosilac_je_autor="true">
+    <podnosilac xmlns="http://www.ftn.uns.ac.rs/xwt" podnosilac_je_autor="true">
         <lice xsi:type="TFizickoLice">
             <kontakt>
                 <telefon>0628977742</telefon>
-                <email>dd@gmail.com</email>
+                <PodnosilacEmail xmlns="" datatype="xs:string" property="pred:podnosilac_email">dd@gmail.com</PodnosilacEmail>
             </kontakt>
             <ime>Dragan</ime>
             <prezime>Dragic</prezime>
@@ -25,8 +21,8 @@
             <drzavljanstvo>Srpsko</drzavljanstvo>
         </lice>
     </podnosilac>
-    <autorsko_delo>
-        <naslov>Nova knjiga</naslov>
+    <autorsko_delo xmlns="http://www.ftn.uns.ac.rs/xwt">
+        <NaslovDela xmlns="" datatype="xs:string" property="pred:naslov_dela">Nova knjiga</NaslovDela>
         <delo_prerade>
             <naslov_dela_prerade>Stara knjiga</naslov_dela_prerade>
             <autori>
@@ -51,12 +47,12 @@
         <vrsta_dela>književno delo</vrsta_dela>
         <forma_zapisa_dela>štampani tekst</forma_zapisa_dela>
         <stvoreno_u_radnom_odnosu>true</stvoreno_u_radnom_odnosu>
-        <nacin_koriscenja></nacin_koriscenja>
+        <nacin_koriscenja/>
         <autori>
             <autor>
                 <kontakt>
                     <telefon>0628977742</telefon>
-                    <email>dd@gmail.com</email>
+                    <AutorEmail xmlns="" datatype="xs:string" property="pred:autor_email">dd@gmail.com</AutorEmail>
                 </kontakt>
                 <ime>Dragan</ime>
                 <prezime>Dragic</prezime>
@@ -73,10 +69,10 @@
         </autori>
         <anoniman_autor>false</anoniman_autor>
     </autorsko_delo>
-    <prilozi>
-        <prilog vrsta_priloga="opis autorskog dela" src="Putanja do opisa"/>
+    <prilozi xmlns="http://www.ftn.uns.ac.rs/xwt">
+        <prilog src="Putanja do opisa" vrsta_priloga="opis autorskog dela"/>
     </prilozi>
-    <zavod>
+    <zavod xmlns="http://www.ftn.uns.ac.rs/xwt">
         <naziv>Zavod za intelektualnu svojinu</naziv>
         <adresa>
             <ulica>Kneginje Ljubice</ulica>

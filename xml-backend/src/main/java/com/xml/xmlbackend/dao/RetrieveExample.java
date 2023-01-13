@@ -1,5 +1,6 @@
 package com.xml.xmlbackend.dao;
 
+import com.xml.xmlbackend.service.MetadataService;
 import com.xml.xmlbackend.transformers.XmlTransformer;
 import com.xml.xmlbackend.util.AuthenticationUtilities;
 import org.exist.xmldb.EXistResource;
@@ -10,6 +11,8 @@ import org.xmldb.api.base.XMLDBException;
 import org.xmldb.api.modules.XMLResource;
 
 import javax.xml.transform.OutputKeys;
+import java.io.File;
+import java.io.FileInputStream;
 
 //THIS IS JUST EXAMPLE, NOTHING TO DO WITH THE PROJECT ITSELF
 public class RetrieveExample {
@@ -57,7 +60,22 @@ public class RetrieveExample {
 
                 System.out.println("[INFO] Showing the document as XML resource: ");
                 System.out.println(res.getContent());
-                XmlTransformer.transformToPdf(res.getContent().toString());
+
+                String xmlData = res.getContent().toString();
+
+//                XmlTransformer.transformToPdf(xmlData);
+//                XmlTransformer.transformToHtml(xmlData);
+
+//                generate metadata
+
+                String xsltFIlePath = "./src/main/resources/xml/metadata.xsl";
+                String outputPath = "./src/main/resources/static/rdf.xml";
+                MetadataService service = new MetadataService();
+
+                service.transformRDF(xmlData, xsltFIlePath, outputPath); // 1. xml u obliku string-a
+                String resultMeta = service.extractMetadataToRdf(new FileInputStream(new File("./src/main/resources/static/rdf.xml")), "123");
+                System.out.println(resultMeta);
+                service.uploadMetadata();
 
             }
         } finally {

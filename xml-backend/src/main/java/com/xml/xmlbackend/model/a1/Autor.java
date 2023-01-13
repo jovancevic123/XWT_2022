@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.*;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-        "adresa", "pseudonim"
+        "adresa", "pseudonim", "godinaSmrti"
 })
 public class Autor extends FizickoLice{
     @XmlElement(required=true)
@@ -13,6 +13,9 @@ public class Autor extends FizickoLice{
 
     @XmlElement(required=false)
     private String pseudonim;
+
+    @XmlElement(required=false)
+    private int godinaSmrti;
 
     public Adresa getAdresa() {
         return adresa;
@@ -29,4 +32,14 @@ public class Autor extends FizickoLice{
     public void setPseudonim(String pseudonim) {
         this.pseudonim = pseudonim;
     }
+
+    public int getGodinaSmrti() {
+        return godinaSmrti;
+    }
+
+    public void setGodinaSmrti(int godinaSmrti) {
+        this.godinaSmrti = godinaSmrti;
+    }
+
+
 }

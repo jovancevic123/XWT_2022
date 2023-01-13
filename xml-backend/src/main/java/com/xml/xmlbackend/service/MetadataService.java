@@ -1,12 +1,12 @@
-package com.xml.backend.p1.service;
+package com.xml.xmlbackend.service;
 
-import com.xml.backend.p1.dto.SearchMetadataDto;
-import com.xml.backend.p1.exceptions.OperationFailedException;
-import com.xml.backend.p1.util.FusekiAuthentication;
-import com.xml.backend.p1.util.FusekiAuthentication.ConnectionProperties;
-import com.xml.backend.p1.util.SparqlUtil;
+import com.xml.xmlbackend.dto.SearchMetadataDto;
+import com.xml.xmlbackend.exception.OperationFailedException;
+import com.xml.xmlbackend.util.AuthenticationUtilities;
+import com.xml.xmlbackend.util.FusekiAuthentication;
+import com.xml.xmlbackend.util.SparqlUtil;
 import org.apache.commons.io.FileUtils;
-import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.HttpClient;
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
@@ -24,7 +24,6 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
-import java.net.http.HttpClient;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -36,10 +35,8 @@ import java.util.stream.Stream;
 
 @Service
 public class MetadataService {
-
-
     public final String XSL_TO_RDF_FILE = "xml/metadata.xsl";
-    private ConnectionProperties connectionProperties;
+    private FusekiAuthentication.ConnectionProperties connectionProperties;
 
     public MetadataService() throws IOException {
         connectionProperties = FusekiAuthentication.loadProperties();

@@ -1,0 +1,8 @@
+PREFIX schema: <http://www.ftn.uns.ac.rs/rdf/examples/predicate>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT * from <http://localhost:3030/AutorskoDeloDataset/data>
+WHERE {
+  ?patent  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/broj_prijave> ?brojPrijave .
+  ?patent  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/broj_resenja> ?brojResenja .
+  FILTER(CONTAINS(UCASE(str(?brojPrijave)), UCASE("%1$s")).
+}

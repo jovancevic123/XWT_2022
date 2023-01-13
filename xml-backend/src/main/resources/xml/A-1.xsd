@@ -97,6 +97,7 @@
             <xs:extension base="zah:TFizickoLice">
                 <xs:sequence>
                     <xs:element name="pseudonim" type="xs:string" minOccurs="0"/>
+                    <xs:element name="godina_smrti" type="xs:positiveInteger" minOccurs="0"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>

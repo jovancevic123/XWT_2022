@@ -1,8 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?xml-stylesheet type="text/xsl" href="xslt.xsl"?>
-<zahtev xmlns="http://www.ftn.uns.ac.rs/xwt"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.ftn.uns.ac.rs/xwt A-1.xsd">
+<zahtev xmlns="http://www.ftn.uns.ac.rs/xwt" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ftn.uns.ac.rs/xwt A-1.xsd">
     <prijava>
         <broj_prijave>12</broj_prijave>
         <datum_podnosenja>2022-12-15</datum_podnosenja>
@@ -51,7 +48,7 @@
         <vrsta_dela>književno delo</vrsta_dela>
         <forma_zapisa_dela>štampani tekst</forma_zapisa_dela>
         <stvoreno_u_radnom_odnosu>true</stvoreno_u_radnom_odnosu>
-        <nacin_koriscenja></nacin_koriscenja>
+        <nacin_koriscenja/>
         <autori>
             <autor>
                 <kontakt>

@@ -3,12 +3,14 @@ package com.xml.xmlbackend.model.a1;
 import javax.xml.bind.annotation.*;
 
 @XmlAccessorType(XmlAccessType.PROPERTY)
-@XmlType(name="TFizickoLice", propOrder={"kontakt", "ime", "prezime", "drzavljanstvo"})
+@XmlType(name="TFizickoLice", propOrder={"kontakt", "ime", "prezime", "adresa", "drzavljanstvo"})
 public class FizickoLice extends Lice{
 
     private String ime;
 
     private String prezime;
+
+    private Adresa adresa;
 
     private String drzavljanstvo;
 
@@ -41,6 +43,15 @@ public class FizickoLice extends Lice{
     }
 
     @XmlElement(required = true)
+    public Adresa getAdresa() {
+        return this.adresa;
+    }
+
+    public void setAdresa(Adresa adresa){
+        this.adresa = adresa;
+    }
+
+    @XmlElement(required = true)
     public String getDrzavljanstvo() {
         return drzavljanstvo;
     }
@@ -48,4 +59,6 @@ public class FizickoLice extends Lice{
     public void setDrzavljanstvo(String drzavljanstvo) {
         this.drzavljanstvo = drzavljanstvo;
     }
+
+
 }
