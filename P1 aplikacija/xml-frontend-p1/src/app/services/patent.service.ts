@@ -58,4 +58,31 @@ export class PatentService {
 
     return this.http.get(this.apiURL + '/p1/pdf', { params: queryParams, responseType: 'blob' as 'json'});
   }
+
+  approveRequest(broj: string){
+    let body = {
+      brojPrijave: broj,
+      obrazlozenje: "",
+      imeSluzbenika: "Marko",
+      prezimeSluzbenika: "Rokvic"
+    };
+
+    let xmlZahtev = JsonToXML.parse("responseToPendingRequestDto", body);
+
+    return this.http.post(this.apiURL + '/p1/approve-request', xmlZahtev, {headers: new HttpHeaders().set('Content-Type', 'application/xml'), responseType:'text'});
+  }
+
+  rejectRequest(broj: string, obrazlozenje: string){
+    let body = {
+      brojPrijave: broj,
+      obrazlozenje: obrazlozenje,
+      imeSluzbenika: "Marko",
+      prezimeSluzbenika: "Rokvic"
+    };
+
+    let xmlZahtev = JsonToXML.parse("responseToPendingRequestDto", body);
+
+    return this.http.post(this.apiURL + '/p1/reject-request', xmlZahtev, {headers: new HttpHeaders().set('Content-Type', 'application/xml'), responseType:'text'});
+  }
+
 }

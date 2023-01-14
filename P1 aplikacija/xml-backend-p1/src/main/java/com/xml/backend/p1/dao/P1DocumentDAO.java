@@ -20,7 +20,6 @@ public class P1DocumentDAO {
 
     public P1DocumentDAO() throws Exception {
         this.connectionProperties = AuthenticationUtilities.loadProperties();
-        this.collectionId = "/db/patent";
 
         // initialize database driver
         System.out.println("[INFO] Loading driver class: " + connectionProperties.driver);
@@ -30,19 +29,23 @@ public class P1DocumentDAO {
         database.setProperty("create-database", "true");
 
         DatabaseManager.registerDatabase(database);
+    }
 
+    public XMLResource findById(String resourceId, String collectionId) throws XMLDBException {
         collection = getOrCreateCollection(collectionId);
 //        collection = DatabaseManager.getCollection(connectionProperties.uri + collectionId);
         collection.setProperty(OutputKeys.INDENT, "yes");
-    }
 
-    public XMLResource findById(String resourceId) throws XMLDBException {
         XMLResource res = (XMLResource)collection.getResource(resourceId);
 
         return res;
     }
 
-    public void save(String documentId, String xmlData) throws Exception {
+    public void save(String documentId, String xmlData, String collectionId) throws Exception {
+        collection = getOrCreateCollection(collectionId);
+//        collection = DatabaseManager.getCollection(connectionProperties.uri + collectionId);
+        collection.setProperty(OutputKeys.INDENT, "yes");
+
         XMLResource res = (XMLResource) collection.createResource( documentId + ".xml", XMLResource.RESOURCE_TYPE);
         res.setContent(xmlData);
         System.out.println("[INFO] Storing the document: " + res.getId());

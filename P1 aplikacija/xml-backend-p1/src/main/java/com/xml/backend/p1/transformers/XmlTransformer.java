@@ -148,7 +148,7 @@ public class XmlTransformer {
 //        service.uploadMetadata();
 
 //        ------------select metadata
-        MetadataService service = new MetadataService();
-        service.metaDataSelect(new SearchMetadataDto("999", "-1"));
+//        MetadataService service = new MetadataService();
+//        service.metaDataSelect(new SearchMetadataDto("999", "-1"));
     }
 }
