@@ -3,6 +3,8 @@ package com.xml.backend.p1;
 import com.xml.backend.p1.dao.P1DocumentDAO;
 import com.xml.backend.p1.model.Zahtev;
 import com.xml.backend.p1.service.ExistService;
+import com.xml.backend.p1.service.MetadataService;
+import com.xml.backend.p1.transformers.XmlTransformer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -10,6 +12,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 import org.xmldb.api.base.XMLDBException;
+import org.xmldb.api.modules.XMLResource;
 
 import javax.xml.bind.*;
 import java.io.File;
@@ -26,7 +29,7 @@ import static com.xml.backend.p1.transformers.XmlTransformer.*;
 @SpringBootApplication
 public class XmlBackendP1Application {
 
-	public static void main(String[] args) throws IOException, PropertyException {
+	public static void main(String[] args) throws Exception {
 
 //		String xmlData = null;
 //		try {
@@ -44,8 +47,41 @@ public class XmlBackendP1Application {
 //		String outputPath = "./src/main/resources/static/rdf/";
 
 
-		SpringApplication.run(com.xml.backend.p1.XmlBackendP1Application.class, args);
+//		SpringApplication.run(com.xml.backend.p1.XmlBackendP1Application.class, args);
 
+
+
+
+
+
+		String xmlData = new String(Files.readAllBytes(Paths.get("./src/main/resources/xml/P-1-generated.xml")), StandardCharsets.UTF_8);
+
+		// TACKA 2
+
+		//PISANJE
+//		P1DocumentDAO dao = new P1DocumentDAO();
+//		dao.save("id888", xmlData);
+//		//CITANJE
+//		XMLResource res = dao.findById("id888.xml");
+//		System.out.println(res.getContent());
+
+		// TACKA 3
+
+		String xsltFIlePath = "./src/main/resources/xml/metadata.xsl";
+		String outputPath = "./src/main/resources/static/rdf/";
+		MetadataService service = new MetadataService();
+
+		service.transformRDF(xmlData, xsltFIlePath, outputPath); // 1. xml u obliku string-a
+		String resultMeta = service.extractMetadataToRdf(new FileInputStream(new File("./src/main/resources/static/rdf")), "123");
+
+		service.uploadMetadata();
+
+
+
+		// TACKA 4
+//		XmlTransformer transformer = new XmlTransformer();
+//		transformer.transformToHtml(xmlData);
+//		transformer.transformToPdf(xmlData);
 
 //		try{
 //
