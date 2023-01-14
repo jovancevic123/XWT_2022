@@ -2,10 +2,10 @@ package com.xml.backend.p1.controller;
 
 import com.xml.backend.p1.dto.PendingRequestDto;
 import com.xml.backend.p1.dto.RequestDto;
+import com.xml.backend.p1.dto.ResponseToPendingRequestDto;
 import com.xml.backend.p1.dto.XonomyRequestDto;
 import com.xml.backend.p1.model.Zahtev;
 import com.xml.backend.p1.service.P1DocumentService;
-import org.exist.source.StringSource;
 import org.exist.util.StringInputSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -15,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.xmldb.api.base.XMLDBException;;import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.util.List;
 
@@ -32,7 +31,7 @@ public class P1DocumentController {
 
     @GetMapping
     public void findById(@RequestParam String resourceId) throws XMLDBException {
-        this.service.findById(resourceId);
+        this.service.findZahtevById(resourceId);
     }
 
     @PostMapping(value="/add-request", consumes = "application/xml", produces = "application/xml")
@@ -77,6 +76,26 @@ public class P1DocumentController {
         try{
             String html = this.service.getRequestHTML(brojPrijave);
             return ResponseEntity.ok(html);
+        }catch(Exception ex){
+            return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping("/approve-request")
+    public ResponseEntity<?> approveRequest(@RequestBody ResponseToPendingRequestDto dto){
+        try{
+            this.service.approveRequest(dto);
+            return ResponseEntity.ok("Success");
+        }catch(Exception ex){
+            return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping("/reject-request")
+    public ResponseEntity<?> rejectRequest(@RequestBody ResponseToPendingRequestDto dto){
+        try{
+            this.service.rejectRequest(dto);
+            return ResponseEntity.ok("Success");
         }catch(Exception ex){
             return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
         }

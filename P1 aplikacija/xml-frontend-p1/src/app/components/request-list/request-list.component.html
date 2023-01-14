@@ -33,6 +33,20 @@
             </button>
         </td>
     </ng-container>
+
+    <ng-container matColumnDef="odobravanje">
+      <th mat-header-cell *matHeaderCellDef> Odobravanje zahteva </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-button color="primary" (click)="odobri(element.brojPrijave)">Odobri</button>
+      </td>
+  </ng-container>
+
+  <ng-container matColumnDef="odbijanje">
+      <th mat-header-cell *matHeaderCellDef> Odbijanje zahteva </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-button color="primary" (click)="odbij(element.brojPrijave)" color="warn">Odbij</button>
+      </td>
+  </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

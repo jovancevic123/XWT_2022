@@ -5,7 +5,7 @@ import { saveAs } from 'file-saver';
 
 
 const ELEMENT_DATA: PendingRequest[] = [
-  { brojPrijave: "787.xml", nazivPodnosioca: 'Jovan', nazivPatenta: "TV" }
+  { brojPrijave: "id888", nazivPodnosioca: 'Jovan', nazivPatenta: "TV" }
 ];
 
 @Component({
@@ -16,7 +16,7 @@ const ELEMENT_DATA: PendingRequest[] = [
 export class RequestListComponent implements OnInit{
 
   requests: PendingRequest[] = [];
-  displayedColumns: string[] = ['brojPrijave', 'nazivPodnosioca', 'nazivPatenta', 'html', 'pdf'];
+  displayedColumns: string[] = ['brojPrijave', 'nazivPodnosioca', 'nazivPatenta', 'html', 'pdf', 'odobravanje', 'odbijanje'];
 
   constructor(private patentService: PatentService){}
 
@@ -53,6 +53,32 @@ export class RequestListComponent implements OnInit{
       next: blob => {
         let file = new File([blob as BlobPart], "zahtev.pdf")
         saveAs(file);         
+      },
+      error: error => {
+        console.error(error);
+        }
+    });
+  }
+
+  odobri(brojPrijave: string){
+      this.patentService.approveRequest(brojPrijave).subscribe({
+        next: data => {
+          console.log(data);
+            
+        },
+        error: error => {
+          console.error(error);
+          }
+      });
+  }
+
+  odbij(brojPrijave: string){
+    let obrazlozenje: string = "Obrazlozenje";
+
+    this.patentService.rejectRequest(brojPrijave, obrazlozenje).subscribe({
+      next: data => {
+        console.log(data);
+          
       },
       error: error => {
         console.error(error);

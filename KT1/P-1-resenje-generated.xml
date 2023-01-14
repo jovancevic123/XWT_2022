@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resenje xmlns="http://www.ftn.uns.ac.rs/xwt"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.ftn.uns.ac.rs/xwt file:/C:/Users/Joco/Desktop/IV/XML/Projekat/XWT_2022/KT1/resenje.xsd">
+    <broj_prijave></broj_prijave>
+    <ime_sluzbenika></ime_sluzbenika>
+    <prezime_sluzbenika></prezime_sluzbenika>
+    <datum_odgovora>2022-11-25</datum_odgovora>
+</resenje>

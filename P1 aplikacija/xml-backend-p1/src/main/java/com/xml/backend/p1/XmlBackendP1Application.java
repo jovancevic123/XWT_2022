@@ -1,6 +1,7 @@
 package com.xml.backend.p1;
 
 import com.xml.backend.p1.dao.P1DocumentDAO;
+import com.xml.backend.p1.model.Resenje;
 import com.xml.backend.p1.model.Zahtev;
 import com.xml.backend.p1.service.ExistService;
 import com.xml.backend.p1.service.MetadataService;
@@ -47,14 +48,14 @@ public class XmlBackendP1Application {
 //		String outputPath = "./src/main/resources/static/rdf/";
 
 
-//		SpringApplication.run(com.xml.backend.p1.XmlBackendP1Application.class, args);
+		SpringApplication.run(com.xml.backend.p1.XmlBackendP1Application.class, args);
 
 
 
 
 
 
-		String xmlData = new String(Files.readAllBytes(Paths.get("./src/main/resources/xml/P-1-generated.xml")), StandardCharsets.UTF_8);
+//		String xmlData = new String(Files.readAllBytes(Paths.get("./src/main/resources/xml/P-1-generated.xml")), StandardCharsets.UTF_8);
 
 		// TACKA 2
 
@@ -67,14 +68,14 @@ public class XmlBackendP1Application {
 
 		// TACKA 3
 
-		String xsltFIlePath = "./src/main/resources/xml/metadata.xsl";
-		String outputPath = "./src/main/resources/static/rdf/";
-		MetadataService service = new MetadataService();
-
-		service.transformRDF(xmlData, xsltFIlePath, outputPath); // 1. xml u obliku string-a
-		String resultMeta = service.extractMetadataToRdf(new FileInputStream(new File("./src/main/resources/static/rdf")), "123");
-
-		service.uploadMetadata();
+//		String xsltFIlePath = "./src/main/resources/xml/metadata.xsl";
+//		String outputPath = "./src/main/resources/static/rdf/";
+//		MetadataService service = new MetadataService();
+//
+//		service.transformRDF(xmlData, xsltFIlePath, outputPath); // 1. xml u obliku string-a
+//		String resultMeta = service.extractMetadataToRdf(new FileInputStream(new File("./src/main/resources/static/rdf")), "123");
+//
+//		service.uploadMetadata();
 
 
 
@@ -82,24 +83,20 @@ public class XmlBackendP1Application {
 //		XmlTransformer transformer = new XmlTransformer();
 //		transformer.transformToHtml(xmlData);
 //		transformer.transformToPdf(xmlData);
-
+//
 //		try{
 //
 //			// Unmarshalling
-//			JAXBContext context = JAXBContext.newInstance(Zahtev.class);
+//			JAXBContext context = JAXBContext.newInstance(Resenje.class);
 //			Unmarshaller unmarshaller = context.createUnmarshaller();
-//			Zahtev zahtev = (Zahtev) unmarshaller.unmarshal(new File("./src/main/resources/xml/P-1-generated.xml"));
+//			Resenje resenje = (Resenje) unmarshaller.unmarshal(new File("./src/main/resources/xml/P-1-resenje-generated.xml"));
 //
-//			// Changing properties in request
-//			zahtev.getPronalazak().setNazivPronalaskaSRB("Sistem napajanja za električna vozila");
-//			zahtev.getPronalazak().setNazivPronalaskaENG("Battery system for electric vehicles");
-//
-//			zahtev.getPodnosilac().getLice().getAdresa().setUlica("Bulevar vojvode Stepe");
+//			resenje.setBrojPrijave("P-78777");
 //
 //			// Marshalling to stdout
 //			Marshaller m = context.createMarshaller();
 //			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-//			m.marshal(zahtev, System.out);
+//			m.marshal(resenje, System.out);
 //
 //		}catch (Exception ex){
 //			System.out.println(ex.getMessage());

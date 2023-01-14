@@ -58,7 +58,7 @@ public class MetadataService {
         model.write(System.out, SparqlUtil.RDF_XML);
 
         // Creating the first named graph and updating it with RDF data
-        String sparqlUpdate = insertData(connectionProperties.dataEndpoint, new String(out.toByteArray()));
+        String sparqlUpdate = insertData(connectionProperties.dataEndpoint + "/zahtev", new String(out.toByteArray()));
         System.out.println(sparqlUpdate);
         // UpdateRequest represents a unit of execution
         UpdateRequest update = UpdateFactory.create(sparqlUpdate);
@@ -69,7 +69,7 @@ public class MetadataService {
 
 
         // populating what has been inserted
-        String sparqlQuery = SparqlUtil.selectData(connectionProperties.dataEndpoint, "?s ?p ?o");
+        String sparqlQuery = SparqlUtil.selectData(connectionProperties.dataEndpoint + "/zahtev", "?s ?p ?o");
 
         // Create a QueryExecution that will access a SPARQL service over HTTP
         QueryExecution query = QueryExecutionFactory.sparqlService(connectionProperties.queryEndpoint, sparqlQuery);
