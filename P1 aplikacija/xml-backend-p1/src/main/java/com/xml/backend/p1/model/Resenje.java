@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
         "brojResenja", "brojPrijave", "obrazlozenje",
-        "imeSluzbenika", "prezimeSluzbenika", "datumOdgovora"
+        "imeSluzbenika", "prezimeSluzbenika", "datumOdgovora", "prihvacena"
 })
 @XmlRootElement(name = "resenje")
 public class Resenje {
@@ -40,4 +40,7 @@ public class Resenje {
     @XmlElement(name = "datum_odgovora", required=true)
     @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
     private LocalDate datumOdgovora;
+
+    @XmlElement(name = "prihvacena", required=true)
+    private boolean prihvacena;
 }

@@ -4,6 +4,5 @@ SELECT * from <http://localhost:3030/PatentDataset/data>
 WHERE {
   ?patent  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/broj_prijave> ?brojPrijave .
   ?patent  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/broj_resenja> ?brojResenja .
-  FILTER(CONTAINS(UCASE(str(?brojPrijave)), UCASE("%1$s"))
-  && ?brojResenja = "%2$s").
+  FILTER( ?brojResenja = "%2$s" ).
 }

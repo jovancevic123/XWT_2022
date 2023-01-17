@@ -1,0 +1,15 @@
+PREFIX schema: <http://www.ftn.uns.ac.rs/rdf/examples/predicate>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT DISTINCT ?g
+WHERE {
+     GRAPH ?g
+    {
+      ?resenje  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/broj_resenja> ?brojResenja .
+      ?resenje  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/datum_odgovora> ?datumOdgovora .
+      ?resenje  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/prihvacena> ?prihvacena .
+      FILTER((?datumOdgovora >=  "%1$s"^^xsd:date)
+      && (?datumOdgovora <=  "%2$s"^^xsd:date)
+      && (?prihvacena = "true"^^xsd:boolean)
+      ).
+    }
+}

@@ -1,32 +1,39 @@
 package com.xml.backend.p1.service;
 
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import com.xml.backend.p1.dao.P1DocumentDAO;
-import com.xml.backend.p1.dto.*;
+import com.xml.backend.p1.dto.PendingRequestDto;
+import com.xml.backend.p1.dto.RanijaPrijavaDto;
+import com.xml.backend.p1.dto.RequestDto;
+import com.xml.backend.p1.dto.ResponseToPendingRequestDto;
 import com.xml.backend.p1.model.*;
 import com.xml.backend.p1.transformers.XmlTransformer;
-import lombok.*;
-import org.exist.source.StringSource;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.stereotype.Service;
 import org.xmldb.api.base.XMLDBException;
 import org.xmldb.api.modules.XMLResource;
-
+import org.json.*;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Stream;
 
 @Service
 @Getter
@@ -36,19 +43,17 @@ public class P1DocumentService {
     private final P1DocumentDAO repository;
     private final XmlTransformer transformer;
     private final MetadataService metadataService;
-    private final ResenjeMetadataService resenjeMetadataService;
 
     @Autowired
-    public P1DocumentService(P1DocumentDAO repository, XmlTransformer transformer, MetadataService metadataService,
-                             ResenjeMetadataService resenjeMetadataService) {
+    public P1DocumentService(P1DocumentDAO repository, XmlTransformer transformer,
+                             MetadataService resenjeMetadataService) {
         this.repository = repository;
         this.transformer = transformer;
-        this.metadataService = metadataService;
-        this.resenjeMetadataService = resenjeMetadataService;
+        this.metadataService = resenjeMetadataService;
     }
 
     public XMLResource findZahtevById(String resourceId) throws XMLDBException {
-        return this.repository.findById(resourceId, "/db/patent/zahtevi");
+        return this.repository.findById(resourceId + ".xml", "/db/patent/zahtevi");
     }
 
     public XMLResource findResenjeById(String resourceId) throws XMLDBException {
@@ -146,12 +151,13 @@ public class P1DocumentService {
     }
 
     public List<PendingRequestDto> getPendingRequests() {
-        this.metadataService.metaDataSelect(new SearchMetadataDto("999", "-1"));
+        List<String> pendingRequests = this.metadataService.getPendingRequests("./data/sparql/pendingRequests.rq");
         return new ArrayList<>();
     }
 
     public void approveRequest(ResponseToPendingRequestDto dto) throws Exception {
         Resenje resenje = makeResenjeFromDto(dto);
+        resenje.setPrihvacena(true);
 
         JAXBContext context = JAXBContext.newInstance(Resenje.class);
         StringWriter stringWriter = new StringWriter();
@@ -160,13 +166,14 @@ public class P1DocumentService {
         m.marshal(resenje, stringWriter);
 
         this.repository.save(resenje.getBrojResenja(), stringWriter.toString(), "/db/patent/resenja");
-        uploadResenjeMetadata(stringWriter.toString());
+        uploadResenjeMetadata(stringWriter.toString(), resenje.getBrojResenja());
         updateBrojResenjaInZahtev(dto.getBrojPrijave(), resenje.getBrojResenja());
     }
 
     public void rejectRequest(ResponseToPendingRequestDto dto) throws Exception {
         Resenje resenje = makeResenjeFromDto(dto);
         resenje.setObrazlozenje(dto.getObrazlozenje());
+        resenje.setPrihvacena(false);
 
         JAXBContext context = JAXBContext.newInstance(Resenje.class);
         StringWriter stringWriter = new StringWriter();
@@ -175,7 +182,7 @@ public class P1DocumentService {
         m.marshal(resenje, stringWriter);
 
         this.repository.save(resenje.getBrojResenja(), stringWriter.toString(), "/db/patent/resenja");
-        uploadResenjeMetadata(stringWriter.toString());
+        uploadResenjeMetadata(stringWriter.toString(), resenje.getBrojResenja());
         updateBrojResenjaInZahtev(dto.getBrojPrijave(), resenje.getBrojResenja());
     }
 
@@ -195,14 +202,14 @@ public class P1DocumentService {
         this.repository.save(brojPrijave, stringWriter.toString(), "/db/patent/zahtevi");
     }
 
-    private void uploadResenjeMetadata(String xmlData) throws IOException {
+    private void uploadResenjeMetadata(String xmlData, String brojResenja) throws IOException {
         String xsltFIlePath = "./src/main/resources/xml/resenje-metadata.xsl";
         String outputPath = "./src/main/resources/static/rdf/";
 
-        resenjeMetadataService.transformRDF(xmlData, xsltFIlePath, outputPath); // 1. xml u obliku string-a
-        String resultMeta = resenjeMetadataService.extractMetadataToRdf(new FileInputStream(new File("./src/main/resources/static/rdf")), "./src/main/resources/static/extracted_rdf.xml");
+        metadataService.transformRDF(xmlData, xsltFIlePath, outputPath); // 1. xml u obliku string-a
+        String resultMeta = metadataService.extractMetadataToRdf(new FileInputStream(new File("./src/main/resources/static/rdf")), "./src/main/resources/static/extracted_rdf.xml");
 
-        resenjeMetadataService.uploadMetadata("./src/main/resources/static/extracted_rdf.xml", "/resenje");
+        metadataService.uploadResenjeMetadata("./src/main/resources/static/extracted_rdf.xml", brojResenja);
     }
 
     private Resenje makeResenjeFromDto(ResponseToPendingRequestDto dto){
@@ -216,5 +223,83 @@ public class P1DocumentService {
         resenje.setPrezimeSluzbenika(dto.getPrezimeSluzbenika());
 
         return resenje;
+    }
+
+    public ByteArrayResource generateReport(String startDate, String endDate) throws IOException, DocumentException {
+        Document document = new Document();
+        String path = "./src/main/resources/xml/reports/" + new Date().getTime() + ".pdf";
+        File file = null;
+
+        try {
+            file = new File(path);
+            if (file.createNewFile()) {
+                System.out.println("File created: " + file.getName());
+            } else {
+                System.out.println("File already exists.");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
+        PdfWriter.getInstance(document, new FileOutputStream(path));
+        document.open();
+
+        int brojPodnetihPrijava = this.metadataService.requestsThatAreReceivedBetween(startDate, endDate, "./data/sparql/reportRequestQuery.rq");
+        int acceptedCounter = this.metadataService.numberOfResponsesBetween(startDate, endDate, "./data/sparql/reportRequestQuery2.rq");
+        int rejectedCounter = this.metadataService.numberOfResponsesBetween(startDate, endDate, "./data/sparql/reportRequestQuery3.rq");
+
+        Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
+        Chunk chunk = new Chunk("Izveštaj za period: " + startDate + " --- " + endDate + "\n\n\n\n\n", font);
+
+        PdfPTable table = new PdfPTable(2);
+        addTableHeader(table);
+
+        addRows(table, "Broj podnetih zahteva:", brojPodnetihPrijava);
+        addRows(table, "Broj prihvaćenih zahteva:", acceptedCounter);
+        addRows(table, "Broj odbijenih zahteva:", rejectedCounter);
+
+        Paragraph paragraph1 = new Paragraph(chunk);
+        document.add(paragraph1);
+
+        document.add(table);
+
+        document.close();
+
+        byte[] fileContent = Files.readAllBytes(file.toPath());
+        ByteArrayResource body = new ByteArrayResource(fileContent);
+        file.delete();
+        return body;
+    }
+
+    private void addTableHeader(PdfPTable table) {
+        Stream.of("Predmet", "Ukupan broj")
+                .forEach(columnTitle -> {
+                    PdfPCell header = new PdfPCell();
+                    header.setBackgroundColor(BaseColor.LIGHT_GRAY);
+                    header.setBorderWidth(2);
+                    header.setPhrase(new Phrase(columnTitle));
+                    table.addCell(header);
+                });
+    }
+
+    private void addRows(PdfPTable table, String text, int counter) {
+        table.addCell(text);
+        table.addCell(counter + "");
+    }
+
+    public String getMetadataRDF(String brojPrijave) throws XMLDBException, IOException {
+        String xsltFIlePath = "./src/main/resources/xml/metadata.xsl";
+		String outputPath = "./src/main/resources/static/rdf/";
+        XMLResource res = this.repository.findById(brojPrijave + ".xml", "/db/patent/zahtevi");
+
+        this.metadataService.transformRDF(res.getContent().toString(), xsltFIlePath, outputPath); // 1. xml u obliku string-a
+        String resultMetaFile = this.metadataService.extractMetadataToRdf(new FileInputStream(new File("./src/main/resources/static/rdf")), "./src/main/resources/static/extracted_rdf.xml");
+        return Files.readString(Path.of(resultMetaFile));
+    }
+
+    public String getMetadataJSON(String brojPrijave) throws XMLDBException, IOException {
+        JSONObject json = XML.toJSONObject(getMetadataRDF(brojPrijave));
+        return json.toString();
     }
 }

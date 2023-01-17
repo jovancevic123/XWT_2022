@@ -81,6 +81,26 @@ public class P1DocumentController {
         }
     }
 
+    @GetMapping("/json")
+    public ResponseEntity<?> getMetadataJSON(@RequestParam("brojPrijave") String brojPrijave){
+        try{
+            String json = this.service.getMetadataJSON(brojPrijave);
+            return ResponseEntity.ok(json);
+        }catch(Exception ex){
+            return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/rdf")
+    public ResponseEntity<?> getMetadataRDF(@RequestParam("brojPrijave") String brojPrijave){
+        try{
+            String json = this.service.getMetadataRDF(brojPrijave);
+            return ResponseEntity.ok(json);
+        }catch(Exception ex){
+            return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @PostMapping("/approve-request")
     public ResponseEntity<?> approveRequest(@RequestBody ResponseToPendingRequestDto dto){
         try{
@@ -96,6 +116,16 @@ public class P1DocumentController {
         try{
             this.service.rejectRequest(dto);
             return ResponseEntity.ok("Success");
+        }catch(Exception ex){
+            return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/report")
+    public ResponseEntity<?> generateReport(@RequestParam("start") String startDate, @RequestParam("end") String endDate){
+        try{
+            ByteArrayResource body = this.service.generateReport(startDate, endDate);
+            return ((ResponseEntity.BodyBuilder)ResponseEntity.ok()).contentType(MediaType.APPLICATION_OCTET_STREAM).body(body);
         }catch(Exception ex){
             return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
         }

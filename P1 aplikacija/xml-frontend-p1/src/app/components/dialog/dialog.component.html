@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Razlog odbijanja zahteva?</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>Razlog</mat-label>
+    <textarea matInput
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="1"
+            [(ngModel)]="data.reason"
+            cdkAutosizeMaxRows="5"></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Odustani</button>
+  <button mat-button [mat-dialog-close]="data.reason" cdkFocusInitial>Potvrdi</button>
+</div>

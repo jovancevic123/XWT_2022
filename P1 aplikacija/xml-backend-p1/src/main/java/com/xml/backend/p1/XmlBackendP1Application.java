@@ -1,31 +1,18 @@
 package com.xml.backend.p1;
 
-import com.xml.backend.p1.dao.P1DocumentDAO;
-import com.xml.backend.p1.model.Resenje;
-import com.xml.backend.p1.model.Zahtev;
-import com.xml.backend.p1.service.ExistService;
 import com.xml.backend.p1.service.MetadataService;
-import com.xml.backend.p1.transformers.XmlTransformer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
-import org.xmldb.api.base.XMLDBException;
-import org.xmldb.api.modules.XMLResource;
 
-import javax.xml.bind.*;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
-
-import static com.xml.backend.p1.transformers.XmlTransformer.*;
 
 @SpringBootApplication
 public class XmlBackendP1Application {
@@ -55,7 +42,7 @@ public class XmlBackendP1Application {
 
 
 
-//		String xmlData = new String(Files.readAllBytes(Paths.get("./src/main/resources/xml/P-1-generated.xml")), StandardCharsets.UTF_8);
+//		String xmlData = Files.readString(Paths.get("./src/main/resources/xml/P-1-generated.xml"));
 
 		// TACKA 2
 
@@ -73,10 +60,10 @@ public class XmlBackendP1Application {
 //		MetadataService service = new MetadataService();
 //
 //		service.transformRDF(xmlData, xsltFIlePath, outputPath); // 1. xml u obliku string-a
-//		String resultMeta = service.extractMetadataToRdf(new FileInputStream(new File("./src/main/resources/static/rdf")), "123");
+//		String resultMeta = service.extractMetadataToRdf(new FileInputStream(new File("./src/main/resources/static/rdf")), "./src/main/resources/static/extracted_rdf.xml");
 //
-//		service.uploadMetadata();
-
+//		service.uploadZahtevMetadata("123678");
+//
 
 
 		// TACKA 4
