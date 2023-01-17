@@ -23,6 +23,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { XonomyFormComponent } from './components/xonomy-form/xonomy-form.component';
 import { RequestListComponent } from './components/request-list/request-list.component';
 import {MatTableModule} from '@angular/material/table';
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
+import { ReportPageComponent } from './components/report-page/report-page.component';
+import { ToastrModule } from 'ngx-toastr';
+import { DialogComponent } from './components/dialog/dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {TextFieldModule} from '@angular/cdk/text-field';
 
 @NgModule({
   declarations: [
@@ -31,7 +40,9 @@ import {MatTableModule} from '@angular/material/table';
     AddressComponent,
     ContactComponent,
     XonomyFormComponent,
-    RequestListComponent
+    RequestListComponent,
+    ReportPageComponent,
+    DialogComponent
   ],
   imports: [
     HttpClientModule,
@@ -49,7 +60,14 @@ import {MatTableModule} from '@angular/material/table';
     FormsModule,
     ReactiveFormsModule,
     MatIconModule,
-    MatTableModule
+    MatTableModule,
+    NgxExtendedPdfViewerModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatDialogModule,
+    MatNativeDateModule,
+    TextFieldModule,
+    ToastrModule.forRoot({positionClass: 'toast-bottom-right', timeOut: 2000,}),
   ],
   providers: [],
   bootstrap: [AppComponent]

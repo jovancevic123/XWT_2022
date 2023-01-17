@@ -1,0 +1,14 @@
+PREFIX schema: <http://www.ftn.uns.ac.rs/rdf/examples/predicate>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT DISTINCT ?g
+WHERE {
+     GRAPH ?g
+    {
+      ?patent  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/broj_prijave> ?brojPrijave .
+      ?patent  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/broj_resenja> ?brojResenja .
+      ?patent  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/datum_prijema> ?datumPrijema .
+      FILTER((?datumPrijema >=  "%1$s"^^xsd:date)
+      && (?datumPrijema <=  "%2$s"^^xsd:date)
+      ).
+    }
+}

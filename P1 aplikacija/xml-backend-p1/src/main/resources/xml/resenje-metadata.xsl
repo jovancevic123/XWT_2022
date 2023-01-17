@@ -31,4 +31,9 @@
         </DatumOdgovora>
     </xsl:template>
 
+    <xsl:template match="p1:resenje/p1:prihvacena">
+        <Prihvacena property="pred:prihvacena" datatype="xs:boolean">
+            <xsl:apply-templates select="node()|@*"/>
+        </Prihvacena>
+    </xsl:template>
 </xsl:stylesheet>

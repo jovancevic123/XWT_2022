@@ -1,7 +1,89 @@
-<?xml version="1.0" encoding="UTF-8"?><resenje xmlns:sh="https://schema.org/" xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:p1="http://www.ftn.uns.ac.rs/xwt" about="http://www.ftn.uns.ac.rs/xwt/resenje" vocab="http://www.ftn.uns.ac.rs/rdf/examples/predicate/">
-    <BrojResenja datatype="xs:string" property="pred:broj_resenja">1673713980857</BrojResenja>
-    <broj_prijave xmlns="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">id888</broj_prijave>
-    <ime_sluzbenika xmlns="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">Marko</ime_sluzbenika>
-    <prezime_sluzbenika xmlns="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">Rokvic</prezime_sluzbenika>
-    <DatumOdgovora datatype="xs:date" property="pred:datum_odgovora">2023-01-14</DatumOdgovora>
-</resenje>
+<?xml version="1.0" encoding="UTF-8"?><zahtev xmlns:sh="https://schema.org/" xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:p1="http://www.ftn.uns.ac.rs/xwt" about="http://www.ftn.uns.ac.rs/xwt/zahtev" vocab="http://www.ftn.uns.ac.rs/rdf/examples/predicate/">
+    <prijava xmlns="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+        <BrojPrijave xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:broj_prijave">99999</BrojPrijave>
+        <DatumPrijema xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:date" property="pred:datum_prijema">2022-11-25</DatumPrijema>
+        <priznati_datum_podnosenja>2022-11-26</priznati_datum_podnosenja>
+        <vrsta_prijave>dopunska</vrsta_prijave>
+        <broj_prvobitne_prijave>0</broj_prvobitne_prijave>
+    </prijava>
+    <zavod xmlns="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+        <naziv>Zavod za intelektualnu svojinu</naziv>
+        <adresa>
+            <ulica>Kneginje Ljubice</ulica>
+            <broj>5</broj>
+            <postanski_broj>11000</postanski_broj>
+            <mesto>Beograd</mesto>
+            <drzava>Srbija</drzava>
+        </adresa>
+    </zavod>
+    <pronalazak xmlns="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+        <NazivSRB xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:naziv_srb">Naziv na srpskom je srb</NazivSRB>
+        <NazivENG xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:naziv_eng">Naziv na engleskom</NazivENG>
+    </pronalazak>
+    <podnosilac xmlns="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema" pronalazac="false">
+        <drzavljanstvo>srpsko</drzavljanstvo>
+        <lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TPravnoLice">
+            <adresa>
+                <ulica>Vojvode Stepe</ulica>
+                <broj>1</broj>
+                <postanski_broj>21000</postanski_broj>
+                <mesto>Novi Sad</mesto>
+                <drzava>Srbija</drzava>
+            </adresa>
+            <kontakt>
+                <telefon>021 824854</telefon>
+                <PodnosilacEmail xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:podnosilac_email">aktiva@gmail.com</PodnosilacEmail>
+            </kontakt>
+            <poslovno_ime>Aktiva DOO</poslovno_ime>
+        </lice>
+    </podnosilac>
+    <pronalazac xmlns="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema" naveden_u_prijavi="true">
+        <lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TFizickoLice">
+            <adresa>
+                <ulica>Kralja Petra I</ulica>
+                <broj>17</broj>
+                <postanski_broj>21203</postanski_broj>
+                <mesto>Veternik</mesto>
+                <drzava>Srbija</drzava>
+            </adresa>
+            <kontakt>
+                <telefon>0631899381</telefon>
+                <PronalazacEmail xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:pronalazac_email">jovancevicjovan5@gmail.com</PronalazacEmail>
+            </kontakt>
+            <ime>Jovan</ime>
+            <prezime>Jovancevic</prezime>
+        </lice>
+    </pronalazac>
+    <punomoc xmlns="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+        <tip>punomocnik_za_zastupanje</tip>
+        <lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TFizickoLice">
+            <adresa>
+                <ulica>Omladinska</ulica>
+                <broj>15</broj>
+                <postanski_broj>21203</postanski_broj>
+                <mesto>Veternik</mesto>
+                <drzava>Srbija</drzava>
+            </adresa>
+            <kontakt>
+                <telefon>062123789</telefon>
+                <PunomocEmail xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:punomoc_email">milanpanic@gmail.com</PunomocEmail>
+            </kontakt>
+            <ime>Milan</ime>
+            <prezime>Panic</prezime>
+        </lice>
+    </punomoc>
+    <ranije_prijave xmlns="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+        <ranija_prijava>
+            <broj_prijave>123</broj_prijave>
+            <datum_podnosenja>2022-07-07</datum_podnosenja>
+            <dvoslovna_oznaka>hl</dvoslovna_oznaka>
+        </ranija_prijava>
+        <ranija_prijava>
+            <broj_prijave>123</broj_prijave>
+            <datum_podnosenja>2022-07-07</datum_podnosenja>
+            <dvoslovna_oznaka>hl</dvoslovna_oznaka>
+        </ranija_prijava>
+    </ranije_prijave>
+    <nacin_dostavljanja xmlns="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">elektronska_forma</nacin_dostavljanja>
+    <BrojResenja datatype="xs:string" property="pred:broj_resenja">1673954519239</BrojResenja>
+</zahtev>

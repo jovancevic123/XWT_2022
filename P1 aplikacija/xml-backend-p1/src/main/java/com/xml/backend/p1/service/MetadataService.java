@@ -3,10 +3,8 @@ package com.xml.backend.p1.service;
 import com.xml.backend.p1.dto.SearchMetadataDto;
 import com.xml.backend.p1.exceptions.OperationFailedException;
 import com.xml.backend.p1.util.FusekiAuthentication;
-import com.xml.backend.p1.util.FusekiAuthentication.ConnectionProperties;
 import com.xml.backend.p1.util.SparqlUtil;
 import org.apache.commons.io.FileUtils;
-import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
@@ -24,7 +22,6 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
-import java.net.http.HttpClient;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -36,16 +33,14 @@ import java.util.stream.Stream;
 
 @Service
 public class MetadataService {
-
-
     public final String XSL_TO_RDF_FILE = "xml/metadata.xsl";
-    private ConnectionProperties connectionProperties;
+    private FusekiAuthentication.ConnectionProperties connectionProperties;
 
     public MetadataService() throws IOException {
         connectionProperties = FusekiAuthentication.loadProperties();
     }
 
-    public void uploadMetadata() throws IOException {
+    public void uploadZahtevMetadata(String brojPrijave) throws IOException {
         // Creates a default model
         Model model = ModelFactory.createDefaultModel();
         String filePath = "./src/main/resources/static/extracted_rdf.xml";
@@ -58,7 +53,7 @@ public class MetadataService {
         model.write(System.out, SparqlUtil.RDF_XML);
 
         // Creating the first named graph and updating it with RDF data
-        String sparqlUpdate = insertData(connectionProperties.dataEndpoint + "/zahtev", new String(out.toByteArray()));
+        String sparqlUpdate = insertData(connectionProperties.dataEndpoint + brojPrijave, new String(out.toByteArray()));
         System.out.println(sparqlUpdate);
         // UpdateRequest represents a unit of execution
         UpdateRequest update = UpdateFactory.create(sparqlUpdate);
@@ -66,24 +61,31 @@ public class MetadataService {
         UpdateProcessor processor = UpdateExecutionFactory.createRemote(update, connectionProperties.updateEndpoint);
 
         processor.execute();
-
-
-        // populating what has been inserted
-        String sparqlQuery = SparqlUtil.selectData(connectionProperties.dataEndpoint + "/zahtev", "?s ?p ?o");
-
-        // Create a QueryExecution that will access a SPARQL service over HTTP
-        QueryExecution query = QueryExecutionFactory.sparqlService(connectionProperties.queryEndpoint, sparqlQuery);
-
-
-        // Query the collection, dump output response as XML
-        ResultSet results = query.execSelect();
-
-        ResultSetFormatter.out(System.out, results);
-
-        query.close() ;
     }
 
-    public String extractMetadataToRdf(InputStream in, String id) {
+    public void uploadResenjeMetadata(String extractedRdfFilePath, String brojResenja) throws IOException { //String filePath = "./src/main/resources/static/extracted_rdf.xml";  graphURI = "/resenje"
+        // Creates a default model
+        Model model = ModelFactory.createDefaultModel();
+        model.read(extractedRdfFilePath);
+
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+        model.write(out, SparqlUtil.NTRIPLES);
+
+        model.write(System.out, SparqlUtil.RDF_XML);
+
+        // Creating the first named graph and updating it with RDF data
+        String sparqlUpdate = insertData(connectionProperties.dataEndpoint + brojResenja, new String(out.toByteArray()));
+        System.out.println(sparqlUpdate);
+        // UpdateRequest represents a unit of execution
+        UpdateRequest update = UpdateFactory.create(sparqlUpdate);
+
+        UpdateProcessor processor = UpdateExecutionFactory.createRemote(update, connectionProperties.updateEndpoint);
+
+        processor.execute();
+    }
+
+    public String extractMetadataToRdf(InputStream in, String outputExtractedFilePath) { //String outputFilePath = "./src/main/resources/static/extracted_rdf.xml";
         StreamSource transformSource = new StreamSource(new File("./data/grddl/grddl.xsl"));
         TransformerFactory factory = TransformerFactory.newInstance();
         Transformer grddlTransformer = null;
@@ -98,14 +100,13 @@ public class MetadataService {
         grddlTransformer.setOutputProperty("{http://xml.apache.org/xalan}indent-amount", "2");
         grddlTransformer.setOutputProperty(OutputKeys.INDENT, "yes");
 
-        String outputFilePath = "./src/main/resources/static/extracted_rdf.xml";
 
         //StreamSource source = new StreamSource(new ByteArrayInputStream(xmlData.getBytes(StandardCharsets.UTF_8)));
         StreamSource source = new StreamSource(in);
         StreamResult result = null;
 
         try {
-            result = new StreamResult(new FileOutputStream(outputFilePath));
+            result = new StreamResult(new FileOutputStream(outputExtractedFilePath));
         } catch (FileNotFoundException e) {
             throw new OperationFailedException("Error while creating output file");
         }
@@ -116,11 +117,11 @@ public class MetadataService {
             throw new OperationFailedException("Error while extracting metadata to RDF");
         }
 
-        String rdfXmlResult = readFromFile(outputFilePath);
+        String rdfXmlResult = readFromFile(outputExtractedFilePath);
         //File outputFile = new File(outputFilePath);
         //outputFile.delete();
 
-        return outputFilePath;
+        return outputExtractedFilePath;
     }
 
     public void transformRDF(String xmlData, String xsltFIlePath, String outputPath) {
@@ -202,7 +203,7 @@ public class MetadataService {
 
     public List<String> metaDataSelect(SearchMetadataDto dto) {
         String sparqlQuery = null;
-        String querySelectPath = "./data/sparql/querySelect.rq";
+        String querySelectPath = "./data/sparql/pendingRequests.rq";
 
         List<String> result = new ArrayList<>();
         try {
@@ -247,6 +248,90 @@ public class MetadataService {
         }
 
         return result;
+    }
+
+    public List<String> getPendingRequests(String querySelectPath) {     //String querySelectPath = "./data/sparql/pendingRequests.rq";
+        String sparqlQuery = null;
+
+        List<String> result = new ArrayList<>();
+        try {
+            sparqlQuery = String.format(readFile(querySelectPath, StandardCharsets.UTF_8), "-1");
+        }catch (IOException e){}
+
+        // Create a QueryExecution that will access a SPARQL service over HTTP
+        QueryExecution query = QueryExecutionFactory.sparqlService(connectionProperties.queryEndpoint, sparqlQuery);
+
+        // Query the SPARQL endpoint, iterate over the result set...
+        ResultSet results = query.execSelect();
+
+        String varName;
+        RDFNode varValue;
+
+        while (results.hasNext()) {
+            QuerySolution querySolution = results.next();
+            Iterator<String> variableBindings = querySolution.varNames();
+
+            String graph = querySolution.get("g").toString();
+            int i = graph.lastIndexOf("/");
+            result.add(graph.substring(i+1));
+        }
+        return result;
+    }
+
+    public int requestsThatAreReceivedBetween(String startDate, String endDate, String querySelectPath) {     //String querySelectPath = "./data/sparql/reportRequestQuery.rq";
+        String sparqlQuery = null;
+
+        List<String> brojeviPrijava = new ArrayList<>();
+        try {
+
+            sparqlQuery = String.format(readFile(querySelectPath, StandardCharsets.UTF_8),
+                    startDate,
+                    endDate);
+        }catch (IOException e){
+        }
+
+        QueryExecution query = QueryExecutionFactory.sparqlService(connectionProperties.queryEndpoint, sparqlQuery);
+        ResultSet results = query.execSelect();
+
+        while (results.hasNext()) {
+            QuerySolution querySolution = results.next();
+            Iterator<String> variableBindings = querySolution.varNames();
+
+            String graph = querySolution.get("g").toString();
+            int i = graph.lastIndexOf("/");
+            brojeviPrijava.add(graph.substring(i+1));
+        }
+        return brojeviPrijava.size();
+    }
+
+    public int numberOfResponsesBetween(String startDate, String endDate, String querySelectPath) {     //String querySelectPath = "./data/sparql/reportRequestQuery2.rq";
+        String sparqlQuery = null;
+
+        List<String> resenja = new ArrayList<>();
+        try {
+
+            sparqlQuery = String.format(readFile(querySelectPath, StandardCharsets.UTF_8),
+                    startDate,
+                    endDate);
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+
+        QueryExecution query = QueryExecutionFactory.sparqlService(connectionProperties.queryEndpoint, sparqlQuery);
+        ResultSet results = query.execSelect();
+
+        String varName;
+        RDFNode varValue;
+        while (results.hasNext()) {
+
+            QuerySolution querySolution = results.next();
+            Iterator<String> variableBindings = querySolution.varNames();
+
+            String graph = querySolution.get("g").toString();
+            int i = graph.lastIndexOf("/");
+            resenja.add(graph.substring(i+1));
+        }
+        return resenja.size();
     }
 
 

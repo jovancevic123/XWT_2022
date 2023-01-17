@@ -34,6 +34,24 @@
         </td>
     </ng-container>
 
+    <ng-container matColumnDef="rdf">
+      <th mat-header-cell *matHeaderCellDef> RDF meta </th>
+      <td mat-cell *matCellDef="let element">
+          <button mat-flat-button (click)="downloadRDF(element.brojPrijave)">
+              <mat-icon>cloud_download</mat-icon>
+          </button>
+      </td>
+  </ng-container>
+
+  <ng-container matColumnDef="json">
+      <th mat-header-cell *matHeaderCellDef> JSON meta </th>
+      <td mat-cell *matCellDef="let element">
+          <button mat-flat-button (click)="downloadJSON(element.brojPrijave)">
+              <mat-icon>cloud_download</mat-icon>
+          </button>
+      </td>
+  </ng-container>
+
     <ng-container matColumnDef="odobravanje">
       <th mat-header-cell *matHeaderCellDef> Odobravanje zahteva </th>
       <td mat-cell *matCellDef="let element">
@@ -44,12 +62,11 @@
   <ng-container matColumnDef="odbijanje">
       <th mat-header-cell *matHeaderCellDef> Odbijanje zahteva </th>
       <td mat-cell *matCellDef="let element">
-        <button mat-button color="primary" (click)="odbij(element.brojPrijave)" color="warn">Odbij</button>
+        <button mat-button color="primary" (click)="openDialog(element.brojPrijave)" color="warn">Odbij</button>
       </td>
   </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-  
   

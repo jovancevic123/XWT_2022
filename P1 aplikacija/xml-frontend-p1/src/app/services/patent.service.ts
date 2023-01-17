@@ -56,7 +56,7 @@ export class PatentService {
     let queryParams = new HttpParams();
     queryParams = queryParams.append("brojPrijave", broj);
 
-    return this.http.get(this.apiURL + '/p1/pdf', { params: queryParams, responseType: 'blob' as 'json'});
+    return this.http.get(this.apiURL + '/p1/pdf', { params: queryParams, responseType: 'blob'});
   }
 
   approveRequest(broj: string){
@@ -83,6 +83,37 @@ export class PatentService {
     let xmlZahtev = JsonToXML.parse("responseToPendingRequestDto", body);
 
     return this.http.post(this.apiURL + '/p1/reject-request', xmlZahtev, {headers: new HttpHeaders().set('Content-Type', 'application/xml'), responseType:'text'});
+  }
+
+  generateReport(startDate: Date, endDate: Date){
+      let startMonth = ('0'+(startDate.getMonth()+1)).slice(-2);
+      let endMonth = ('0'+(endDate.getMonth()+1)).slice(-2);
+
+      let startDay = ('0'+(startDate.getDate())).slice(-2);
+      let endDay = ('0'+(endDate.getDate())).slice(-2);
+
+      let startDateString: string = startDate.getFullYear() + "-" + startMonth + "-" + startDay; 
+      let endDateString: string = endDate.getFullYear() + "-" + endMonth + "-" + endDay; 
+
+      let queryParams = new HttpParams();
+      queryParams = queryParams.append("start", startDateString);
+      queryParams = queryParams.append("end", endDateString);
+
+      return this.http.get(this.apiURL + '/p1/report', { params: queryParams, responseType: 'blob'});
+  }
+
+  getRequestRDF(broj: string){
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("brojPrijave", broj);
+
+    return this.http.get(this.apiURL + '/p1/rdf', { params: queryParams, responseType: 'blob'});
+  }
+
+  getRequestJSON(broj: string){
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("brojPrijave", broj);
+
+    return this.http.get(this.apiURL + '/p1/json', { params: queryParams, responseType: 'blob'});
   }
 
 }
