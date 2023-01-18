@@ -1,0 +1,37 @@
+<mat-grid-list cols="4" rowHeight="10vh">
+    <mat-grid-tile 
+    [colspan]="4"
+    [rowspan]="1">
+
+    </mat-grid-tile>
+    <mat-grid-tile 
+    [colspan]="4"
+    [rowspan]="1">
+
+    </mat-grid-tile>
+
+    <mat-grid-tile class="left" [colspan]="2" [rowspan]="1">
+        <mat-radio-group
+            aria-labelledby="example-radio-group-label"
+            class="example-radio-group">
+            <mat-radio-button class="example-radio-button" value="1" checked="vrstaPretrage == 1" (change)="onVrstaPretrageChanged(1)">Osnovna pretraga</mat-radio-button>
+            <mat-radio-button class="example-radio-button" value="2" (change)="onVrstaPretrageChanged(2)">Napredna pretraga</mat-radio-button>
+        </mat-radio-group>
+    </mat-grid-tile>
+
+    <mat-grid-tile class="right" [colspan]="2" [rowspan]="7">
+    </mat-grid-tile>
+
+        <mat-grid-tile class="left" [colspan]="2" [rowspan]="1">
+            <div *ngIf="vrstaPretrage == 1">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Tekst pretrage</mat-label>
+                    <input matInput placeholder="Pretraži" [(ngModel)]="basicSearchInput">
+                </mat-form-field>       
+                <button mat-raised-button class="dugme-pretraga" (click)="basicSearch()">Pretraži</button>                
+            </div>
+            <div *ngIf="vrstaPretrage == 2">
+                
+            </div>
+    </mat-grid-tile>
+</mat-grid-list>

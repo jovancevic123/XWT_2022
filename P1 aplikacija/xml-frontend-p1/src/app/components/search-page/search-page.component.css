@@ -1,0 +1,21 @@
+mat-grid-tile {
+    background: lightblue;
+}
+
+.left{
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-start !important;
+}
+
+.right{
+    background-color: rgb(157, 129, 129);
+
+}
+
+.dugme-pretraga{
+    margin-left: 2vh;
+    vertical-align: 1vh;
+}

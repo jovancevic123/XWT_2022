@@ -130,4 +130,13 @@ public class P1DocumentController {
             return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
+
+    @GetMapping("/basic-search")
+    public ResponseEntity<?> basicSearch(@RequestParam("textToSearch") String text){
+        try{
+            return ResponseEntity.ok("Success");
+        }catch(Exception ex){
+            return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
 }
