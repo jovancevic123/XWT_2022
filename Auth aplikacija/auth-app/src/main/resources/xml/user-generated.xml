@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<user xmlns="http://www.ftn.uns.ac.rs/xwt"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.ftn.uns.ac.rs/xwt file:/C:/Users/Joco/Desktop/IV/XML/Projekat/XWT_2022/Auth%20aplikacija/auth-app/src/main/resources/xml/user.xsd">
+    <firstname>Marko</firstname>
+    <lastname>Simic</lastname>
+    <email>markosimic@gmail.com</email>
+    <password>123</password>
+    <role>KORISNIK</role>
+</user>
