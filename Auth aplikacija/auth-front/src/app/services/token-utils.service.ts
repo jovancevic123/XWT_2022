@@ -9,7 +9,7 @@ export class TokenUtilsService {
 
   getRoleFromToken(): string | null{
     try{
-        let token: any = localStorage.getItem("user");
+        let token: any = JSON.parse(localStorage.getItem("user") as string);        
         return token.role;
     }
     catch{
@@ -19,7 +19,7 @@ export class TokenUtilsService {
 
   getUserFromToken(): string | null {
     try{
-        let token: any = localStorage.getItem("user");
+        let token: any = JSON.parse(localStorage.getItem("user") as string);
         return token.firstname + " " + token.lastname;
     }
     catch{

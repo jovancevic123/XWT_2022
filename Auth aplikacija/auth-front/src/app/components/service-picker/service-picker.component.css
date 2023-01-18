@@ -1,0 +1,38 @@
+.body{    
+    height: 70vh;
+    padding-top: 15vh;
+    padding-bottom: 15vh;
+    background-color: rgba(140, 209, 236, 0.622);
+    background-repeat: repeat;
+    overflow-y: auto;
+}
+
+.background{
+    margin-top: 10vh;
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+}
+
+.ripple{
+    padding: 15vh;
+    text-align: center;
+    justify-content: center;
+}
+
+.first-service{
+    background-color: rgba(229, 221, 161, 0.622);
+}
+
+.second-service{
+    background-color: rgba(125, 221, 154, 0.622);
+}
+
+.third-service{
+    background-color: rgba(232, 116, 116, 0.622);
+}
+
+.logout{
+    margin-left: 3vh;
+}

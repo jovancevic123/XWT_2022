@@ -32,18 +32,17 @@ export class RegistrationPageComponent {
   onSubmit() { 
       localStorage.clear();
 
-        this.authService.register(this.registerForm);
-        // .pipe(catchError(err => {return throwError(() => {new Error('greska')} )}))
-        // .subscribe({
-        //   next: (res) => {
-        //     let token = res.accessToken;
-        //     localStorage.setItem("user", token);
-        //     let role: string | null = this.tokenUtilsService.getRoleFromToken();            
-        //   },
-        //   error: (err) => {
-        //     console.log(err.error);
-        //   },
-        // });
+        this.authService.register(this.registerForm)
+        .subscribe({
+          next: (res) => {
+            let token = res.accessToken;
+            localStorage.setItem("user", token);
+            window.location.href="http://localhost:4201/login";       
+          },
+          error: (err) => {
+            console.log(err.error);
+          },
+        });
   }
 
   goToRegistration():void{

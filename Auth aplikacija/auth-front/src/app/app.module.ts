@@ -26,12 +26,15 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { ToastrModule } from 'ngx-toastr';
 import {MatDialogModule} from '@angular/material/dialog';
 import {TextFieldModule} from '@angular/cdk/text-field';
+import {MatRippleModule} from '@angular/material/core';
+import { ServicePickerComponent } from './components/service-picker/service-picker.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
-    RegistrationPageComponent
+    RegistrationPageComponent,
+    ServicePickerComponent
   ],
   imports: [
     HttpClientModule,
@@ -56,6 +59,7 @@ import {TextFieldModule} from '@angular/cdk/text-field';
     MatNativeDateModule,
     TextFieldModule,
     ToastrModule.forRoot({positionClass: 'toast-bottom-right', timeOut: 2000,}),
+    MatRippleModule
   ],
   providers: [],
   bootstrap: [AppComponent]
