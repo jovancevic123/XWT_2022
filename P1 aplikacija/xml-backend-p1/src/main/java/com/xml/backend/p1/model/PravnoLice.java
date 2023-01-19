@@ -48,4 +48,8 @@ public class PravnoLice extends Lice{
 
     public PravnoLice(){}
 
+    @Override
+    public String toString() {
+        return poslovnoIme;
+    }
 }

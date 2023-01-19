@@ -4,15 +4,14 @@ import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.xml.backend.p1.dao.P1DocumentDAO;
-import com.xml.backend.p1.dto.PendingRequestDto;
-import com.xml.backend.p1.dto.RanijaPrijavaDto;
-import com.xml.backend.p1.dto.RequestDto;
-import com.xml.backend.p1.dto.ResponseToPendingRequestDto;
+import com.xml.backend.p1.dao.ExistDao;
+import com.xml.backend.p1.dto.*;
+import com.xml.backend.p1.exceptions.QueryFormatException;
 import com.xml.backend.p1.model.*;
 import com.xml.backend.p1.transformers.XmlTransformer;
 import lombok.Getter;
 import lombok.Setter;
+import org.exist.util.StringInputSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.stereotype.Service;
@@ -40,12 +39,12 @@ import java.util.stream.Stream;
 @Setter
 public class P1DocumentService {
 
-    private final P1DocumentDAO repository;
+    private final ExistDao repository;
     private final XmlTransformer transformer;
     private final MetadataService metadataService;
 
     @Autowired
-    public P1DocumentService(P1DocumentDAO repository, XmlTransformer transformer,
+    public P1DocumentService(ExistDao repository, XmlTransformer transformer,
                              MetadataService resenjeMetadataService) {
         this.repository = repository;
         this.transformer = transformer;
@@ -150,7 +149,7 @@ public class P1DocumentService {
         return html;
     }
 
-    public List<PendingRequestDto> getPendingRequests() {
+    public List<SearchResultsDto> getPendingRequests() {
         List<String> pendingRequests = this.metadataService.getPendingRequests("./data/sparql/pendingRequests.rq");
         return new ArrayList<>();
     }
@@ -301,5 +300,54 @@ public class P1DocumentService {
     public String getMetadataJSON(String brojPrijave) throws XMLDBException, IOException {
         JSONObject json = XML.toJSONObject(getMetadataRDF(brojPrijave));
         return json.toString();
+    }
+
+    public List<SearchResultsDto> basicSearch(String text) throws JAXBException, XMLDBException {
+        return this.metadataService.basicSearch(text, "./data/sparql/basicSearch.rq");
+    }
+
+    public List<SearchResultsDto> advancedSearch(AdvancedSearchListDto list) throws JAXBException, XMLDBException {
+        String pred = "http://www.ftn.uns.ac.rs/rdf/examples/predicate/";
+
+        String queryString =
+                "PREFIX schema: <http://www.ftn.uns.ac.rs/rdf/examples/predicate>\n" +
+                "prefix xsd: <http://www.w3.org/2001/XMLSchema#>\n" +
+                "SELECT DISTINCT ?g\n" +
+                "WHERE {\n" +
+                "  GRAPH ?g {\n";
+
+        //CONTAINS(UCASE(str(?brojPrijave)), UCASE("%1$s"))
+        for(AdvancedSearchDto dto : list.getConditions()){
+            queryString = queryString.concat(String.format("?patent <%s%s> ?%s . \n", pred, dto.getMeta(), namingConversion(dto.getMeta())));
+        }
+
+        queryString = queryString.concat("FILTER( \n");
+
+        int i = 0;
+        for(AdvancedSearchDto dto : list.getConditions()){
+            i++;
+            queryString = queryString.concat(String.format("CONTAINS(UCASE(str(?%s)), UCASE('%s'))\n ", namingConversion(dto.getMeta()), dto.getValue()));
+            if(i < list.getConditions().size()){
+                queryString = queryString.concat(String.format("%s ", dto.getOperator()));
+            }
+        }
+
+        queryString = queryString.concat(").\n}\n}");
+//        System.out.println(queryString);
+        return this.metadataService.advancedSearch(queryString);
+    }
+
+    private String namingConversion(String undercase){
+        switch (undercase){
+            case "broj_prijave": return "brojPrijave"; 
+            case "broj_resenja": return "brojResenja"; 
+            case "naziv_srb": return "nazivSRB"; 
+            case "naziv_eng": return "nazivENG"; 
+            case "pronalazac_email": return "pronalazacEmail"; 
+            case "podnosilac_email": return "podnosilacEmail"; 
+            case "punomoc_email": return "punomocEmail"; 
+            case "datum_prijema": return "datumPrijema"; 
+            default: throw new QueryFormatException("Malformed query!");
+        }
     }
 }

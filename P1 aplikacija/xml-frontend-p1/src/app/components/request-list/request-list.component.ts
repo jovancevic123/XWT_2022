@@ -1,13 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { PendingRequest } from 'src/app/model/PendingRequest';
+import { Component, OnInit, Input } from '@angular/core';
+import { SearchResult } from 'src/app/model/PendingRequest';
 import { PatentService } from 'src/app/services/patent.service';
 import { saveAs } from 'file-saver';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
-
-const ELEMENT_DATA: PendingRequest[] = [
-  { brojPrijave: "id888", nazivPodnosioca: 'Jovan', nazivPatenta: "TV" }
-];
 
 export interface DialogData {
   reason: string;
@@ -18,17 +14,13 @@ export interface DialogData {
   templateUrl: './request-list.component.html',
   styleUrls: ['./request-list.component.css']
 })
-export class RequestListComponent implements OnInit{
+export class RequestListComponent{
 
-  requests: PendingRequest[] = [];
+  @Input() requests: SearchResult[] = [];
   displayedColumns: string[] = ['brojPrijave', 'nazivPodnosioca', 'nazivPatenta', 'html', 'pdf', 'rdf', 'json', 'odobravanje', 'odbijanje'];
   reason: string;
 
   constructor(private patentService: PatentService, public dialog: MatDialog){}
-
-  ngOnInit(){
-    this.requests = ELEMENT_DATA;
-  }
 
   getPendingRequests(){
     this.patentService.getPendingRequests().subscribe({

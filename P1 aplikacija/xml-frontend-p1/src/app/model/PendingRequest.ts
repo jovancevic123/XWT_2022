@@ -1,4 +1,4 @@
-export interface PendingRequest{
+export interface SearchResult{
     brojPrijave: string,
     nazivPodnosioca: string,
     nazivPatenta: string

@@ -1,7 +1,10 @@
 package com.xml.backend.p1.service;
 
+import com.xml.backend.p1.dao.ExistDao;
 import com.xml.backend.p1.dto.SearchMetadataDto;
+import com.xml.backend.p1.dto.SearchResultsDto;
 import com.xml.backend.p1.exceptions.OperationFailedException;
+import com.xml.backend.p1.model.Zahtev;
 import com.xml.backend.p1.util.FusekiAuthentication;
 import com.xml.backend.p1.util.SparqlUtil;
 import org.apache.commons.io.FileUtils;
@@ -13,8 +16,11 @@ import org.apache.jena.update.UpdateExecutionFactory;
 import org.apache.jena.update.UpdateFactory;
 import org.apache.jena.update.UpdateProcessor;
 import org.apache.jena.update.UpdateRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.xmldb.api.base.XMLDBException;
 
+import javax.xml.bind.JAXBException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.*;
@@ -35,8 +41,11 @@ import java.util.stream.Stream;
 public class MetadataService {
     public final String XSL_TO_RDF_FILE = "xml/metadata.xsl";
     private FusekiAuthentication.ConnectionProperties connectionProperties;
+    private final ExistDao existDao;
 
-    public MetadataService() throws IOException {
+    @Autowired
+    public MetadataService(ExistDao existDao) throws IOException {
+        this.existDao = existDao;
         connectionProperties = FusekiAuthentication.loadProperties();
     }
 
@@ -337,5 +346,60 @@ public class MetadataService {
 
     public String selectData(String graphURI, String sparqlCondition) {
         return String.format("SELECT * FROM <%1$s> WHERE { %2$s }", graphURI, sparqlCondition);
+    }
+
+    public List<SearchResultsDto> basicSearch(String text, String queryPath) throws JAXBException, XMLDBException {
+        String sparqlQuery = null;
+
+        List<SearchResultsDto> prijave = new ArrayList<>();
+        try {
+
+            sparqlQuery = String.format(readFile(queryPath, StandardCharsets.UTF_8),
+                    text);
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+
+        QueryExecution query = QueryExecutionFactory.sparqlService(connectionProperties.queryEndpoint, sparqlQuery);
+        ResultSet results = query.execSelect();
+
+        String varName;
+        RDFNode varValue;
+        while (results.hasNext()) {
+
+            QuerySolution querySolution = results.next();
+            Iterator<String> variableBindings = querySolution.varNames();
+
+            String graph = querySolution.get("g").toString();
+            int i = graph.lastIndexOf("/");
+            String brojPrijave = graph.substring(i+1);
+
+            Zahtev zahtev = this.existDao.findUnmarshalledZahtevById(brojPrijave);
+            prijave.add(new SearchResultsDto(Integer.toString(zahtev.getPrijava().getBrojPrijave()), zahtev.getPodnosilac().getLice().toString(), zahtev.getPronalazak().getNazivPronalaskaSRB()));
+        }
+        return prijave;
+    }
+
+    public List<SearchResultsDto> advancedSearch(String sparqlQuery) throws JAXBException, XMLDBException {
+        List<SearchResultsDto> prijave = new ArrayList<>();
+
+        QueryExecution query = QueryExecutionFactory.sparqlService(connectionProperties.queryEndpoint, sparqlQuery);
+        ResultSet results = query.execSelect();
+
+        String varName;
+        RDFNode varValue;
+        while (results.hasNext()) {
+
+            QuerySolution querySolution = results.next();
+            Iterator<String> variableBindings = querySolution.varNames();
+
+            String graph = querySolution.get("g").toString();
+            int i = graph.lastIndexOf("/");
+            String brojPrijave = graph.substring(i+1);
+
+            Zahtev zahtev = this.existDao.findUnmarshalledZahtevById(brojPrijave);
+            prijave.add(new SearchResultsDto(Integer.toString(zahtev.getPrijava().getBrojPrijave()), zahtev.getPodnosilac().getLice().toString(), zahtev.getPronalazak().getNazivPronalaskaSRB()));
+        }
+        return prijave;
     }
 }
