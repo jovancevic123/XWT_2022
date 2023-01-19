@@ -1,9 +1,6 @@
 package com.xml.backend.p1.controller;
 
-import com.xml.backend.p1.dto.PendingRequestDto;
-import com.xml.backend.p1.dto.RequestDto;
-import com.xml.backend.p1.dto.ResponseToPendingRequestDto;
-import com.xml.backend.p1.dto.XonomyRequestDto;
+import com.xml.backend.p1.dto.*;
 import com.xml.backend.p1.model.Zahtev;
 import com.xml.backend.p1.service.P1DocumentService;
 import org.exist.util.StringInputSource;
@@ -54,7 +51,7 @@ public class P1DocumentController {
     @GetMapping("/get-pending-requests")
     public ResponseEntity<?> getPendingRequests(){
         try{
-            List<PendingRequestDto> requestDtos = this.service.getPendingRequests();
+            List<SearchResultsDto> requestDtos = this.service.getPendingRequests();
             return ResponseEntity.ok(requestDtos);
         }catch(Exception ex){
             return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
@@ -126,6 +123,26 @@ public class P1DocumentController {
         try{
             ByteArrayResource body = this.service.generateReport(startDate, endDate);
             return ((ResponseEntity.BodyBuilder)ResponseEntity.ok()).contentType(MediaType.APPLICATION_OCTET_STREAM).body(body);
+        }catch(Exception ex){
+            return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/basic-search")
+    public ResponseEntity<?> basicSearch(@RequestParam("textToSearch") String text){
+        try{
+            List<SearchResultsDto> results = this.service.basicSearch(text);
+            return ResponseEntity.ok(results);
+        }catch(Exception ex){
+            return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping("/advanced-search")
+    public ResponseEntity<?> advancedSearch(@RequestBody AdvancedSearchListDto dto){
+        try{
+            List<SearchResultsDto> results = this.service.advancedSearch(dto);
+            return ResponseEntity.ok(results);
         }catch(Exception ex){
             return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
         }

@@ -58,4 +58,9 @@ public class FizickoLice extends Lice{
     }
 
     public FizickoLice(){}
+
+    @Override
+    public String toString() {
+        return ime + " " + prezime;
+    }
 }

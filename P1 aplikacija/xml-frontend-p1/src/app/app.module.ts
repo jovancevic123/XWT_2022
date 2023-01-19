@@ -32,6 +32,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { DialogComponent } from './components/dialog/dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {TextFieldModule} from '@angular/cdk/text-field';
+import { SearchPageComponent } from './components/search-page/search-page.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import {TextFieldModule} from '@angular/cdk/text-field';
     XonomyFormComponent,
     RequestListComponent,
     ReportPageComponent,
-    DialogComponent
+    DialogComponent,
+    SearchPageComponent
   ],
   imports: [
     HttpClientModule,
@@ -66,6 +68,7 @@ import {TextFieldModule} from '@angular/cdk/text-field';
     MatFormFieldModule,
     MatDialogModule,
     MatNativeDateModule,
+    MatGridListModule,
     TextFieldModule,
     ToastrModule.forRoot({positionClass: 'toast-bottom-right', timeOut: 2000,}),
   ],

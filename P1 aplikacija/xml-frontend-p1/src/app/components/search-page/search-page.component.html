@@ -1,0 +1,49 @@
+<div class="background">
+
+    <div class="left">
+        <mat-radio-group
+            aria-labelledby="example-radio-group-label"
+            class="example-radio-group">
+            <mat-radio-button class="example-radio-button" value="1" (change)="onVrstaPretrageChanged(1)">Osnovna pretraga</mat-radio-button>
+            <mat-radio-button class="example-radio-button" value="2" checked="vrstaPretrage == 2" (change)="onVrstaPretrageChanged(2)">Napredna pretraga</mat-radio-button>
+        </mat-radio-group>
+    </div>
+
+    <div class="right">
+        <div *ngIf="vrstaPretrage == 1">
+            <mat-form-field class="example-full-width">
+                <mat-label>Tekst pretrage</mat-label>
+                <input matInput placeholder="Pretraži" [(ngModel)]="basicSearchInput">
+            </mat-form-field>       
+            <button mat-raised-button class="dugme-pretraga" (click)="basicSearch()">Pretraži</button>                
+        </div>
+
+        <div *ngIf="vrstaPretrage == 2">
+            <span *ngFor="let rp of advancedSearchInput; let i = index">
+                <mat-form-field class="example-full-width" *ngIf="advancedSearchInput.length != 0">
+                    <mat-label>Metapodatak</mat-label>
+                    <input matInput placeholder="Pretraži" [ngModelOptions]="{standalone: true}" [(ngModel)]="advancedSearchInput[i].meta">
+                </mat-form-field>    
+                <mat-form-field class="example-full-width" *ngIf="advancedSearchInput.length != 0">
+                    <mat-label>Vrednost</mat-label>
+                    <input matInput placeholder="Pretraži" [ngModelOptions]="{standalone: true}" [(ngModel)]="advancedSearchInput[i].value">
+                </mat-form-field>       
+                <mat-form-field class="example-full-width" *ngIf="advancedSearchInput.length != 0">
+                    <mat-label>Logički operator</mat-label>
+                    <input matInput placeholder="Pretraži" [ngModelOptions]="{standalone: true}" [(ngModel)]="advancedSearchInput[i].operator">
+                </mat-form-field>   
+                <button mat-fab (click)="onDeleteAdvancedSeachInput(i)">
+                    <mat-icon>delete-forever</mat-icon>
+                </button>   
+            </span>
+            <button mat-fab extended (click)="onNewUslov()">
+                <mat-icon>add-new</mat-icon>
+                Novi uslov
+            </button>      
+            <button mat-raised-button class="dugme-pretraga" (click)="advancedSearch()" [disabled]="advancedSearchInput.length == 0">Pretraži</button>          
+        </div>  
+    </div>
+    
+    <app-request-list class="bottom" [requests]="searchResults"></app-request-list>
+
+</div>
