@@ -1,5 +1,6 @@
 package com.xml.backend.p1;
 
+import com.xml.backend.p1.dao.ExistDao;
 import com.xml.backend.p1.service.MetadataService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -57,12 +58,12 @@ public class XmlBackendP1Application {
 
 //		String xsltFIlePath = "./src/main/resources/xml/metadata.xsl";
 //		String outputPath = "./src/main/resources/static/rdf/";
-//		MetadataService service = new MetadataService();
+//		MetadataService service = new MetadataService(new ExistDao());
 //
 //		service.transformRDF(xmlData, xsltFIlePath, outputPath); // 1. xml u obliku string-a
 //		String resultMeta = service.extractMetadataToRdf(new FileInputStream(new File("./src/main/resources/static/rdf")), "./src/main/resources/static/extracted_rdf.xml");
 //
-//		service.uploadZahtevMetadata("123678");
+//		service.uploadZahtevMetadata("/graph/metadata/p1");
 //
 
 

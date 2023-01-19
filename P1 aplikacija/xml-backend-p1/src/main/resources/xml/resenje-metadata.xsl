@@ -14,7 +14,7 @@
 
     <xsl:template match="p1:resenje">
         <resenje vocab="http://www.ftn.uns.ac.rs/rdf/examples/predicate/"
-                about="http://www.ftn.uns.ac.rs/xwt/resenje">
+                about="http://www.ftn.uns.ac.rs/xwt/resenje/{./p1:broj_resenja}">
             <xsl:apply-templates select="node()|@*"/>
         </resenje>
     </xsl:template>
