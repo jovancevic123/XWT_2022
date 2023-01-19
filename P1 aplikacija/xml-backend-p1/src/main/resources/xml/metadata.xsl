@@ -15,7 +15,7 @@
 
     <xsl:template match="p1:zahtev">
         <zahtev vocab="http://www.ftn.uns.ac.rs/rdf/examples/predicate/"
-                   about="http://www.ftn.uns.ac.rs/xwt/zahtev">
+                   about="http://www.ftn.uns.ac.rs/xwt/zahtev/{./p1:prijava/p1:broj_prijave}">
             <xsl:apply-templates select="node()|@*"/>
         </zahtev>
     </xsl:template>

@@ -208,7 +208,7 @@ public class P1DocumentService {
         metadataService.transformRDF(xmlData, xsltFIlePath, outputPath); // 1. xml u obliku string-a
         String resultMeta = metadataService.extractMetadataToRdf(new FileInputStream(new File("./src/main/resources/static/rdf")), "./src/main/resources/static/extracted_rdf.xml");
 
-        metadataService.uploadResenjeMetadata("./src/main/resources/static/extracted_rdf.xml", brojResenja);
+        metadataService.uploadResenjeMetadata("./src/main/resources/static/extracted_rdf.xml", "/graph/metadata/p1/resenje");
     }
 
     private Resenje makeResenjeFromDto(ResponseToPendingRequestDto dto){
@@ -312,13 +312,12 @@ public class P1DocumentService {
         String queryString =
                 "PREFIX schema: <http://www.ftn.uns.ac.rs/rdf/examples/predicate>\n" +
                 "prefix xsd: <http://www.w3.org/2001/XMLSchema#>\n" +
-                "SELECT DISTINCT ?g\n" +
-                "WHERE {\n" +
-                "  GRAPH ?g {\n";
+                "SELECT * from <http://localhost:3030/PatentDataset/data/graph/metadata/p1>\n" +
+                "WHERE {\n ?patent  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/broj_prijave> ?brojPrijave . \n" ;
 
-        //CONTAINS(UCASE(str(?brojPrijave)), UCASE("%1$s"))
         for(AdvancedSearchDto dto : list.getConditions()){
-            queryString = queryString.concat(String.format("?patent <%s%s> ?%s . \n", pred, dto.getMeta(), namingConversion(dto.getMeta())));
+            if(!dto.getMeta().equals("broj_prijave"))
+                queryString = queryString.concat(String.format("?patent <%s%s> ?%s . \n", pred, dto.getMeta(), namingConversion(dto.getMeta())));
         }
 
         queryString = queryString.concat("FILTER( \n");
@@ -332,8 +331,8 @@ public class P1DocumentService {
             }
         }
 
-        queryString = queryString.concat(").\n}\n}");
-//        System.out.println(queryString);
+        queryString = queryString.concat(").\n}");
+        System.out.println(queryString);
         return this.metadataService.advancedSearch(queryString);
     }
 

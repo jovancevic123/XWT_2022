@@ -39,6 +39,7 @@ import java.util.stream.Stream;
 
 @Service
 public class MetadataService {
+//    private static final String SPARQL_NAMED_GRAPH_URI = "/graph/metadata/p1";
     public final String XSL_TO_RDF_FILE = "xml/metadata.xsl";
     private FusekiAuthentication.ConnectionProperties connectionProperties;
     private final ExistDao existDao;
@@ -49,7 +50,7 @@ public class MetadataService {
         connectionProperties = FusekiAuthentication.loadProperties();
     }
 
-    public void uploadZahtevMetadata(String brojPrijave) throws IOException {
+    public void uploadZahtevMetadata(String SPARQL_NAMED_GRAPH_URI) throws IOException {
         // Creates a default model
         Model model = ModelFactory.createDefaultModel();
         String filePath = "./src/main/resources/static/extracted_rdf.xml";
@@ -62,7 +63,7 @@ public class MetadataService {
         model.write(System.out, SparqlUtil.RDF_XML);
 
         // Creating the first named graph and updating it with RDF data
-        String sparqlUpdate = insertData(connectionProperties.dataEndpoint + brojPrijave, new String(out.toByteArray()));
+        String sparqlUpdate = insertData(connectionProperties.dataEndpoint + SPARQL_NAMED_GRAPH_URI, new String(out.toByteArray()));
         System.out.println(sparqlUpdate);
         // UpdateRequest represents a unit of execution
         UpdateRequest update = UpdateFactory.create(sparqlUpdate);
@@ -72,7 +73,7 @@ public class MetadataService {
         processor.execute();
     }
 
-    public void uploadResenjeMetadata(String extractedRdfFilePath, String brojResenja) throws IOException { //String filePath = "./src/main/resources/static/extracted_rdf.xml";  graphURI = "/resenje"
+    public void uploadResenjeMetadata(String extractedRdfFilePath, String SPARQL_NAMED_GRAPH_URI) throws IOException { //String filePath = "./src/main/resources/static/extracted_rdf.xml";  graphURI = "/resenje"
         // Creates a default model
         Model model = ModelFactory.createDefaultModel();
         model.read(extractedRdfFilePath);
@@ -84,7 +85,7 @@ public class MetadataService {
         model.write(System.out, SparqlUtil.RDF_XML);
 
         // Creating the first named graph and updating it with RDF data
-        String sparqlUpdate = insertData(connectionProperties.dataEndpoint + brojResenja, new String(out.toByteArray()));
+        String sparqlUpdate = insertData(connectionProperties.dataEndpoint + SPARQL_NAMED_GRAPH_URI, new String(out.toByteArray()));
         System.out.println(sparqlUpdate);
         // UpdateRequest represents a unit of execution
         UpdateRequest update = UpdateFactory.create(sparqlUpdate);
@@ -306,9 +307,8 @@ public class MetadataService {
             QuerySolution querySolution = results.next();
             Iterator<String> variableBindings = querySolution.varNames();
 
-            String graph = querySolution.get("g").toString();
-            int i = graph.lastIndexOf("/");
-            brojeviPrijava.add(graph.substring(i+1));
+            String broj = querySolution.get("brojPrijave").toString();
+            brojeviPrijava.add(broj);
         }
         return brojeviPrijava.size();
     }
@@ -332,13 +332,11 @@ public class MetadataService {
         String varName;
         RDFNode varValue;
         while (results.hasNext()) {
-
             QuerySolution querySolution = results.next();
             Iterator<String> variableBindings = querySolution.varNames();
 
-            String graph = querySolution.get("g").toString();
-            int i = graph.lastIndexOf("/");
-            resenja.add(graph.substring(i+1));
+            String broj = querySolution.get("brojResenja").toString();
+            resenja.add(broj);
         }
         return resenja.size();
     }
@@ -370,12 +368,11 @@ public class MetadataService {
             QuerySolution querySolution = results.next();
             Iterator<String> variableBindings = querySolution.varNames();
 
-            String graph = querySolution.get("g").toString();
-            int i = graph.lastIndexOf("/");
-            String brojPrijave = graph.substring(i+1);
+            String broj = querySolution.get("brojPrijave").toString();
+            String podnosilac = querySolution.get("podnosilacEmail").toString();
+            String nazivSRB = querySolution.get("nazivSRB").toString();
 
-            Zahtev zahtev = this.existDao.findUnmarshalledZahtevById(brojPrijave);
-            prijave.add(new SearchResultsDto(Integer.toString(zahtev.getPrijava().getBrojPrijave()), zahtev.getPodnosilac().getLice().toString(), zahtev.getPronalazak().getNazivPronalaskaSRB()));
+            prijave.add(new SearchResultsDto(broj, podnosilac, nazivSRB));
         }
         return prijave;
     }
@@ -393,11 +390,9 @@ public class MetadataService {
             QuerySolution querySolution = results.next();
             Iterator<String> variableBindings = querySolution.varNames();
 
-            String graph = querySolution.get("g").toString();
-            int i = graph.lastIndexOf("/");
-            String brojPrijave = graph.substring(i+1);
+            String broj = querySolution.get("brojPrijave").toString();
 
-            Zahtev zahtev = this.existDao.findUnmarshalledZahtevById(brojPrijave);
+            Zahtev zahtev = this.existDao.findUnmarshalledZahtevById(broj);
             prijave.add(new SearchResultsDto(Integer.toString(zahtev.getPrijava().getBrojPrijave()), zahtev.getPodnosilac().getLice().toString(), zahtev.getPronalazak().getNazivPronalaskaSRB()));
         }
         return prijave;
