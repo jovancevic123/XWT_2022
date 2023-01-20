@@ -1,4 +1,11 @@
-<div class="background">
+<div class="nav">
+    <a href="#">Servis za autorska dela</a>
+    <a href="{{patentLink}}">Servis za patente</a>
+    <a href="#">Servis za žigove</a>
+    <a href="javascript:;" (click)="changePage()">{{otherPageName}}</a>
+</div>
+
+<div class="background" *ngIf="currentPage == 0">
 
     <div class="left">
         <mat-radio-group
@@ -43,7 +50,11 @@
             <button mat-raised-button class="dugme-pretraga" (click)="advancedSearch()" [disabled]="advancedSearchInput.length == 0">Pretraži</button>          
         </div>  
     </div>
-    
     <app-request-list class="bottom" [requests]="searchResults"></app-request-list>
-
 </div>
+
+<app-report-page *ngIf="currentPage == 1"></app-report-page>
+
+<button mat-fab aria-label="Example icon button with a home icon" class="logout-button" (click)="logout()">
+    <mat-icon>logout</mat-icon>
+</button>

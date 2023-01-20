@@ -22,7 +22,6 @@ export class ServicePickerComponent {
       }else{
         window.location.href = "http://localhost:4200/sluzbenik-dashboard";
       }
-      
     }
 
     secondChosen(){
@@ -51,7 +50,7 @@ export class ServicePickerComponent {
       console.log("a");
       
       localStorage.clear();
-      window.location.href="http://localhost:4201/login";       
+      window.location.href="http://localhost:4205/login";       
     }
 
 }

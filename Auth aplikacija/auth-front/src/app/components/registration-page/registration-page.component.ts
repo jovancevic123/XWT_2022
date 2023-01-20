@@ -37,7 +37,7 @@ export class RegistrationPageComponent {
           next: (res) => {
             let token = res.accessToken;
             localStorage.setItem("user", token);
-            window.location.href="http://localhost:4201/login";       
+            window.location.href="http://localhost:4205/login";       
           },
           error: (err) => {
             console.log(err.error);
