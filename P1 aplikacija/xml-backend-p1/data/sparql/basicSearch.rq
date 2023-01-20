@@ -3,21 +3,37 @@ prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 SELECT * from <http://localhost:3030/PatentDataset/data/graph/metadata/p1>
 WHERE
 {
-      ?patent  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/broj_prijave> ?brojPrijave .
-      ?patent  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/broj_resenja> ?brojResenja .
-      ?patent  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/naziv_srb> ?nazivSRB .
-      ?patent  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/naziv_eng> ?nazivENG .
-      ?patent  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/pronalazac_email> ?pronalazacEmail .
-      ?patent  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/podnosilac_email> ?podnosilacEmail .
-      ?patent  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/punomoc_email> ?punomocEmail .
-      ?patent  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/datum_prijema> ?datumPrijema .
-      FILTER(CONTAINS(UCASE(str(?brojPrijave)), UCASE("%1$s"))
-          || CONTAINS(UCASE(str(?brojResenja)), UCASE("%1$s"))
-          || CONTAINS(UCASE(str(?nazivSRB)), UCASE("%1$s"))
-          || CONTAINS(UCASE(str(?nazivENG)), UCASE("%1$s"))
-          || CONTAINS(UCASE(str(?pronalazacEmail)), UCASE("%1$s"))
-          || CONTAINS(UCASE(str(?podnosilacEmail)), UCASE("%1$s"))
-          || CONTAINS(UCASE(str(?punomocEmail)), UCASE("%1$s"))
-           || CONTAINS(UCASE(str(?datumPrijema)), UCASE("%1$s"))
-        ).
+      {?patent  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/broj_prijave> ?brojPrijave .
+             ?patent  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/broj_resenja> ?brojResenja .
+             ?patent  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/naziv_srb> ?nazivSRB .
+             ?patent  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/naziv_eng> ?nazivENG .
+             ?patent  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/pronalazac_email> ?pronalazacEmail .
+             ?patent  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/podnosilac_email> ?podnosilacEmail .
+             ?patent  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/punomoc_email> ?punomocEmail .
+             ?patent  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/datum_prijema> ?datumPrijema .
+             FILTER(CONTAINS(UCASE(str(?brojPrijave)), UCASE("%1$s"))
+                 || CONTAINS(UCASE(str(?brojResenja)), UCASE("%1$s"))
+                 || CONTAINS(UCASE(str(?nazivSRB)), UCASE("%1$s"))
+                 || CONTAINS(UCASE(str(?nazivENG)), UCASE("%1$s"))
+                 || CONTAINS(UCASE(str(?pronalazacEmail)), UCASE("%1$s"))
+                 || CONTAINS(UCASE(str(?podnosilacEmail)), UCASE("%1$s"))
+                 || CONTAINS(UCASE(str(?punomocEmail)), UCASE("%1$s"))
+                  || CONTAINS(UCASE(str(?datumPrijema)), UCASE("%1$s"))
+           ).}
+           UNION
+           {?patent  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/broj_prijave> ?brojPrijave .
+            ?patent  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/naziv_srb> ?nazivSRB .
+            ?patent  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/naziv_eng> ?nazivENG .
+            ?patent  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/pronalazac_email> ?pronalazacEmail .
+            ?patent  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/podnosilac_email> ?podnosilacEmail .
+            ?patent  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/punomoc_email> ?punomocEmail .
+            ?patent  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/datum_prijema> ?datumPrijema .
+            FILTER(CONTAINS(UCASE(str(?brojPrijave)), UCASE("%1$s"))
+                || CONTAINS(UCASE(str(?nazivSRB)), UCASE("%1$s"))
+                || CONTAINS(UCASE(str(?nazivENG)), UCASE("%1$s"))
+                || CONTAINS(UCASE(str(?pronalazacEmail)), UCASE("%1$s"))
+                || CONTAINS(UCASE(str(?podnosilacEmail)), UCASE("%1$s"))
+                || CONTAINS(UCASE(str(?punomocEmail)), UCASE("%1$s"))
+                 || CONTAINS(UCASE(str(?datumPrijema)), UCASE("%1$s"))
+              ).}
 }

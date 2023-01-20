@@ -42,7 +42,7 @@ export class PatentService {
   }
 
   getPendingRequests(){
-    return this.http.get(this.apiURL + '/p1/get-pending-requests', {headers: new HttpHeaders().set('Content-Type', 'application/xml'), responseType:'text'})
+    return this.http.get(this.apiURL + '/p1/get-pending-requests', {headers: new HttpHeaders().set('Content-Type', 'application/xml'), responseType:'text'});
   }
 
   getRequestHTML(broj: string){

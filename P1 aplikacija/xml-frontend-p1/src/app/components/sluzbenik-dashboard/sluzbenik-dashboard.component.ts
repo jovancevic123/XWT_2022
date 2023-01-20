@@ -3,6 +3,7 @@ import { AdvancedSearchMeta } from 'src/app/model/AdvancedSearchMeta';
 import { SearchResult } from 'src/app/model/PendingRequest';
 import { SearchService } from 'src/app/services/search.service';
 import { TokenUtilService } from 'src/app/services/token-util.service';
+import { PatentService } from 'src/app/services/patent.service';
 
 export interface Tile {
   color: string;
@@ -12,7 +13,7 @@ export interface Tile {
 }
 
 const ELEMENT_DATA: SearchResult[] = [
-  { brojPrijave: "123678", nazivPodnosioca: 'Jovan', nazivPatenta: "TV" }
+  { brojPrijave: "2", nazivPodnosioca: 'Jovan', nazivPatenta: "TV" }
 
 ];
 
@@ -31,9 +32,10 @@ export class SluzbenikDashboardComponent {
   currentPage: number = 0;
   otherPageName: string = "Izveštaj";
 
-  constructor(private searchService: SearchService, private tokenUtilService: TokenUtilService){}
+  constructor(private searchService: SearchService, private tokenUtilService: TokenUtilService, private patentService: PatentService){}
   
   ngOnInit(){
+   this.getPendingRequests();
     this.searchResults = ELEMENT_DATA;
     let role: string | null = this.tokenUtilService.getRoleFromToken();        
   
@@ -65,7 +67,7 @@ export class SluzbenikDashboardComponent {
   basicSearch(){    
     this.searchService.basicSearch(this.basicSearchInput).subscribe({
       next: res => {
-          console.log(res);  
+        this.searchResults = this.makeJsonListOutOfSearchResults(res);       
       },
       error: error => {
           console.error(error);
@@ -76,7 +78,7 @@ export class SluzbenikDashboardComponent {
   advancedSearch(){
       this.searchService.advancedSearch(this.advancedSearchInput).subscribe({
         next: res => {
-            console.log(res);  
+          this.searchResults = this.makeJsonListOutOfSearchResults(res);
         },
         error: error => {
             console.error(error);
@@ -107,4 +109,27 @@ export class SluzbenikDashboardComponent {
       this.currentPage = 1 - this.currentPage;
       this.otherPageName = this.currentPage == 0 ? "Izveštaj" : "Zahtevi";
   }
+
+  getPendingRequests(){
+    this.patentService.getPendingRequests().subscribe({
+      next: res => {    
+          this.searchResults = this.makeJsonListOutOfSearchResults(res);
+      },
+      error: error => {
+          console.error(error);
+      }
+    });
+  }
+
+  makeJsonListOutOfSearchResults(xmlString: string): any{
+
+      let results = JSON.parse(this.tokenUtilService.xml2Json(xmlString)).searchResultsListDto.results;     
+      console.log(results);
+      
+      if(results.length){
+        return results;
+      }
+      return [results];
+  }
+
 }

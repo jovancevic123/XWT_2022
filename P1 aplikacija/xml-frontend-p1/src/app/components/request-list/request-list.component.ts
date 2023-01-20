@@ -4,6 +4,7 @@ import { PatentService } from 'src/app/services/patent.service';
 import { saveAs } from 'file-saver';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
+import { TokenUtilService } from 'src/app/services/token-util.service';
 
 export interface DialogData {
   reason: string;
@@ -21,12 +22,16 @@ export class RequestListComponent{
   reason: string;
   
 
-  constructor(private patentService: PatentService, public dialog: MatDialog){}
+  constructor(private patentService: PatentService, public dialog: MatDialog, private tokenUtilService: TokenUtilService){}
 
   getPendingRequests(){
     this.patentService.getPendingRequests().subscribe({
       next: data => {
-        console.log(data);           
+        console.log(data);   
+        console.log("Joca");
+        
+        console.log(this.tokenUtilService.xml2Json(data));
+
       },
       error: error => {
         console.error(error);
@@ -59,11 +64,11 @@ export class RequestListComponent{
     });
   }
 
-  odobri(brojPrijave: string){
+  odobri(brojPrijave: string, i: number){
       this.patentService.approveRequest(brojPrijave).subscribe({
         next: data => {
           console.log(data);
-            
+          this.requests.splice(i, 1);
         },
         error: error => {
           console.error(error);
@@ -71,11 +76,11 @@ export class RequestListComponent{
       });
   }
 
-  odbij(brojPrijave: string, obrazlozenje: string){
+  odbij(brojPrijave: string, obrazlozenje: string, i: number){
     this.patentService.rejectRequest(brojPrijave, obrazlozenje).subscribe({
       next: data => {
-        console.log(data);
-          
+        console.log(data);   
+        this.requests.splice(i, 1);
       },
       error: error => {
         console.error(error);
@@ -107,14 +112,14 @@ export class RequestListComponent{
     });
   }
 
-  openDialog(brojPrijave: string): void {
+  openDialog(brojPrijave: string, i:number): void {
     const dialogRef = this.dialog.open(DialogComponent, {
       data: { reason: this.reason },
     });
 
     dialogRef.afterClosed().subscribe(result => {
         if(result != undefined){
-            this.odbij(brojPrijave, result);
+            this.odbij(brojPrijave, result, i);
         }
     });
   }

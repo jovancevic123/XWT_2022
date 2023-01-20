@@ -1,13 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?xml-stylesheet type="text/xsl" href="bookstore.xsl"?>
-<zahtev xmlns="http://www.ftn.uns.ac.rs/xwt"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.ftn.uns.ac.rs/xwt file:/C:/Users/Joco/Desktop/IV/XML/Projekat/XWT_2022/xml-backend-p1/data/P-1.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<zahtev xmlns="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">
     <prijava>
-        <broj_prijave>1</broj_prijave>
+        <broj_prijave>2</broj_prijave>
         <datum_prijema>2022-11-25</datum_prijema>
         <priznati_datum_podnosenja>2022-11-26</priznati_datum_podnosenja>
         <vrsta_prijave>dopunska</vrsta_prijave>
+        <broj_prvobitne_prijave>0</broj_prvobitne_prijave>
     </prijava>
     <zavod>
         <naziv>Zavod za intelektualnu svojinu</naziv>
@@ -21,12 +19,11 @@
     </zavod>
     <pronalazak>
         <naziv_pronalaska_srb>Naziv na srpskom je srb</naziv_pronalaska_srb>
-        <naziv_pronalaska_eng>Naziv na engleskom</naziv_pronalaska_eng>
+        <naziv_pronalaska_eng>English</naziv_pronalaska_eng>
     </pronalazak>
-
     <podnosilac pronalazac="false">
         <drzavljanstvo>srpsko</drzavljanstvo>
-        <lice xsi:type="TPravnoLice">
+        <lice xsi:type="TPravnoLice" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <adresa>
                 <ulica>Vojvode Stepe</ulica>
                 <broj>1</broj>
@@ -42,7 +39,7 @@
         </lice>
     </podnosilac>
     <pronalazac naveden_u_prijavi="true">
-        <lice xsi:type="TFizickoLice">
+        <lice xsi:type="TFizickoLice" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <adresa>
                 <ulica>Kralja Petra I</ulica>
                 <broj>17</broj>
@@ -60,7 +57,7 @@
     </pronalazac>
     <punomoc>
         <tip>punomocnik_za_zastupanje</tip>
-        <lice xsi:type="TFizickoLice">
+        <lice xsi:type="TFizickoLice" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <adresa>
                 <ulica>Omladinska</ulica>
                 <broj>15</broj>
@@ -89,5 +86,5 @@
         </ranija_prijava>
     </ranije_prijave>
     <nacin_dostavljanja>elektronska_forma</nacin_dostavljanja>
-    <broj_resenja>-1</broj_resenja>
+    <broj_resenja>1674243250677</broj_resenja>
 </zahtev>
