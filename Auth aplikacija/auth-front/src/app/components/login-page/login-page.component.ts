@@ -40,7 +40,7 @@ export class LoginPageComponent {
             let token = this.xml2Json(res);            
             localStorage.setItem("user", JSON.stringify(token));
             this.toastService.success("Successful login!");
-            window.location.href="http://localhost:4201/service-picker";
+            window.location.href="http://localhost:4205/service-picker";
           },
           error: (err) => {
             this.toastService.error(err.error);

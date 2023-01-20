@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AdvancedSearchMeta } from 'src/app/model/AdvancedSearchMeta';
 import { SearchResult } from 'src/app/model/PendingRequest';
 import { SearchService } from 'src/app/services/search.service';
+import { TokenUtilService } from 'src/app/services/token-util.service';
 
 export interface Tile {
   color: string;
@@ -16,21 +17,31 @@ const ELEMENT_DATA: SearchResult[] = [
 ];
 
 @Component({
-  selector: 'app-search-page',
-  templateUrl: './search-page.component.html',
-  styleUrls: ['./search-page.component.css']
+  selector: 'app-sluzbenik-dashboard',
+  templateUrl: './sluzbenik-dashboard.component.html',
+  styleUrls: ['./sluzbenik-dashboard.component.css']
 })
-export class SearchPageComponent implements OnInit {
+export class SluzbenikDashboardComponent {
 
   protected vrstaPretrage: number = 2;
   basicSearchInput: string = "";
   advancedSearchInput: AdvancedSearchMeta[] = [];
   searchResults: SearchResult[];
+  patentLink: string;
+  currentPage: number = 0;
+  otherPageName: string = "Izveštaj";
 
-  constructor(private searchService: SearchService){}
+  constructor(private searchService: SearchService, private tokenUtilService: TokenUtilService){}
   
   ngOnInit(){
     this.searchResults = ELEMENT_DATA;
+    let role: string | null = this.tokenUtilService.getRoleFromToken();        
+  
+    if(role === "KORISNIK"){
+      this.patentLink = "http://localhost:4200/korisnik-dashboard";
+    }else{
+      this.patentLink = "http://localhost:4200/sluzbenik-dashboard";
+    }
   }
 
   tiles: Tile[] = [
@@ -85,5 +96,15 @@ export class SearchPageComponent implements OnInit {
     };
     
     this.advancedSearchInput.push(newRow);
+  }
+
+  logout(){
+    localStorage.clear();
+    window.location.href="http://localhost:4205/login";
+  }
+
+  changePage(){
+      this.currentPage = 1 - this.currentPage;
+      this.otherPageName = this.currentPage == 0 ? "Izveštaj" : "Zahtevi";
   }
 }

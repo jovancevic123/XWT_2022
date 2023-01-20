@@ -1,0 +1,13 @@
+<div class="nav">
+    <a href="#">Servis za autorska dela</a>
+    <a href="{{patentLink}}">Servis za patente</a>
+    <a href="#">Servis za žigove</a>
+    <a href="javascript:;" (click)="changePage()">{{otherPageName}}</a>
+</div>
+
+<app-form-page *ngIf="currentPage == 0"></app-form-page>
+<app-xonomy-form *ngIf="currentPage == 1"></app-xonomy-form>
+
+<button mat-fab aria-label="Example icon button with a home icon" class="logout-button" (click)="logout()">
+    <mat-icon>logout</mat-icon>
+</button>

@@ -8,6 +8,10 @@
             <label class="password-label">Password</label>
             <input class="password-field" type="password" pPassword placeholder="Password" formControlName="password" required=""/>
         
+            <br>
+            <a href="http://localhost:4205/register">Don't have an account yet? Sign Up.</a>
+            <br>
+
             <div class="button-container">
                 <button class="login-button" pButton type="submit" label="Submit" [disabled]="!loginForm.valid" clickable>Log In</button>
             </div>

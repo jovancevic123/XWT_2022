@@ -19,6 +19,7 @@ export class RequestListComponent{
   @Input() requests: SearchResult[] = [];
   displayedColumns: string[] = ['brojPrijave', 'nazivPodnosioca', 'nazivPatenta', 'html', 'pdf', 'rdf', 'json', 'odobravanje', 'odbijanje'];
   reason: string;
+  
 
   constructor(private patentService: PatentService, public dialog: MatDialog){}
 
