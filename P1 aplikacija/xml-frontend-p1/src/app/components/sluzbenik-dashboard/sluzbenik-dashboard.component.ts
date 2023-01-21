@@ -12,10 +12,19 @@ export interface Tile {
   text: string;
 }
 
-const ELEMENT_DATA: SearchResult[] = [
-  { brojPrijave: "2", nazivPodnosioca: 'Jovan', nazivPatenta: "TV" }
+export interface DialogResenjeData {
+  brojResenja: string,
+  imeSluzbenika: string,
+  prezimeSluzbenika: string,
+  datumOdgovora: string,
+  prihvacena: string,
+  razlog: string;
+}
 
-];
+// const ELEMENT_DATA: SearchResult[] = [
+//   { brojPrijave: "2", nazivPodnosioca: 'Jovan', nazivPatenta: "TV" }
+
+// ];
 
 @Component({
   selector: 'app-sluzbenik-dashboard',
@@ -24,7 +33,7 @@ const ELEMENT_DATA: SearchResult[] = [
 })
 export class SluzbenikDashboardComponent {
 
-  protected vrstaPretrage: number = 2;
+  protected vrstaPretrage: number = 1;
   basicSearchInput: string = "";
   advancedSearchInput: AdvancedSearchMeta[] = [];
   searchResults: SearchResult[];
@@ -36,7 +45,7 @@ export class SluzbenikDashboardComponent {
   
   ngOnInit(){
    this.getPendingRequests();
-    this.searchResults = ELEMENT_DATA;
+    // this.searchResults = ELEMENT_DATA;
     let role: string | null = this.tokenUtilService.getRoleFromToken();        
   
     if(role === "KORISNIK"){
@@ -122,14 +131,34 @@ export class SluzbenikDashboardComponent {
   }
 
   makeJsonListOutOfSearchResults(xmlString: string): any{
-
       let results = JSON.parse(this.tokenUtilService.xml2Json(xmlString)).searchResultsListDto.results;     
-      console.log(results);
       
       if(results.length){
-        return results;
+        results = results;
       }
-      return [results];
+      results = [results];      
+
+      console.log("Pocetak");
+      
+      console.log(results);
+
+      if(results[0].length){
+        for(let s of results[0]){
+            if(typeof(s.brojResenja) !== 'string'){
+              s.brojResenja = "";
+            }
+        }
+        return results[0];
+      }else if(typeof(results[0].brojResenja) !== 'string'){
+          results[0].brojResenja = "";
+        }
+    
+      
+      console.log("Kraj");
+      
+      console.log(results);
+      
+      return results;
   }
 
 }

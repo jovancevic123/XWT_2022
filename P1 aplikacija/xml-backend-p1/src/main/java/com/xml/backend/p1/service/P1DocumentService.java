@@ -55,8 +55,8 @@ public class P1DocumentService {
         return this.repository.findById(resourceId + ".xml", "/db/patent/zahtevi");
     }
 
-    public XMLResource findResenjeById(String resourceId) throws XMLDBException {
-        return this.repository.findById(resourceId, "/db/patent/resenja");
+    public Resenje findResenjeById(String resourceId) throws XMLDBException, JAXBException {
+        return this.repository.findUnmarshalledResenjeById(resourceId);
     }
 
     public void addPatent(RequestDto dto) throws JAXBException {

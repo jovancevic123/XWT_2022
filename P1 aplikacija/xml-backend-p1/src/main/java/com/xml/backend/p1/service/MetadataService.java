@@ -232,7 +232,7 @@ public class MetadataService {
             // A single answer from a SELECT query
             QuerySolution querySolution = results.next();
             String br = querySolution.get("brojPrijave").toString();
-            if (!prijave.contains(br)) {
+            if (prijave.contains(br)) {
                 String naziv = querySolution.get("nazivSRB").toString();
                 String email = querySolution.get("podnosilacEmail").toString();
                 result.add(new SearchResultsDto(br, naziv, email));

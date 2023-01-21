@@ -38,6 +38,8 @@ public class XmlBackendP1Application {
 
 		SpringApplication.run(com.xml.backend.p1.XmlBackendP1Application.class, args);
 
+//		ExistDao dao = new ExistDao();
+//		dao.getDocumentsThatAreReferencedIn("1", "/db/patent/zahtevi");
 
 		// TACKA 2
 

@@ -1,22 +1,25 @@
 package com.xml.backend.p1.dao;
 
+import com.xml.backend.p1.dto.SearchResultsDto;
 import com.xml.backend.p1.model.Resenje;
 import com.xml.backend.p1.model.Zahtev;
 import com.xml.backend.p1.util.AuthenticationUtilities;
 import com.xml.backend.p1.util.AuthenticationUtilities.ConnectionProperties;
 import org.exist.util.StringInputSource;
+import org.exist.xmldb.EXistResource;
 import org.springframework.stereotype.Repository;
 import org.xmldb.api.DatabaseManager;
-import org.xmldb.api.base.Collection;
-import org.xmldb.api.base.Database;
-import org.xmldb.api.base.XMLDBException;
+import org.xmldb.api.base.*;
 import org.xmldb.api.modules.CollectionManagementService;
 import org.xmldb.api.modules.XMLResource;
+import org.xmldb.api.modules.XPathQueryService;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.OutputKeys;
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class ExistDao {
@@ -56,6 +59,14 @@ public class ExistDao {
         return (Zahtev) unmarshaller.unmarshal(new StringInputSource(res.getContent().toString()));
     }
 
+    public Resenje findUnmarshalledResenjeById(String resourceId) throws XMLDBException, JAXBException {
+        XMLResource res = this.findById(resourceId + ".xml", "/db/patent/resenja");
+        JAXBContext context = JAXBContext.newInstance(Resenje.class);
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+
+        return (Resenje) unmarshaller.unmarshal(new StringInputSource(res.getContent().toString()));
+    }
+
     public void save(String documentId, String xmlData, String collectionId) throws Exception {
         collection = getOrCreateCollection(collectionId);
 //        collection = DatabaseManager.getCollection(connectionProperties.uri + collectionId);
@@ -65,6 +76,77 @@ public class ExistDao {
         res.setContent(xmlData);
         System.out.println("[INFO] Storing the document: " + res.getId());
         collection.storeResource(res);
+    }
+
+    public List<SearchResultsDto> getDocumentsThatReferences(String documentId, String collectionId) throws XMLDBException {
+        collection = getOrCreateCollection(collectionId);
+        collection.setProperty(OutputKeys.INDENT, "yes");
+        // get an instance of xpath query service
+        XPathQueryService xpathService = (XPathQueryService) collection.getService("XPathQueryService", "1.0");
+        xpathService.setNamespace("", "http://www.ftn.uns.ac.rs/xwt");
+        String xpathExp = "declare variable $data as document-node()* := collection('/db/patent/zahtevi');\n" +
+                "\n" +
+                "for $v in $data\n" +
+                "for $rp in $v/zahtev/ranije_prijave/ranija_prijava \n" +
+                "where $rp/broj_prijave=" + documentId + "\n" +
+                "return concat($v/zahtev/prijava/broj_prijave, ':', $v/zahtev/podnosilac/lice/kontakt/email, ':', $v/zahtev/pronalazak/naziv_pronalaska_srb) \n";
+
+        ResourceSet result = xpathService.query(xpathExp);
+        ResourceIterator i = result.getIterator();
+        Resource res = null;
+        List<SearchResultsDto> dtos = new ArrayList<>();
+
+        while(i.hasMoreResources()) {
+            try {
+                res = i.nextResource();
+                String[] tokens = res.getContent().toString().split(":");
+                dtos.add(new SearchResultsDto(tokens[0], tokens[1], tokens[2]));
+            } finally {
+                try {
+                    ((EXistResource)res).freeResources();
+                } catch (XMLDBException xe) {
+                    xe.printStackTrace();
+                }
+            }
+        }
+        return dtos;
+    }
+
+    public List<SearchResultsDto> getDocumentsThatAreReferencedIn(String documentId, String collectionId) throws XMLDBException {
+        collection = getOrCreateCollection(collectionId);
+        collection.setProperty(OutputKeys.INDENT, "yes");
+        // get an instance of xpath query service
+        XPathQueryService xpathService = (XPathQueryService) collection.getService("XPathQueryService", "1.0");
+        xpathService.setNamespace("", "http://www.ftn.uns.ac.rs/xwt");
+        String xpathExp = "declare variable $data as document-node()* := collection('/db/patent/zahtevi');\n" +
+                "\n" +
+                "for $v in $data\n" +
+                "for $rp in $v/zahtev/ranije_prijave/ranija_prijava \n" +
+                "where $v/zahtev/prijava/broj_prijave=" + documentId + "\n" +
+                "return $rp/broj_prijave/text() \n";
+
+        ResourceSet result = xpathService.query(xpathExp);
+        ResourceIterator i = result.getIterator();
+        Resource res = null;
+        List<SearchResultsDto> dtos = new ArrayList<>();
+
+        while(i.hasMoreResources()) {
+            try {
+                res = i.nextResource();
+
+                Zahtev z = findUnmarshalledZahtevById(res.getContent().toString());
+                dtos.add(new SearchResultsDto(Integer.toString(z.getPrijava().getBrojPrijave()), z.getPodnosilac().getLice().getKontakt().getEmail(), z.getPronalazak().getNazivPronalaskaSRB()));
+            } catch (JAXBException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    ((EXistResource)res).freeResources();
+                } catch (XMLDBException xe) {
+                    xe.printStackTrace();
+                }
+            }
+        }
+        return dtos;
     }
 
     private Collection getOrCreateCollection(String collectionUri) throws XMLDBException {

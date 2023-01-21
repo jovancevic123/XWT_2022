@@ -34,6 +34,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {TextFieldModule} from '@angular/cdk/text-field';
 import { SluzbenikDashboardComponent } from './components/sluzbenik-dashboard/sluzbenik-dashboard.component';
 import { KorisnikDashboardComponent } from './components/korisnik-dashboard/korisnik-dashboard.component';
+import { DialogResenjeComponent } from './components/dialog-resenje/dialog-resenje.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { KorisnikDashboardComponent } from './components/korisnik-dashboard/kori
     ReportPageComponent,
     DialogComponent,
     SluzbenikDashboardComponent,
-    KorisnikDashboardComponent
+    KorisnikDashboardComponent,
+    DialogResenjeComponent
   ],
   imports: [
     HttpClientModule,

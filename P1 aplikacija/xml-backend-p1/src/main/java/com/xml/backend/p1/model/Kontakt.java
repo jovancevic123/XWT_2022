@@ -1,10 +1,11 @@
 package com.xml.backend.p1.model;
 
 import com.xml.backend.p1.dto.KontaktDto;
+import lombok.Getter;
 
 import javax.xml.bind.annotation.*;
 
-
+@Getter
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
         "telefon", "email", "fax"
