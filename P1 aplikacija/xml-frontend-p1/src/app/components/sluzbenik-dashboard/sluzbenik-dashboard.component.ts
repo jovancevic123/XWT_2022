@@ -21,6 +21,11 @@ export interface DialogResenjeData {
   razlog: string;
 }
 
+export interface DialogReferenceData{
+  referencirani: SearchResult[],
+  referencirajuci: SearchResult[]
+}
+
 // const ELEMENT_DATA: SearchResult[] = [
 //   { brojPrijave: "2", nazivPodnosioca: 'Jovan', nazivPatenta: "TV" }
 
@@ -130,17 +135,13 @@ export class SluzbenikDashboardComponent {
     });
   }
 
-  makeJsonListOutOfSearchResults(xmlString: string): any{
+  makeJsonListOutOfSearchResults(xmlString: string): any {
       let results = JSON.parse(this.tokenUtilService.xml2Json(xmlString)).searchResultsListDto.results;     
       
       if(results.length){
         results = results;
       }
       results = [results];      
-
-      console.log("Pocetak");
-      
-      console.log(results);
 
       if(results[0].length){
         for(let s of results[0]){
@@ -151,12 +152,7 @@ export class SluzbenikDashboardComponent {
         return results[0];
       }else if(typeof(results[0].brojResenja) !== 'string'){
           results[0].brojResenja = "";
-        }
-    
-      
-      console.log("Kraj");
-      
-      console.log(results);
+      }
       
       return results;
   }

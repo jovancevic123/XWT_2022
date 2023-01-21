@@ -25,8 +25,6 @@ import java.util.List;
 public class ExistDao {
 
     private ConnectionProperties connectionProperties;
-    private String collectionId;
-    private Collection collection;
 
     public ExistDao() throws Exception {
         this.connectionProperties = AuthenticationUtilities.loadProperties();
@@ -42,7 +40,7 @@ public class ExistDao {
     }
 
     public XMLResource findById(String resourceId, String collectionId) throws XMLDBException {
-        collection = getOrCreateCollection(collectionId);
+        Collection collection = getOrCreateCollection(collectionId);
 //        collection = DatabaseManager.getCollection(connectionProperties.uri + collectionId);
         collection.setProperty(OutputKeys.INDENT, "yes");
 
@@ -68,7 +66,7 @@ public class ExistDao {
     }
 
     public void save(String documentId, String xmlData, String collectionId) throws Exception {
-        collection = getOrCreateCollection(collectionId);
+        Collection collection = getOrCreateCollection(collectionId);
 //        collection = DatabaseManager.getCollection(connectionProperties.uri + collectionId);
         collection.setProperty(OutputKeys.INDENT, "yes");
 
@@ -79,7 +77,7 @@ public class ExistDao {
     }
 
     public List<SearchResultsDto> getDocumentsThatReferences(String documentId, String collectionId) throws XMLDBException {
-        collection = getOrCreateCollection(collectionId);
+        Collection collection = getOrCreateCollection(collectionId);
         collection.setProperty(OutputKeys.INDENT, "yes");
         // get an instance of xpath query service
         XPathQueryService xpathService = (XPathQueryService) collection.getService("XPathQueryService", "1.0");
@@ -113,7 +111,7 @@ public class ExistDao {
     }
 
     public List<SearchResultsDto> getDocumentsThatAreReferencedIn(String documentId, String collectionId) throws XMLDBException {
-        collection = getOrCreateCollection(collectionId);
+        Collection collection = getOrCreateCollection(collectionId);
         collection.setProperty(OutputKeys.INDENT, "yes");
         // get an instance of xpath query service
         XPathQueryService xpathService = (XPathQueryService) collection.getService("XPathQueryService", "1.0");

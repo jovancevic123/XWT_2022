@@ -116,4 +116,18 @@ export class PatentService {
     return this.http.get(this.apiURL + '/p1/json', { params: queryParams, responseType: 'blob'});
   }
 
+  dobaviReferencirane(brojPrijave: string){
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("documentId", brojPrijave);
+
+    return this.http.get(this.apiURL + '/p1/documents-are-referenced', { params: queryParams, responseType: 'text'});
+  }
+
+  dobaviReferencirajuce(brojPrijave: string){
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("documentId", brojPrijave);
+
+    return this.http.get(this.apiURL + '/p1/documents-that-reference', { params: queryParams, responseType: 'text'});
+  }
+
 }
