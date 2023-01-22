@@ -130,4 +130,11 @@ export class PatentService {
     return this.http.get(this.apiURL + '/p1/documents-that-reference', { params: queryParams, responseType: 'text'});
   }
 
+  getUserRequests(email: string){
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("email", email);
+
+    return this.http.get(this.apiURL + '/p1/user-requests', {params: queryParams, headers: new HttpHeaders().set('Content-Type', 'application/xml'), responseType:'text'});
+  }
+
 }

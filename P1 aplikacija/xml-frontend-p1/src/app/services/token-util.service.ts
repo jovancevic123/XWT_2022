@@ -28,6 +28,16 @@ export class TokenUtilService {
     }
   }
 
+  getEmailFromToken(): string | null {
+    try{
+        let token: any = JSON.parse(localStorage.getItem("user") as string);
+        return token.email;
+    }
+    catch{
+        return null;
+    }
+  }
+
   xml2Json(xml: any){
     let options = {ignoreComment: true, alwaysChildren: false, nativeType: false, alwaysArray: false, compact: true, textFn:this.removeJsonTextAttribute};
     return convert.xml2json(xml, options);
@@ -41,4 +51,4 @@ export class TokenUtilService {
     }
       catch(e){}
     }
-}
+  }

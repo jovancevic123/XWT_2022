@@ -141,6 +141,16 @@ public class P1DocumentController {
         }
     }
 
+    @GetMapping(value="/user-requests", produces = "application/xml")
+    public ResponseEntity<?> getUsersRequests(@RequestParam("email") String email){
+        try{
+            SearchResultsListDto requestDtos = new SearchResultsListDto(this.service.getUsersRequests(email));
+            return ResponseEntity.ok(requestDtos);
+        }catch(Exception ex){
+            return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @PostMapping(value="/advanced-search", produces = "application/xml")
     public ResponseEntity<?> advancedSearch(@RequestBody AdvancedSearchListDto dto){
         try{

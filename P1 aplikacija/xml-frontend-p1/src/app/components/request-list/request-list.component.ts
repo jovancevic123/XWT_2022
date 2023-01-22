@@ -19,10 +19,12 @@ export interface DialogData {
   templateUrl: './request-list.component.html',
   styleUrls: ['./request-list.component.css']
 })
-export class RequestListComponent{
+export class RequestListComponent implements OnInit{
 
   @Input() requests: SearchResult[] = [];
-  displayedColumns: string[] = ['brojPrijave', 'nazivPodnosioca', 'nazivPatenta', 'html', 'pdf', 'rdf', 'json', 'odobravanje', 'odbijanje', 'resenje', 'reference'];
+  @Input() isUser: boolean;
+
+  displayedColumns: string[] = [];
   reason: string;
 
   referencirani: SearchResult[] = [];
@@ -31,6 +33,11 @@ export class RequestListComponent{
 
   constructor(private patentService: PatentService, public dialog: MatDialog, private tokenUtilService: TokenUtilService,
               private resenjeService: ResenjeService){}
+
+  ngOnInit(): void {
+    this.displayedColumns = this.isUser ? ['brojPrijave', 'nazivPodnosioca', 'nazivPatenta', 'html', 'pdf', 'resenje', 'reference'] :
+                                     ['brojPrijave', 'nazivPodnosioca', 'nazivPatenta', 'html', 'pdf', 'rdf', 'json', 'odobravanje', 'odbijanje', 'resenje', 'reference'];
+  }
 
   downloadHTML(brojPrijave: string){  
     

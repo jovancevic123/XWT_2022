@@ -310,6 +310,10 @@ public class P1DocumentService {
         return this.metadataService.basicSearch(text, "./data/sparql/basicSearch.rq");
     }
 
+    public List<SearchResultsDto> getUsersRequests(String email) throws JAXBException, XMLDBException {
+        return this.metadataService.getUsersRequests(email, "./data/sparql/userRequests.rq");
+    }
+
     public List<SearchResultsDto> advancedSearch(AdvancedSearchListDto list) throws JAXBException, XMLDBException {
         String pred = "http://www.ftn.uns.ac.rs/rdf/examples/predicate/";
 

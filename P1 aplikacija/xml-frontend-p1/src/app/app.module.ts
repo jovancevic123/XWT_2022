@@ -36,6 +36,7 @@ import { SluzbenikDashboardComponent } from './components/sluzbenik-dashboard/sl
 import { KorisnikDashboardComponent } from './components/korisnik-dashboard/korisnik-dashboard.component';
 import { DialogResenjeComponent } from './components/dialog-resenje/dialog-resenje.component';
 import { ReferencesComponent } from './components/references/references.component';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { ReferencesComponent } from './components/references/references.componen
     SluzbenikDashboardComponent,
     KorisnikDashboardComponent,
     DialogResenjeComponent,
-    ReferencesComponent
+    ReferencesComponent,
+    SearchComponent
   ],
   imports: [
     HttpClientModule,
