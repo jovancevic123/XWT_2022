@@ -35,10 +35,14 @@ public class P1DocumentController {
     }
 
     @PostMapping(value="/add-request", consumes = "application/xml", produces = "application/xml")
-    public ResponseEntity<?> submitRequest(@RequestBody RequestDto dto) throws JAXBException {
-        System.out.println(dto);
-        this.service.addPatent(dto);
-        return ResponseEntity.ok("Bravo");
+    public ResponseEntity<?> submitRequest(@RequestBody RequestDto dto) throws Exception {
+        try{
+            this.service.addPatent(dto);
+            return ResponseEntity.ok("Success");
+        }
+        catch(Exception ex){
+            return new ResponseEntity<String>("Xml document is not valid!", HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PostMapping(value="/add-request-xonomy", consumes = "application/xml", produces = "application/xml")
@@ -91,7 +95,7 @@ public class P1DocumentController {
         }
     }
 
-    @GetMapping("/rdf")
+    @GetMapping(value="/rdf", consumes = "application/xml", produces = "application/xml")
     public ResponseEntity<?> getMetadataRDF(@RequestParam("brojPrijave") String brojPrijave){
         try{
             String rdfXml = this.service.getMetadataRDF(brojPrijave);
@@ -121,7 +125,7 @@ public class P1DocumentController {
         }
     }
 
-    @GetMapping("/report")
+    @GetMapping(value="/report", consumes = "application/xml", produces = "application/xml")
     public ResponseEntity<?> generateReport(@RequestParam("start") String startDate, @RequestParam("end") String endDate){
         try{
             ByteArrayResource body = this.service.generateReport(startDate, endDate);

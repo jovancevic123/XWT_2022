@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<<<<<<< HEAD
 <zahtev xmlns="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">
     <prijava>
         <broj_prijave>2</broj_prijave>
         <datum_prijema>2022-11-25</datum_prijema>
         <priznati_datum_podnosenja>2022-11-26</priznati_datum_podnosenja>
+=======
+<zahtev xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.ftn.uns.ac.rs/xwt">
+    <prijava>
+        <broj_prijave>34998269</broj_prijave>
+        <datum_prijema>2023-01-30</datum_prijema>
+>>>>>>> develop
         <vrsta_prijave>dopunska</vrsta_prijave>
         <broj_prvobitne_prijave>0</broj_prvobitne_prijave>
     </prijava>
@@ -14,42 +21,58 @@
             <broj>5</broj>
             <postanski_broj>11000</postanski_broj>
             <mesto>Beograd</mesto>
-            <drzava>Srbija</drzava>
+            <drzava>Republika Srbija</drzava>
         </adresa>
     </zavod>
     <pronalazak>
+<<<<<<< HEAD
         <naziv_pronalaska_srb>Naziv na srpskom je srb</naziv_pronalaska_srb>
         <naziv_pronalaska_eng>English</naziv_pronalaska_eng>
     </pronalazak>
     <podnosilac pronalazac="false">
         <drzavljanstvo>srpsko</drzavljanstvo>
         <lice xsi:type="TPravnoLice" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+=======
+        <naziv_pronalaska_srb>cekic</naziv_pronalaska_srb>
+        <naziv_pronalaska_eng>hammer</naziv_pronalaska_eng>
+    </pronalazak>
+    <podnosilac pronalazac="true">
+        <drzavljanstvo>Srpsko</drzavljanstvo>
+        <lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TFizickoLice">
+>>>>>>> develop
             <adresa>
-                <ulica>Vojvode Stepe</ulica>
-                <broj>1</broj>
+                <ulica>Atar</ulica>
+                <broj>3</broj>
                 <postanski_broj>21000</postanski_broj>
-                <mesto>Novi Sad</mesto>
-                <drzava>Srbija</drzava>
+                <mesto>NS</mesto>
+                <drzava>SRBIJA</drzava>
             </adresa>
             <kontakt>
-                <telefon>021 824854</telefon>
-                <email>aktiva@gmail.com</email>
+                <telefon>23490</telefon>
+                <email>jvoancevic@gmial.com</email>
+                <fax>asdfjkl</fax>
             </kontakt>
-            <poslovno_ime>Aktiva DOO</poslovno_ime>
+            <ime>Jovan</ime>
+            <prezime>Jovancevic</prezime>
         </lice>
     </podnosilac>
     <pronalazac naveden_u_prijavi="true">
+<<<<<<< HEAD
         <lice xsi:type="TFizickoLice" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+=======
+        <lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TFizickoLice">
+>>>>>>> develop
             <adresa>
-                <ulica>Kralja Petra I</ulica>
-                <broj>17</broj>
-                <postanski_broj>21203</postanski_broj>
-                <mesto>Veternik</mesto>
-                <drzava>Srbija</drzava>
+                <ulica>Atar</ulica>
+                <broj>3</broj>
+                <postanski_broj>21000</postanski_broj>
+                <mesto>NS</mesto>
+                <drzava>SRBIJA</drzava>
             </adresa>
             <kontakt>
-                <telefon>0631899381</telefon>
-                <email>jovancevicjovan5@gmail.com</email>
+                <telefon>23490</telefon>
+                <email>jvoancevic@gmial.com</email>
+                <fax>asdfjkl</fax>
             </kontakt>
             <ime>Jovan</ime>
             <prezime>Jovancevic</prezime>
@@ -57,34 +80,37 @@
     </pronalazac>
     <punomoc>
         <tip>punomocnik_za_zastupanje</tip>
+<<<<<<< HEAD
         <lice xsi:type="TFizickoLice" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+=======
+        <lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TPravnoLice">
+>>>>>>> develop
             <adresa>
-                <ulica>Omladinska</ulica>
-                <broj>15</broj>
-                <postanski_broj>21203</postanski_broj>
-                <mesto>Veternik</mesto>
-                <drzava>Srbija</drzava>
+                <ulica>PA PAVLA</ulica>
+                <broj>123</broj>
+                <postanski_broj>21000</postanski_broj>
+                <mesto>NS</mesto>
+                <drzava>SRB</drzava>
             </adresa>
             <kontakt>
-                <telefon>062123789</telefon>
-                <email>milanpanic@gmail.com</email>
+                <telefon>23458902345890</telefon>
+                <email>akitva@gmail.com</email>
+                <fax>jkldfs</fax>
             </kontakt>
-            <ime>Milan</ime>
-            <prezime>Panic</prezime>
+            <poslovno_ime>DOO INVEST</poslovno_ime>
         </lice>
     </punomoc>
     <ranije_prijave>
         <ranija_prijava>
-            <broj_prijave>123</broj_prijave>
-            <datum_podnosenja>2022-07-07</datum_podnosenja>
-            <dvoslovna_oznaka>hl</dvoslovna_oznaka>
-        </ranija_prijava>
-        <ranija_prijava>
-            <broj_prijave>123</broj_prijave>
-            <datum_podnosenja>2022-07-07</datum_podnosenja>
-            <dvoslovna_oznaka>hl</dvoslovna_oznaka>
+            <broj_prijave>1</broj_prijave>
+            <datum_podnosenja>2023-01-30</datum_podnosenja>
+            <dvoslovna_oznaka>sr</dvoslovna_oznaka>
         </ranija_prijava>
     </ranije_prijave>
     <nacin_dostavljanja>elektronska_forma</nacin_dostavljanja>
+<<<<<<< HEAD
     <broj_resenja>1674243250677</broj_resenja>
+=======
+    <broj_resenja></broj_resenja>
+>>>>>>> develop
 </zahtev>
