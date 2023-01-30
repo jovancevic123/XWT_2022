@@ -238,7 +238,7 @@ public class P1DocumentService {
         metadataService.transformRDF(xmlData, xsltFIlePath, outputPath); // 1. xml u obliku string-a
         String resultMeta = metadataService.extractMetadataToRdf(new FileInputStream(new File("./src/main/resources/static/rdf")), "./src/main/resources/static/extracted_rdf.xml");
 
-        metadataService.uploadResenjeMetadata("./src/main/resources/static/extracted_rdf.xml", "/graph/metadata/p1"); //MISTAKE
+        metadataService.uploadResenjeMetadata("./src/main/resources/static/extracted_rdf.xml", "/graph/metadata/p1"); 
     }
 
     private Resenje makeResenjeFromDto(ResponseToPendingRequestDto dto){

@@ -64,7 +64,7 @@ export class PatentService {
     let body = {
       brojPrijave: broj,
       obrazlozenje: "",
-      imeSluzbenika: this.tokenUtilService.getUserFromToken(),
+      imeSluzbenika: "Nevena Simic", // this.tokenUtilService.getUserFromToken(),
       prihvacena: true
     };
 
@@ -77,7 +77,7 @@ export class PatentService {
     let body = {
       brojPrijave: broj,
       obrazlozenje: obrazlozenje,
-      imeSluzbenika: this.tokenUtilService.getUserFromToken(),
+      imeSluzbenika: "Nevena Simic", //this.tokenUtilService.getUserFromToken(),
       prihvacena: false
     };
 
