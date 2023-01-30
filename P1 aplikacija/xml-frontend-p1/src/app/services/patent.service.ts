@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as JsonToXML from "js2xmlparser";
+import { TokenUtilService } from './token-util.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class PatentService {
 
   private apiURL: String = "http://localhost:8083/api";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private tokenUtilService: TokenUtilService) { }
 
 
   submitRequest(request: any){
@@ -63,8 +64,8 @@ export class PatentService {
     let body = {
       brojPrijave: broj,
       obrazlozenje: "",
-      imeSluzbenika: "Marko",
-      prezimeSluzbenika: "Rokvic"
+      imeSluzbenika: this.tokenUtilService.getUserFromToken(),
+      prihvacena: true
     };
 
     let xmlZahtev = JsonToXML.parse("responseToPendingRequestDto", body);
@@ -76,8 +77,8 @@ export class PatentService {
     let body = {
       brojPrijave: broj,
       obrazlozenje: obrazlozenje,
-      imeSluzbenika: "Marko",
-      prezimeSluzbenika: "Rokvic"
+      imeSluzbenika: this.tokenUtilService.getUserFromToken(),
+      prihvacena: false
     };
 
     let xmlZahtev = JsonToXML.parse("responseToPendingRequestDto", body);

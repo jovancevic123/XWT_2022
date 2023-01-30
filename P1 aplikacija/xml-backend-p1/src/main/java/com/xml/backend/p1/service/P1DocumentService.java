@@ -96,8 +96,10 @@ public class P1DocumentService {
         Punomoc punomoc = new Punomoc(punomocLice, tipPunomocnika);
 
         List<RanijaPrijava> ranijePrijave = new ArrayList<>();
-        for(RanijaPrijavaDto rp : dto.getRanijePrijave()){
-            ranijePrijave.add(new RanijaPrijava(rp));
+        if(dto.getRanijePrijave() != null){
+            for(RanijaPrijavaDto rp : dto.getRanijePrijave()){
+                ranijePrijave.add(new RanijaPrijava(rp));
+            }
         }
 
         Zahtev zahtev = new Zahtev();
@@ -109,7 +111,7 @@ public class P1DocumentService {
         zahtev.setPronalazak(pronalazak);
         zahtev.setNacinDostavljanja(nacinDostavljanja);
         zahtev.setRanijePrijave(ranijePrijave);
-        zahtev.setBrojResenja("");
+//        zahtev.setBrojResenja("");
 
         JAXBContext context = JAXBContext.newInstance(Zahtev.class);
         Marshaller m = context.createMarshaller();
@@ -124,6 +126,7 @@ public class P1DocumentService {
             String xmlData = Files.readString(Paths.get(newFilePath));
             this.repository.save(zahtev.getPrijava().getBrojPrijave() + "", xmlData, "/db/patent/zahtevi");
             this.uploadZahtevMetadata(xmlData);
+            return;
         }
         throw new FormatNotValidException();
     }
@@ -215,7 +218,7 @@ public class P1DocumentService {
         this.metadataService.transformRDF(stringWriter.toString(), "./src/main/resources/xml/metadata.xsl", "./src/main/resources/static/rdf/");
         this.metadataService.extractMetadataToRdf(new FileInputStream(new File("./src/main/resources/static/rdf")), "./src/main/resources/static/extracted_rdf.xml");
         this.metadataService.updateBrojResenjaMetaInZahtev("./src/main/resources/static/extracted_rdf.xml", stringWriter.toString(), brojPrijave, brojResenja);
-//        this.metadataService.uploadZahtevMetadata("/graph/metadata/p1");
+        this.metadataService.uploadZahtevMetadata("/graph/metadata/p1");
     }
 
     private void uploadResenjeMetadata(String xmlData, String brojResenja) throws IOException {
@@ -225,7 +228,7 @@ public class P1DocumentService {
         metadataService.transformRDF(xmlData, xsltFIlePath, outputPath); // 1. xml u obliku string-a
         String resultMeta = metadataService.extractMetadataToRdf(new FileInputStream(new File("./src/main/resources/static/rdf")), "./src/main/resources/static/extracted_rdf.xml");
 
-        metadataService.uploadResenjeMetadata("./src/main/resources/static/extracted_rdf.xml", "/graph/metadata/p1/resenje");
+        metadataService.uploadResenjeMetadata("./src/main/resources/static/extracted_rdf.xml", "/graph/metadata/p1");
     }
 
     private void uploadZahtevMetadata(String xmlData) throws IOException {
@@ -235,7 +238,7 @@ public class P1DocumentService {
         metadataService.transformRDF(xmlData, xsltFIlePath, outputPath); // 1. xml u obliku string-a
         String resultMeta = metadataService.extractMetadataToRdf(new FileInputStream(new File("./src/main/resources/static/rdf")), "./src/main/resources/static/extracted_rdf.xml");
 
-        metadataService.uploadResenjeMetadata("./src/main/resources/static/extracted_rdf.xml", "/graph/metadata/p1/zahtev");
+        metadataService.uploadResenjeMetadata("./src/main/resources/static/extracted_rdf.xml", "/graph/metadata/p1"); //MISTAKE
     }
 
     private Resenje makeResenjeFromDto(ResponseToPendingRequestDto dto){
@@ -245,8 +248,8 @@ public class P1DocumentService {
         resenje.setBrojPrijave(dto.getBrojPrijave());
         resenje.setDatumOdgovora(LocalDate.now());
         resenje.setBrojResenja(Long.toString(brojResenja));
-        resenje.setImeSluzbenika(dto.getImeSluzbenika());
-        resenje.setPrezimeSluzbenika(dto.getPrezimeSluzbenika());
+        resenje.setImeSluzbenika(dto.getImeSluzbenika().split(" ")[0]);
+        resenje.setPrezimeSluzbenika(dto.getImeSluzbenika().split(" ")[1]);
 
         return resenje;
     }

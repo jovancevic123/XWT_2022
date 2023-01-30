@@ -54,6 +54,10 @@ export class SearchComponent implements OnInit{
   makeJsonListOutOfSearchResults(xmlString: string): any {
       let results = JSON.parse(this.tokenUtilService.xml2Json(xmlString)).searchResultsListDto.results;     
       
+      if(!results){
+        return [];
+      }
+      
       if(results.length){
         results = results;
       }

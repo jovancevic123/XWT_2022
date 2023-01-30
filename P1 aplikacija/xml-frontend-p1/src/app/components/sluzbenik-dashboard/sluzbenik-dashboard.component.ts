@@ -83,9 +83,14 @@ export class SluzbenikDashboardComponent {
   makeJsonListOutOfSearchResults(xmlString: string): any {
     let results = JSON.parse(this.tokenUtilService.xml2Json(xmlString)).searchResultsListDto.results;     
     
+    if(!results){
+      return [];
+    }
+
     if(results.length){
       results = results;
     }
+    
     results = [results];      
 
     if(results[0].length){

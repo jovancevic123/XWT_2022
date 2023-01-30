@@ -95,7 +95,7 @@ public class P1DocumentController {
         }
     }
 
-    @GetMapping(value="/rdf", consumes = "application/xml", produces = "application/xml")
+    @GetMapping(value="/rdf", produces = "application/xml")
     public ResponseEntity<?> getMetadataRDF(@RequestParam("brojPrijave") String brojPrijave){
         try{
             String rdfXml = this.service.getMetadataRDF(brojPrijave);
@@ -125,7 +125,7 @@ public class P1DocumentController {
         }
     }
 
-    @GetMapping(value="/report", consumes = "application/xml", produces = "application/xml")
+    @GetMapping(value="/report", produces = "application/xml")
     public ResponseEntity<?> generateReport(@RequestParam("start") String startDate, @RequestParam("end") String endDate){
         try{
             ByteArrayResource body = this.service.generateReport(startDate, endDate);

@@ -1,52 +1,23 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
-<<<<<<< HEAD
-  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/2">
-    <pred:broj_prijave xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2</pred:broj_prijave>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/43498129">
+    <pred:broj_prijave xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">43498129</pred:broj_prijave>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/2">
-    <pred:datum_prijema xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2022-11-25</pred:datum_prijema>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/2">
-    <pred:naziv_srb xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Naziv na srpskom je srb</pred:naziv_srb>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/2">
-    <pred:naziv_eng xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">English</pred:naziv_eng>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/2">
-    <pred:podnosilac_email xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">aktiva@gmail.com</pred:podnosilac_email>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/2">
-    <pred:pronalazac_email xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">jovancevicjovan5@gmail.com</pred:pronalazac_email>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/2">
-    <pred:punomoc_email xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">milanpanic@gmail.com</pred:punomoc_email>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/2">
-    <pred:broj_resenja xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1674243250677</pred:broj_resenja>
-=======
-  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/34998269">
-    <pred:broj_prijave xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">34998269</pred:broj_prijave>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/34998269">
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/43498129">
     <pred:datum_prijema xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2023-01-30</pred:datum_prijema>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/34998269">
-    <pred:naziv_srb xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">cekic</pred:naziv_srb>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/43498129">
+    <pred:naziv_srb xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">f</pred:naziv_srb>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/34998269">
-    <pred:naziv_eng xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">hammer</pred:naziv_eng>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/43498129">
+    <pred:naziv_eng xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">f</pred:naziv_eng>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/34998269">
-    <pred:podnosilac_email xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">jvoancevic@gmial.com</pred:podnosilac_email>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/43498129">
+    <pred:podnosilac_email xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">f</pred:podnosilac_email>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/34998269">
-    <pred:pronalazac_email xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">jvoancevic@gmial.com</pred:pronalazac_email>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/43498129">
+    <pred:pronalazac_email xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">v</pred:pronalazac_email>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/34998269">
-    <pred:punomoc_email xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">akitva@gmail.com</pred:punomoc_email>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/34998269">
-    <pred:broj_resenja xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"/>
->>>>>>> develop
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/43498129">
+    <pred:punomoc_email xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">f</pred:punomoc_email>
   </rdf:Description>
 </rdf:RDF>

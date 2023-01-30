@@ -16,5 +16,5 @@ public class ResponseToPendingRequestDto {
         private String brojPrijave;
         private String obrazlozenje;
         private String imeSluzbenika;
-        private String prezimeSluzbenika;
+        private boolean prihvacena;
 }

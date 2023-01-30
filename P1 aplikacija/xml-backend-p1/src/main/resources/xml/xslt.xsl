@@ -154,6 +154,9 @@
                         <tr>
                             <td rowspan="2" class="tdfill">
                                 Ime i prezime/Poslovno ime:
+                                <i class="ins"><xsl:value-of select="zahtev/podnosilac/lice/poslovno_ime"/></i> &#160;
+                                <i class="ins"><xsl:value-of select="zahtev/podnosilac/lice/ime"/></i> &#160;
+                                <i class="ins"><xsl:value-of select="zahtev/podnosilac/lice/prezime"/></i> &#160;
                                 <p class="opis">(prezime/poslovno ime upisati velikim slovima)</p>
                             </td>
                             <td rowspan="2" class="tdfill">Ulica i broj, poštanski broj, mesto i država:<br/><br/>
@@ -170,7 +173,7 @@
                         </tr>
                         <tr>
                             <td class="tdfill"> Broj faksa: <br/>
-                                <i class="ins"><xsl:value-of  select="zahtev/podnosilac/lice/kontakt/faks"/></i>
+                                <i class="ins"><xsl:value-of  select="zahtev/podnosilac/lice/kontakt/fax"/></i>
                             </td>
                         </tr>
                         <tr>
@@ -197,6 +200,9 @@
                         <tr>
                             <td rowspan="3" class="tdfill">
                                 Ime i prezime/Poslovno ime:
+                                <i class="ins"><xsl:value-of select="zahtev/pronalazac/lice/poslovno_ime"/></i> &#160;
+                                <i class="ins"><xsl:value-of select="zahtev/pronalazac/lice/ime"/></i> &#160;
+                                <i class="ins"><xsl:value-of select="zahtev/pronalazac/lice/prezime"/></i> &#160;
                                 <p class="opis">(prezime/poslovno ime upisati velikim slovima)</p>
                             </td>
                             <td rowspan="3" class="tdfill">Ulica i broj, poštanski broj, mesto i država:<br/><br/>
@@ -212,7 +218,7 @@
                         </tr>
                         <tr>
                             <td class="tdfill"> Broj faksa: <br/>
-                                <i class="ins"><xsl:value-of  select="zahtev/pronalazac/lice/kontakt/faks"/></i>
+                                <i class="ins"><xsl:value-of  select="zahtev/pronalazac/lice/kontakt/fax"/></i>
                             </td>
                         </tr>
                         <tr>
@@ -241,6 +247,9 @@
                         <tr>
                             <td rowspan="2" class="tdfill">
                                 Ime i prezime/Poslovno ime:
+                                <i class="ins"><xsl:value-of select="zahtev/punomoc/lice/poslovno_ime"/></i> &#160;
+                                <i class="ins"><xsl:value-of select="zahtev/punomoc/lice/ime"/></i> &#160;
+                                <i class="ins"><xsl:value-of select="zahtev/punomoc/lice/prezime"/></i> &#160;
                                 <p class="opis">(prezime/poslovno ime upisati velikim slovima)</p>
                             </td>
                             <td rowspan="2" class="tdfill">Ulica i broj, poštanski broj, mesto i država:<br/><br/>

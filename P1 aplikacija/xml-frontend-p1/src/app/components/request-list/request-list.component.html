@@ -55,14 +55,14 @@
     <ng-container matColumnDef="odobravanje" *ngIf="!isUser">
       <th mat-header-cell *matHeaderCellDef> Odobravanje zahteva </th>
       <td mat-cell *matCellDef="let element;let i = index">
-        <button mat-button color="primary" (click)="odobri(element.brojPrijave, i)">Odobri</button>
+        <button mat-button color="primary" (click)="odobri(element.brojPrijave, i)" [disabled]="element.brojResenja != ''">Odobri</button>
       </td>
   </ng-container>
 
   <ng-container matColumnDef="odbijanje" *ngIf="!isUser">
       <th mat-header-cell *matHeaderCellDef> Odbijanje zahteva </th>
       <td mat-cell *matCellDef="let element;let i = index">
-        <button mat-button color="primary" (click)="openDialog(element.brojPrijave, i)" color="warn">Odbij</button>
+        <button mat-button color="primary" (click)="openDialog(element.brojPrijave, i)" color="warn" [disabled]="element.brojResenja != ''">Odbij</button>
       </td>
   </ng-container>
 
