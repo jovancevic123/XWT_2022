@@ -38,12 +38,8 @@ public class XmlBackendP1Application {
 
 		SpringApplication.run(com.xml.backend.p1.XmlBackendP1Application.class, args);
 
-
-
-
-
-
-//		String xmlData = Files.readString(Paths.get("./src/main/resources/xml/P-1-generated.xml"));
+//		ExistDao dao = new ExistDao();
+//		dao.getDocumentsThatAreReferencedIn("1", "/db/patent/zahtevi");
 
 		// TACKA 2
 
@@ -56,6 +52,7 @@ public class XmlBackendP1Application {
 
 		// TACKA 3
 
+//		String xmlData = Files.readString(Paths.get("./src/main/resources/xml/P-1-generated.xml"));
 //		String xsltFIlePath = "./src/main/resources/xml/metadata.xsl";
 //		String outputPath = "./src/main/resources/static/rdf/";
 //		MetadataService service = new MetadataService(new ExistDao());
@@ -64,7 +61,7 @@ public class XmlBackendP1Application {
 //		String resultMeta = service.extractMetadataToRdf(new FileInputStream(new File("./src/main/resources/static/rdf")), "./src/main/resources/static/extracted_rdf.xml");
 //
 //		service.uploadZahtevMetadata("/graph/metadata/p1");
-//
+
 
 
 		// TACKA 4

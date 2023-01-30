@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { AdvancedSearchMeta } from 'src/app/model/AdvancedSearchMeta';
 import { SearchResult } from 'src/app/model/PendingRequest';
-import { SearchService } from 'src/app/services/search.service';
 import { TokenUtilService } from 'src/app/services/token-util.service';
+import { PatentService } from 'src/app/services/patent.service';
 
 export interface Tile {
   color: string;
@@ -11,10 +10,24 @@ export interface Tile {
   text: string;
 }
 
-const ELEMENT_DATA: SearchResult[] = [
-  { brojPrijave: "123678", nazivPodnosioca: 'Jovan', nazivPatenta: "TV" }
+export interface DialogResenjeData {
+  brojResenja: string,
+  imeSluzbenika: string,
+  prezimeSluzbenika: string,
+  datumOdgovora: string,
+  prihvacena: string,
+  razlog: string;
+}
 
-];
+export interface DialogReferenceData{
+  referencirani: SearchResult[],
+  referencirajuci: SearchResult[]
+}
+
+// const ELEMENT_DATA: SearchResult[] = [
+//   { brojPrijave: "2", nazivPodnosioca: 'Jovan', nazivPatenta: "TV" }
+
+// ];
 
 @Component({
   selector: 'app-sluzbenik-dashboard',
@@ -23,18 +36,17 @@ const ELEMENT_DATA: SearchResult[] = [
 })
 export class SluzbenikDashboardComponent {
 
-  protected vrstaPretrage: number = 2;
-  basicSearchInput: string = "";
-  advancedSearchInput: AdvancedSearchMeta[] = [];
-  searchResults: SearchResult[];
   patentLink: string;
   currentPage: number = 0;
   otherPageName: string = "Izveštaj";
+  startingList: SearchResult[] = [];
+  isLoading = true;
 
-  constructor(private searchService: SearchService, private tokenUtilService: TokenUtilService){}
+  constructor(private tokenUtilService: TokenUtilService, private patentService: PatentService){}
   
   ngOnInit(){
-    this.searchResults = ELEMENT_DATA;
+    this.getPendingRequests();
+    
     let role: string | null = this.tokenUtilService.getRoleFromToken();        
   
     if(role === "KORISNIK"){
@@ -51,21 +63,16 @@ export class SluzbenikDashboardComponent {
     {text: 'Four', cols: 2, rows: 1, color: '#DDBDF1'},
   ];
 
-  onVrstaPretrageChanged(vrstaPretrage: number){
-      this.advancedSearchInput = [];
-      this.basicSearchInput = "";
-
-      if(vrstaPretrage === 1){
-          this.vrstaPretrage = 1;
-      }else{
-          this.vrstaPretrage = 2;
-      } 
+  logout(){
+    localStorage.clear();
+    window.location.href="http://localhost:4205/login";
   }
 
-  basicSearch(){    
-    this.searchService.basicSearch(this.basicSearchInput).subscribe({
-      next: res => {
-          console.log(res);  
+  getPendingRequests(){
+    this.patentService.getPendingRequests().subscribe({
+      next: res => {    
+          this.startingList = this.makeJsonListOutOfSearchResults(res);    
+          this.isLoading = false;     
       },
       error: error => {
           console.error(error);
@@ -73,38 +80,31 @@ export class SluzbenikDashboardComponent {
     });
   }
 
-  advancedSearch(){
-      this.searchService.advancedSearch(this.advancedSearchInput).subscribe({
-        next: res => {
-            console.log(res);  
-        },
-        error: error => {
-            console.error(error);
-        }
-      });
-  }
-
-  onDeleteAdvancedSeachInput(index: number){
-    this.advancedSearchInput.splice(index, 1);
-  }
-
-  onNewUslov(){
-    let newRow = {
-      meta: "",
-      value: "",
-      operator: ""
-    };
+  makeJsonListOutOfSearchResults(xmlString: string): any {
+    let results = JSON.parse(this.tokenUtilService.xml2Json(xmlString)).searchResultsListDto.results;     
     
-    this.advancedSearchInput.push(newRow);
-  }
+    if(results.length){
+      results = results;
+    }
+    results = [results];      
 
-  logout(){
-    localStorage.clear();
-    window.location.href="http://localhost:4205/login";
-  }
+    if(results[0].length){
+      for(let s of results[0]){
+          if(typeof(s.brojResenja) !== 'string'){
+            s.brojResenja = "";
+          }
+      }
+      return results[0];
+    }else if(typeof(results[0].brojResenja) !== 'string'){
+        results[0].brojResenja = "";
+    }
+    
+    return results;
+}
 
   changePage(){
       this.currentPage = 1 - this.currentPage;
       this.otherPageName = this.currentPage == 0 ? "Izveštaj" : "Zahtevi";
   }
+
 }

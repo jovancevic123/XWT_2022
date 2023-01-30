@@ -57,8 +57,8 @@ public class P1DocumentService {
         return this.repository.findById(resourceId + ".xml", "/db/patent/zahtevi");
     }
 
-    public XMLResource findResenjeById(String resourceId) throws XMLDBException {
-        return this.repository.findById(resourceId, "/db/patent/resenja");
+    public Resenje findResenjeById(String resourceId) throws XMLDBException, JAXBException {
+        return this.repository.findUnmarshalledResenjeById(resourceId);
     }
 
     public void addPatent(RequestDto dto) throws Exception {
@@ -163,8 +163,7 @@ public class P1DocumentService {
     }
 
     public List<SearchResultsDto> getPendingRequests() {
-        List<String> pendingRequests = this.metadataService.getPendingRequests("./data/sparql/pendingRequests.rq");
-        return new ArrayList<>();
+        return this.metadataService.getPendingRequests("./data/sparql/pendingRequests.rq");
     }
 
     public void approveRequest(ResponseToPendingRequestDto dto) throws Exception {
@@ -199,7 +198,7 @@ public class P1DocumentService {
     }
 
     private void updateBrojResenjaInZahtev(String brojPrijave, String brojResenja) throws Exception {
-        XMLResource res = this.repository.findById(brojPrijave + ".xml", "/db/patent/");
+        XMLResource res = this.repository.findById(brojPrijave + ".xml", "/db/patent/zahtevi");
         JAXBContext context = JAXBContext.newInstance(Zahtev.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
         XMLStreamReader reader = XMLInputFactory.newInstance().createXMLStreamReader(new StringReader((String) res.getContent()));
@@ -212,6 +211,11 @@ public class P1DocumentService {
         m.marshal(zahtev, stringWriter);
 
         this.repository.save(brojPrijave, stringWriter.toString(), "/db/patent/zahtevi");
+
+        this.metadataService.transformRDF(stringWriter.toString(), "./src/main/resources/xml/metadata.xsl", "./src/main/resources/static/rdf/");
+        this.metadataService.extractMetadataToRdf(new FileInputStream(new File("./src/main/resources/static/rdf")), "./src/main/resources/static/extracted_rdf.xml");
+        this.metadataService.updateBrojResenjaMetaInZahtev("./src/main/resources/static/extracted_rdf.xml", stringWriter.toString(), brojPrijave, brojResenja);
+//        this.metadataService.uploadZahtevMetadata("/graph/metadata/p1");
     }
 
     private void uploadResenjeMetadata(String xmlData, String brojResenja) throws IOException {
@@ -278,7 +282,7 @@ public class P1DocumentService {
         addTableHeader(table);
 
         addRows(table, "Broj podnetih zahteva:", brojPodnetihPrijava);
-        addRows(table, "Broj prihvaćenih zahteva:", acceptedCounter);
+        addRows(table, "Broj prihvacenih zahteva:", acceptedCounter);
         addRows(table, "Broj odbijenih zahteva:", rejectedCounter);
 
         Paragraph paragraph1 = new Paragraph(chunk);
@@ -327,6 +331,10 @@ public class P1DocumentService {
 
     public List<SearchResultsDto> basicSearch(String text) throws JAXBException, XMLDBException {
         return this.metadataService.basicSearch(text, "./data/sparql/basicSearch.rq");
+    }
+
+    public List<SearchResultsDto> getUsersRequests(String email) throws JAXBException, XMLDBException {
+        return this.metadataService.getUsersRequests(email, "./data/sparql/userRequests.rq");
     }
 
     public List<SearchResultsDto> advancedSearch(AdvancedSearchListDto list) throws JAXBException, XMLDBException {

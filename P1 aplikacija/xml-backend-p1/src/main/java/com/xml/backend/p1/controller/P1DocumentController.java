@@ -1,7 +1,9 @@
 package com.xml.backend.p1.controller;
 
 import com.xml.backend.p1.dto.*;
+import com.xml.backend.p1.model.Resenje;
 import com.xml.backend.p1.model.Zahtev;
+import com.xml.backend.p1.service.ExistService;
 import com.xml.backend.p1.service.P1DocumentService;
 import org.exist.util.StringInputSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,17 +15,18 @@ import org.springframework.web.bind.annotation.*;
 import org.xmldb.api.base.XMLDBException;;import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-import java.util.List;
 
 @RestController
 @RequestMapping("/p1")
 public class P1DocumentController {
 
     private P1DocumentService service;
+    private ExistService existService;
 
     @Autowired
-    public P1DocumentController(P1DocumentService service){
+    public P1DocumentController(P1DocumentService service, ExistService existService){
         this.service = service;
+        this.existService = existService;
     }
 
     @GetMapping
@@ -52,10 +55,10 @@ public class P1DocumentController {
         return ResponseEntity.ok("Bravo");
     }
 
-    @GetMapping(value="/get-pending-requests")
+    @GetMapping(value="/get-pending-requests", produces = "application/xml")
     public ResponseEntity<?> getPendingRequests(){
         try{
-            List<SearchResultsDto> requestDtos = this.service.getPendingRequests();
+            SearchResultsListDto requestDtos = new SearchResultsListDto(this.service.getPendingRequests());
             return ResponseEntity.ok(requestDtos);
         }catch(Exception ex){
             return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
@@ -95,14 +98,14 @@ public class P1DocumentController {
     @GetMapping(value="/rdf", consumes = "application/xml", produces = "application/xml")
     public ResponseEntity<?> getMetadataRDF(@RequestParam("brojPrijave") String brojPrijave){
         try{
-            String json = this.service.getMetadataRDF(brojPrijave);
-            return ResponseEntity.ok(json);
+            String rdfXml = this.service.getMetadataRDF(brojPrijave);
+            return ResponseEntity.ok(rdfXml);
         }catch(Exception ex){
             return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
-    @PostMapping(value="/approve-request", consumes = "application/xml", produces = "application/xml")
+    @PostMapping(value="/approve-request", produces = "application/xml")
     public ResponseEntity<?> approveRequest(@RequestBody ResponseToPendingRequestDto dto){
         try{
             this.service.approveRequest(dto);
@@ -112,7 +115,7 @@ public class P1DocumentController {
         }
     }
 
-    @PostMapping(value="/reject-request", consumes = "application/xml", produces = "application/xml")
+    @PostMapping(value="/reject-request", produces = "application/xml")
     public ResponseEntity<?> rejectRequest(@RequestBody ResponseToPendingRequestDto dto){
         try{
             this.service.rejectRequest(dto);
@@ -132,21 +135,61 @@ public class P1DocumentController {
         }
     }
 
-    @GetMapping(value="/basic-search")
+    @GetMapping(value="/basic-search", produces = "application/xml")
     public ResponseEntity<?> basicSearch(@RequestParam("textToSearch") String text){
         try{
-            List<SearchResultsDto> results = this.service.basicSearch(text);
-            return ResponseEntity.ok(results);
+            SearchResultsListDto requestDtos = new SearchResultsListDto(this.service.basicSearch(text));
+            return ResponseEntity.ok(requestDtos);
         }catch(Exception ex){
             return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
-    @PostMapping(value="/advanced-search", consumes = "application/xml", produces = "application/xml")
+    @GetMapping(value="/user-requests", produces = "application/xml")
+    public ResponseEntity<?> getUsersRequests(@RequestParam("email") String email){
+        try{
+            SearchResultsListDto requestDtos = new SearchResultsListDto(this.service.getUsersRequests(email));
+            return ResponseEntity.ok(requestDtos);
+        }catch(Exception ex){
+            return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping(value="/advanced-search", produces = "application/xml")
     public ResponseEntity<?> advancedSearch(@RequestBody AdvancedSearchListDto dto){
         try{
-            List<SearchResultsDto> results = this.service.advancedSearch(dto);
-            return ResponseEntity.ok(results);
+            SearchResultsListDto requestDtos = new SearchResultsListDto(this.service.advancedSearch(dto));
+            return ResponseEntity.ok(requestDtos);
+        }catch(Exception ex){
+            return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping(value="/documents-that-reference", produces = "application/xml")
+    public ResponseEntity<?> documentsThatReferences(@RequestParam("documentId") String documentId){
+        try{
+            SearchResultsListDto requestDtos = new SearchResultsListDto(this.existService.documentsThatReferences(documentId));
+            return ResponseEntity.ok(requestDtos);
+        }catch(Exception ex){
+            return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping(value="/documents-are-referenced", produces = "application/xml")
+    public ResponseEntity<?> documentsThatAreReferenced(@RequestParam("documentId") String documentId){
+        try{
+            SearchResultsListDto requestDtos = new SearchResultsListDto(this.existService.documentsThatReferencedIn(documentId));
+            return ResponseEntity.ok(requestDtos);
+        }catch(Exception ex){
+            return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping(value="/get-resenje", produces = "application/xml")
+    public ResponseEntity<?> getResenjeById(@RequestParam("documentId") String documentId){
+        try{
+            Resenje r = this.service.findResenjeById(documentId);
+            return ResponseEntity.ok(r);
         }catch(Exception ex){
             return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
         }

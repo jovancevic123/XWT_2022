@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<<<<<<< HEAD
+<zahtev xmlns="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <prijava>
+        <broj_prijave>2</broj_prijave>
+        <datum_prijema>2022-11-25</datum_prijema>
+        <priznati_datum_podnosenja>2022-11-26</priznati_datum_podnosenja>
+=======
 <zahtev xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.ftn.uns.ac.rs/xwt">
     <prijava>
         <broj_prijave>34998269</broj_prijave>
         <datum_prijema>2023-01-30</datum_prijema>
+>>>>>>> develop
         <vrsta_prijave>dopunska</vrsta_prijave>
+        <broj_prvobitne_prijave>0</broj_prvobitne_prijave>
     </prijava>
     <zavod>
         <naziv>Zavod za intelektualnu svojinu</naziv>
@@ -16,12 +25,21 @@
         </adresa>
     </zavod>
     <pronalazak>
+<<<<<<< HEAD
+        <naziv_pronalaska_srb>Naziv na srpskom je srb</naziv_pronalaska_srb>
+        <naziv_pronalaska_eng>English</naziv_pronalaska_eng>
+    </pronalazak>
+    <podnosilac pronalazac="false">
+        <drzavljanstvo>srpsko</drzavljanstvo>
+        <lice xsi:type="TPravnoLice" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+=======
         <naziv_pronalaska_srb>cekic</naziv_pronalaska_srb>
         <naziv_pronalaska_eng>hammer</naziv_pronalaska_eng>
     </pronalazak>
     <podnosilac pronalazac="true">
         <drzavljanstvo>Srpsko</drzavljanstvo>
         <lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TFizickoLice">
+>>>>>>> develop
             <adresa>
                 <ulica>Atar</ulica>
                 <broj>3</broj>
@@ -39,7 +57,11 @@
         </lice>
     </podnosilac>
     <pronalazac naveden_u_prijavi="true">
+<<<<<<< HEAD
+        <lice xsi:type="TFizickoLice" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+=======
         <lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TFizickoLice">
+>>>>>>> develop
             <adresa>
                 <ulica>Atar</ulica>
                 <broj>3</broj>
@@ -58,7 +80,11 @@
     </pronalazac>
     <punomoc>
         <tip>punomocnik_za_zastupanje</tip>
+<<<<<<< HEAD
+        <lice xsi:type="TFizickoLice" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+=======
         <lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TPravnoLice">
+>>>>>>> develop
             <adresa>
                 <ulica>PA PAVLA</ulica>
                 <broj>123</broj>
@@ -82,5 +108,9 @@
         </ranija_prijava>
     </ranije_prijave>
     <nacin_dostavljanja>elektronska_forma</nacin_dostavljanja>
+<<<<<<< HEAD
+    <broj_resenja>1674243250677</broj_resenja>
+=======
     <broj_resenja></broj_resenja>
+>>>>>>> develop
 </zahtev>

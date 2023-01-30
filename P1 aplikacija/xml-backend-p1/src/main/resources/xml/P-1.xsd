@@ -56,7 +56,7 @@
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:element>
-                <xs:element name="broj_resenja" type="xs:string" />
+                <xs:element minOccurs="0" name="broj_resenja" type="xs:string" />
                 <xs:element minOccurs="0" name="adresa_dostave" type="TAdresa"/>
             </xs:sequence>
         </xs:complexType>

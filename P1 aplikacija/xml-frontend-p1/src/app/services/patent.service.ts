@@ -42,7 +42,7 @@ export class PatentService {
   }
 
   getPendingRequests(){
-    return this.http.get(this.apiURL + '/p1/get-pending-requests', {headers: new HttpHeaders().set('Content-Type', 'application/xml'), responseType:'text'})
+    return this.http.get(this.apiURL + '/p1/get-pending-requests', {headers: new HttpHeaders().set('Content-Type', 'application/xml'), responseType:'text'});
   }
 
   getRequestHTML(broj: string){
@@ -114,6 +114,27 @@ export class PatentService {
     queryParams = queryParams.append("brojPrijave", broj);
 
     return this.http.get(this.apiURL + '/p1/json', { params: queryParams, responseType: 'blob'});
+  }
+
+  dobaviReferencirane(brojPrijave: string){
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("documentId", brojPrijave);
+
+    return this.http.get(this.apiURL + '/p1/documents-are-referenced', { params: queryParams, responseType: 'text'});
+  }
+
+  dobaviReferencirajuce(brojPrijave: string){
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("documentId", brojPrijave);
+
+    return this.http.get(this.apiURL + '/p1/documents-that-reference', { params: queryParams, responseType: 'text'});
+  }
+
+  getUserRequests(email: string){
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("email", email);
+
+    return this.http.get(this.apiURL + '/p1/user-requests', {params: queryParams, headers: new HttpHeaders().set('Content-Type', 'application/xml'), responseType:'text'});
   }
 
 }
