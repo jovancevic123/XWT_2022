@@ -32,10 +32,14 @@ public class P1DocumentController {
     }
 
     @PostMapping(value="/add-request", consumes = "application/xml", produces = "application/xml")
-    public ResponseEntity<?> submitRequest(@RequestBody RequestDto dto) throws JAXBException {
-        System.out.println(dto);
-        this.service.addPatent(dto);
-        return ResponseEntity.ok("Bravo");
+    public ResponseEntity<?> submitRequest(@RequestBody RequestDto dto) throws Exception {
+        try{
+            this.service.addPatent(dto);
+            return ResponseEntity.ok("Success");
+        }
+        catch(Exception ex){
+            return new ResponseEntity<String>("Xml document is not valid!", HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PostMapping(value="/add-request-xonomy", consumes = "application/xml", produces = "application/xml")
@@ -48,7 +52,7 @@ public class P1DocumentController {
         return ResponseEntity.ok("Bravo");
     }
 
-    @GetMapping("/get-pending-requests")
+    @GetMapping(value="/get-pending-requests")
     public ResponseEntity<?> getPendingRequests(){
         try{
             List<SearchResultsDto> requestDtos = this.service.getPendingRequests();
@@ -88,7 +92,7 @@ public class P1DocumentController {
         }
     }
 
-    @GetMapping("/rdf")
+    @GetMapping(value="/rdf", consumes = "application/xml", produces = "application/xml")
     public ResponseEntity<?> getMetadataRDF(@RequestParam("brojPrijave") String brojPrijave){
         try{
             String json = this.service.getMetadataRDF(brojPrijave);
@@ -98,7 +102,7 @@ public class P1DocumentController {
         }
     }
 
-    @PostMapping("/approve-request")
+    @PostMapping(value="/approve-request", consumes = "application/xml", produces = "application/xml")
     public ResponseEntity<?> approveRequest(@RequestBody ResponseToPendingRequestDto dto){
         try{
             this.service.approveRequest(dto);
@@ -108,7 +112,7 @@ public class P1DocumentController {
         }
     }
 
-    @PostMapping("/reject-request")
+    @PostMapping(value="/reject-request", consumes = "application/xml", produces = "application/xml")
     public ResponseEntity<?> rejectRequest(@RequestBody ResponseToPendingRequestDto dto){
         try{
             this.service.rejectRequest(dto);
@@ -118,7 +122,7 @@ public class P1DocumentController {
         }
     }
 
-    @GetMapping("/report")
+    @GetMapping(value="/report", consumes = "application/xml", produces = "application/xml")
     public ResponseEntity<?> generateReport(@RequestParam("start") String startDate, @RequestParam("end") String endDate){
         try{
             ByteArrayResource body = this.service.generateReport(startDate, endDate);
@@ -128,7 +132,7 @@ public class P1DocumentController {
         }
     }
 
-    @GetMapping("/basic-search")
+    @GetMapping(value="/basic-search")
     public ResponseEntity<?> basicSearch(@RequestParam("textToSearch") String text){
         try{
             List<SearchResultsDto> results = this.service.basicSearch(text);
@@ -138,7 +142,7 @@ public class P1DocumentController {
         }
     }
 
-    @PostMapping("/advanced-search")
+    @PostMapping(value="/advanced-search", consumes = "application/xml", produces = "application/xml")
     public ResponseEntity<?> advancedSearch(@RequestBody AdvancedSearchListDto dto){
         try{
             List<SearchResultsDto> results = this.service.advancedSearch(dto);

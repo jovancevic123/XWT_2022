@@ -18,7 +18,7 @@ import java.time.LocalDate;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
         "brojPrijave", "datumPrijema", "priznatiDatumPodnosenja", "vrstaPrijave",
-        "brojPrvobitnePrijave", "datumPodnosenjaPrvobitnePrijave"
+//        "brojPrvobitnePrijave", "datumPodnosenjaPrvobitnePrijave"
 })
 public class Prijava {
 
@@ -29,17 +29,24 @@ public class Prijava {
     @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
     private LocalDate datumPrijema;
 
-    @XmlElement(name="priznati_datum_podnosenja", required = true)
+    @XmlElement(name="priznati_datum_podnosenja", required = false)
     @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
     private LocalDate priznatiDatumPodnosenja;
 
     @XmlElement(name="vrsta_prijave", required = true)
     private String vrstaPrijave;
 
-    @XmlElement(name="broj_prvobitne_prijave", required = true)
-    private int brojPrvobitnePrijave;
+//    @XmlElement(name="broj_prvobitne_prijave", required = false)
+//    private int brojPrvobitnePrijave;
+//
+//    @XmlElement(name="datum_podnosenja_prvobitne_prijave", required = false)
+//    @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
+//    private LocalDate datumPodnosenjaPrvobitnePrijave;
 
-    @XmlElement(name="datum_podnosenja_prvobitne_prijave", required = true)
-    @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
-    private LocalDate datumPodnosenjaPrvobitnePrijave;
+//    public Prijava(int brojPrijave, LocalDate datumPrijema, LocalDate priznatiDatumPodnosenja, String vrstaPrijave) {
+//        this.brojPrijave = brojPrijave;
+//        this.datumPrijema = datumPrijema;
+//        this.priznatiDatumPodnosenja = priznatiDatumPodnosenja;
+//        this.vrstaPrijave = vrstaPrijave;
+//    }
 }

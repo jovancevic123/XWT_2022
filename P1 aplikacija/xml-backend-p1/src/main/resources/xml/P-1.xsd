@@ -65,7 +65,7 @@
         <xs:sequence>
             <xs:element name="broj_prijave" type="xs:positiveInteger"/>
             <xs:element name="datum_prijema" type="xs:date"/>
-            <xs:element name="priznati_datum_podnosenja" type="xs:date"/>
+            <xs:element minOccurs="0" name="priznati_datum_podnosenja" type="xs:date"/>
             <xs:element name="vrsta_prijave">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">

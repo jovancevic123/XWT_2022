@@ -30,6 +30,7 @@ export class FormPageComponent implements OnInit{
     elektronskaDostavaChecked: boolean = true;
     tipPunomocnikaZaZastupanjeChecked: boolean = true;
     dopunskaPrijavaChecked: boolean = true;
+    podnosilacJePronalazacChecked: boolean = false;
     ranijePrijave: RanijaPrijava[] = [];
 
     constructor(private patentService: PatentService){}
@@ -92,12 +93,24 @@ export class FormPageComponent implements OnInit{
     
     onSubmit(){
       let body = this.form.getRawValue();
+
+      if(this.podnosilacJePronalazacChecked){
+        body = {...body,
+          "imePronalazac": body.imePodnosilac,
+          "prezimePronalazac": body.prezimePodnosilac,
+          "drzavljanstvoPronalazac": body.drzavljanstvoPodnosilac,
+          "poslovnoImePronalazac": body.poslovnoImePodnosilac,
+          "tipLicaPronalazac": body.tipLicaPodnosilac,
+          "navedenUPrijavi": true
+        }
+      }
+
       body = {...body,
          "podnosilacAdresa": this.podnosilacAdresa,
-         "pronalazacAdresa": this.pronalazacAdresa,
+         "pronalazacAdresa": this.podnosilacJePronalazacChecked ? this.podnosilacAdresa : this.pronalazacAdresa,
          "punomocAdresa": this.punomocAdresa,
          "podnosilacKontakt": this.podnosilacKontakt,
-         "pronalazacKontakt": this.pronalazacKontakt,
+         "pronalazacKontakt": this.podnosilacJePronalazacChecked ? this.podnosilacKontakt : this.pronalazacKontakt,
          "punomocKontakt": this.punomocKontakt,
          "ranijePrijave": this.ranijePrijave,
         }
@@ -173,5 +186,11 @@ export class FormPageComponent implements OnInit{
 
     onPunomocKontakt(event: Kontakt){
       this.punomocKontakt = event;
+    }
+
+    onPodnosilacPronalazacChange(){
+      console.log(this.podnosilacJePronalazacChecked);
+      
+      this.podnosilacJePronalazacChecked = !this.podnosilacJePronalazacChecked;
     }
 }

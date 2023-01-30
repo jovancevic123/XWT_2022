@@ -6,12 +6,12 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.xml.backend.p1.dao.ExistDao;
 import com.xml.backend.p1.dto.*;
+import com.xml.backend.p1.exceptions.FormatNotValidException;
 import com.xml.backend.p1.exceptions.QueryFormatException;
 import com.xml.backend.p1.model.*;
 import com.xml.backend.p1.transformers.XmlTransformer;
 import lombok.Getter;
 import lombok.Setter;
-import org.exist.util.StringInputSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.stereotype.Service;
@@ -42,13 +42,15 @@ public class P1DocumentService {
     private final ExistDao repository;
     private final XmlTransformer transformer;
     private final MetadataService metadataService;
+    private final ExistService existService;
 
     @Autowired
     public P1DocumentService(ExistDao repository, XmlTransformer transformer,
-                             MetadataService resenjeMetadataService) {
+                             MetadataService resenjeMetadataService, ExistService existService) {
         this.repository = repository;
         this.transformer = transformer;
         this.metadataService = resenjeMetadataService;
+        this.existService = existService;
     }
 
     public XMLResource findZahtevById(String resourceId) throws XMLDBException {
@@ -59,9 +61,9 @@ public class P1DocumentService {
         return this.repository.findById(resourceId, "/db/patent/resenja");
     }
 
-    public void addPatent(RequestDto dto) throws JAXBException {
+    public void addPatent(RequestDto dto) throws Exception {
         int brojPrijave = (int) new Date().getTime();
-        Prijava prijava = new Prijava(brojPrijave, LocalDate.now(), null, dto.getVrstaPrijave() == 1 ? "dopunska" : "izdvojena" , 0, null);
+        Prijava prijava = new Prijava(brojPrijave, LocalDate.now(), null, dto.getVrstaPrijave() == 1 ? "dopunska" : "izdvojena");
         Zavod zavod = new Zavod();
         Pronalazak pronalazak = new Pronalazak(dto.getNazivSRB(), dto.getNazivENG());
 
@@ -81,9 +83,9 @@ public class P1DocumentService {
 
         Lice punomocLice = null;
         if(dto.getTipLicaPunomoc() == 1){
-            podnosilacLice = new FizickoLice(new Adresa(dto.getPunomocAdresa()), new Kontakt(dto.getPunomocKontakt()), dto.getImePunomoc(), dto.getPrezimePunomoc());
+            punomocLice = new FizickoLice(new Adresa(dto.getPunomocAdresa()), new Kontakt(dto.getPunomocKontakt()), dto.getImePunomoc(), dto.getPrezimePunomoc());
         }else{
-            podnosilacLice = new PravnoLice(new Adresa(dto.getPunomocAdresa()), new Kontakt(dto.getPunomocKontakt()), dto.getPoslovnoImePunomoc());
+            punomocLice = new PravnoLice(new Adresa(dto.getPunomocAdresa()), new Kontakt(dto.getPunomocKontakt()), dto.getPoslovnoImePunomoc());
         }
 
         String nacinDostavljanja = dto.getElektronskaDostava() == 1 ? "elektronska_forma" : "papirna_forma";
@@ -98,7 +100,6 @@ public class P1DocumentService {
             ranijePrijave.add(new RanijaPrijava(rp));
         }
 
-
         Zahtev zahtev = new Zahtev();
         zahtev.setPodnosilac(podnosilac);
         zahtev.setPronalazac(pronalazac);
@@ -108,11 +109,23 @@ public class P1DocumentService {
         zahtev.setPronalazak(pronalazak);
         zahtev.setNacinDostavljanja(nacinDostavljanja);
         zahtev.setRanijePrijave(ranijePrijave);
+        zahtev.setBrojResenja("");
 
         JAXBContext context = JAXBContext.newInstance(Zahtev.class);
         Marshaller m = context.createMarshaller();
         m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-		m.marshal(zahtev, System.out);
+//		m.marshal(zahtev, System.out);
+
+        String newFilePath = "src/main/resources/xml/generated/" + zahtev.getPrijava().getBrojPrijave() + ".xml";
+        File file = new File(newFilePath);
+        m.marshal(zahtev, file);
+        boolean valid = this.existService.validateXMLSchema("src/main/resources/xml/P-1.xsd", newFilePath);
+        if(valid){
+            String xmlData = Files.readString(Paths.get(newFilePath));
+            this.repository.save(zahtev.getPrijava().getBrojPrijave() + "", xmlData, "/db/patent/zahtevi");
+            this.uploadZahtevMetadata(xmlData);
+        }
+        throw new FormatNotValidException();
     }
 
     public void addPatentXonomy(Zahtev zahtev) throws JAXBException {
@@ -209,6 +222,16 @@ public class P1DocumentService {
         String resultMeta = metadataService.extractMetadataToRdf(new FileInputStream(new File("./src/main/resources/static/rdf")), "./src/main/resources/static/extracted_rdf.xml");
 
         metadataService.uploadResenjeMetadata("./src/main/resources/static/extracted_rdf.xml", "/graph/metadata/p1/resenje");
+    }
+
+    private void uploadZahtevMetadata(String xmlData) throws IOException {
+        String xsltFIlePath = "./src/main/resources/xml/metadata.xsl";
+        String outputPath = "./src/main/resources/static/rdf/";
+
+        metadataService.transformRDF(xmlData, xsltFIlePath, outputPath); // 1. xml u obliku string-a
+        String resultMeta = metadataService.extractMetadataToRdf(new FileInputStream(new File("./src/main/resources/static/rdf")), "./src/main/resources/static/extracted_rdf.xml");
+
+        metadataService.uploadResenjeMetadata("./src/main/resources/static/extracted_rdf.xml", "/graph/metadata/p1/zahtev");
     }
 
     private Resenje makeResenjeFromDto(ResponseToPendingRequestDto dto){
