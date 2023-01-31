@@ -16,6 +16,6 @@ export class ZigService {
     const xmlZahtev = JsonToXML.parse("requestDto", request);
     console.log(xmlZahtev);
 
-    return this.http.post(this.apiURL + '/p1/add-request', xmlZahtev, {headers: new HttpHeaders().set('Content-Type', 'application/xml'), responseType:'text'});
+    return this.http.post(this.apiURL + '/zh1/add-request', xmlZahtev, {headers: new HttpHeaders().set('Content-Type', 'application/xml'), responseType:'text'});
   }
 }

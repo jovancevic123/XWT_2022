@@ -18,16 +18,16 @@
             <div class="podnosilac-name">
                 <mat-form-field [style.width.%]="40" *ngIf="fizikoLicePodnosilacChecked">
                     <mat-label>Ime:</mat-label>
-                    <input matInput formControlName="imePodnosilac">
+                    <input matInput formControlName="imePodnosioca">
                 </mat-form-field>
                 <mat-form-field [style.width.%]="40" *ngIf="fizikoLicePodnosilacChecked">
                     <mat-label>Prezime:</mat-label>
-                    <input matInput formControlName="prezimePodnosilac">
+                    <input matInput formControlName="prezimePodnosioca">
                 </mat-form-field>
     
                 <mat-form-field [style.width.%]="50" *ngIf="!fizikoLicePodnosilacChecked">
                     <mat-label>Poslovno ime:</mat-label>
-                    <input matInput formControlName="poslovnoImePodnosilac">
+                    <input matInput formControlName="poslovnoImePodnosioca">
                 </mat-form-field>
             </div>
         </div>        
@@ -57,16 +57,16 @@
             <div class="podnosilac-name">
                 <mat-form-field [style.width.%]="40" *ngIf="fizikoLicePunomocnikChecked">
                     <mat-label>Ime:</mat-label>
-                    <input matInput formControlName="imePunomocnik">
+                    <input matInput formControlName="imePunomocnika">
                 </mat-form-field>
                 <mat-form-field [style.width.%]="40" *ngIf="fizikoLicePunomocnikChecked">
                     <mat-label>Prezime:</mat-label>
-                    <input matInput formControlName="prezimePunomocnik">
+                    <input matInput formControlName="prezimePunomocnika">
                 </mat-form-field>
     
                 <mat-form-field [style.width.%]="50" *ngIf="!fizikoLicePunomocnikChecked">
                     <mat-label>Poslovno ime:</mat-label>
-                    <input matInput formControlName="poslovnoImePunomocnik">
+                    <input matInput formControlName="poslovnoImePunomocnika">
                 </mat-form-field>
             </div>
         </div>        
@@ -137,7 +137,7 @@
 
         <mat-form-field [style.width.%]="50">
             <mat-label>Transliteracija</mat-label>
-            <input matInput formControlName="transliteracija" required="false">
+            <input matInput formControlName="transliteracijaZnaka" required="false">
         </mat-form-field>
 
         <h2>7. Prevod znaka*</h2>
@@ -179,7 +179,7 @@
         </mat-form-field>
         
         <div>
-            <button mat-raised-button style="margin-bottom: 3rem; margin-top: 3rem;" (click)="calculateTotalPrice()">Prikazi ukupan iznos taksi</button>
+            <button type="button" mat-raised-button style="margin-bottom: 3rem; margin-top: 3rem;" (click)="calculateTotalPrice()">Prikazi ukupan iznos taksi</button>
         </div>
 
         <div>
