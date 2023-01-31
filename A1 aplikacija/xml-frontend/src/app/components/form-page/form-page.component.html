@@ -1,0 +1,170 @@
+<div class="container">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-container">
+
+        <div class="header">
+            <h1>Zahtev za unošenje u evidenciju i deponovanje autorskih dela</h1>
+        </div>
+
+        <h2>1. Podnosilac prijave:</h2>
+        <div class="podnosilac">
+            <div class="podnosilac-first-line">
+                <mat-radio-group
+                    aria-labelledby="example-radio-group-label"
+                    class="example-radio-group" formControlName="tipLicaPodnosilac">
+                    <mat-radio-button class="example-radio-button" value="fizicko" >Fizičko lice</mat-radio-button>
+                    <mat-radio-button class="example-radio-button" value="pravno">Pravno lice</mat-radio-button>
+                </mat-radio-group>
+                <mat-checkbox formControlName="podnosilacJeAutor" >Podnosilac je i autor</mat-checkbox>
+            </div>
+            <div class="podnosilac-name">
+                <mat-form-field [style.width.%]="50" *ngIf="tipLicaPodnosilac === 'fizicko'">
+                    <mat-label>Ime:</mat-label>
+                    <input matInput formControlName="imePodnosilac" name="name">
+                </mat-form-field>
+                <mat-form-field [style.width.%]="50" *ngIf="tipLicaPodnosilac === 'fizicko'">
+                    <mat-label>Prezime:</mat-label>
+                    <input matInput formControlName="prezimePodnosilac" name="lastName">
+                </mat-form-field>
+                <mat-form-field [style.width.%]="50" *ngIf="tipLicaPodnosilac === 'fizicko'">
+                    <mat-label>Državljanstvo:</mat-label>
+                    <input matInput formControlName="drzavljanstvoPodnosilac" name="citizenship">
+                </mat-form-field>
+    
+                <mat-form-field [style.width.%]="50" *ngIf="tipLicaPodnosilac === 'pravno'">
+                    <mat-label>Poslovno ime:</mat-label>
+                    <input matInput formControlName="poslovnoImePodnosilac" name="businessName">
+                </mat-form-field>
+                <mat-form-field [style.width.%]="50" *ngIf="tipLicaPodnosilac === 'pravno'">
+                    <mat-label>Sediste:</mat-label>
+                    <input matInput formControlName="poslovnoImePodnosilac" name="place">
+                </mat-form-field>
+            </div>
+        </div>        
+        <div class="address-contact">
+            <span class="flex-grow-ac" *ngIf="tipLicaPodnosilac === 'fizicko'">
+                <h3>Adresa:</h3>
+                <app-address (formRawValue)="onPodnosilacAdresa($event)"></app-address>
+            </span>
+            <span class="flex-grow-ac">
+                <h3>Kontakt:</h3>
+                <app-contact (formRawValue)="onPodnosilacKontakt($event)"></app-contact>
+            </span>
+        </div>
+        <h2>2. Punomoćnik:</h2>
+        <div class="autorsko-delo">
+            <mat-checkbox formControlName="prijavaPrekoPunomocnika" class="punomocnikCheckbox">Prijava preko punomoćnika</mat-checkbox>
+        </div>
+        <div class="podnosilac" *ngIf="prijavaPrekoPunomocnika">
+            <div class="podnosilac-first-line">
+                <mat-radio-group
+                    aria-labelledby="example-radio-group-label"
+                    class="example-radio-group" formControlName="tipLicaPunomocnik">
+                    <mat-radio-button class="example-radio-button" value="fizicko" >Fizičko lice</mat-radio-button>
+                    <mat-radio-button class="example-radio-button" value="pravno">Pravno lice</mat-radio-button>
+                </mat-radio-group>
+            </div>
+            <div class="podnosilac-name">
+                <mat-form-field [style.width.%]="50" *ngIf="tipLicaPunomocnik === 'fizicko'">
+                    <mat-label>Ime:</mat-label>
+                    <input matInput formControlName="imePunomocnik"  name="name">
+                </mat-form-field>
+                <mat-form-field [style.width.%]="50" *ngIf="tipLicaPunomocnik === 'fizicko'">
+                    <mat-label>Prezime:</mat-label>
+                    <input matInput formControlName="prezimePunomocnik"  name="lastName">
+                </mat-form-field>
+                <mat-form-field [style.width.%]="50" *ngIf="tipLicaPunomocnik === 'fizicko'">
+                    <mat-label>Državljanstvo:</mat-label>
+                    <input matInput formControlName="drzavljanstvoPunomocnik"  name="citizenship">
+                </mat-form-field>
+    
+                <mat-form-field [style.width.%]="50" *ngIf="tipLicaPunomocnik === 'pravno'">
+                    <mat-label>Poslovno ime:</mat-label>
+                    <input matInput formControlName="poslovnoImePunomocnik"  name="businessName">
+                </mat-form-field>
+                <mat-form-field [style.width.%]="50" *ngIf="tipLicaPunomocnik === 'pravno'">
+                    <mat-label>Sediste:</mat-label>
+                    <input matInput formControlName="sedistePunomocnik"  name="place">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="address-contact" *ngIf="prijavaPrekoPunomocnika">
+            <span class="flex-grow-ac" *ngIf="tipLicaPunomocnik === 'fizicko'">
+                <h3>Adresa:</h3>
+                <app-address (formRawValue)="onPunomocnikAdresa($event)"></app-address>
+            </span>
+            <span class="flex-grow-ac">
+                <h3>Kontakt:</h3>
+                <app-contact (formRawValue)="onPunomocnikKontakt($event)"></app-contact>
+            </span>
+        </div>
+        
+        <h2>3. Autorsko delo:</h2>
+        <div class="autorsko-delo">
+            <mat-form-field [style.width.%]="50" >
+                <mat-label>Naslov ili alternativni naslov:</mat-label>
+                <input matInput formControlName="naslovAutorskogDela"  name="title">
+            </mat-form-field>
+            <mat-checkbox formControlName="jeDeloPrerade" class="punomocnikCheckbox" >Delo prerade</mat-checkbox>
+        </div>
+        <div *ngIf="jeDeloPrerade" class="delo-prerade">
+            <h2>Delo Prerade</h2>
+            <mat-form-field [style.width.%]="50" [style.margin-left.px]="0">
+                <mat-label>Naslov dela prerade:</mat-label>
+                <input matInput formControlName="naslovDelaPrerade"  name="title">
+            </mat-form-field>
+            <span class="flex-grow-ac">
+                <h3 class="autori">Autori dela prerade:</h3>
+                <div *ngFor="let autori of autoriDelaPreradeNum; let i = index" >
+                    <h3>Autor {{i+1}}:</h3>
+                    <app-autor (formRawValue)="onAutorDelaPrerade($event, i)"></app-autor>
+                </div>
+                <button mat-fab aria-label="Example icon button with a home icon" type="button" class="logout-button" (click)="addAutorPrerade()">
+                    <mat-icon>add</mat-icon>
+                </button>
+                <button mat-fab aria-label="Example icon button with a home icon" type="button" class="logout-button" (click)="removeAutorPrerade()" [disabled]="autoriDelaPreradeNum.length <= 1">
+                    <mat-icon>remove</mat-icon>
+                </button>
+            </span>
+        </div>
+        <div class="autorsko-delo">
+            <mat-form-field [style.width.%]="50" [style.margin-left.px]="0" [style.margin-top.px]="50">
+                <mat-label>Vrsta autorskog dela (književno delo, muzičko delo, računarski program...):</mat-label>
+                <input matInput formControlName="vrstaDela"  name="typeOfWork">
+            </mat-form-field>
+            <mat-form-field [style.width.%]="50" [style.margin-left.px]="0">
+                <mat-label>Forma zapisa autorskog dela (štampani tekst, optički disk...):</mat-label>
+                <input matInput formControlName="formaDela" name="formOfWork">
+            </mat-form-field>
+        </div>
+        <span class="flex-grow-ac" *ngIf="!podnosilacJeAutor">
+            <h3 class="autori">Autori dela:</h3>
+            <mat-checkbox formControlName="anonimanAutor" class="punomocnikCheckbox" >Anoniman autor</mat-checkbox>
+            <div *ngIf="!anonimanAutor">
+                <div *ngFor="let autori of autoriDelaNum; let i = index" >
+                    <h3>Autor {{i+1}}:</h3>
+                    <app-autor (formRawValue)="onAutorDela($event, i)"></app-autor>
+                </div>
+                <button mat-fab aria-label="Example icon button with a home icon" type="button" class="logout-button" (click)="addAutor()">
+                    <mat-icon>add</mat-icon>
+                </button>
+                <button mat-fab aria-label="Example icon button with a home icon" type="button" class="logout-button" (click)="removeAutor()" [disabled]="autoriDelaNum.length <= 1">
+                    <mat-icon>remove</mat-icon>
+                </button>
+            </div>
+        </span>
+
+        
+        <div class="autorsko-delo">
+            <mat-checkbox formControlName="uRadnomOdnosu" class="punomocnikCheckbox" >Stvoreno u radnom odnosu</mat-checkbox>
+            <mat-form-field [style.width.%]="50" [style.margin-left.px]="0" [style.margin-top.px]="50">
+                <mat-label>Način korišćenja autorskog dela:</mat-label>
+                <input matInput formControlName="nacinKoriscenjaDela" name="usingWork">
+            </mat-form-field>
+        </div>
+
+        <div class="submit-button-div">
+            <button mat-raised-button type="submit" >Pošalji zahtev</button>
+        </div>   
+      
+    </form>
+</div>
