@@ -1,0 +1,9 @@
+.container{
+    display: flex;
+    flex-direction: row;
+}
+
+input{
+    padding: 20px;
+    margin-top: 2rem;
+}
