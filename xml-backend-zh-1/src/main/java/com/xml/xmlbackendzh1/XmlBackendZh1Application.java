@@ -33,24 +33,24 @@ import java.util.List;
 public class XmlBackendZh1Application {
 
 	public static void main(String[] args) throws JAXBException {
-//		SpringApplication.run(XmlBackendZh1Application.class, args);
+		SpringApplication.run(XmlBackendZh1Application.class, args);
 //		XmlBackendZh1Application xmlBackendZh1Application = new XmlBackendZh1Application();
 //		xmlBackendZh1Application.kt2Demo();
-
-		String xmlData = null;
-		try {
-			xmlData = new String(Files.readAllBytes(Paths.get("./src/main/resources/xml/ZH-1-generated.xml")), StandardCharsets.UTF_8);
-
-			ZH1DocumentDAO dao = new ZH1DocumentDAO();
-			dao.save("787", xmlData);
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		String xsltFIlePath = "./src/main/resources/xml/metadata.xsl";
-//		String outputPath = "./src/main/resources/static/rdf/";
+//
+//		String xmlData = null;
+//		try {
+//			xmlData = new String(Files.readAllBytes(Paths.get("./src/main/resources/xml/ZH-1-generated.xml")), StandardCharsets.UTF_8);
+//
+//			ZH1DocumentDAO dao = new ZH1DocumentDAO();
+//			dao.save("787", xmlData);
+//
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		String xsltFIlePath = "./src/main/resources/xml/metadata.xsl";
+////		String outputPath = "./src/main/resources/static/rdf/";
 	}
 
 	public void kt2Demo() throws JAXBException {

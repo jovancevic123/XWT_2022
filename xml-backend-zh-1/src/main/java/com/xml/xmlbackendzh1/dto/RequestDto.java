@@ -41,10 +41,5 @@ public class RequestDto {
     private boolean znakNijeCirLat;
 
     private List<TaksaDto> placeneTakse;
-
-    private PriloziDto priloziDto;
-
-    private String brojPrijaveZiga;
-    private String datumPodnosenja;
 }
 

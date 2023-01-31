@@ -16,12 +16,12 @@ export class FormPageComponent implements OnInit {
   form: FormGroup;
 
   //adrese
-  podnosilacAdresa: Adresa;
-  punomocnikAdresa: Adresa;
+  adresaPodnosioca: Adresa;
+  adresaPunomocnika: Adresa;
 
   //kontakti
-  podnosilacKontakt: Kontakt;
-  punomocnikKontakt: Kontakt;
+  kontaktPodnosioca: Kontakt;
+  kontaktPunomocnika: Kontakt;
 
   fizikoLicePodnosilacChecked: boolean = true;
   fizikoLicePunomocnikChecked: boolean = true;
@@ -37,7 +37,7 @@ export class FormPageComponent implements OnInit {
 
   boje: string[] = [];
 
-  nicanskiBrojevi: number[] = [];
+  brojeviKlasa: number[] = [];
 
   osnovnaTaksaIznos: number;
   taksaZaGrafickoResenjeIznos: number;
@@ -49,15 +49,15 @@ export class FormPageComponent implements OnInit {
     this.form = new FormGroup({
       
       //podnosilac
-      imePodnosilac: new FormControl('',[Validators.required]),
-      prezimePodnosilac: new FormControl('',[Validators.required]),
-      poslovnoImePodnosilac: new FormControl('',[Validators.required]),
+      imePodnosioca: new FormControl('',[Validators.required]),
+      prezimePodnosioca: new FormControl('',[Validators.required]),
+      poslovnoImePodnosioca: new FormControl('',[Validators.required]),
       tipLicaPodnosilac: new FormControl('1',[Validators.required]),
 
       //punomoc
-      imePunomocnik: new FormControl('',[Validators.required]),
-      prezimePunomocnik: new FormControl('',[Validators.required]),
-      poslovnoImePunomocnik: new FormControl('',[Validators.required]),
+      imePunomocnika: new FormControl('',[Validators.required]),
+      prezimePunomocnika: new FormControl('',[Validators.required]),
+      poslovnoImePunomocnika: new FormControl('',[Validators.required]),
       tipLicaPunomocnik: new FormControl('1',[Validators.required]),
 
       //zig
@@ -65,17 +65,16 @@ export class FormPageComponent implements OnInit {
 
       //znak
       tipZnaka: new FormControl('',[Validators.required]),
-      transliteracija: new FormControl('',[Validators.required]),
+      transliteracijaZnaka: new FormControl('',[Validators.required]),
       boje: new FormControl([], [Validators.required, Validators.minLength(1)]),
       prevodZnaka: new FormControl('',[Validators.required]), 
       opisZnaka: new FormControl('',[Validators.required]), 
-      nicanskiBrojevi: new FormControl([], [Validators.required, Validators.minLength(0)]),
-      zatrazenoPravo: new FormControl('',[Validators.required]),
+      izgledZnaka: new FormControl('',[Validators.required]), 
 
       //ostalo
-      osnovnaTaksaIznos: new FormControl('',[Validators.required]),
-      taksaZaGrafickoResenjeIznos: new FormControl('',[Validators.required]),
-      ukupanIznosTaksi: new FormControl('',[Validators.required]),
+      brojeviKlasa: new FormControl([], [Validators.required, Validators.minLength(0)]),
+      zatrazenoPravo: new FormControl('',[Validators.required]),
+      placeneTakse: new FormControl([], [Validators.required, Validators.minLength(1)]),
     });
   }
 
@@ -91,27 +90,24 @@ export class FormPageComponent implements OnInit {
     let body = this.form.getRawValue();
 
     body = {...body,
-       "podnosilacAdresa": this.podnosilacAdresa,
-       "punomocnikAdresa": this.punomocnikAdresa,
-       "podnosilacKontakt": this.podnosilacKontakt,
-       "punomocnikKontakt": this.punomocnikKontakt,
+       "adresaPodnosioca": this.adresaPodnosioca,
+       "adresaPunomocnika": this.adresaPunomocnika,
+       "kontaktPodnosioca": this.kontaktPodnosioca,
+       "kontaktPunomocnika": this.kontaktPunomocnika,
        "tipZiga": this.tipZiga,
        "tipZnaka": this.tipZnaka,
        "boje": this.boje,
-       "nicanskiBrojevi": this.nicanskiBrojevi,
-       "osnovnaTaksaIznos": this.osnovnaTaksaIznos,
-       "taksaZaGrafickoResenjeIznos": this.taksaZaGrafickoResenjeIznos,
-       "ukupanIznosTaksi": this.osnovnaTaksaIznos + this.taksaZaGrafickoResenjeIznos
+       "brojeviKlasa": this.brojeviKlasa,
+       "placeneTakse": {"osnovna_taksa": this.osnovnaTaksaIznos.toString(), "taksa_za_graficko_resenje": this.taksaZaGrafickoResenjeIznos.toString()}
       }
-    // this.zigService.submitRequest(body).subscribe({
-    //     next: data => {
-    //       console.log(data);           
-    //     },
-    //     error: error => {
-    //       console.error(error);
-    //       }
-    //   });
-    console.log(body);
+    this.zigService.submitRequest(body).subscribe({
+        next: data => {
+          console.log(data);           
+        },
+        error: error => {
+          console.error(error);
+          }
+      });
   }
 
   onTipLicaChangedPodnosilac(){
@@ -124,21 +120,21 @@ export class FormPageComponent implements OnInit {
 
   // Address events
   onPodnosilacAdresa(event: Adresa){
-    this.podnosilacAdresa = event;
+    this.adresaPodnosioca = event;
   }
 
   onPunomocnikAdresa(event: Adresa){
-    this.punomocnikAdresa = event;
+    this.adresaPunomocnika = event;
   }
 
   //Contact events
   onPodnosilacKontakt(event: Kontakt){
-    this.podnosilacKontakt = event;
+    this.kontaktPodnosioca = event;
     
   }
 
   onPunomocKontakt(event: Kontakt){
-    this.punomocnikKontakt = event;
+    this.kontaktPunomocnika = event;
   }
 
   onFileSelected(event: Event, fileInput: HTMLInputElement){
@@ -201,11 +197,11 @@ export class FormPageComponent implements OnInit {
 
   updateSelectedNumbers(number: number, isChecked: boolean) {
     if (isChecked) {
-      this.nicanskiBrojevi.push(number);
+      this.brojeviKlasa.push(number);
     } else {
-      this.nicanskiBrojevi = this.nicanskiBrojevi.filter(n => n !== number);
+      this.brojeviKlasa = this.brojeviKlasa.filter(n => n !== number);
     }
-    console.log(this.nicanskiBrojevi);
+    console.log(this.brojeviKlasa);
   }
 
   calculateTotalPrice()

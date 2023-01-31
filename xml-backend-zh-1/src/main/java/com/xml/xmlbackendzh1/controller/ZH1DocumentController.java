@@ -10,7 +10,7 @@ import org.xmldb.api.base.XMLDBException;
 import javax.xml.bind.JAXBException;
 
 @RestController
-@RequestMapping("/zp1")
+@RequestMapping("/zh1")
 public class ZH1DocumentController {
 
     private ZH1DocumentService service;
