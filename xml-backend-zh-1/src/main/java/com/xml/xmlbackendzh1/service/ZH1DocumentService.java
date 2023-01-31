@@ -35,7 +35,7 @@ public class ZH1DocumentService {
         this.repository.findById(resourceId);
     }
 
-    public void addZig(RequestDto dto) throws JAXBException {
+    public void addZahtevZig(RequestDto dto) throws JAXBException {
 
         Lice podnosilac;
         if(dto.getTipLicaPodnosilac() == 1){
@@ -61,9 +61,7 @@ public class ZH1DocumentService {
 
         Zig zig = new Zig();
         zig.setZnak(znak);
-        zig.setDatumPodnosenja(LocalDate.now());
         zig.setTipZiga(dto.getTipZiga());
-        zig.setBrojPrijaveZiga(Integer.parseInt(dto.getBrojPrijaveZiga()));
         zig.setZatrazenoPravo(dto.getZatrazenoPravo());
         zig.setBrojeviKlasaRobe(dto.getBrojeviKlasa());
 
@@ -71,16 +69,6 @@ public class ZH1DocumentService {
         for(TaksaDto taksaDto : dto.getPlaceneTakse()){
             placeneTakse.add(new Taksa(taksaDto));
         }
-
-        Prilozi prilozi = new Prilozi();
-        prilozi.setDokazOUplatiTakse(new Prilog(dto.getPriloziDto().getDokazOUplatiTakse()));
-        prilozi.setOpstiAkt(new Prilog(dto.getPriloziDto().getOpstiAkt()));
-        prilozi.setDokazOPravuPrvenstva(new Prilog(dto.getPriloziDto().getDokazOPravuPrvenstva()));
-        prilozi.setPunomocje(new Prilog(dto.getPriloziDto().getPunomocje()));
-        prilozi.setPrimerakZnaka(new Prilog(dto.getPriloziDto().getPrimerakZnaka()));
-        prilozi.setPunomocjeNaknadnoDostavljeno(new Prilog(dto.getPriloziDto().getPunomocjeNaknadnoDostavljeno()));
-        prilozi.setGeneralnoPpunomocje(new Prilog(dto.getPriloziDto().getGeneralnoPunomocje()));
-        prilozi.setSpisakRobeIUsluga(new Prilog(dto.getPriloziDto().getSpisakRobeIUsluga()));
 
         Zavod zavod = new Zavod();
 
@@ -90,7 +78,6 @@ public class ZH1DocumentService {
         zahtev.setZavod(zavod);
         zahtev.setZig(zig);
         zahtev.setPlaceneTakse(placeneTakse);
-        zahtev.setPrilozi(prilozi);
         zahtev.setNaziv("ZAHTEV ZA PRIZNANJE ZIGA");
 
         JAXBContext context = JAXBContext.newInstance(Zahtev.class);
