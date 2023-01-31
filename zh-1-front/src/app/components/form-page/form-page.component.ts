@@ -5,6 +5,7 @@ import { Kontakt } from 'src/app/model/Kontakt';
 import { ZigService } from 'src/app/services/zig.service';
 import { ENTER, COMMA } from "@angular/cdk/keycodes";
 import { MatChipEditedEvent, MatChipInputEvent } from '@angular/material/chips';
+import { PlacenaTaksa } from 'src/app/model/PlacenaTaksa';
 
 @Component({
   selector: 'app-form-page',
@@ -75,6 +76,8 @@ export class FormPageComponent implements OnInit {
       brojeviKlasa: new FormControl([], [Validators.required, Validators.minLength(0)]),
       zatrazenoPravo: new FormControl('',[Validators.required]),
       placeneTakse: new FormControl([], [Validators.required, Validators.minLength(1)]),
+      osnovnaTaksaIznos: new FormControl('',[Validators.required]),
+      taksaZaGrafickoResenjeIznos: new FormControl('',[Validators.required]),
     });
   }
 
@@ -98,7 +101,10 @@ export class FormPageComponent implements OnInit {
        "tipZnaka": this.tipZnaka,
        "boje": this.boje,
        "brojeviKlasa": this.brojeviKlasa,
-       "placeneTakse": {"osnovna_taksa": this.osnovnaTaksaIznos.toString(), "taksa_za_graficko_resenje": this.taksaZaGrafickoResenjeIznos.toString()}
+       "placeneTakse": [
+          new PlacenaTaksa("Osnovna taksa", this.form.getRawValue()["osnovnaTaksaIznos"]),
+          new PlacenaTaksa("Taksa za graficko resenje", this.form.getRawValue()["taksaZaGrafickoResenjeIznos"]),
+       ]
       }
     this.zigService.submitRequest(body).subscribe({
         next: data => {
@@ -206,6 +212,6 @@ export class FormPageComponent implements OnInit {
 
   calculateTotalPrice()
   {
-    this.ukupanIznosTaksi = this.osnovnaTaksaIznos + this.taksaZaGrafickoResenjeIznos;
+    this.ukupanIznosTaksi = this.form.getRawValue()["taksaZaGrafickoResenjeIznos"] + this.form.getRawValue()["osnovnaTaksaIznos"];
   }
 }

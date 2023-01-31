@@ -28,7 +28,7 @@ public class ZH1DocumentController {
     @PostMapping(value="/add-request", consumes = "application/xml", produces = "application/xml")
     public ResponseEntity<?> submitRequest(@RequestBody RequestDto dto) throws JAXBException {
         System.out.println(dto);
-        this.service.addZig(dto);
+        this.service.addZahtevZig(dto);
         return ResponseEntity.ok("Bravo");
     }
 }
