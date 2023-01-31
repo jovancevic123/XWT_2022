@@ -16,11 +16,11 @@
                 </mat-radio-group>
             </div>
             <div class="podnosilac-name">
-                <mat-form-field [style.width.%]="50" *ngIf="fizikoLicePodnosilacChecked">
+                <mat-form-field [style.width.%]="40" *ngIf="fizikoLicePodnosilacChecked">
                     <mat-label>Ime:</mat-label>
                     <input matInput formControlName="imePodnosilac">
                 </mat-form-field>
-                <mat-form-field [style.width.%]="50" *ngIf="fizikoLicePodnosilacChecked">
+                <mat-form-field [style.width.%]="40" *ngIf="fizikoLicePodnosilacChecked">
                     <mat-label>Prezime:</mat-label>
                     <input matInput formControlName="prezimePodnosilac">
                 </mat-form-field>
@@ -55,11 +55,11 @@
             <div class="podnosilac-first-line">
             </div>
             <div class="podnosilac-name">
-                <mat-form-field [style.width.%]="50" *ngIf="fizikoLicePunomocnikChecked">
+                <mat-form-field [style.width.%]="40" *ngIf="fizikoLicePunomocnikChecked">
                     <mat-label>Ime:</mat-label>
                     <input matInput formControlName="imePunomocnik">
                 </mat-form-field>
-                <mat-form-field [style.width.%]="50" *ngIf="fizikoLicePunomocnikChecked">
+                <mat-form-field [style.width.%]="40" *ngIf="fizikoLicePunomocnikChecked">
                     <mat-label>Prezime:</mat-label>
                     <input matInput formControlName="prezimePunomocnik">
                 </mat-form-field>
@@ -137,21 +137,21 @@
 
         <mat-form-field [style.width.%]="50">
             <mat-label>Transliteracija</mat-label>
-            <input matInput formControlName="transliteracija">
+            <input matInput formControlName="transliteracija" required="false">
         </mat-form-field>
 
         <h2>7. Prevod znaka*</h2>
 
         <mat-form-field [style.width.%]="50">
             <mat-label>Prevod znaka</mat-label>
-            <input matInput formControlName="prevodZnaka">
+            <input matInput formControlName="prevodZnaka" required="false">
         </mat-form-field>
 
         <h2>8. Opis znaka*</h2>
 
         <mat-form-field [style.width.%]="50">
             <mat-label>Opis znaka</mat-label>
-            <input matInput formControlName="opisZnaka">
+            <input matInput formControlName="opisZnaka" required="false">
         </mat-form-field>
 
         <h2>9. Zaokruziti brojeve klasa robe i usluga prema Nicanskoj klasifikaciji:</h2>
