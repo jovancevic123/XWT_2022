@@ -103,9 +103,13 @@ h3{
     background-color: #ffd740 !important;
 }
 
+mat-form-field{
+    margin-left: 3rem;
+    margin-right: 3rem;
+}
+
 input{
-    padding: 20px;
-    margin-top: 2rem;
+    
 }
 
 .vrsta-znaka{
