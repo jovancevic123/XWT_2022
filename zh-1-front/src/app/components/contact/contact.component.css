@@ -3,7 +3,10 @@
     flex-direction: row;
 }
 
+mat-form-field{
+    margin-left: 3rem;
+    margin-right: 3rem;
+}
+
 input{
-    padding: 20px;
-    margin-top: 2rem;
 }
