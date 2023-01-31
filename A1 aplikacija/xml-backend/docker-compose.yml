@@ -1,0 +1,46 @@
+version: '3.7'
+
+services:
+#  exist:
+#    image: existdb/existdb:release
+#    container_name: exist
+#    ports:
+#      - "8080:8080"
+#      - "8443:8443"
+#    networks:
+#      - www
+#    volumes:
+#      - type: volume
+#        source: data
+#        target: ${EXIST_HOME}/${EXIST_DATA_DIR}
+#      - type: volume
+#        source: config
+#        target: ${EXIST_HOME}/${EXIST_CONFIG_DIR}
+
+  fuseki:
+    image: zacanbot/fuseki
+    container_name: fusekiJena
+    ports:
+      - "3030:3030"
+    environment:
+      - ADMIN_PASSWORD=admin
+    volumes:
+      - ./data:/data/fuseki
+
+#volumes:
+#  data:
+#    driver: local
+#    name: exist-data
+#  config:
+#    driver: local
+#    name: exist-config
+#  fuseki:
+#    driver: local
+#    name: fuseki-data
+#
+#networks:
+#  www:
+#    name: www
+#    driver: bridge
+
+

@@ -1,0 +1,13 @@
+<div class="nav">
+    <a href="#" [routerLink]="['/user', {outlets: {'user-outlet': ['form']}}]">Servis za autorska dela</a>
+    <a href="#">Servis za patente</a>
+    <a href="#">Servis za žigove</a>
+    <!-- <a href="javascript:;" (click)="changePage()">{{otherPageName}}</a>
+    <a href="javascript:;" (click)="changePageTo2()">Pretraga</a> -->
+</div>
+
+<router-outlet name="user-outlet"></router-outlet>
+
+<button mat-fab aria-label="Example icon button with a home icon" class="logout-button" >
+    <mat-icon>logout</mat-icon>
+</button>

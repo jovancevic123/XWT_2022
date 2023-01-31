@@ -1,0 +1,26 @@
+<form [formGroup]="form" class="container">
+    <div class="podnosilac-name">
+        <mat-form-field [style.width.%]="50" >
+            <mat-label>Ime:</mat-label>
+            <input matInput formControlName="imeAutor" (change)="onChange()" name="name">
+        </mat-form-field>
+        <mat-form-field [style.width.%]="50">
+            <mat-label>Prezime:</mat-label>
+            <input matInput formControlName="prezimeAutor" (change)="onChange()" name="lastName">
+        </mat-form-field>
+        <mat-form-field [style.width.%]="50" >
+            <mat-label>Državljanstvo:</mat-label>
+            <input matInput formControlName="drzavljanstvoAutor" (change)="onChange()" name="citizenship">
+        </mat-form-field>
+    </div>
+    <div class="address-contact">
+        <span class="flex-grow-ac">
+            <h3>Adresa:</h3>
+            <app-address (formRawValue)="onAutorAdresa($event)"></app-address>
+        </span>
+        <span class="flex-grow-ac">
+            <h3>Kontakt:</h3>
+            <app-contact (formRawValue)="onAutorKontakt($event)"></app-contact>
+        </span>
+    </div>
+</form>
