@@ -13,7 +13,7 @@ import org.xmldb.api.modules.XMLResource;
 import javax.xml.transform.OutputKeys;
 import java.io.IOException;
 
-//@Repository
+@Repository
 public class A1DocumentDAO {
 
     private AuthenticationUtilities.ConnectionProperties connectionProperties;
@@ -22,7 +22,6 @@ public class A1DocumentDAO {
 
     public A1DocumentDAO() throws Exception {
         this.connectionProperties = AuthenticationUtilities.loadProperties();
-        this.collectionId = "/db/autorskoDelo";
 
         // initialize database driver
         System.out.println("[INFO] Loading driver class: " + connectionProperties.driver);
@@ -32,10 +31,25 @@ public class A1DocumentDAO {
         database.setProperty("create-database", "true");
 
         DatabaseManager.registerDatabase(database);
+    }
 
-        collection = getOrCreateCollection(collectionId, 0);
-//        collection = DatabaseManager.getCollection(connectionProperties.uri + collectionId);
+    public XMLResource findById(String resourceId, String collectionId) throws XMLDBException {
+        Collection collection = getOrCreateCollection(collectionId, 0);
         collection.setProperty(OutputKeys.INDENT, "yes");
+
+        XMLResource res = (XMLResource)collection.getResource(resourceId);
+
+        return res;
+    }
+
+    public void save(String documentId, String xmlData, String collectionId) throws Exception {
+        Collection collection = getOrCreateCollection(collectionId, 0);
+        collection.setProperty(OutputKeys.INDENT, "yes");
+
+        XMLResource res = (XMLResource) collection.createResource( documentId + ".xml", XMLResource.RESOURCE_TYPE);
+        res.setContent(xmlData);
+        System.out.println("[INFO] Storing the document: " + res.getId());
+        collection.storeResource(res);
     }
 
     public XMLResource findById(String resourceId) throws XMLDBException {

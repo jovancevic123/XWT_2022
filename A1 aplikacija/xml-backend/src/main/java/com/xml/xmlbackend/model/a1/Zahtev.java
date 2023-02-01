@@ -1,10 +1,19 @@
 package com.xml.xmlbackend.model.a1;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.xml.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
         "prijava", "podnosilac", "punomocnik", "autorskoDelo", "prilozi", "zavod"
@@ -17,20 +26,21 @@ public class Zahtev {
     @XmlElement(required = true)
     private Podnosilac podnosilac;
 
-    @XmlElement
+    @XmlElement(required = false)
     private Lice punomocnik;
 
     @XmlElement(name = "autorsko_delo",required = true)
     private AutorskoDelo autorskoDelo;
 
-    @XmlElementWrapper(name="prilozi", required=true)
+    @XmlElementWrapper(name="prilozi", required=false)
     @XmlElement(name="prilog", required=true)
     private List<Prilog> prilozi = new ArrayList<Prilog>();
 
     @XmlElement(required=true)
     private Zavod zavod;
 
-
+    @XmlElement(name="broj_resenja", required = false)
+    private String brojResenja;
 
     public Prijava getPrijava() {
         return prijava;

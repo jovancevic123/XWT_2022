@@ -98,12 +98,12 @@ public class RetrieveExample {
         service.transformRDF(xmlData, xsltFIlePath, outputPath);
         String resultMeta = service.extractMetadataToRdf(new FileInputStream(new File("./src/main/resources/static/rdf.xml")), "123");
         System.out.println(resultMeta);
-        service.uploadMetadata();
+        service.uploadMetadata("./src/main/resources/static/extracted_rdf.xml", "");
     }
 
     private static void transformToPdfAndHtml(String xmlData) throws IOException {
-        XmlTransformer.transformToPdf(xmlData);
-        XmlTransformer.transformToHtml(xmlData);
+//        XmlTransformer.transformToPdf(xmlData);
+//        XmlTransformer.transformToHtml(xmlData);
     }
 
 

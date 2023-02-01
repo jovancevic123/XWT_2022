@@ -23,6 +23,7 @@ export class AutorComponent {
       imeAutor: new FormControl('',[Validators.required]),
       prezimeAutor: new FormControl('',[Validators.required]),
       drzavljanstvoAutor: new FormControl('',[Validators.required]),
+      pseudonim:new FormControl(''),
     });
   }
   

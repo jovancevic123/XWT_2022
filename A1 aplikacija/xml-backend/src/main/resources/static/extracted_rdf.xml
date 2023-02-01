@@ -1,17 +1,14 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
   <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev">
-    <pred:broj_prijave xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">12</pred:broj_prijave>
+    <pred:broj_prijave xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">230878497</pred:broj_prijave>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev">
-    <pred:datum_podnosenja xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2022-12-15</pred:datum_podnosenja>
+    <pred:datum_podnosenja xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2023-02-01</pred:datum_podnosenja>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev">
-    <pred:podnosilac_email xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dd@gmail.com</pred:podnosilac_email>
+    <pred:podnosilac_email xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">sabadosmihal@gmail.com</pred:podnosilac_email>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev">
-    <pred:naslov_dela xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Nova knjiga</pred:naslov_dela>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev">
-    <pred:autor_email xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dd@gmail.com</pred:autor_email>
+    <pred:naslov_dela xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Novi Naslov</pred:naslov_dela>
   </rdf:Description>
 </rdf:RDF>

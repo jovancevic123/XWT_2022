@@ -12,6 +12,10 @@
             <mat-label>Državljanstvo:</mat-label>
             <input matInput formControlName="drzavljanstvoAutor" (change)="onChange()" name="citizenship">
         </mat-form-field>
+        <mat-form-field [style.width.%]="50" >
+            <mat-label>Pseudonim:</mat-label>
+            <input matInput formControlName="pseudonim" (change)="onChange()" name="alias">
+        </mat-form-field>
     </div>
     <div class="address-contact">
         <span class="flex-grow-ac">

@@ -135,11 +135,11 @@
                 <mat-label>Forma zapisa autorskog dela (štampani tekst, optički disk...):</mat-label>
                 <input matInput formControlName="formaDela" name="formOfWork">
             </mat-form-field>
+            <mat-checkbox formControlName="anonimanAutor" class="punomocnikCheckbox" >Anoniman autor</mat-checkbox>
         </div>
         <span class="flex-grow-ac" *ngIf="!podnosilacJeAutor">
-            <h3 class="autori">Autori dela:</h3>
-            <mat-checkbox formControlName="anonimanAutor" class="punomocnikCheckbox" >Anoniman autor</mat-checkbox>
-            <div *ngIf="!anonimanAutor">
+            <div *ngIf="!anonimanAutor" class="autoriDiv">
+                <h3 class="autori">Autori dela:</h3>
                 <div *ngFor="let autori of autoriDelaNum; let i = index" >
                     <h3>Autor {{i+1}}:</h3>
                     <app-autor (formRawValue)="onAutorDela($event, i)"></app-autor>

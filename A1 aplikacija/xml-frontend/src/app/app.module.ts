@@ -26,12 +26,15 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatGridListModule } from '@angular/material/grid-list';
-import {MatListModule} from '@angular/material/list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { AddressComponent } from './components/address/address.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { AutorComponent } from './components/autor/autor.component';
+import { SearchComponent } from './components/search/search.component';
+import { RequestListComponent } from './components/request-list/request-list.component';
+import { ConclusionDialogComponent } from './components/conclusion-dialog/conclusion-dialog.component';
+import { DialogComponent } from './components/dialog/dialog.component';
 
 
 @NgModule({
@@ -42,7 +45,11 @@ import { AutorComponent } from './components/autor/autor.component';
     SluzbenikDashboardComponent,
     AddressComponent,
     ContactComponent,
-    AutorComponent
+    AutorComponent,
+    SearchComponent,
+    RequestListComponent,
+    ConclusionDialogComponent,
+    DialogComponent
   ],
   imports: [
     HttpClientModule,
@@ -68,7 +75,12 @@ import { AutorComponent } from './components/autor/autor.component';
     MatNativeDateModule,
     MatGridListModule,
     TextFieldModule,
-    ToastrModule.forRoot({positionClass: 'toast-bottom-right', timeOut: 2000,}),
+    ToastrModule.forRoot({
+      timeOut: 2000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+      closeButton: true
+    }),
 
   ],
   providers: [],

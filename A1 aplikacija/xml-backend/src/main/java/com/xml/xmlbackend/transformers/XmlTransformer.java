@@ -6,6 +6,7 @@ import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.xml.xmlbackend.model.a1.Zahtev;
 import com.xml.xmlbackend.service.MetadataService;
+import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
@@ -22,8 +23,9 @@ import javax.xml.transform.stream.StreamSource;
 import java.io.*;
 import java.net.URL;
 
+@Service
 public class XmlTransformer {
-    private static Document convertStringToDocument(String xmlStr) {
+    private Document convertStringToDocument(String xmlStr) {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder;
         try
@@ -39,7 +41,7 @@ public class XmlTransformer {
 
 
 
-    public static StringWriter transform(final String xmlString) {
+    public StringWriter transform(final String xmlString) {
         try{
             ClassLoader classloader = XmlTransformer.class.getClassLoader();
             URL xsltURL = classloader.getResource("xml/xslt.xsl");
@@ -61,7 +63,7 @@ public class XmlTransformer {
 
 
 
-    public static void transformToPdf(final String xmlString) throws IOException {
+    public void transformToPdf(final String xmlString) throws IOException {
 
         StringWriter stringWriter = transform(xmlString);
 
@@ -71,7 +73,7 @@ public class XmlTransformer {
         HtmlConverter.convertToPdf(is, pdfDocument);
     }
 
-    public static void transformToHtml(final String xmlString) throws IOException {
+    public void transformToHtml(final String xmlString) throws IOException {
         StringWriter stringWriter = transform(xmlString);
 
         File file = new File("src/main/resources/xml/GeneratedHTML.html");

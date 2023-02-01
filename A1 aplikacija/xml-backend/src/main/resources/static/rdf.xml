@@ -1,85 +1,43 @@
-<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="xslt.xsl"?><zahtev xmlns:sh="https://schema.org/" xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:a1="http://www.ftn.uns.ac.rs/xwt" about="http://www.ftn.uns.ac.rs/xwt/zahtev" vocab="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" xsi:schemaLocation="http://www.ftn.uns.ac.rs/xwt A-1.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <prijava xmlns="http://www.ftn.uns.ac.rs/xwt">
-        <BrojPrijave xmlns="" datatype="xs:string" property="pred:broj_prijave">12</BrojPrijave>
-        <DatumPodnosenja xmlns="" datatype="xs:string" property="pred:datum_podnosenja">2022-12-15</DatumPodnosenja>
-    </prijava>
-    <podnosilac xmlns="http://www.ftn.uns.ac.rs/xwt" podnosilac_je_autor="true">
-        <lice xsi:type="TFizickoLice">
-            <kontakt>
-                <telefon>0628977742</telefon>
-                <PodnosilacEmail xmlns="" datatype="xs:string" property="pred:podnosilac_email">dd@gmail.com</PodnosilacEmail>
-            </kontakt>
-            <ime>Dragan</ime>
-            <prezime>Dragic</prezime>
-            <adresa>
-                <ulica>Bul. oslobođenja</ulica>
-                <broj>25</broj>
-                <postanski_broj>21211</postanski_broj>
-                <mesto>Novi Sad</mesto>
-                <drzava>Srbija</drzava>
-            </adresa>
-            <drzavljanstvo>Srpsko</drzavljanstvo>
-        </lice>
-    </podnosilac>
-    <autorsko_delo xmlns="http://www.ftn.uns.ac.rs/xwt">
-        <NaslovDela xmlns="" datatype="xs:string" property="pred:naslov_dela">Nova knjiga</NaslovDela>
-        <delo_prerade>
-            <naslov_dela_prerade>Stara knjiga</naslov_dela_prerade>
-            <autori>
-                <autor>
-                    <kontakt>
-                        <telefon>0632153945</telefon>
-                        <email>pera@gmail.com</email>
-                    </kontakt>
-                    <ime>Pera</ime>
-                    <prezime>Peric</prezime>
-                    <adresa>
-                        <ulica>Miše Dimitrijevića</ulica>
-                        <broj>54</broj>
-                        <postanski_broj>21000</postanski_broj>
-                        <mesto>Novi Sad</mesto>
-                        <drzava>Srbija</drzava>
-                    </adresa>
-                    <drzavljanstvo>Srpsko</drzavljanstvo>
-                </autor>
-            </autori>
-        </delo_prerade>
-        <vrsta_dela>književno delo</vrsta_dela>
-        <forma_zapisa_dela>štampani tekst</forma_zapisa_dela>
-        <stvoreno_u_radnom_odnosu>true</stvoreno_u_radnom_odnosu>
-        <nacin_koriscenja/>
-        <autori>
-            <autor>
-                <kontakt>
-                    <telefon>0628977742</telefon>
-                    <AutorEmail xmlns="" datatype="xs:string" property="pred:autor_email">dd@gmail.com</AutorEmail>
-                </kontakt>
-                <ime>Dragan</ime>
-                <prezime>Dragic</prezime>
-                <adresa>
-                    <ulica>Bul. oslobođenja</ulica>
-                    <broj>24</broj>
-                    <postanski_broj>21211</postanski_broj>
-                    <mesto>Novi Sad</mesto>
-                    <drzava>Srbija</drzava>
-                </adresa>
-                <drzavljanstvo>Srpsko</drzavljanstvo>
-                <pseudonim>Dragi</pseudonim>
-            </autor>
-        </autori>
-        <anoniman_autor>false</anoniman_autor>
-    </autorsko_delo>
-    <prilozi xmlns="http://www.ftn.uns.ac.rs/xwt">
-        <prilog src="Putanja do opisa" vrsta_priloga="opis autorskog dela"/>
-    </prilozi>
-    <zavod xmlns="http://www.ftn.uns.ac.rs/xwt">
-        <naziv>Zavod za intelektualnu svojinu</naziv>
-        <adresa>
-            <ulica>Kneginje Ljubice</ulica>
-            <broj>5</broj>
-            <postanski_broj>11000</postanski_broj>
-            <mesto>Beograd</mesto>
-            <drzava>Srbija</drzava>
-        </adresa>
-    </zavod>
+<?xml version="1.0" encoding="UTF-8"?><zahtev xmlns:sh="https://schema.org/" xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:a1="http://www.ftn.uns.ac.rs/xwt" about="http://www.ftn.uns.ac.rs/xwt/zahtev" vocab="http://www.ftn.uns.ac.rs/rdf/examples/predicate/">
+    <zah:prijava xmlns:zah="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+        <BrojPrijave xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:broj_prijave">230878497</BrojPrijave>
+        <DatumPodnosenja xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:datum_podnosenja">2023-02-01</DatumPodnosenja>
+    </zah:prijava>
+    <zah:podnosilac xmlns:zah="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema" podnosilac_je_autor="false">
+        <zah:lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="zah:TFizickoLice">
+            <zah:kontakt>
+                <zah:telefon>0655193962</zah:telefon>
+                <PodnosilacEmail xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:podnosilac_email">sabadosmihal@gmail.com</PodnosilacEmail>
+                <zah:fax/>
+            </zah:kontakt>
+            <zah:ime>Mihal</zah:ime>
+            <zah:prezime>Sabadoš</zah:prezime>
+            <zah:adresa>
+                <zah:ulica>Štefanikova </zah:ulica>
+                <zah:broj>120</zah:broj>
+                <zah:postanski_broj>21211</zah:postanski_broj>
+                <zah:mesto>Kisač</zah:mesto>
+                <zah:drzava>Srbija</zah:drzava>
+            </zah:adresa>
+            <zah:drzavljanstvo>Srpsko</zah:drzavljanstvo>
+        </zah:lice>
+    </zah:podnosilac>
+    <zah:autorsko_delo xmlns:zah="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+        <NaslovDela xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:naslov_dela">Novi Naslov</NaslovDela>
+        <zah:vrsta_dela>književno delo</zah:vrsta_dela>
+        <zah:forma_zapisa_dela>štampani tekst</zah:forma_zapisa_dela>
+        <zah:stvoreno_u_radnom_odnosu>false</zah:stvoreno_u_radnom_odnosu>
+        <zah:nacin_koriscenja>čitanje</zah:nacin_koriscenja>
+        <zah:anoniman_autor>true</zah:anoniman_autor>
+    </zah:autorsko_delo>
+    <zah:zavod xmlns:zah="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+        <zah:naziv>Zavod za intelektualnu svojinu</zah:naziv>
+        <zah:adresa>
+            <zah:ulica>Kneginje Ljubice</zah:ulica>
+            <zah:broj>5</zah:broj>
+            <zah:postanski_broj>11000</zah:postanski_broj>
+            <zah:mesto>Beograd</zah:mesto>
+            <zah:drzava>Srbija</zah:drzava>
+        </zah:adresa>
+    </zah:zavod>
 </zahtev>

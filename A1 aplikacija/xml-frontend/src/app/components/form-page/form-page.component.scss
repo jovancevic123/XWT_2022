@@ -6,7 +6,6 @@
     align-content: center;
     text-align: center;
     color: black;
-    overflow-y: auto;
 }
 
 .form-container{
@@ -125,12 +124,26 @@ h2{
 }
 
 .delo-prerade{
-    background-color: rgb(62, 102, 145);
-    padding: 10px;
+    background-color: rgb(160, 206, 255);
+    border: 1px solid white;
+    padding:20px
+}
+
+.delo-prerade h2{
+    margin-top: 0px;
 }
 
 .punomocnikCheckbox{
     align-self: flex-start;
     justify-self: left;
     margin-left: 0;
+    margin-bottom: 10px;
 }
+
+.autoriDiv{
+    background-color: rgb(160, 206, 255);
+    border: 1px solid white;
+    padding:20px;
+    margin-block: 20px;
+}
+
