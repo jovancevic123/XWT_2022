@@ -2,11 +2,20 @@ package com.xml.xmlbackendzh1.service;
 
 import com.xml.xmlbackendzh1.dao.ExistDao;
 import com.xml.xmlbackendzh1.dto.RequestDto;
+import com.xml.xmlbackendzh1.dto.ResponseToPendingRequestDto;
+import com.xml.xmlbackendzh1.dto.SearchResultsDto;
 import com.xml.xmlbackendzh1.dto.TaksaDto;
 import com.xml.xmlbackendzh1.exceptions.FormatNotValidException;
 import com.xml.xmlbackendzh1.model.zh1.*;
+import com.xml.xmlbackendzh1.util.SparqlUtil;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.update.UpdateExecutionFactory;
+import org.apache.jena.update.UpdateFactory;
+import org.apache.jena.update.UpdateProcessor;
+import org.apache.jena.update.UpdateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.xmldb.api.base.XMLDBException;
@@ -14,9 +23,10 @@ import org.xmldb.api.modules.XMLResource;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamReader;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
@@ -147,6 +157,69 @@ public class ZH1DocumentService {
         String resultMeta = metadataService.extractMetadataToRdf(new FileInputStream(new File("./src/main/resources/static/rdf")), "./src/main/resources/static/extracted_rdf.xml");
 
         metadataService.uploadResenjeMetadata("./src/main/resources/static/extracted_rdf.xml", "/graph/metadata/zh1");
+    }
+
+    public List<SearchResultsDto> getPendingRequests() {
+        return this.metadataService.getPendingRequests("./data/sparql/pendingRequests.rq");
+    }
+
+    public void approveRequest(ResponseToPendingRequestDto dto) throws Exception {
+        Resenje resenje = makeResenjeFromDto(dto);
+        resenje.setPrihvacena(true);
+
+        JAXBContext context = JAXBContext.newInstance(Resenje.class);
+        StringWriter stringWriter = new StringWriter();
+        Marshaller m = context.createMarshaller();
+        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        m.marshal(resenje, stringWriter);
+
+        this.repository.save(resenje.getBrojResenja(), stringWriter.toString(), "/db/zig/resenja");
+        uploadResenjeMetadata(stringWriter.toString(), resenje.getBrojResenja());
+        updateBrojResenjaInZahtev(dto.getBrojPrijaveZiga(), resenje.getBrojResenja());
+    }
+
+    private Resenje makeResenjeFromDto(ResponseToPendingRequestDto dto){
+        long brojResenja = (long) new Date().getTime();
+        Resenje resenje = new Resenje();
+
+        resenje.setBrojPrijaveZiga(dto.getBrojPrijaveZiga());
+        resenje.setDatumOdgovora(LocalDate.now());
+        resenje.setBrojResenja(Long.toString(brojResenja));
+        resenje.setImeSluzbenika(dto.getImeSluzbenika().split(" ")[0]);
+        resenje.setPrezimeSluzbenika(dto.getImeSluzbenika().split(" ")[1]);
+
+        return resenje;
+    }
+
+    private void uploadResenjeMetadata(String xmlData, String brojResenja) throws IOException {
+        String xsltFIlePath = "./src/main/resources/xml/resenje-metadata.xsl";
+        String outputPath = "./src/main/resources/static/rdf/";
+
+        metadataService.transformRDF(xmlData, xsltFIlePath, outputPath); // 1. xml u obliku string-a
+        String resultMeta = metadataService.extractMetadataToRdf(new FileInputStream(new File("./src/main/resources/static/rdf")), "./src/main/resources/static/extracted_rdf.xml");
+
+        metadataService.uploadResenjeMetadata("./src/main/resources/static/extracted_rdf.xml", "/graph/metadata/zh1");
+    }
+
+    private void updateBrojResenjaInZahtev(String brojPrijave, String brojResenja) throws Exception {
+        XMLResource res = this.repository.findById(brojPrijave + ".xml", "/db/zig/zahtevi");
+        JAXBContext context = JAXBContext.newInstance(Zahtev.class);
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+        XMLStreamReader reader = XMLInputFactory.newInstance().createXMLStreamReader(new StringReader((String) res.getContent()));
+        Zahtev zahtev = (Zahtev) unmarshaller.unmarshal(reader);
+        zahtev.setBrojResenja(brojResenja);
+
+        StringWriter stringWriter = new StringWriter();
+        Marshaller m = context.createMarshaller();
+        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        m.marshal(zahtev, stringWriter);
+
+        this.repository.save(brojPrijave, stringWriter.toString(), "/db/zig/zahtevi");
+
+        this.metadataService.transformRDF(stringWriter.toString(), "./src/main/resources/xml/metadata.xsl", "./src/main/resources/static/rdf/");
+        this.metadataService.extractMetadataToRdf(new FileInputStream(new File("./src/main/resources/static/rdf")), "./src/main/resources/static/extracted_rdf.xml");
+        this.metadataService.updateBrojResenjaMetaInZahtev("./src/main/resources/static/extracted_rdf.xml", stringWriter.toString(), brojPrijave, brojResenja);
+        this.metadataService.uploadZahtevMetadata("/graph/metadata/zh1");
     }
 }
 

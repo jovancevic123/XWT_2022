@@ -27,6 +27,14 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { AddressComponent } from './components/address/address.component';
 import { ContactComponent } from './components/contact/contact.component';
 import {MatChipsModule} from '@angular/material/chips';
+import { RequestListComponent } from './components/request-list/request-list.component';
+import { DialogComponent } from './components/dialog/dialog.component';
+import { DialogResenjeComponent } from './components/dialog-resenje/dialog-resenje.component';
+import { ReferencesComponent } from './components/references/references.component';
+import { KorisnikDashboardComponent } from './components/korisnik-dashboard/korisnik-dashboard.component';
+import { SearchComponent } from './components/search/search.component';
+import { SluzbenikDashboardComponent } from './components/sluzbenik-dashboard/sluzbenik-dashboard.component';
+import { ReportPageComponent } from './report-page/report-page.component';
 
 
 @NgModule({
@@ -35,6 +43,14 @@ import {MatChipsModule} from '@angular/material/chips';
     FormPageComponent,
     AddressComponent,
     ContactComponent,
+    RequestListComponent,
+    DialogComponent,
+    DialogResenjeComponent,
+    ReferencesComponent,
+    KorisnikDashboardComponent,
+    SearchComponent,
+    SluzbenikDashboardComponent,
+    ReportPageComponent,
   ],
   imports: [
     HttpClientModule,
@@ -58,7 +74,8 @@ import {MatChipsModule} from '@angular/material/chips';
     MatDialogModule,
     MatNativeDateModule,
     MatGridListModule,
-    MatChipsModule
+    MatChipsModule,
+    NgxExtendedPdfViewerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

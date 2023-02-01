@@ -1,8 +1,11 @@
 package com.xml.xmlbackendzh1.controller;
 
 import com.xml.xmlbackendzh1.dto.RequestDto;
+import com.xml.xmlbackendzh1.dto.ResponseToPendingRequestDto;
+import com.xml.xmlbackendzh1.dto.SearchResultsListDto;
 import com.xml.xmlbackendzh1.service.ZH1DocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.xmldb.api.base.XMLDBException;
@@ -30,5 +33,25 @@ public class ZH1DocumentController {
         System.out.println(dto);
         this.service.addZahtevZig(dto);
         return ResponseEntity.ok("Bravo");
+    }
+
+    @GetMapping(value="/get-pending-requests", produces = "application/xml")
+    public ResponseEntity<?> getPendingRequests(){
+        try{
+            SearchResultsListDto requestDtos = new SearchResultsListDto(this.service.getPendingRequests());
+            return ResponseEntity.ok(requestDtos);
+        }catch(Exception ex){
+            return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping(value="/approve-request", produces = "application/xml")
+    public ResponseEntity<?> approveRequest(@RequestBody ResponseToPendingRequestDto dto){
+        try{
+            this.service.approveRequest(dto);
+            return ResponseEntity.ok("Success");
+        }catch(Exception ex){
+            return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 }

@@ -50,21 +50,25 @@ export class FormPageComponent implements OnInit {
   taksaZaGrafickoResenjeIznos: number;
   ukupanIznosTaksi: number;
 
+  imePodnosioca: string;
+
+  formIsValid: boolean;
+
   constructor(private zigService: ZigService) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
       
       //podnosilac
-      imePodnosioca: new FormControl('',[Validators.required]),
-      prezimePodnosioca: new FormControl('',[Validators.required]),
-      // poslovnoImePodnosioca: new FormControl('',[Validators.required]),
+      imePodnosioca: new FormControl(),
+      prezimePodnosioca: new FormControl(),
+      poslovnoImePodnosioca: new FormControl(),
       tipLicaPodnosilac: new FormControl('1',[Validators.required]),
 
       //punomoc
-      imePunomocnika: new FormControl('',[Validators.required]),
-      prezimePunomocnika: new FormControl('',[Validators.required]),
-      // poslovnoImePunomocnika: new FormControl('',[Validators.required]),
+      imePunomocnika: new FormControl(),
+      prezimePunomocnika: new FormControl(),
+      poslovnoImePunomocnika: new FormControl(),
       tipLicaPunomocnik: new FormControl('1',[Validators.required]),
 
       //zig
@@ -117,22 +121,34 @@ export class FormPageComponent implements OnInit {
         },
         error: error => {
           console.error(error);
-          }
+        }
       });
   }
 
-  onTipLicaChangedPodnosilac(){
-    this.fizikoLicePodnosilacChecked = !this.fizikoLicePodnosilacChecked;
+  onTipLicaChangedPodnosilacToFizicko(){
+    this.fizikoLicePodnosilacChecked = true;
   }
 
-  onTipLicaChangedPunomocnik(){
-    this.fizikoLicePunomocnikChecked = !this.fizikoLicePunomocnikChecked;
+  onTipLicaChangedPodnosilacToPravno()
+  {
+    this.fizikoLicePodnosilacChecked = false;
   }
+  
+
+  onTipLicaChangedPunomocnikToFizicko(){
+    this.fizikoLicePodnosilacChecked = true;
+  }
+  
+  onTipLicaChangedPunomocnikToPravno()
+  {
+    this.fizikoLicePunomocnikChecked = false;
+  }
+  
 
   // Address events
   onPodnosilacAdresa(event: Adresa){
     this.adresaPodnosioca = event;
-    if(this.adresaPodnosioca.broj != null && this.adresaPodnosioca.drzava != "" && this.adresaPodnosioca.mesto != "" && this.adresaPodnosioca.postanskiBroj != null && this.adresaPunomocnika.postanskiBroj >= 11000 && this.adresaPodnosioca.ulica != "")
+    if(this.adresaPodnosioca.broj != null && this.adresaPodnosioca.drzava != "" && this.adresaPodnosioca.mesto != "" && this.adresaPodnosioca.postanskiBroj != null && this.adresaPodnosioca.postanskiBroj >= 11000 && this.adresaPodnosioca.ulica != "")
     {
       this.addressPodnosilacFormValid = true;
     }
@@ -245,5 +261,10 @@ export class FormPageComponent implements OnInit {
   calculateTotalPrice()
   {
     this.ukupanIznosTaksi = this.form.getRawValue()["taksaZaGrafickoResenjeIznos"] + this.form.getRawValue()["osnovnaTaksaIznos"];
+    console.log(this.form)
+    console.log(this.addressPodnosilacFormValid)
+    console.log(this.addressPunomocnikFormValid);
+    console.log(this.contactPodnosilacFormValid)
+    console.log(this.contactPunomocnikFormValid)
   }
 }

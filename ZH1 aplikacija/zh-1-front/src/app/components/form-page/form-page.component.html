@@ -11,8 +11,8 @@
                 <mat-radio-group
                     aria-labelledby="example-radio-group-label"
                     class="example-radio-group" formControlName="tipLicaPodnosilac">
-                    <mat-radio-button class="example-radio-button" value="1" (change)="onTipLicaChangedPodnosilac()">Fizičko lice</mat-radio-button>
-                    <mat-radio-button class="example-radio-button" value="2" (change)="onTipLicaChangedPodnosilac()">Pravno lice</mat-radio-button>
+                    <mat-radio-button class="example-radio-button" value="1" (click)="onTipLicaChangedPodnosilacToFizicko()">Fizičko lice</mat-radio-button>
+                    <mat-radio-button class="example-radio-button" value="2" (click)="onTipLicaChangedPodnosilacToPravno()">Pravno lice</mat-radio-button>
                 </mat-radio-group>
             </div>
             <div class="podnosilac-name">
@@ -48,8 +48,8 @@
                 <mat-radio-group
                     aria-labelledby="example-radio-group-label"
                     class="example-radio-group" formControlName="tipLicaPunomocnik">
-                    <mat-radio-button class="example-radio-button" value="1" (change)="onTipLicaChangedPunomocnik()">Fizičko lice</mat-radio-button>
-                    <mat-radio-button class="example-radio-button" value="2" (change)="onTipLicaChangedPunomocnik()">Pravno lice</mat-radio-button>
+                    <mat-radio-button class="example-radio-button" value="1" (click)="onTipLicaChangedPunomocnikToFizicko()">Fizičko lice</mat-radio-button>
+                    <mat-radio-button class="example-radio-button" value="2" (click)="onTipLicaChangedPunomocnikToPravno()">Pravno lice</mat-radio-button>
                 </mat-radio-group>
             </div>
             <div class="podnosilac-first-line">
