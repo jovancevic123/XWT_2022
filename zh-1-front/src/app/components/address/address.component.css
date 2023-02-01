@@ -1,9 +1,0 @@
-.container{
-    display: flex;
-    flex-direction: row;
-}
-
-mat-form-field{
-    margin-left: 3rem;
-    margin-right: 3rem;
-}

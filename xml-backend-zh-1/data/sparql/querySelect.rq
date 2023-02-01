@@ -1,8 +1,0 @@
-PREFIX schema: <http://www.ftn.uns.ac.rs/rdf/examples/predicate>
-prefix xsd: <http://www.w3.org/2001/XMLSchema#>
-SELECT * from <http://localhost:3030/zigovi/data>
-WHERE {
-  ?zig  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/broj_prijave_ziga> ?brojPrijaveZiga .
-  FILTER(CONTAINS(UCASE(str(?brojPrijaveZiga)), UCASE("%1$s"))
-  && ?brojPrijaveZiga = "%2$s").
-}

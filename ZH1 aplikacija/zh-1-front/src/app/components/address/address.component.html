@@ -1,0 +1,26 @@
+<form [formGroup]="form" class="container">
+    <mat-form-field [style.width.%]="60">
+        <mat-label>Ulica:</mat-label>
+        <input matInput (change)="onChange()" formControlName="ulica">
+    </mat-form-field>
+
+    <mat-form-field [style.width.%]="60">
+        <mat-label>Broj:</mat-label>
+        <input matInput type="number" (change)="onChange()" formControlName="broj">
+    </mat-form-field>
+
+    <mat-form-field [style.width.%]="60">
+        <mat-label>Poštanski broj:</mat-label>
+        <input matInput type="number" (change)="onChange()" formControlName="postanskiBroj">
+    </mat-form-field>
+
+    <mat-form-field [style.width.%]="60">
+        <mat-label>Mesto:</mat-label> 
+        <input matInput (change)="onChange()" formControlName="mesto">
+    </mat-form-field>
+
+    <mat-form-field [style.width.%]="60">
+        <mat-label>Država:</mat-label>
+        <input matInput (change)="onChange()" formControlName="drzava">
+    </mat-form-field>
+</form>
