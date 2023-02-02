@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-        "naziv", "zavod", "podnosilac", "punomocnik", "zig", "placeneTakse", "prilozi"
+        "naziv", "zavod", "podnosilac", "punomocnik", "zig", "placeneTakse", "prilozi", "brojResenja"
 })
 @XmlRootElement(name = "zahtev")
 public class Zahtev {

@@ -36,6 +36,7 @@ export class RequestListComponent {
               private resenjeService: ResenjeService){}
 
   ngOnInit(): void {
+    console.log(this.requests)
     this.displayedColumns = this.isUser ? ['brojPrijaveZiga', 'nazivPodnosioca', 'html', 'pdf', 'resenje', 'reference'] :
                                      ['brojPrijaveZiga', 'nazivPodnosioca', 'html', 'pdf', 'rdf', 'json', 'odobravanje', 'odbijanje', 'resenje', 'reference'];
   }
@@ -69,7 +70,7 @@ export class RequestListComponent {
       this.zigService.approveRequest(brojPrijaveZiga).subscribe({
         next: data => {
           console.log(data);
-          this.requests.splice(i, 1);
+          this.requests = this.requests.filter(request => request.brojPrijaveZiga !== brojPrijaveZiga)
         },
         error: error => {
           console.error(error);
@@ -81,7 +82,7 @@ export class RequestListComponent {
     this.zigService.rejectRequest(brojPrijaveZiga, obrazlozenje).subscribe({
       next: data => {
         console.log(data);   
-        this.requests.splice(i, 1);
+        this.requests = this.requests.filter(request => request.brojPrijaveZiga !== brojPrijaveZiga)
       },
       error: error => {
         console.error(error);

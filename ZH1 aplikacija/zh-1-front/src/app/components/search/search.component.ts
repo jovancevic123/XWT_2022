@@ -21,7 +21,8 @@ export class SearchComponent {
   constructor(private searchService: SearchService, private tokenUtilService: TokenUtilService){}
 
   ngOnInit(): void {
-    this.searchResults = [...this.startingList];        
+    this.searchResults = [...this.startingList];    
+    console.log(this.searchResults)    
   }
 
   basicSearch(){    

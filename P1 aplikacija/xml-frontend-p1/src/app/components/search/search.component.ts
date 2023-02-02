@@ -23,7 +23,7 @@ export class SearchComponent implements OnInit{
   constructor(private searchService: SearchService, private tokenUtilService: TokenUtilService, private toastService: ToastrService){}
 
   ngOnInit(): void {
-    this.searchResults = [...this.startingList];        
+    this.searchResults = [...this.startingList];       
   }
 
   basicSearch(){    

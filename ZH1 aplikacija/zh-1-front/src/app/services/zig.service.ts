@@ -23,7 +23,7 @@ export class ZigService {
     let queryParams = new HttpParams();
     queryParams = queryParams.append("brojPrijaveZiga", broj);
 
-    return this.http.get(this.apiURL + '/z1/html', { params: queryParams, responseType:'text'});
+    return this.http.get(this.apiURL + '/zh1/html', { params: queryParams, responseType:'text'});
   }
 
   getRequestPDF(broj: string){

@@ -112,15 +112,9 @@
                     </tr>
                     <tr rowspan="2">
                         <td colspan="3" style="height: 40px">
-                            <xsl:choose>
-                                <xsl:when test="zahtev/podnosilac/@type='TFizickoLice'">
-                                    <b><xsl:value-of  select="zahtev/podnosilac/ime"/>, </b>
-                                    <b><xsl:value-of  select="zahtev/podnosilac/prezime"/>, </b>
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <b><xsl:value-of  select="zahtev/podnosilac/poslovno_ime"/>, </b>
-                                </xsl:otherwise>
-                            </xsl:choose>
+                            <b><xsl:value-of  select="zahtev/podnosilac/ime"/>, </b>
+                            <b><xsl:value-of  select="zahtev/podnosilac/prezime"/></b>
+                            <b><xsl:value-of  select="zahtev/podnosilac/poslovno_ime"/>, </b>
                             <b><xsl:value-of  select="zahtev/podnosilac/adresa/ulica"/>, </b>
                             <b><xsl:value-of  select="zahtev/podnosilac/adresa/broj"/>, </b>
                             <b><xsl:value-of  select="zahtev/podnosilac/adresa/postanski_broj"/>, </b>
@@ -139,15 +133,9 @@
                     </tr>
                     <tr>
                         <td colspan="3" style="height: 40px">
-                            <xsl:choose>
-                                <xsl:when test="zahtev/punomocnik/@type='TFizickoLice'">
-                                    <b><xsl:value-of  select="zahtev/punomocnik/ime"/>, </b>
-                                    <b><xsl:value-of  select="zahtev/punomocnik/prezime"/>, </b>
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <b><xsl:value-of  select="zahtev/punomocnik/poslovno_ime"/>, </b>
-                                </xsl:otherwise>
-                            </xsl:choose>
+                            <b><xsl:value-of  select="zahtev/punomocnik/ime"/>, </b>
+                            <b><xsl:value-of  select="zahtev/punomocnik/prezime"/></b>
+                            <b><xsl:value-of  select="zahtev/punomocnik/poslovno_ime"/>, </b>
                             <b><xsl:value-of  select="zahtev/punomocnik/adresa/ulica"/>, </b>
                             <b><xsl:value-of  select="zahtev/punomocnik/adresa/broj"/>, </b>
                             <b><xsl:value-of  select="zahtev/punomocnik/adresa/postanski_broj"/>, </b>
@@ -184,7 +172,7 @@
                         <td colspan="1">individualni zig</td>
                         <td colspan="1">
                         <xsl:variable name="zigType" select="zahtev/zig/tip_ziga"/>
-                        <xsl:if test="$zigType = 'individualni_zig'">
+                        <xsl:if test="$zigType = 'Individualni zig'">
                             <b>X</b>
                         </xsl:if>
                         </td>
@@ -194,7 +182,7 @@
                         <td colspan="1">kolektivni zig</td>
                         <td colspan="1">
                             <xsl:variable name="zigType" select="zahtev/zig/tip_ziga"/>
-                            <xsl:if test="$zigType = 'kolektivni_zig'">
+                            <xsl:if test="$zigType = 'Kolektivni zig'">
                                 <b>X</b>
                             </xsl:if>
                         </td>
@@ -203,7 +191,7 @@
                         <td colspan="1">zig garancije</td>
                         <td colspan="1">
                             <xsl:variable name="zigType" select="zahtev/zig/tip_ziga"/>
-                            <xsl:if test="$zigType = 'zig_garancije'">
+                            <xsl:if test="$zigType = 'Zig garancije'">
                                 <b>X</b>
                             </xsl:if>
                         </td>
@@ -214,7 +202,7 @@
                         <td colspan="1">verbalni znak (znak u reci)</td>
                         <td colspan="1">
                             <xsl:variable name="znakType" select="zahtev/zig/znak/tip_znaka"/>
-                            <xsl:if test="$znakType = 'verbalni_znak'">
+                            <xsl:if test="$znakType = 'Verbalni znak'">
                                 <b>X</b>
                             </xsl:if>
                         </td>
@@ -224,7 +212,7 @@
                         <td colspan="1">graficki znak; boju, kombinaciju boja</td>
                         <td colspan="1">
                             <xsl:variable name="znakType" select="zahtev/zig/znak/tip_znaka"/>
-                            <xsl:if test="$znakType = 'graficki_znak'">
+                            <xsl:if test="$znakType = 'Graficki znak'">
                                 <b>X</b>
                             </xsl:if>
                         </td>
@@ -234,7 +222,7 @@
                         <td colspan="1">kombinovani znak</td>
                         <td colspan="1">
                             <xsl:variable name="znakType" select="zahtev/zig/znak/tip_znaka"/>
-                            <xsl:if test="$znakType = 'kombinovani_znak'">
+                            <xsl:if test="$znakType = 'Kombinovani znak'">
                                 <b>X</b>
                             </xsl:if>
                         </td>
@@ -244,7 +232,7 @@
                         <td colspan="1">trodimenzionalni znak</td>
                         <td colspan="1">
                             <xsl:variable name="znakType" select="zahtev/zig/znak/tip_znaka"/>
-                            <xsl:if test="$znakType = 'trodimenzionalni_znak'">
+                            <xsl:if test="$znakType = 'Trodimenzionalni znak'">
                                 <b>X</b>
                             </xsl:if>
                         </td>
@@ -254,7 +242,7 @@
                         <td colspan="1">drugu vrstu znaka (navesti koju)</td>
                         <td colspan="1">
                             <xsl:variable name="znakType" select="zahtev/zig/znak/tip_znaka"/>
-                            <xsl:if test="$znakType = 'druga_vrsta_znaka'">
+                            <xsl:if test="$znakType = 'Druga vrsta znaka'">
                                 <b>X</b>
                             </xsl:if>
                         </td>
@@ -270,12 +258,14 @@
                     <tr colspan="3">
                         <td colspan="3">
                             <b>6. Transliteracija znaka*: </b>
+                            <xsl:value-of select="zahtev/zig/znak/transliteracija_znaka"/>
                         </td>
                     </tr>
 
                     <tr colspan="3">
                         <td colspan="3">
                             <b>7. Prevod znaka*: </b>
+                            <xsl:value-of select="zahtev/zig/znak/prevod_znaka"/>
                         </td>
                     </tr>
 
@@ -311,6 +301,14 @@
                         </xsl:call-template>
                     </tr>
                 </table>
+                <table>
+                    <tr>
+                        <td>
+                            <b>10. Zatrazeno pravo prvenstva i osnov: </b>
+                            <xsl:value-of select="zahtev/zig/zatrazeno_pravo"/>
+                        </td>
+                    </tr>
+                </table>
                 <p>*Popuniti samo ako je znak ili element znaka ispisan slovima koja nisu cirilicna ili latinicna</p>
 
                 <table>
@@ -327,7 +325,7 @@
                         <td><b>a) osnovna taksa</b></td>
                         <xsl:for-each select="zahtev/placene_takse/taksa">
                             <xsl:choose>
-                                <xsl:when test="tip_takse='osnovna_taksa'">
+                                <xsl:when test="tip_takse='Osnovna taksa'">
                                     <td>
                                         <xsl:value-of select="iznos"></xsl:value-of>
                                     </td>
@@ -343,7 +341,7 @@
                         </td>
                         <xsl:for-each select="zahtev/placene_takse/taksa">
                             <xsl:choose>
-                                <xsl:when test="tip_takse='za_graficko_resenje'">
+                                <xsl:when test="tip_takse='Taksa za graficko resenje'">
                                     <td>
                                         <xsl:value-of select="iznos"></xsl:value-of>
                                     </td>

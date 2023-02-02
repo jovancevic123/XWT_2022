@@ -1,6 +1,8 @@
 package com.xml.xmlbackendzh1.dao;
 
+import com.xml.xmlbackendzh1.model.zh1.Resenje;
 import com.xml.xmlbackendzh1.util.AuthenticationUtilities;
+import org.exist.util.StringInputSource;
 import org.springframework.stereotype.Repository;
 import org.xmldb.api.DatabaseManager;
 import org.xmldb.api.base.Collection;
@@ -9,6 +11,9 @@ import org.xmldb.api.base.XMLDBException;
 import org.xmldb.api.modules.CollectionManagementService;
 import org.xmldb.api.modules.XMLResource;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.OutputKeys;
 
 @Repository
@@ -99,5 +104,13 @@ public class ExistDao {
         } else {
             return col;
         }
+    }
+
+    public Resenje findUnmarshalledResenjeById(String resourceId) throws XMLDBException, JAXBException {
+        XMLResource res = this.findById(resourceId + ".xml", "/db/zig/resenja");
+        JAXBContext context = JAXBContext.newInstance(Resenje.class);
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+
+        return (Resenje) unmarshaller.unmarshal(new StringInputSource(res.getContent().toString()));
     }
 }

@@ -7,21 +7,17 @@ import com.xml.xmlbackendzh1.dto.SearchResultsDto;
 import com.xml.xmlbackendzh1.dto.TaksaDto;
 import com.xml.xmlbackendzh1.exceptions.FormatNotValidException;
 import com.xml.xmlbackendzh1.model.zh1.*;
-import com.xml.xmlbackendzh1.util.SparqlUtil;
+import com.xml.xmlbackendzh1.transformers.XmlTransformer;
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.update.UpdateExecutionFactory;
-import org.apache.jena.update.UpdateFactory;
-import org.apache.jena.update.UpdateProcessor;
-import org.apache.jena.update.UpdateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.stereotype.Service;
 import org.xmldb.api.base.XMLDBException;
 import org.xmldb.api.modules.XMLResource;
 
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.stream.XMLInputFactory;
@@ -42,12 +38,14 @@ public class ZH1DocumentService {
     private final ExistDao repository;
     private final ExistService existService;
     private final MetadataService metadataService;
+    private final XmlTransformer transformer;
 
     @Autowired
-    public ZH1DocumentService(ExistDao repository, ExistService existService, MetadataService metadataService) {
+    public ZH1DocumentService(ExistDao repository, ExistService existService, MetadataService metadataService, XmlTransformer transformer) {
         this.repository = repository;
         this.existService = existService;
         this.metadataService = metadataService;
+        this.transformer = transformer;
     }
 
     public XMLResource findZahtevById(String resourceId) throws XMLDBException {
@@ -220,6 +218,46 @@ public class ZH1DocumentService {
         this.metadataService.extractMetadataToRdf(new FileInputStream(new File("./src/main/resources/static/rdf")), "./src/main/resources/static/extracted_rdf.xml");
         this.metadataService.updateBrojResenjaMetaInZahtev("./src/main/resources/static/extracted_rdf.xml", stringWriter.toString(), brojPrijave, brojResenja);
         this.metadataService.uploadZahtevMetadata("/graph/metadata/zh1");
+    }
+
+    public void rejectRequest(ResponseToPendingRequestDto dto) throws Exception {
+        Resenje resenje = makeResenjeFromDto(dto);
+        resenje.setObrazlozenje(dto.getObrazlozenje());
+        resenje.setPrihvacena(false);
+
+        JAXBContext context = JAXBContext.newInstance(Resenje.class);
+        StringWriter stringWriter = new StringWriter();
+        Marshaller m = context.createMarshaller();
+        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        m.marshal(resenje, stringWriter);
+
+        this.repository.save(resenje.getBrojResenja(), stringWriter.toString(), "/db/zig/resenja");
+        uploadResenjeMetadata(stringWriter.toString(), resenje.getBrojResenja());
+        updateBrojResenjaInZahtev(dto.getBrojPrijaveZiga(), resenje.getBrojResenja());
+    }
+
+    public Resenje findResenjeById(String resourceId) throws XMLDBException, JAXBException {
+        return this.repository.findUnmarshalledResenjeById(resourceId);
+    }
+
+    public ByteArrayResource getRequestPDF(String brojPrijaveZiga) throws XMLDBException, IOException {
+        XMLResource res = this.findZahtevById(brojPrijaveZiga);
+        String xmlData = res.getContent().toString();
+
+        transformer.transformToPdf(xmlData);
+        File f = new File("src/main/resources/xml/GeneratedPDF.pdf");
+        byte[] fileContent = Files.readAllBytes(f.toPath());
+        ByteArrayResource body = new ByteArrayResource(fileContent);
+        return body;
+    }
+
+    public String getRequestHTML(String brojPrijaveZiga) throws XMLDBException, IOException {
+        XMLResource res = this.findZahtevById(brojPrijaveZiga);
+        String xmlData = res.getContent().toString();
+
+        transformer.transformToHtml(xmlData);
+        String html = Files.readString(Paths.get("src/main/resources/xml/GeneratedHTML.html"));
+        return html;
     }
 }
 

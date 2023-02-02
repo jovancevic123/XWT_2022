@@ -18,6 +18,7 @@
                     </xs:complexType>
                 </xs:element>
                 <xs:element name="prilozi" type="zh-1:TPrilozi" maxOccurs="1" minOccurs="1"/>
+                <xs:element minOccurs="0" name="broj_resenja" type="xs:string" />
             </xs:sequence>
         </xs:complexType>
     </xs:element>
