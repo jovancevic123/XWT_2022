@@ -5,11 +5,9 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.xml.xmlbackendzh1.dao.ExistDao;
-import com.xml.xmlbackendzh1.dto.RequestDto;
-import com.xml.xmlbackendzh1.dto.ResponseToPendingRequestDto;
-import com.xml.xmlbackendzh1.dto.SearchResultsDto;
-import com.xml.xmlbackendzh1.dto.TaksaDto;
+import com.xml.xmlbackendzh1.dto.*;
 import com.xml.xmlbackendzh1.exceptions.FormatNotValidException;
+import com.xml.xmlbackendzh1.exceptions.QueryFormatException;
 import com.xml.xmlbackendzh1.model.zh1.*;
 import com.xml.xmlbackendzh1.transformers.XmlTransformer;
 import lombok.Getter;
@@ -303,6 +301,51 @@ public class ZH1DocumentService {
     public String getMetadataJSON(String brojPrijave) throws XMLDBException, IOException {
         JSONObject json = XML.toJSONObject(getMetadataRDF(brojPrijave));
         return json.toString();
+    }
+
+    public List<SearchResultsDto> basicSearch(String text) throws JAXBException, XMLDBException {
+        return this.metadataService.basicSearch(text, "./data/sparql/basicSearch.rq");
+    }
+
+    public List<SearchResultsDto> advancedSearch(AdvancedSearchListDto list) throws JAXBException, XMLDBException {
+        String pred = "http://www.ftn.uns.ac.rs/rdf/examples/predicate/";
+
+        String queryString =
+                "PREFIX schema: <http://www.ftn.uns.ac.rs/rdf/examples/predicate>\n" +
+                        "prefix xsd: <http://www.w3.org/2001/XMLSchema#>\n" +
+                        "SELECT * from <http://localhost:3030/zigovi/data/graph/metadata/zh1>\n" +
+                        "WHERE {\n ?zig  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/broj_prijave_ziga> ?brojPrijaveZiga . \n" ;
+
+        for(AdvancedSearchDto dto : list.getConditions()){
+            if(!dto.getMeta().equals("broj_prijave_ziga"))
+                queryString = queryString.concat(String.format("?zig <%s%s> ?%s . \n", pred, dto.getMeta(), namingConversion(dto.getMeta())));
+        }
+
+        queryString = queryString.concat("FILTER( \n");
+
+        int i = 0;
+        for(AdvancedSearchDto dto : list.getConditions()){
+            i++;
+            queryString = queryString.concat(String.format("CONTAINS(UCASE(str(?%s)), UCASE('%s'))\n ", namingConversion(dto.getMeta()), dto.getValue()));
+            if(i < list.getConditions().size()){
+                queryString = queryString.concat(String.format("%s ", dto.getOperator()));
+            }
+        }
+
+        queryString = queryString.concat(").\n}");
+        System.out.println(queryString);
+        return this.metadataService.advancedSearch(queryString);
+    }
+
+    private String namingConversion(String undercase){
+        switch (undercase){
+            case "broj_prijave_ziga": return "brojPrijaveZiga";
+            case "broj_resenja": return "brojResenja";
+            case "podnosilac_email": return "podnosilacEmail";
+            case "punomocnik_email": return "punomocnikEmail";
+            case "datum_podnosenja": return "datumPodnosenja";
+            default: throw new QueryFormatException("Malformed query!");
+        }
     }
 }
 

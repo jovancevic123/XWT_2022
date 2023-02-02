@@ -1,17 +1,17 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
-  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/320242117">
-    <pred:podnosilac_email xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">gdsagdsa</pred:podnosilac_email>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/321594741">
+    <pred:podnosilac_email xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dgsagdsa</pred:podnosilac_email>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/320242117">
-    <pred:punomocnik_email xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">gdsagdsa</pred:punomocnik_email>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/321594741">
+    <pred:punomocnik_email xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">gasg</pred:punomocnik_email>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/320242117">
-    <pred:broj_prijave_ziga xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">320242117</pred:broj_prijave_ziga>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/321594741">
+    <pred:broj_prijave_ziga xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">321594741</pred:broj_prijave_ziga>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/320242117">
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/321594741">
     <pred:datum_podnosenja xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2023-02-02</pred:datum_podnosenja>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/320242117">
-    <pred:broj_resenja xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1675357904437</pred:broj_resenja>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/321594741">
+    <pred:broj_resenja xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1675358864814</pred:broj_resenja>
   </rdf:Description>
 </rdf:RDF>

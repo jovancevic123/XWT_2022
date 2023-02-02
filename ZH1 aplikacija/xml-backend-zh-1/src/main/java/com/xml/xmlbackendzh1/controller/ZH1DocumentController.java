@@ -1,5 +1,6 @@
 package com.xml.xmlbackendzh1.controller;
 
+import com.xml.xmlbackendzh1.dto.AdvancedSearchListDto;
 import com.xml.xmlbackendzh1.dto.RequestDto;
 import com.xml.xmlbackendzh1.dto.ResponseToPendingRequestDto;
 import com.xml.xmlbackendzh1.dto.SearchResultsListDto;
@@ -113,6 +114,26 @@ public class ZH1DocumentController {
         try{
             String json = this.service.getMetadataJSON(brojPrijaveZiga);
             return ResponseEntity.ok(json);
+        }catch(Exception ex){
+            return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping(value="/basic-search", produces = "application/xml")
+    public ResponseEntity<?> basicSearch(@RequestParam("textToSearch") String text){
+        try{
+            SearchResultsListDto requestDtos = new SearchResultsListDto(this.service.basicSearch(text));
+            return ResponseEntity.ok(requestDtos);
+        }catch(Exception ex){
+            return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping(value="/advanced-search", produces = "application/xml")
+    public ResponseEntity<?> advancedSearch(@RequestBody AdvancedSearchListDto dto){
+        try{
+            SearchResultsListDto requestDtos = new SearchResultsListDto(this.service.advancedSearch(dto));
+            return ResponseEntity.ok(requestDtos);
         }catch(Exception ex){
             return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
         }
