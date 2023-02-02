@@ -15,7 +15,7 @@
 
     <xsl:template match="zh1:zahtev">
         <zahtev vocab="http://www.ftn.uns.ac.rs/rdf/examples/predicate/"
-                about="http://www.ftn.uns.ac.rs/xwt/zahtev">
+                about="http://www.ftn.uns.ac.rs/xwt/zahtev/{./zh1:zig/zh1:broj_prijave_ziga}">
             <xsl:apply-templates select="node()|@*"/>
         </zahtev>
     </xsl:template>
@@ -42,6 +42,12 @@
         <PunomocnikEmail property="pred:punomocnik_email" datatype="xs:string">
             <xsl:apply-templates select="node()|@*"/>
         </PunomocnikEmail>
+    </xsl:template>
+
+    <xsl:template match="zh1:zahtev/zh1:broj_resenja">
+        <BrojResenja property="pred:broj_resenja" datatype="xs:string">
+            <xsl:apply-templates select="node()|@*"/>
+        </BrojResenja>
     </xsl:template>
 
 </xsl:stylesheet>

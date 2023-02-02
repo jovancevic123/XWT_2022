@@ -13,35 +13,35 @@
     </zh-1:zavod>
     <zh-1:podnosilac xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="zh-1:TFizickoLice">
         <zh-1:adresa>
-            <zh-1:ulica>gdsagads</zh-1:ulica>
-            <zh-1:broj>344</zh-1:broj>
+            <zh-1:ulica>gsafdgas</zh-1:ulica>
+            <zh-1:broj>43</zh-1:broj>
             <zh-1:postanski_broj>21000</zh-1:postanski_broj>
-            <zh-1:mesto>gdas</zh-1:mesto>
-            <zh-1:drzava>gadssa</zh-1:drzava>
+            <zh-1:mesto>gdsagsda</zh-1:mesto>
+            <zh-1:drzava>gdsagsad</zh-1:drzava>
         </zh-1:adresa>
         <zh-1:kontakt>
-            <zh-1:telefon>43243</zh-1:telefon>
-            <zh-1:email>gdsa</zh-1:email>
-            <zh-1:fax>gdsagds</zh-1:fax>
+            <zh-1:telefon>53424523</zh-1:telefon>
+            <zh-1:email>gsag</zh-1:email>
+            <zh-1:fax>gdsag</zh-1:fax>
         </zh-1:kontakt>
-        <zh-1:ime>gdsagads</zh-1:ime>
-        <zh-1:prezime>ghadsghasdg</zh-1:prezime>
+        <zh-1:ime>gdsag</zh-1:ime>
+        <zh-1:prezime>asfgagfs</zh-1:prezime>
     </zh-1:podnosilac>
     <zh-1:punomocnik xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="zh-1:TFizickoLice">
         <zh-1:adresa>
-            <zh-1:ulica>gsadgas</zh-1:ulica>
-            <zh-1:broj>423</zh-1:broj>
-            <zh-1:postanski_broj>11000</zh-1:postanski_broj>
-            <zh-1:mesto>gdsa</zh-1:mesto>
-            <zh-1:drzava>gdsagd</zh-1:drzava>
+            <zh-1:ulica>gwdsa</zh-1:ulica>
+            <zh-1:broj>5342</zh-1:broj>
+            <zh-1:postanski_broj>11111</zh-1:postanski_broj>
+            <zh-1:mesto>gdsagsa</zh-1:mesto>
+            <zh-1:drzava>gsadfgsa</zh-1:drzava>
         </zh-1:adresa>
         <zh-1:kontakt>
-            <zh-1:telefon>434</zh-1:telefon>
-            <zh-1:email>gdsagdsa</zh-1:email>
-            <zh-1:fax>gdsa</zh-1:fax>
+            <zh-1:telefon>54353</zh-1:telefon>
+            <zh-1:email>gfsagfa</zh-1:email>
+            <zh-1:fax>gsagda</zh-1:fax>
         </zh-1:kontakt>
-        <zh-1:ime>gdsagdas</zh-1:ime>
-        <zh-1:prezime>gdsagdas</zh-1:prezime>
+        <zh-1:ime>sfda</zh-1:ime>
+        <zh-1:prezime>gfdsagsda</zh-1:prezime>
     </zh-1:punomocnik>
     <zh-1:zig>
         <zh-1:tip_ziga>Individualni zig</zh-1:tip_ziga>
@@ -49,27 +49,27 @@
             <zh-1:tip_znaka>Graficki znak</zh-1:tip_znaka>
             <zh-1:izgled_znaka/>
             <zh-1:boje>
-                <zh-1:boja>gdsag</zh-1:boja>
+                <zh-1:boja>gfasg</zh-1:boja>
             </zh-1:boje>
-            <zh-1:opis_znaka>gafsgfas</zh-1:opis_znaka>
-            <zh-1:transliteracija_znaka>gdasgdas</zh-1:transliteracija_znaka>
-            <zh-1:prevod_znaka>gsadhgasf</zh-1:prevod_znaka>
+            <zh-1:opis_znaka>sadg</zh-1:opis_znaka>
+            <zh-1:transliteracija_znaka>gfasg</zh-1:transliteracija_znaka>
+            <zh-1:prevod_znaka>gdsag</zh-1:prevod_znaka>
         </zh-1:znak>
         <zh-1:brojevi_klasa_robe>
-            <zh-1:broj>6</zh-1:broj>
+            <zh-1:broj>38</zh-1:broj>
         </zh-1:brojevi_klasa_robe>
-        <zh-1:zatrazeno_pravo>dgsagdsag</zh-1:zatrazeno_pravo>
-        <zh-1:broj_prijave_ziga>216900198</zh-1:broj_prijave_ziga>
-        <zh-1:datum_podnosenja>2023-02-01</zh-1:datum_podnosenja>
+        <zh-1:zatrazeno_pravo>gsafgf</zh-1:zatrazeno_pravo>
+        <zh-1:broj_prijave_ziga>301490112</zh-1:broj_prijave_ziga>
+        <zh-1:datum_podnosenja>2023-02-02</zh-1:datum_podnosenja>
     </zh-1:zig>
     <zh-1:placene_takse>
         <zh-1:taksa valuta="RSD">
             <zh-1:tip_takse>Osnovna taksa</zh-1:tip_takse>
-            <zh-1:iznos>4342.0</zh-1:iznos>
+            <zh-1:iznos>432.0</zh-1:iznos>
         </zh-1:taksa>
         <zh-1:taksa valuta="RSD">
             <zh-1:tip_takse>Taksa za graficko resenje</zh-1:tip_takse>
-            <zh-1:iznos>43434.0</zh-1:iznos>
+            <zh-1:iznos>432.0</zh-1:iznos>
         </zh-1:taksa>
     </zh-1:placene_takse>
     <zh-1:prilozi>

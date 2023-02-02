@@ -15,7 +15,13 @@ import org.apache.jena.update.UpdateExecutionFactory;
 import org.apache.jena.update.UpdateFactory;
 import org.apache.jena.update.UpdateProcessor;
 import org.apache.jena.update.UpdateRequest;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -85,7 +91,7 @@ public class MetadataService {
         query.close() ;
     }
 
-    public String extractMetadataToRdf(InputStream in, String id) {
+    public String extractMetadataToRdf(InputStream in, String outputExtractedFilePath) { //String outputFilePath = "./src/main/resources/static/extracted_rdf.xml";
         StreamSource transformSource = new StreamSource(new File("./data/grddl/grddl.xsl"));
         TransformerFactory factory = TransformerFactory.newInstance();
         Transformer grddlTransformer = null;
@@ -100,14 +106,13 @@ public class MetadataService {
         grddlTransformer.setOutputProperty("{http://xml.apache.org/xalan}indent-amount", "2");
         grddlTransformer.setOutputProperty(OutputKeys.INDENT, "yes");
 
-        String outputFilePath = "./src/main/resources/static/extracted_rdf.xml";
 
         //StreamSource source = new StreamSource(new ByteArrayInputStream(xmlData.getBytes(StandardCharsets.UTF_8)));
         StreamSource source = new StreamSource(in);
         StreamResult result = null;
 
         try {
-            result = new StreamResult(new FileOutputStream(outputFilePath));
+            result = new StreamResult(new FileOutputStream(outputExtractedFilePath));
         } catch (FileNotFoundException e) {
             throw new OperationFailedException("Error while creating output file");
         }
@@ -118,15 +123,15 @@ public class MetadataService {
             throw new OperationFailedException("Error while extracting metadata to RDF");
         }
 
-        String rdfXmlResult = readFromFile(outputFilePath);
+        String rdfXmlResult = readFromFile(outputExtractedFilePath);
         //File outputFile = new File(outputFilePath);
         //outputFile.delete();
 
-        return outputFilePath;
+        return outputExtractedFilePath;
     }
 
     public void transformRDF(String xmlData, String xsltFIlePath, String outputPath) {
-        String path = "./src/main/resources/xml/ZH-1-generated.xml";
+        String path = "./src/main/resources/static/data.xml";
         try{
             FileUtils.writeStringToFile(new File(path), xmlData);
             StreamSource streamSource = new StreamSource(new File(xsltFIlePath));
@@ -229,11 +234,9 @@ public class MetadataService {
             String br = querySolution.get("brojPrijaveZiga").toString();
             if (!prijave.contains(br)) {
                 String email = querySolution.get("podnosilacEmail").toString();
-                if(!brojeviPrijaveZiga.contains(br))
-                {
-                    result.add(new SearchResultsDto(br, email));
-                    brojeviPrijaveZiga.add(br);
-                }
+
+                result.add(new SearchResultsDto(br, email));
+                brojeviPrijaveZiga.add(br);
             }
         }
 
@@ -319,6 +322,29 @@ public class MetadataService {
 
         // UpdateProcessor sends update request to a remote SPARQL update service.
         UpdateProcessor processor = UpdateExecutionFactory.createRemote(update, connectionProperties.updateEndpoint);
+        processor.execute();
+    }
+
+    public void uploadZahtevMetadata(String SPARQL_NAMED_GRAPH_URI) throws IOException {
+        // Creates a default model
+        Model model = ModelFactory.createDefaultModel();
+        String filePath = "./src/main/resources/static/extracted_rdf.xml";
+        model.read(filePath);
+
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+        model.write(out, SparqlUtil.NTRIPLES);
+
+        model.write(System.out, SparqlUtil.RDF_XML);
+
+        // Creating the first named graph and updating it with RDF data
+        String sparqlUpdate = insertData(connectionProperties.dataEndpoint + SPARQL_NAMED_GRAPH_URI, new String(out.toByteArray()));
+        System.out.println(sparqlUpdate);
+        // UpdateRequest represents a unit of execution
+        UpdateRequest update = UpdateFactory.create(sparqlUpdate);
+
+        UpdateProcessor processor = UpdateExecutionFactory.createRemote(update, connectionProperties.updateEndpoint);
+
         processor.execute();
     }
 }

@@ -44,8 +44,8 @@ export class SluzbenikDashboardComponent {
 
   getPendingRequests(){
     this.zigService.getPendingRequests().subscribe({
-      next: res => {    
-          this.startingList = this.makeJsonListOutOfSearchResults(res);    
+      next: res => {   
+          this.startingList = this.makeJsonListOutOfSearchResults(res);   
           this.isLoading = false;     
       },
       error: error => {

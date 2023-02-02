@@ -116,11 +116,10 @@
             <mat-chip-grid #chipGrid aria-label="Dodajte jos boja">
               <mat-chip-row *ngFor="let boja of boje"
                             (removed)="removeColor(boja)"
-                            [editable]="false"
+                            [editable]="true"
                             (edited)="editColor(boja, $event)"
-                            [removable]="true"
                             >
-                {{boje}}
+                {{boja}}
                 <button matChipRemove [attr.aria-label]="'remove ' + boja">
                   <mat-icon>cancel</mat-icon>
                 </button>
@@ -147,7 +146,7 @@
             <input matInput formControlName="prevodZnaka" required="false">
         </mat-form-field>
 
-        <h2>8. Opis znaka*</h2>
+        <h2>8. Opis znaka</h2>
 
         <mat-form-field [style.width.%]="50">
             <mat-label>Opis znaka</mat-label>

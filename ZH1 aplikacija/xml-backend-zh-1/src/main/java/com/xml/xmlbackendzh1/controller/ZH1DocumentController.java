@@ -3,9 +3,12 @@ package com.xml.xmlbackendzh1.controller;
 import com.xml.xmlbackendzh1.dto.RequestDto;
 import com.xml.xmlbackendzh1.dto.ResponseToPendingRequestDto;
 import com.xml.xmlbackendzh1.dto.SearchResultsListDto;
+import com.xml.xmlbackendzh1.model.zh1.Resenje;
 import com.xml.xmlbackendzh1.service.ZH1DocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.xmldb.api.base.XMLDBException;
@@ -50,6 +53,46 @@ public class ZH1DocumentController {
         try{
             this.service.approveRequest(dto);
             return ResponseEntity.ok("Success");
+        }catch(Exception ex){
+            return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping(value="/reject-request", produces = "application/xml")
+    public ResponseEntity<?> rejectRequest(@RequestBody ResponseToPendingRequestDto dto){
+        try{
+            this.service.rejectRequest(dto);
+            return ResponseEntity.ok("Success");
+        }catch(Exception ex){
+            return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping(value="/get-resenje", produces = "application/xml")
+    public ResponseEntity<?> getResenjeById(@RequestParam("documentId") String documentId){
+        try{
+            Resenje r = this.service.findResenjeById(documentId);
+            return ResponseEntity.ok(r);
+        }catch(Exception ex){
+            return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/pdf")
+    public ResponseEntity<?> getRequestPDF(@RequestParam("brojPrijaveZiga") String brojPrijave){
+        try{
+            ByteArrayResource body = this.service.getRequestPDF(brojPrijave);
+            return ((ResponseEntity.BodyBuilder)ResponseEntity.ok()).contentType(MediaType.APPLICATION_OCTET_STREAM).body(body);
+        }catch(Exception ex){
+            return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/html")
+    public ResponseEntity<?> getRequestHTML(@RequestParam("brojPrijaveZiga") String brojPrijave){
+        try{
+            String html = this.service.getRequestHTML(brojPrijave);
+            return ResponseEntity.ok(html);
         }catch(Exception ex){
             return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
         }

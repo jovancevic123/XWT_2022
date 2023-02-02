@@ -76,8 +76,8 @@ export class FormPageComponent implements OnInit {
 
       //znak
       tipZnaka: new FormControl('',[Validators.required]),
-      transliteracijaZnaka: new FormControl('',[Validators.required]),
-      prevodZnaka: new FormControl('',[Validators.required]), 
+      transliteracijaZnaka: new FormControl(),
+      prevodZnaka: new FormControl(), 
       opisZnaka: new FormControl('',[Validators.required]), 
       // izgledZnaka: new FormControl('',[Validators.required]), 
 
@@ -136,7 +136,7 @@ export class FormPageComponent implements OnInit {
   
 
   onTipLicaChangedPunomocnikToFizicko(){
-    this.fizikoLicePodnosilacChecked = true;
+    this.fizikoLicePunomocnikChecked = true;
   }
   
   onTipLicaChangedPunomocnikToPravno()
