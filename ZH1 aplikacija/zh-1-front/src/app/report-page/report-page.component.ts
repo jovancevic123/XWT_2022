@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
 import { ZigService } from '../services/zig.service';
 
 @Component({
@@ -16,11 +15,10 @@ export class ReportPageComponent {
     end: new FormControl<Date | null>(null),
   });
 
-  constructor(private zigService: ZigService, private toastr: ToastrService){}
+  constructor(private zigService: ZigService){}
 
   generateReport(){
     if(!this.range.controls.start.value || !this.range.controls.end.value){
-      this.toastr.error('Opseg datuma nije validan!');
       return;
     }
 
@@ -29,8 +27,8 @@ export class ReportPageComponent {
         this.pdfContent = blob;
       },
       error: error => {
-        this.toastr.error('Došlo je do greške, pokušajte ponovo!');
-        }
+        console.log(error);
+      }
     });
   }
 }
