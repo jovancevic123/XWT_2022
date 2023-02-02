@@ -82,4 +82,5 @@
         <zh-1:dokaz_o_pravu_prvenstva src=""/>
         <zh-1:dokaz_o_uplati_takse src=""/>
     </zh-1:prilozi>
+    <BrojResenja datatype="xs:string" property="pred:broj_resenja">1675357904437</BrojResenja>
 </zahtev>

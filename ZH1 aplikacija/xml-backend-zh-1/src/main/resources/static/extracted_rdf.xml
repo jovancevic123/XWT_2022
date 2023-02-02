@@ -11,4 +11,7 @@
   <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/320242117">
     <pred:datum_podnosenja xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2023-02-02</pred:datum_podnosenja>
   </rdf:Description>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/320242117">
+    <pred:broj_resenja xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1675357904437</pred:broj_resenja>
+  </rdf:Description>
 </rdf:RDF>
