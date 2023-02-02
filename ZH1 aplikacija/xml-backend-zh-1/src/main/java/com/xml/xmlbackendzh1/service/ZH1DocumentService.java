@@ -347,5 +347,68 @@ public class ZH1DocumentService {
             default: throw new QueryFormatException("Malformed query!");
         }
     }
+
+    public ByteArrayResource generateReport(String startDate, String endDate) throws IOException, DocumentException {
+        Document document = new Document();
+        String path = "./src/main/resources/xml/reports/" + new Date().getTime() + ".pdf";
+        File file = null;
+
+        try {
+            file = new File(path);
+            if (file.createNewFile()) {
+                System.out.println("File created: " + file.getName());
+            } else {
+                System.out.println("File already exists.");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
+        PdfWriter.getInstance(document, new FileOutputStream(path));
+        document.open();
+
+        int brojPodnetihPrijava = this.metadataService.requestsThatAreReceivedBetween(startDate, endDate, "./data/sparql/reportRequestQuery1.rq");
+        int acceptedCounter = this.metadataService.numberOfResponsesBetween(startDate, endDate, "./data/sparql/reportRequestQuery2.rq");
+        int rejectedCounter = this.metadataService.numberOfResponsesBetween(startDate, endDate, "./data/sparql/reportRequestQuery3.rq");
+
+        Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
+        Chunk chunk = new Chunk("Izveštaj za period: " + startDate + " --- " + endDate + "\n\n\n\n\n", font);
+
+        PdfPTable table = new PdfPTable(2);
+        addTableHeader(table);
+
+        addRows(table, "Broj podnetih zahteva:", brojPodnetihPrijava);
+        addRows(table, "Broj prihvacenih zahteva:", acceptedCounter);
+        addRows(table, "Broj odbijenih zahteva:", rejectedCounter);
+
+        Paragraph paragraph1 = new Paragraph(chunk);
+        document.add(paragraph1);
+
+        document.add(table);
+
+        document.close();
+
+        byte[] fileContent = Files.readAllBytes(file.toPath());
+        ByteArrayResource body = new ByteArrayResource(fileContent);
+        file.delete();
+        return body;
+    }
+
+    private void addTableHeader(PdfPTable table) {
+        Stream.of("Predmet", "Ukupan broj")
+                .forEach(columnTitle -> {
+                    PdfPCell header = new PdfPCell();
+                    header.setBackgroundColor(BaseColor.LIGHT_GRAY);
+                    header.setBorderWidth(2);
+                    header.setPhrase(new Phrase(columnTitle));
+                    table.addCell(header);
+                });
+    }
+
+    private void addRows(PdfPTable table, String text, int counter) {
+        table.addCell(text);
+        table.addCell(counter + "");
+    }
 }
 

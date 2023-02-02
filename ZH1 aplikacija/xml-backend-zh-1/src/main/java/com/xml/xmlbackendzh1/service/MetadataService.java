@@ -424,4 +424,57 @@ public class MetadataService {
         return prijave;
     }
 
+    public int requestsThatAreReceivedBetween(String startDate, String endDate, String querySelectPath) {     //String querySelectPath = "./data/sparql/reportRequestQuery.rq";
+        String sparqlQuery = null;
+
+        List<String> brojeviPrijava = new ArrayList<>();
+        try {
+
+            sparqlQuery = String.format(readFile(querySelectPath, StandardCharsets.UTF_8),
+                    startDate,
+                    endDate);
+        }catch (IOException e){
+        }
+
+        QueryExecution query = QueryExecutionFactory.sparqlService(connectionProperties.queryEndpoint, sparqlQuery);
+        ResultSet results = query.execSelect();
+
+        while (results.hasNext()) {
+            QuerySolution querySolution = results.next();
+            Iterator<String> variableBindings = querySolution.varNames();
+
+            String broj = querySolution.get("brojPrijaveZiga").toString();
+            brojeviPrijava.add(broj);
+        }
+        return brojeviPrijava.size();
+    }
+
+    public int numberOfResponsesBetween(String startDate, String endDate, String querySelectPath) {     //String querySelectPath = "./data/sparql/reportRequestQuery2.rq";
+        String sparqlQuery = null;
+
+        List<String> resenja = new ArrayList<>();
+        try {
+
+            sparqlQuery = String.format(readFile(querySelectPath, StandardCharsets.UTF_8),
+                    startDate,
+                    endDate);
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+
+        QueryExecution query = QueryExecutionFactory.sparqlService(connectionProperties.queryEndpoint, sparqlQuery);
+        ResultSet results = query.execSelect();
+
+        String varName;
+        RDFNode varValue;
+        while (results.hasNext()) {
+            QuerySolution querySolution = results.next();
+            Iterator<String> variableBindings = querySolution.varNames();
+
+            String broj = querySolution.get("brojResenja").toString();
+            resenja.add(broj);
+        }
+        return resenja.size();
+    }
+
 }
