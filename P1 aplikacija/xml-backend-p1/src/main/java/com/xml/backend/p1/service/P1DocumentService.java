@@ -131,7 +131,7 @@ public class P1DocumentService {
         throw new FormatNotValidException();
     }
 
-    public void addPatentXonomy(Zahtev zahtev) throws JAXBException {
+    public void addPatentXonomy(Zahtev zahtev) throws Exception {
         int brojPrijave = (int) new Date().getTime();
         zahtev.getPrijava().setBrojPrijave(brojPrijave);
         zahtev.getPrijava().setDatumPrijema(LocalDate.now());
@@ -142,7 +142,18 @@ public class P1DocumentService {
         JAXBContext context = JAXBContext.newInstance(Zahtev.class);
         Marshaller m = context.createMarshaller();
         m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        m.marshal(zahtev, System.out);
+//        m.marshal(zahtev, System.out);
+        String newFilePath = "src/main/resources/xml/generated/" + zahtev.getPrijava().getBrojPrijave() + ".xml";
+        File file = new File(newFilePath);
+        m.marshal(zahtev, file);
+        boolean valid = this.existService.validateXMLSchema("src/main/resources/xml/P-1.xsd", newFilePath);
+        if(valid){
+            String xmlData = Files.readString(Paths.get(newFilePath));
+            this.repository.save(zahtev.getPrijava().getBrojPrijave() + "", xmlData, "/db/patent/zahtevi");
+            this.uploadZahtevMetadata(xmlData);
+            return;
+        }
+        throw new FormatNotValidException();
     }
 
     public ByteArrayResource getRequestPDF(String brojPrijave) throws XMLDBException, IOException {
@@ -238,7 +249,7 @@ public class P1DocumentService {
         metadataService.transformRDF(xmlData, xsltFIlePath, outputPath); // 1. xml u obliku string-a
         String resultMeta = metadataService.extractMetadataToRdf(new FileInputStream(new File("./src/main/resources/static/rdf")), "./src/main/resources/static/extracted_rdf.xml");
 
-        metadataService.uploadResenjeMetadata("./src/main/resources/static/extracted_rdf.xml", "/graph/metadata/p1"); 
+        metadataService.uploadResenjeMetadata("./src/main/resources/static/extracted_rdf.xml", "/graph/metadata/p1");
     }
 
     private Resenje makeResenjeFromDto(ResponseToPendingRequestDto dto){

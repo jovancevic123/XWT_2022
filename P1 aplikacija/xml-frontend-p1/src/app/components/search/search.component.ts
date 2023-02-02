@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Component, Input, OnInit } from '@angular/core';
 import { AdvancedSearchMeta } from 'src/app/model/AdvancedSearchMeta';
 import { SearchResult } from 'src/app/model/PendingRequest';
@@ -19,7 +20,7 @@ export class SearchComponent implements OnInit{
   advancedSearchInput: AdvancedSearchMeta[] = [];
   searchResults: SearchResult[];
 
-  constructor(private searchService: SearchService, private tokenUtilService: TokenUtilService){}
+  constructor(private searchService: SearchService, private tokenUtilService: TokenUtilService, private toastService: ToastrService){}
 
   ngOnInit(): void {
     this.searchResults = [...this.startingList];        
@@ -31,7 +32,7 @@ export class SearchComponent implements OnInit{
         this.searchResults = this.makeJsonListOutOfSearchResults(res);       
       },
       error: error => {
-          console.error(error);
+        this.toastService.warning("Something went wrong!");
       }
     });
   }
@@ -42,7 +43,7 @@ export class SearchComponent implements OnInit{
           this.searchResults = this.makeJsonListOutOfSearchResults(res);
         },
         error: error => {
-            console.error(error);
+          this.toastService.warning(error.error);
         }
       });
   }
@@ -98,7 +99,5 @@ export class SearchComponent implements OnInit{
     
     this.advancedSearchInput.push(newRow);
   }
-
-
 
 }

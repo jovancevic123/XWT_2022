@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<zahtev xmlns="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<zahtev xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.ftn.uns.ac.rs/xwt">
     <prijava>
-        <broj_prijave>44803962</broj_prijave>
-        <datum_prijema>2023-01-30</datum_prijema>
+        <broj_prijave>302660082</broj_prijave>
+        <datum_prijema>2023-02-02</datum_prijema>
         <vrsta_prijave>izdvojena</vrsta_prijave>
     </prijava>
     <zavod>
@@ -16,72 +16,64 @@
         </adresa>
     </zavod>
     <pronalazak>
-        <naziv_pronalaska_srb>Cekic</naziv_pronalaska_srb>
-        <naziv_pronalaska_eng>Hammer</naziv_pronalaska_eng>
+        <naziv_pronalaska_srb>srb</naziv_pronalaska_srb>
+        <naziv_pronalaska_eng>eng</naziv_pronalaska_eng>
     </pronalazak>
     <podnosilac pronalazac="true">
-        <drzavljanstvo>Srpsko</drzavljanstvo>
-        <lice xsi:type="TFizickoLice" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <drzavljanstvo>srpsko</drzavljanstvo>
+        <lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TPravnoLice">
             <adresa>
-                <ulica>atar</ulica>
-                <broj>3</broj>
-                <postanski_broj>21000</postanski_broj>
-                <mesto>veternik</mesto>
+                <ulica>joca</ulica>
+                <broj>1</broj>
+                <postanski_broj>21203</postanski_broj>
+                <mesto>vetenik</mesto>
                 <drzava>srb</drzava>
             </adresa>
             <kontakt>
-                <telefon>1298308904</telefon>
-                <email>jovancevic@gmail.com</email>
-                <fax>faks</fax>
+                <telefon>123</telefon>
+                <email>aktiva@gmail.com</email>
+                <fax>123</fax>
             </kontakt>
-            <ime>Jovan</ime>
-            <prezime>Jovancevic</prezime>
+            <poslovno_ime>aktiva doo</poslovno_ime>
         </lice>
     </podnosilac>
-    <pronalazac naveden_u_prijavi="true">
-        <lice xsi:type="TFizickoLice" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <pronalazac naveden_u_prijavi="false">
+        <lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TFizickoLice">
             <adresa>
                 <ulica>atar</ulica>
-                <broj>3</broj>
+                <broj>123</broj>
                 <postanski_broj>21000</postanski_broj>
-                <mesto>veternik</mesto>
+                <mesto>vet</mesto>
                 <drzava>srb</drzava>
             </adresa>
             <kontakt>
-                <telefon>1298308904</telefon>
-                <email>jovancevic@gmail.com</email>
-                <fax>faks</fax>
+                <telefon>123</telefon>
+                <email>jovic@gmial.com</email>
+                <fax>123</fax>
             </kontakt>
             <ime>Jovan</ime>
-            <prezime>Jovancevic</prezime>
+            <prezime>Jovvic</prezime>
         </lice>
     </pronalazac>
     <punomoc>
-        <tip>punomocnik_za_zastupanje</tip>
-        <lice xsi:type="TFizickoLice" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <tip>punomocnik_za_prijem_pismena</tip>
+        <lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TFizickoLice">
             <adresa>
-                <ulica>pavla</ulica>
+                <ulica>atar</ulica>
                 <broj>1</broj>
-                <postanski_broj>21000</postanski_broj>
-                <mesto>novi sad</mesto>
+                <postanski_broj>12000</postanski_broj>
+                <mesto>idjos</mesto>
                 <drzava>srb</drzava>
             </adresa>
             <kontakt>
-                <telefon>89034890</telefon>
-                <email>perisic@gmail.com</email>
-                <fax>faks</fax>
+                <telefon>123</telefon>
+                <email>gmail@gmail.com</email>
+                <fax>123</fax>
             </kontakt>
-            <ime>Mile</ime>
-            <prezime>Markovic</prezime>
+            <ime>Joca</ime>
+            <prezime>Pavlovi</prezime>
         </lice>
     </punomoc>
-    <ranije_prijave>
-        <ranija_prijava>
-            <broj_prijave>123</broj_prijave>
-            <datum_podnosenja>2023-01-30</datum_podnosenja>
-            <dvoslovna_oznaka>srb</dvoslovna_oznaka>
-        </ranija_prijava>
-    </ranije_prijave>
+    <ranije_prijave/>
     <nacin_dostavljanja>elektronska_forma</nacin_dostavljanja>
-    <broj_resenja>1675082301754</broj_resenja>
 </zahtev>
