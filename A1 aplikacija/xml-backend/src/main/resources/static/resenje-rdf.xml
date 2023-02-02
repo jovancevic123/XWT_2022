@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><resenje xmlns:sh="https://schema.org/" xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:a1="http://www.ftn.uns.ac.rs/xwt" about="http://www.ftn.uns.ac.rs/xwt/resenje/1675355262032" vocab="http://www.ftn.uns.ac.rs/rdf/examples/predicate/">
+    <BrojResenja datatype="xs:string" property="pred:broj_resenja">1675355262032</BrojResenja>
+    <zah:broj_prijave xmlns:zah="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">317132464</zah:broj_prijave>
+    <zah:obrazlozenje xmlns:zah="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">Nije dobra forma</zah:obrazlozenje>
+    <zah:ime_sluzbenika xmlns:zah="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">Nevena</zah:ime_sluzbenika>
+    <zah:prezime_sluzbenika xmlns:zah="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">Simic</zah:prezime_sluzbenika>
+    <DatumOdgovora datatype="xs:date" property="pred:datum_odgovora">2023-02-02</DatumOdgovora>
+    <Prihvacena datatype="xs:boolean" property="pred:prihvacena">false</Prihvacena>
+</resenje>

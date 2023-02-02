@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<zah:zahtev xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:zah="http://www.ftn.uns.ac.rs/xwt">
+    <zah:prijava>
+        <zah:broj_prijave>317132464</zah:broj_prijave>
+        <zah:datum_podnosenja>2023-02-02</zah:datum_podnosenja>
+    </zah:prijava>
+    <zah:podnosilac podnosilac_je_autor="false">
+        <zah:lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="zah:TPravnoLice">
+            <zah:kontakt>
+                <zah:telefon>0665467777</zah:telefon>
+                <zah:email>nikola@gmail.com</zah:email>
+                <zah:fax></zah:fax>
+            </zah:kontakt>
+            <zah:poslovno_ime>NikolaS</zah:poslovno_ime>
+            <zah:sediste>Novi Sad</zah:sediste>
+        </zah:lice>
+    </zah:podnosilac>
+    <zah:punomocnik xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="zah:TPravnoLice">
+        <zah:kontakt>
+            <zah:telefon>0642322222</zah:telefon>
+            <zah:email>bob@gmail.com</zah:email>
+            <zah:fax></zah:fax>
+        </zah:kontakt>
+        <zah:poslovno_ime>Bob</zah:poslovno_ime>
+        <zah:sediste>Novi Sad</zah:sediste>
+    </zah:punomocnik>
+    <zah:autorsko_delo>
+        <zah:naslov>Biblija</zah:naslov>
+        <zah:delo_prerade>
+            <zah:naslov_dela_prerade>Stari zavet</zah:naslov_dela_prerade>
+            <zah:autori>
+                <zah:autor>
+                    <zah:kontakt>
+                        <zah:telefon>45464564</zah:telefon>
+                        <zah:email>gabi@gmail.com</zah:email>
+                        <zah:fax></zah:fax>
+                    </zah:kontakt>
+                    <zah:ime>Gabriel</zah:ime>
+                    <zah:prezime>Jesus</zah:prezime>
+                    <zah:adresa>
+                        <zah:ulica>ABga</zah:ulica>
+                        <zah:broj>45</zah:broj>
+                        <zah:postanski_broj>30000</zah:postanski_broj>
+                        <zah:mesto>Brazil</zah:mesto>
+                        <zah:drzava>Brazil</zah:drzava>
+                    </zah:adresa>
+                    <zah:drzavljanstvo>Brazil</zah:drzavljanstvo>
+                    <zah:pseudonim>gabi</zah:pseudonim>
+                    <zah:godina_smrti>0</zah:godina_smrti>
+                </zah:autor>
+            </zah:autori>
+        </zah:delo_prerade>
+        <zah:vrsta_dela>književno delo</zah:vrsta_dela>
+        <zah:forma_zapisa_dela>štampani tekst</zah:forma_zapisa_dela>
+        <zah:stvoreno_u_radnom_odnosu>false</zah:stvoreno_u_radnom_odnosu>
+        <zah:nacin_koriscenja>vrh</zah:nacin_koriscenja>
+        <zah:anoniman_autor>true</zah:anoniman_autor>
+    </zah:autorsko_delo>
+    <zah:zavod>
+        <zah:naziv>Zavod za intelektualnu svojinu</zah:naziv>
+        <zah:adresa>
+            <zah:ulica>Kneginje Ljubice</zah:ulica>
+            <zah:broj>5</zah:broj>
+            <zah:postanski_broj>11000</zah:postanski_broj>
+            <zah:mesto>Beograd</zah:mesto>
+            <zah:drzava>Srbija</zah:drzava>
+        </zah:adresa>
+    </zah:zavod>
+    <zah:broj_resenja></zah:broj_resenja>
+</zah:zahtev>

@@ -1,0 +1,16 @@
+.row{
+    display: inline-flex;
+}
+
+.row h3{
+    font-weight: 800;
+}
+
+.row p{
+    padding-left: 5px;
+}
+
+.column{
+    display: flex;
+    flex-direction: column;
+}

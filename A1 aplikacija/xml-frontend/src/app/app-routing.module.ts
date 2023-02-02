@@ -1,6 +1,4 @@
-
-
-import { SluzbenikDashboardComponent } from './components/sluzbenik-dashboard/sluzbenik-dashboard.component';
+import { ReportPageComponent } from './components/report-page/report-page.component';
 import { KorisnikDashboardComponent } from './components/korisnik-dashboard/korisnik-dashboard.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -22,12 +20,12 @@ const routes: Routes = [
         component:SearchComponent,
         outlet:'user-outlet'
       },
+      {
+        path:'report',
+        component:ReportPageComponent,
+        outlet:'user-outlet'
+      },
     ]
-  },
-  { 
-    path:"official", 
-    component: SluzbenikDashboardComponent,
-    children:[]
   },
 ];
 

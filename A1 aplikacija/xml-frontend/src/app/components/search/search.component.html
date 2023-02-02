@@ -27,9 +27,14 @@
                     <mat-label>Vrednost</mat-label>
                     <input matInput placeholder="Pretraži" [ngModelOptions]="{standalone: true}" [(ngModel)]="advancedSearchInput[i].value">
                 </mat-form-field>       
-                <mat-form-field class="example-full-width" *ngIf="advancedSearchInput.length != 0">
+                <mat-form-field class="example-full-width" *ngIf="advancedSearchInput.length != 0" ngDefaultControl >
                     <mat-label>Logički operator</mat-label>
-                    <input matInput placeholder="Pretraži" [ngModelOptions]="{standalone: true}" [(ngModel)]="advancedSearchInput[i].operator">
+                    <!-- <input matInput placeholder="Pretraži" [ngModelOptions]="{standalone: true}" [(ngModel)]="advancedSearchInput[i].operator"> -->
+                    <mat-select name="logicOperator" ngDefaultControl [(ngModel)]="advancedSearchInput[i].operator" required>
+                        <mat-option value="and">I</mat-option>
+                        <mat-option value="or">ILI</mat-option>
+                        <mat-option value="not">NE</mat-option>
+                    </mat-select>
                 </mat-form-field>   
                 <button mat-fab (click)="onDeleteAdvancedSeachInput(i)">
                     <mat-icon>delete-forever</mat-icon>

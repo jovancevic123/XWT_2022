@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.*;
 @Getter
 @Setter
 @XmlTransient
+@XmlSeeAlso({FizickoLice.class, PravnoLice.class})
 public abstract class Lice{
 
     protected Kontakt kontakt;

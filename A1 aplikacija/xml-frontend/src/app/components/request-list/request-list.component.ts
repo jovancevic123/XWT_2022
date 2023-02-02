@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { ConclusionDialogComponent } from './../conclusion-dialog/conclusion-dialog.component';
 import { ConclusionService } from './../../services/conclusion.service';
 import { AutorskoDeloServiceService } from './../../services/autorsko-delo-service.service';
@@ -25,7 +26,7 @@ export class RequestListComponent {
   referencirajuci: SearchResult[] = [];
 
   constructor(private autorskoDeloService: AutorskoDeloServiceService, public dialog: MatDialog, private tokenUtilService: TokenUtilService,
-    private conclusionService: ConclusionService){}
+    private conclusionService: ConclusionService, private toastr:ToastrService){}
 
 
   ngOnInit(): void {
@@ -62,10 +63,12 @@ export class RequestListComponent {
     this.autorskoDeloService.approveRequest(brojPrijave).subscribe({
       next: data => {
         console.log(data);
-        this.requests.splice(i, 1);
+        this.requests[i].brojResenja = data;
+        this.toastr.success("","Uspešno prihvatanje");
       },
       error: error => {
         console.error(error);
+        this.toastr.error("","Neuspešno prihvatanje");
         }
     });
   } 
@@ -73,11 +76,13 @@ export class RequestListComponent {
   odbij(brojPrijave: string, obrazlozenje: string, i: number){
     this.autorskoDeloService.rejectRequest(brojPrijave, obrazlozenje).subscribe({
       next: data => {
-        console.log(data);   
-        this.requests.splice(i, 1);
+        console.log(data);
+        this.requests[i].brojResenja = data;
+        this.toastr.success("","Uspešno odbijanje");
       },
       error: error => {
         console.error(error);
+        this.toastr.error("","Neuspešno odbijanje");
         }
     });
   }
@@ -118,6 +123,7 @@ export class RequestListComponent {
   }
 
   openResenjeDialog(resenje: DialogResenjeData): void {
+    console.log(resenje);
     const dialogRef = this.dialog.open(ConclusionDialogComponent, {
       data: resenje,
     });
@@ -133,15 +139,16 @@ export class RequestListComponent {
   }
 
   pogledajResenje(i: number){
+    console.log(this.requests);
     this.conclusionService.getResenje(this.requests[i].brojResenja)
     .subscribe({
       next: res => {    
           let r: DialogResenjeData = this.makeJsonResenje(res);
           this.openResenjeDialog(r);
-          console.log(r);
       },
       error: error => {
           console.error(error);
+          this.toastr.error("","Neuspešno pristupanje serveru");
       }
   })
   };
@@ -167,15 +174,18 @@ export class RequestListComponent {
   }
 
   makeJsonResenje(xmlString: string): DialogResenjeData{
-    let results = JSON.parse(this.tokenUtilService.xml2Json(xmlString)).resenje;     
+    console.log(xmlString);
+    let results = JSON.parse(this.tokenUtilService.xml2Json(xmlString))["zah:resenje"]; 
+    console.log(results);
+    
     
     let val: DialogResenjeData = {
-      brojResenja: results.broj_resenja,
-      imeSluzbenika: results.ime_sluzbenika,
-      prezimeSluzbenika: results.prezime_sluzbenika,
-      datumOdgovora: results.datum_odgovora,
-      prihvacena: results.prihvacena,
-      razlog: results.razlog
+      brojResenja: results["zah:broj_resenja"],
+      imeSluzbenika: results["zah:ime_sluzbenika"],
+      prezimeSluzbenika: results["zah:prezime_sluzbenika"],
+      datumOdgovora: results["zah:datum_odgovora"],
+      prihvacena: results["zah:prihvacena"],
+      razlog: results["zah:obrazlozenje"]
     }
 
     return val;

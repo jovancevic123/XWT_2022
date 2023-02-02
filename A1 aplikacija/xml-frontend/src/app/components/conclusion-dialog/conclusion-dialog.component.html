@@ -1,1 +1,26 @@
-<p>conclusion-dialog works!</p>
+<h2 mat-dialog-title>Resenje</h2>
+<mat-dialog-content class="mat-typography">
+    <div class="column">
+        <div class="row">
+            <h3>Broj resenja:</h3>
+            <p>{{data.brojResenja}}</p>
+        </div>
+        <div class="row">
+            <h3>Prijava prihvacena?</h3>
+            <p *ngIf="data.prihvacena === 'true'">Da</p>
+            <p *ngIf="data.prihvacena === 'false'">Ne</p>
+        </div>
+        <div class="row" *ngIf="data.prihvacena === 'false'">
+            <h3>Razlog:</h3>
+            <p>{{data.razlog}}</p>
+        </div>
+        <div class="row">
+            <h3>Sluzbenik:</h3>
+            <p>{{data.imeSluzbenika}} {{data.prezimeSluzbenika}}</p>
+        </div>
+        <div class="row">
+            <h3>Datum odgovora:</h3>
+            <p>{{data.datumOdgovora}}</p>
+        </div>
+    </div>
+</mat-dialog-content>

@@ -1,4 +1,4 @@
-package com.xml.xmlbackend.model;
+package com.xml.xmlbackend.model.a1;
 
 import com.xml.xmlbackend.dto.ResponseToPendingRequestDto;
 import com.xml.xmlbackend.model.common.LocalDateAdapter;

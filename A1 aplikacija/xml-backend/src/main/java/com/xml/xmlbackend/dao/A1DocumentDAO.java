@@ -1,7 +1,10 @@
 package com.xml.xmlbackend.dao;
 
 
+import com.xml.xmlbackend.model.a1.Resenje;
+import com.xml.xmlbackend.model.a1.Zahtev;
 import com.xml.xmlbackend.util.AuthenticationUtilities;
+import org.exist.util.StringInputSource;
 import org.springframework.stereotype.Repository;
 import org.xmldb.api.DatabaseManager;
 import org.xmldb.api.base.Collection;
@@ -10,6 +13,9 @@ import org.xmldb.api.base.XMLDBException;
 import org.xmldb.api.modules.CollectionManagementService;
 import org.xmldb.api.modules.XMLResource;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.OutputKeys;
 import java.io.IOException;
 
@@ -64,6 +70,14 @@ public class A1DocumentDAO {
         collection.storeResource(res);
     }
 
+    public Resenje findUnmarshalledResenjeById(String resourceId) throws XMLDBException, JAXBException {
+        XMLResource res = this.findById(resourceId + ".xml", "/db/autorskoDelo/resenja");
+        JAXBContext context = JAXBContext.newInstance(Resenje.class);
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+
+        return (Resenje) unmarshaller.unmarshal(new StringInputSource(res.getContent().toString()));
+    }
+
     private Collection getOrCreateCollection(String collectionUri, int pathSegmentOffset) throws XMLDBException {
 
         Collection col = DatabaseManager.getCollection(connectionProperties.uri + collectionUri, connectionProperties.user, connectionProperties.password);
@@ -111,4 +125,11 @@ public class A1DocumentDAO {
         }
     }
 
+    public Zahtev findUnmarshalledZahtevById(String resourceId) throws XMLDBException, JAXBException {
+        XMLResource res = this.findById(resourceId + ".xml", "/db/autorskoDelo/zahtevi");
+        JAXBContext context = JAXBContext.newInstance(Zahtev.class);
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+
+        return (Zahtev) unmarshaller.unmarshal(new StringInputSource(res.getContent().toString()));
+    }
 }

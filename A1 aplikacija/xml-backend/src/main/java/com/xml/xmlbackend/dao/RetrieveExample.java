@@ -1,7 +1,6 @@
 package com.xml.xmlbackend.dao;
 
 import com.xml.xmlbackend.service.MetadataService;
-import com.xml.xmlbackend.transformers.XmlTransformer;
 import com.xml.xmlbackend.util.AuthenticationUtilities;
 import org.exist.xmldb.EXistResource;
 import org.xmldb.api.DatabaseManager;
@@ -93,12 +92,12 @@ public class RetrieveExample {
     private static void generateRDFAndUpload(String xmlData) throws IOException {
         String xsltFIlePath = "./src/main/resources/xml/metadata.xsl";
         String outputPath = "./src/main/resources/static/rdf.xml";
-        MetadataService service = new MetadataService();
+//        MetadataService service = new MetadataService(existDao);
 
-        service.transformRDF(xmlData, xsltFIlePath, outputPath);
-        String resultMeta = service.extractMetadataToRdf(new FileInputStream(new File("./src/main/resources/static/rdf.xml")), "123");
-        System.out.println(resultMeta);
-        service.uploadMetadata("./src/main/resources/static/extracted_rdf.xml", "");
+//        service.transformRDF(xmlData, xsltFIlePath, outputPath);
+//        String resultMeta = service.extractMetadataToRdf(new FileInputStream(new File("./src/main/resources/static/rdf.xml")), "123");
+//        System.out.println(resultMeta);
+//        service.uploadMetadata("./src/main/resources/static/extracted_rdf.xml", "");
     }
 
     private static void transformToPdfAndHtml(String xmlData) throws IOException {

@@ -6,6 +6,7 @@ import { Adresa } from 'src/app/model/Adresa';
 import { Autor } from 'src/app/model/Autor';
 import { Kontakt } from 'src/app/model/Kontakt';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-page',
@@ -51,7 +52,7 @@ export class FormPageComponent {
   autoriDelaPrerade: Autor[] = [JSON.parse(JSON.stringify(this.prazanAutor))];
   autoriDelaPreradeNum: number[] = [0];
 
-  constructor(private autorskoDeloService:AutorskoDeloServiceService, private toastr:ToastrService){}
+  constructor(private autorskoDeloService:AutorskoDeloServiceService, private toastr:ToastrService, private router:Router){}
 
   ngOnInit(){
     this.form = new FormGroup({
@@ -133,6 +134,8 @@ export class FormPageComponent {
       }
     }
     else{
+      console.log(data);
+      console.log(this.podnosilacKontakt);
       const valid = this.checkIfPodnosilacPravnoLiceIsValid(data);
       if(!valid){
         this.toastr.warning("All fields in Podnosilac must be valid", "Form Invalid");
@@ -183,7 +186,7 @@ export class FormPageComponent {
         this.toastr.warning("All fields in Autor must be valid", "Form Invalid");
         return;
       }
-      zahtev.autoriDela = this.autoriDela;
+      zahtev.autorskoDelo.autoriDela = this.autoriDela;
     }
     //ako je delo prerade
     if(data.jeDeloPrerade){
@@ -201,7 +204,8 @@ export class FormPageComponent {
     this.autorskoDeloService.submitRequest(zahtev).subscribe({
       next: data => {
         console.log(data);
-        this.toastr.success("","Successfully saved")
+        this.toastr.success("","Successfully saved");
+        this.router.navigate(['/user', {outlets: {'user-outlet': ['search']}}]);
       },
       error: error => {
         console.error(error);
@@ -259,6 +263,7 @@ export class FormPageComponent {
 
   checkIfAutorsAreValid(){
     for (const autor of this.autoriDela) {
+      console.log(autor);
       if(!autor.ime || !autor.prezime || !autor.drzavljanstvo || !autor.kontakt.email || !autor.kontakt.broj || !autor.adresa.broj || !autor.adresa.drzava 
         || !autor.adresa.mesto || !autor.adresa.postanskiBroj || !autor.adresa.ulica)
         return false;

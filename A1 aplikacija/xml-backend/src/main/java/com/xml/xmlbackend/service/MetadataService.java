@@ -1,13 +1,13 @@
 package com.xml.xmlbackend.service;
 
+import com.xml.xmlbackend.dao.A1DocumentDAO;
 import com.xml.xmlbackend.dto.SearchMetadataDto;
 import com.xml.xmlbackend.dto.SearchResultDto;
 import com.xml.xmlbackend.exception.OperationFailedException;
-import com.xml.xmlbackend.util.AuthenticationUtilities;
+import com.xml.xmlbackend.model.a1.Zahtev;
 import com.xml.xmlbackend.util.FusekiAuthentication;
 import com.xml.xmlbackend.util.SparqlUtil;
 import org.apache.commons.io.FileUtils;
-import org.apache.http.client.HttpClient;
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.update.UpdateExecutionFactory;
@@ -15,7 +15,10 @@ import org.apache.jena.update.UpdateFactory;
 import org.apache.jena.update.UpdateProcessor;
 import org.apache.jena.update.UpdateRequest;
 import org.springframework.stereotype.Service;
+import org.xmldb.api.base.XMLDBException;
 
+import javax.swing.text.DateFormatter;
+import javax.xml.bind.JAXBException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.*;
@@ -27,6 +30,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -36,8 +40,10 @@ import java.util.stream.Stream;
 public class MetadataService {
     public final String XSL_TO_RDF_FILE = "xml/metadata.xsl";
     private FusekiAuthentication.ConnectionProperties connectionProperties;
+    private final A1DocumentDAO existDao;
 
-    public MetadataService() throws IOException {
+    public MetadataService(A1DocumentDAO existDao) throws IOException {
+        this.existDao = existDao;
         connectionProperties = FusekiAuthentication.loadProperties();
     }
 
@@ -365,5 +371,84 @@ public class MetadataService {
 
         processor.execute();
     }
+
+    public List<SearchResultDto> advancedSearch(String sparqlQuery) throws JAXBException, XMLDBException {
+        List<SearchResultDto> prijave = new ArrayList<>();
+
+        QueryExecution query = QueryExecutionFactory.sparqlService(connectionProperties.queryEndpoint, sparqlQuery);
+        ResultSet results = query.execSelect();
+
+        while (results.hasNext()) {
+
+            QuerySolution querySolution = results.next();
+            Iterator<String> variableBindings = querySolution.varNames();
+
+            String broj = querySolution.get("brojPrijave").toString();
+
+            Zahtev zahtev = this.existDao.findUnmarshalledZahtevById(broj);
+
+            String brojResenja = "";
+            if(zahtev.getBrojResenja() != null){
+                brojResenja = zahtev.getBrojResenja();
+            }
+            DateTimeFormatter  formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+            prijave.add(new SearchResultDto(zahtev.getPrijava().getBrojPrijave()+"", zahtev.getPrijava().getDatumPodnosenja().format(formatter), zahtev.getPodnosilac().getLice().getKontakt().getEmail(), zahtev.getAutorskoDelo().getNaslov(), zahtev.getBrojResenja()));
+        }
+        return prijave;
+    }
+
+    public int requestsThatAreReceivedBetween(String startDate, String endDate, String querySelectPath) {
+        String sparqlQuery = null;
+
+        List<String> brojeviPrijava = new ArrayList<>();
+        try {
+            sparqlQuery = String.format(readFile(querySelectPath, StandardCharsets.UTF_8),
+                    startDate,
+                    endDate);
+        }catch (IOException e){
+        }
+
+        QueryExecution query = QueryExecutionFactory.sparqlService(connectionProperties.queryEndpoint, sparqlQuery);
+        ResultSet results = query.execSelect();
+
+        while (results.hasNext()) {
+            QuerySolution querySolution = results.next();
+            Iterator<String> variableBindings = querySolution.varNames();
+
+            String broj = querySolution.get("brojPrijave").toString();
+            brojeviPrijava.add(broj);
+        }
+        return brojeviPrijava.size();
+    }
+
+    public int numberOfResponsesBetween(String startDate, String endDate, String querySelectPath) {
+        String sparqlQuery = null;
+
+        List<String> resenja = new ArrayList<>();
+        try {
+
+            sparqlQuery = String.format(readFile(querySelectPath, StandardCharsets.UTF_8),
+                    startDate,
+                    endDate);
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+
+        QueryExecution query = QueryExecutionFactory.sparqlService(connectionProperties.queryEndpoint, sparqlQuery);
+        ResultSet results = query.execSelect();
+
+        String varName;
+        RDFNode varValue;
+        while (results.hasNext()) {
+            QuerySolution querySolution = results.next();
+            Iterator<String> variableBindings = querySolution.varNames();
+
+            String broj = querySolution.get("brojResenja").toString();
+            resenja.add(broj);
+        }
+        return resenja.size();
+    }
+
 
 }

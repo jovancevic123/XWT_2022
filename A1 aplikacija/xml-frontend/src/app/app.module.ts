@@ -6,7 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormPageComponent } from './components/form-page/form-page.component';
 import { KorisnikDashboardComponent } from './components/korisnik-dashboard/korisnik-dashboard.component';
-import { SluzbenikDashboardComponent } from './components/sluzbenik-dashboard/sluzbenik-dashboard.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
@@ -35,6 +34,8 @@ import { SearchComponent } from './components/search/search.component';
 import { RequestListComponent } from './components/request-list/request-list.component';
 import { ConclusionDialogComponent } from './components/conclusion-dialog/conclusion-dialog.component';
 import { DialogComponent } from './components/dialog/dialog.component';
+import {MatSelectModule} from '@angular/material/select';
+import { ReportPageComponent } from './components/report-page/report-page.component';
 
 
 @NgModule({
@@ -42,14 +43,14 @@ import { DialogComponent } from './components/dialog/dialog.component';
     AppComponent,
     FormPageComponent,
     KorisnikDashboardComponent,
-    SluzbenikDashboardComponent,
     AddressComponent,
     ContactComponent,
     AutorComponent,
     SearchComponent,
     RequestListComponent,
     ConclusionDialogComponent,
-    DialogComponent
+    DialogComponent,
+    ReportPageComponent
   ],
   imports: [
     HttpClientModule,
@@ -75,6 +76,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
     MatNativeDateModule,
     MatGridListModule,
     TextFieldModule,
+    MatSelectModule ,
     ToastrModule.forRoot({
       timeOut: 2000,
       positionClass: 'toast-bottom-right',

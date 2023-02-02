@@ -20,9 +20,9 @@ export class AutorComponent {
 
   ngOnInit(){
     this.form = new FormGroup({
-      imeAutor: new FormControl('',[Validators.required]),
-      prezimeAutor: new FormControl('',[Validators.required]),
-      drzavljanstvoAutor: new FormControl('',[Validators.required]),
+      ime: new FormControl('',[Validators.required]),
+      prezime: new FormControl('',[Validators.required]),
+      drzavljanstvo: new FormControl('',[Validators.required]),
       pseudonim:new FormControl(''),
     });
   }

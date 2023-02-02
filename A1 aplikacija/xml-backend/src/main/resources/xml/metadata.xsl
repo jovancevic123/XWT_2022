@@ -15,7 +15,7 @@
 
     <xsl:template match="a1:zahtev">
         <zahtev vocab="http://www.ftn.uns.ac.rs/rdf/examples/predicate/"
-                   about="http://www.ftn.uns.ac.rs/xwt/zahtev">
+                   about="http://www.ftn.uns.ac.rs/xwt/zahtev/{./a1:prijava/a1:broj_prijave}">
             <xsl:apply-templates select="node()|@*"/>
         </zahtev>
     </xsl:template>
@@ -27,7 +27,7 @@
     </xsl:template>
 
     <xsl:template match="a1:zahtev/a1:prijava/a1:datum_podnosenja">
-        <DatumPodnosenja property="pred:datum_podnosenja" datatype="xs:string">
+        <DatumPodnosenja property="pred:datum_podnosenja" datatype="xs:date">
             <xsl:apply-templates select="node()|@*"/>
         </DatumPodnosenja>
     </xsl:template>

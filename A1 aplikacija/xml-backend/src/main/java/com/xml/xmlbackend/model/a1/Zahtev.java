@@ -16,7 +16,7 @@ import java.util.List;
 @Setter
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-        "prijava", "podnosilac", "punomocnik", "autorskoDelo", "prilozi", "zavod"
+        "prijava", "podnosilac", "punomocnik", "autorskoDelo", "prilozi", "zavod", "brojResenja", "opisDela", "primerDela"
 })
 @XmlRootElement(name = "zahtev")
 public class Zahtev {
@@ -39,8 +39,38 @@ public class Zahtev {
     @XmlElement(required=true)
     private Zavod zavod;
 
-    @XmlElement(name="broj_resenja", required = false)
+    @XmlElement(name="broj_resenja", required = true)
     private String brojResenja;
+
+    @XmlElement(name="opis_dela", required = true)
+    private String opisDela;
+
+    @XmlElement(name="primer_dela", required = true)
+    private String primerDela;
+
+    public String getOpisDela() {
+        return opisDela;
+    }
+
+    public void setOpisDela(String opisDela) {
+        this.opisDela = opisDela;
+    }
+
+    public String getPrimerDela() {
+        return primerDela;
+    }
+
+    public void setPrimerDela(String primerDela) {
+        this.primerDela = primerDela;
+    }
+
+    public String getBrojResenja() {
+        return brojResenja;
+    }
+
+    public void setBrojResenja(String brojResenja) {
+        this.brojResenja = brojResenja;
+    }
 
     public Prijava getPrijava() {
         return prijava;

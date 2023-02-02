@@ -13,25 +13,16 @@ import javax.xml.bind.annotation.*;
 @Setter
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-        "adresa", "pseudonim", "godinaSmrti"
+        "pseudonim", "godinaSmrti"
 })
 public class Autor extends FizickoLice{
-    @XmlElement(required=true)
-    private Adresa adresa;
 
     @XmlElement(required=false)
     private String pseudonim;
 
-    @XmlElement(required=false)
+    @XmlElement(name = "godina_smrti",required=false)
     private int godinaSmrti;
 
-    public Adresa getAdresa() {
-        return adresa;
-    }
-
-    public void setAdresa(Adresa adresa) {
-        this.adresa = adresa;
-    }
 
     public String getPseudonim() {
         return pseudonim;

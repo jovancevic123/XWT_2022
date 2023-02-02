@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { AutorskoDeloServiceService } from './../../services/autorsko-delo-service.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { AdvancedSearchMeta } from 'src/app/model/AdvancedSearchMeta';
@@ -21,7 +22,7 @@ export class SearchComponent implements OnInit{
   advancedSearchInput: AdvancedSearchMeta[] = [];
   searchResults: SearchResult[];
 
-  constructor(private searchService: SearchService, private autorskoDeloService:AutorskoDeloServiceService, private tokenUtilService: TokenUtilService){}
+  constructor(private searchService: SearchService, private autorskoDeloService:AutorskoDeloServiceService, private tokenUtilService: TokenUtilService, private toastr:ToastrService){}
 
   ngOnInit(): void {
     this.basicSearch();
@@ -49,6 +50,7 @@ export class SearchComponent implements OnInit{
   }
 
   advancedSearch(){
+    console.log(this.advancedSearchInput);
     this.searchService.advancedSearch(this.advancedSearchInput).subscribe({
       next: res => {
         this.searchResults = this.makeJsonListOutOfSearchResults(res);
@@ -56,6 +58,7 @@ export class SearchComponent implements OnInit{
       },
       error: error => {
           console.error(error);
+          this.toastr.error("","Neuspešna pretraga");
       }
     });
   }

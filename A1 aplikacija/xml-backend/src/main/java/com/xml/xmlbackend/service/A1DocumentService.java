@@ -1,21 +1,17 @@
 package com.xml.xmlbackend.service;
 
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import com.xml.xmlbackend.dao.A1DocumentDAO;
-import com.xml.xmlbackend.dto.AutorDto;
-import com.xml.xmlbackend.dto.ResponseToPendingRequestDto;
-import com.xml.xmlbackend.dto.SearchResultDto;
-import com.xml.xmlbackend.dto.ZahtevRequestDto;
+import com.xml.xmlbackend.dto.*;
 import com.xml.xmlbackend.exception.FormatNotValidException;
-import com.xml.xmlbackend.model.Resenje;
+import com.xml.xmlbackend.exception.QueryFormatException;
+import com.xml.xmlbackend.model.a1.Resenje;
 import com.xml.xmlbackend.model.a1.*;
 import com.xml.xmlbackend.transformers.XmlTransformer;
 import lombok.RequiredArgsConstructor;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.update.UpdateExecutionFactory;
-import org.apache.jena.update.UpdateFactory;
-import org.apache.jena.update.UpdateProcessor;
-import org.apache.jena.update.UpdateRequest;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.stereotype.Service;
 import org.xmldb.api.base.XMLDBException;
@@ -23,6 +19,7 @@ import org.xmldb.api.modules.XMLResource;
 
 import org.json.*;
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.stream.XMLInputFactory;
@@ -36,6 +33,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.stream.Stream;
 
 @RequiredArgsConstructor
 @Service
@@ -135,7 +134,7 @@ public class A1DocumentService {
             for (AutorDto autorDto: dto.getDeloPrerade().getAutoriDelaPrerade()) {
                 Autor autor = new Autor();
                 autor.setIme(autorDto.getIme());
-                autor.setPrezime(autor.getPrezime());
+                autor.setPrezime(autorDto.getPrezime());
                 autor.setDrzavljanstvo(autorDto.getDrzavljanstvo());
                 autor.setPseudonim(autorDto.getPseudonim());
 
@@ -166,7 +165,7 @@ public class A1DocumentService {
                 for (AutorDto autorDto: dto.getAutorskoDelo().getAutoriDela()) {
                     Autor autor = new Autor();
                     autor.setIme(autorDto.getIme());
-                    autor.setPrezime(autor.getPrezime());
+                    autor.setPrezime(autorDto.getPrezime());
                     autor.setDrzavljanstvo(autorDto.getDrzavljanstvo());
                     autor.setPseudonim(autorDto.getPseudonim());
 
@@ -188,11 +187,8 @@ public class A1DocumentService {
                 }
             }
             else{
-                autoriDela = new ArrayList<>();
                 autoriDela.add(new Autor(podnosilac.getLice()));
             }
-
-
         }
 
         AutorskoDelo autorskoDelo = new AutorskoDelo();
@@ -213,6 +209,9 @@ public class A1DocumentService {
         zahtev.setPunomocnik(punomocnik);
         zahtev.setAutorskoDelo(autorskoDelo);
         zahtev.setPrilozi(null);
+        zahtev.setBrojResenja("");
+        zahtev.setOpisDela("");
+        zahtev.setPrimerDela("");
 
         JAXBContext context = JAXBContext.newInstance(Zahtev.class);
         Marshaller m = context.createMarshaller();
@@ -284,7 +283,7 @@ public class A1DocumentService {
         return Files.readString(Path.of(resultMetaFile));
     }
 
-    public void approveRequest(ResponseToPendingRequestDto dto) throws Exception {
+    public String approveRequest(ResponseToPendingRequestDto dto) throws Exception {
         Resenje resenje = new Resenje(dto);
         resenje.setPrihvacena(true);
 
@@ -294,19 +293,21 @@ public class A1DocumentService {
         m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         m.marshal(resenje, stringWriter);
 
-        this.repository.save(resenje.getBrojResenja(), stringWriter.toString(), "/db/patent/resenja");
+        this.repository.save(resenje.getBrojResenja(), stringWriter.toString(), "/db/autorskoDelo/resenja");
         uploadConclusionMetadata(stringWriter.toString(), resenje.getBrojResenja());
         updateBrojResenjaInZahtev(dto.getBrojPrijave(), resenje.getBrojResenja());
+        return resenje.getBrojResenja();
     }
 
     private void uploadConclusionMetadata(String xmlData, String brojResenja) throws IOException {
         String xsltFIlePath = "./src/main/resources/xml/resenje-metadata.xsl";
-        String outputPath = "./src/main/resources/static/rdf.xml";
+        String outputPath = "./src/main/resources/static/resenje-rdf.xml";
+        String extractedRdfPath = "./src/main/resources/static/extracted_rdf.xml";
 
         metadataService.transformRDF(xmlData, xsltFIlePath, outputPath); // 1. xml u obliku string-a
-        String resultMeta = metadataService.extractMetadataToRdf(new FileInputStream(new File("./src/main/resources/static/rdf")), "./src/main/resources/static/extracted_rdf.xml");
+        String resultMeta = metadataService.extractMetadataToRdf(new FileInputStream(new File(outputPath)), extractedRdfPath);
 
-        metadataService.uploadResenjeMetadata("./src/main/resources/static/extracted_rdf.xml", "");
+        metadataService.uploadResenjeMetadata(extractedRdfPath, "");
     }
 
     private void updateBrojResenjaInZahtev(String brojPrijave, String brojResenja) throws Exception {
@@ -331,6 +332,141 @@ public class A1DocumentService {
     }
 
 
+    public Resenje findResenjeById(String resourceId) throws JAXBException, XMLDBException {
+        return this.repository.findUnmarshalledResenjeById(resourceId);
+    }
 
+    public String rejectRequest(ResponseToPendingRequestDto dto) throws Exception {
+        Resenje resenje = new Resenje(dto);
+        resenje.setObrazlozenje(dto.getObrazlozenje());
+        resenje.setPrihvacena(false);
 
+        JAXBContext context = JAXBContext.newInstance(Resenje.class);
+        StringWriter stringWriter = new StringWriter();
+        Marshaller m = context.createMarshaller();
+        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        m.marshal(resenje, stringWriter);
+
+        this.repository.save(resenje.getBrojResenja(), stringWriter.toString(), "/db/autorskoDelo/resenja");
+        uploadConclusionMetadata(stringWriter.toString(), resenje.getBrojResenja());
+        updateBrojResenjaInZahtev(dto.getBrojPrijave(), resenje.getBrojResenja());
+
+        return resenje.getBrojResenja();
+    }
+
+    public List<SearchResultDto> advancedSearch(AdvancedSearchListDto list) throws JAXBException, XMLDBException {
+        String pred = "http://www.ftn.uns.ac.rs/rdf/examples/predicate/";
+
+        String queryString =
+                "PREFIX schema: <http://www.ftn.uns.ac.rs/rdf/examples/predicate>\n" +
+                        "prefix xsd: <http://www.w3.org/2001/XMLSchema#>\n" +
+                        "SELECT * from <http://localhost:3030/AutorskoDeloDataset/data>\n" +
+                        "WHERE {\n ?zahtev  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/broj_prijave> ?brojPrijave . \n" ;
+
+        for(AdvancedSearchDto dto : list.getConditions()){
+            if(!dto.getMeta().equals("broj_prijave"))
+                queryString = queryString.concat(String.format("?zahtev <%s%s> ?%s . \n", pred, dto.getMeta(), namingConversion(dto.getMeta())));
+        }
+
+        queryString = queryString.concat("FILTER( \n");
+
+        int i = 0;
+        for(AdvancedSearchDto dto : list.getConditions()){
+            i++;
+            queryString = queryString.concat(String.format("CONTAINS(UCASE(str(?%s)), UCASE('%s'))\n ", namingConversion(dto.getMeta()), dto.getValue()));
+            if(i < list.getConditions().size()){
+                queryString = queryString.concat(String.format("%s ", getQueryOperator(dto.getOperator())));
+            }
+        }
+
+        queryString = queryString.concat(").\n}");
+        System.out.println(queryString);
+        return this.metadataService.advancedSearch(queryString);
+    }
+
+    private Object namingConversion(String undercase) {
+        switch (undercase){
+            case "broj_prijave": return "brojPrijave";
+            case "datum_podnosenja": return "datumPodnosenja";
+            case "podnosilac_email": return "podnosilacEmail";
+            case "naslov_dela": return "naslovDela";
+            case "broj_resenja": return "brojResenja";
+            case "autor_email": return "autorEmail";
+            case "": return "";
+            default: throw new QueryFormatException("Malformed query!");
+        }
+    }
+
+    private String getQueryOperator(String op){
+        switch (op.toLowerCase()){
+            case "and": case "i": return "&&";
+            case "or": case "ili": return "||";
+            case "not": case "ne": return "!=";
+            case "":return "";
+            default: throw new QueryFormatException("Malformed query!");
+        }
+    }
+
+    public ByteArrayResource generateReport(String startDate, String endDate) throws IOException, DocumentException {
+        Document document = new Document();
+        String path = "./src/main/resources/xml/reports/" + new Date().getTime() + ".pdf";
+        File file = null;
+
+        try {
+            file = new File(path);
+            if (file.createNewFile()) {
+                System.out.println("File created: " + file.getName());
+            } else {
+                System.out.println("File already exists.");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
+        PdfWriter.getInstance(document, new FileOutputStream(path));
+        document.open();
+
+        int brojPodnetihPrijava = this.metadataService.requestsThatAreReceivedBetween(startDate, endDate, "./data/sparql/reportRequestQuery.rq");
+        int acceptedCounter = this.metadataService.numberOfResponsesBetween(startDate, endDate, "./data/sparql/reportRequestQuery2.rq");
+        int rejectedCounter = this.metadataService.numberOfResponsesBetween(startDate, endDate, "./data/sparql/reportRequestQuery3.rq");
+
+        Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
+        Chunk chunk = new Chunk("Izveštaj za period: " + startDate + " --- " + endDate + "\n\n\n\n\n", font);
+
+        PdfPTable table = new PdfPTable(2);
+        addTableHeader(table);
+
+        addRows(table, "Broj podnetih zahteva:", brojPodnetihPrijava);
+        addRows(table, "Broj prihvacenih zahteva:", acceptedCounter);
+        addRows(table, "Broj odbijenih zahteva:", rejectedCounter);
+
+        Paragraph paragraph1 = new Paragraph(chunk);
+        document.add(paragraph1);
+
+        document.add(table);
+
+        document.close();
+
+        byte[] fileContent = Files.readAllBytes(file.toPath());
+        ByteArrayResource body = new ByteArrayResource(fileContent);
+        file.delete();
+        return body;
+    }
+
+    private void addRows(PdfPTable table, String text, int counter) {
+        table.addCell(text);
+        table.addCell(counter + "");
+    }
+
+    private void addTableHeader(PdfPTable table) {
+        Stream.of("Predmet", "Ukupan broj")
+                .forEach(columnTitle -> {
+                    PdfPCell header = new PdfPCell();
+                    header.setBackgroundColor(BaseColor.LIGHT_GRAY);
+                    header.setBorderWidth(2);
+                    header.setPhrase(new Phrase(columnTitle));
+                    table.addCell(header);
+                });
+    }
 }

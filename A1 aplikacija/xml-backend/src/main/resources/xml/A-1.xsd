@@ -18,6 +18,8 @@
                 </xs:element>
                 <xs:element name="zavod" type="zah:TZavod"/>
                 <xs:element minOccurs="0" name="broj_resenja" type="xs:string" />
+                <xs:element minOccurs="0" name="opis_dela" type="xs:string" />
+                <xs:element minOccurs="0" name="primer_dela" type="xs:string" />
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -98,7 +100,7 @@
             <xs:extension base="zah:TFizickoLice">
                 <xs:sequence>
                     <xs:element name="pseudonim" type="xs:string" minOccurs="0"/>
-                    <xs:element name="godina_smrti" type="xs:positiveInteger" minOccurs="0"/>
+                    <xs:element name="godina_smrti" type="xs:nonNegativeInteger" minOccurs="0"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>

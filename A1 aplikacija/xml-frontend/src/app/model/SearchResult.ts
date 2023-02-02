@@ -3,5 +3,6 @@ export interface SearchResult{
     datumPodnosenja: string,
     podnosilacEmail: string,
     naslovDela: string,
+    autorEmail: string,
     brojResenja:string
 }

@@ -1,9 +1,7 @@
 package com.xml.xmlbackend.controller;
 
-import com.xml.xmlbackend.dto.ResponseToPendingRequestDto;
-import com.xml.xmlbackend.dto.SearchResultDto;
-import com.xml.xmlbackend.dto.SearchResultsDto;
-import com.xml.xmlbackend.dto.ZahtevRequestDto;
+import com.xml.xmlbackend.dto.*;
+import com.xml.xmlbackend.model.a1.Resenje;
 import com.xml.xmlbackend.service.A1DocumentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,10 +83,50 @@ public class A1DocumentController {
     @PostMapping(value="/approve-request", produces = "application/xml")
     public ResponseEntity<?> approveRequest(@RequestBody ResponseToPendingRequestDto dto){
         try{
-            this.service.approveRequest(dto);
-            return ResponseEntity.ok("Success");
+            String brojResenja = this.service.approveRequest(dto);
+            return ResponseEntity.ok(brojResenja);
         }catch(Exception ex){
             return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping(value="/reject-request", produces = "application/xml")
+    public ResponseEntity<?> rejectRequest(@RequestBody ResponseToPendingRequestDto dto){
+        try{
+            String brojResenja = this.service.rejectRequest(dto);
+            return ResponseEntity.ok(brojResenja);
+        }catch(Exception ex){
+            return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping(value="/get-resenje", produces = "application/xml")
+    public ResponseEntity<?> getResenjeById(@RequestParam("documentId") String documentId){
+        try{
+            Resenje r = this.service.findResenjeById(documentId);
+            return ResponseEntity.ok(r);
+        }catch(Exception ex){
+            return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping(value="/advanced-search", produces = "application/xml")
+    public ResponseEntity<?> advancedSearch(@RequestBody AdvancedSearchListDto dto){
+        try{
+            SearchResultsDto requestDtos = new SearchResultsDto(this.service.advancedSearch(dto));
+            return ResponseEntity.ok(requestDtos);
+        }catch(Exception ex){
+            return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping(value="/report", produces = "application/xml")
+    public ResponseEntity<?> generateReport(@RequestParam("start") String startDate, @RequestParam("end") String endDate){
+        try{
+            ByteArrayResource body = this.service.generateReport(startDate, endDate);
+            return ResponseEntity.ok().contentType(MediaType.APPLICATION_OCTET_STREAM).body(body);
+        }catch(Exception ex){
+            return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
