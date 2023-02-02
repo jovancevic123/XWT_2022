@@ -97,4 +97,24 @@ public class ZH1DocumentController {
             return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
+
+    @GetMapping(value="/rdf", produces = "application/xml")
+    public ResponseEntity<?> getMetadataRDF(@RequestParam("brojPrijaveZiga") String brojPrijaveZiga){
+        try{
+            String rdfXml = this.service.getMetadataRDF(brojPrijaveZiga);
+            return ResponseEntity.ok(rdfXml);
+        }catch(Exception ex){
+            return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/json")
+    public ResponseEntity<?> getMetadataJSON(@RequestParam("brojPrijaveZiga") String brojPrijaveZiga){
+        try{
+            String json = this.service.getMetadataJSON(brojPrijaveZiga);
+            return ResponseEntity.ok(json);
+        }catch(Exception ex){
+            return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
 }
