@@ -1,6 +1,7 @@
 package com.xml.xmlbackendzh1.dao;
 
 import com.xml.xmlbackendzh1.model.zh1.Resenje;
+import com.xml.xmlbackendzh1.model.zh1.Zahtev;
 import com.xml.xmlbackendzh1.util.AuthenticationUtilities;
 import org.exist.util.StringInputSource;
 import org.springframework.stereotype.Repository;
@@ -112,5 +113,13 @@ public class ExistDao {
         Unmarshaller unmarshaller = context.createUnmarshaller();
 
         return (Resenje) unmarshaller.unmarshal(new StringInputSource(res.getContent().toString()));
+    }
+
+    public Zahtev findUnmarshalledZahtevById(String resourceId) throws XMLDBException, JAXBException {
+        XMLResource res = this.findById(resourceId + ".xml", "/db/zig/zahtevi");
+        JAXBContext context = JAXBContext.newInstance(Zahtev.class);
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+
+        return (Zahtev) unmarshaller.unmarshal(new StringInputSource(res.getContent().toString()));
     }
 }

@@ -30,6 +30,6 @@ export class SearchService {
     
     let xmlZahtev = JsonToXML.parse("advancedSearchListDto", dto);
 
-    return this.http.post(this.apiURL + '/p1/advanced-search', xmlZahtev, {headers: new HttpHeaders().set('Content-Type', 'application/xml'), responseType:'text'});
+    return this.http.post(this.apiURL + '/zh1/advanced-search', xmlZahtev, {headers: new HttpHeaders().set('Content-Type', 'application/xml'), responseType:'text'});
   }
 }

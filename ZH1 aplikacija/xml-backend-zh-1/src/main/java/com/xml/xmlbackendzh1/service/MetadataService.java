@@ -1,8 +1,10 @@
 package com.xml.xmlbackendzh1.service;
 
+import com.xml.xmlbackendzh1.dao.ExistDao;
 import com.xml.xmlbackendzh1.dto.SearchMetadataDto;
 import com.xml.xmlbackendzh1.dto.SearchResultsDto;
 import com.xml.xmlbackendzh1.exceptions.OperationFailedException;
+import com.xml.xmlbackendzh1.model.zh1.Zahtev;
 import com.xml.xmlbackendzh1.util.FusekiAuthentication;
 import com.xml.xmlbackendzh1.util.FusekiAuthentication;
 import com.xml.xmlbackendzh1.util.FusekiAuthentication.ConnectionProperties;
@@ -22,7 +24,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.xmldb.api.base.XMLDBException;
 
+import javax.xml.bind.JAXBException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.*;
@@ -46,8 +50,10 @@ public class MetadataService {
 
     public final String XSL_TO_RDF_FILE = "xml/metadata.xsl";
     private ConnectionProperties connectionProperties;
+    private final ExistDao existDao;
 
-    public MetadataService() throws IOException {
+    public MetadataService(ExistDao existDao) throws IOException {
+        this.existDao = existDao;
         connectionProperties = FusekiAuthentication.loadProperties();
     }
 
@@ -347,4 +353,75 @@ public class MetadataService {
 
         processor.execute();
     }
+
+    public List<SearchResultsDto> basicSearch(String text, String queryPath) throws JAXBException, XMLDBException {
+        String sparqlQuery = null;
+
+        List<SearchResultsDto> prijave = new ArrayList<>();
+        try {
+
+            sparqlQuery = String.format(readFile(queryPath, StandardCharsets.UTF_8),
+                    text);
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+
+        QueryExecution query = QueryExecutionFactory.sparqlService(connectionProperties.queryEndpoint, sparqlQuery);
+        ResultSet results = query.execSelect();
+
+        String varName;
+        RDFNode varValue;
+        boolean indicator = false;
+        while (results.hasNext()) {
+            indicator = false;
+            QuerySolution querySolution = results.next();
+            Iterator<String> variableBindings = querySolution.varNames();
+            String brojResenja = "";
+            try{
+                brojResenja = querySolution.get("brojResenja").toString();
+            }catch(NullPointerException ex){}
+
+            String broj = querySolution.get("brojPrijaveZiga").toString();
+            String podnosilac = querySolution.get("podnosilacEmail").toString();
+
+            for(SearchResultsDto dto : prijave){
+                if(dto.getBrojPrijaveZiga().equals(broj)){
+                    indicator = true;
+                    if(dto.getBrojResenja().equals("")){
+                        dto.setBrojResenja(brojResenja);
+                    }
+                }
+            }
+            if(!indicator)
+                prijave.add(new SearchResultsDto(broj, podnosilac, brojResenja));
+        }
+        return prijave;
+    }
+
+    public List<SearchResultsDto> advancedSearch(String sparqlQuery) throws JAXBException, XMLDBException {
+        List<SearchResultsDto> prijave = new ArrayList<>();
+
+        QueryExecution query = QueryExecutionFactory.sparqlService(connectionProperties.queryEndpoint, sparqlQuery);
+        ResultSet results = query.execSelect();
+
+        String varName;
+        RDFNode varValue;
+        while (results.hasNext()) {
+
+            QuerySolution querySolution = results.next();
+            Iterator<String> variableBindings = querySolution.varNames();
+
+            String broj = querySolution.get("brojPrijaveZiga").toString();
+
+            Zahtev zahtev = this.existDao.findUnmarshalledZahtevById(broj);
+
+            String brojResenja = "";
+            if(zahtev.getBrojResenja() != null){
+                brojResenja = zahtev.getBrojResenja();
+            }
+            prijave.add(new SearchResultsDto(Integer.toString(zahtev.getZig().getBrojPrijaveZiga()), zahtev.getPodnosilac().getKontakt().getEmail(), brojResenja));
+        }
+        return prijave;
+    }
+
 }

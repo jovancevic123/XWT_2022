@@ -38,7 +38,7 @@ export class RequestListComponent {
   ngOnInit(): void {
     console.log(this.requests)
     this.displayedColumns = this.isUser ? ['brojPrijaveZiga', 'nazivPodnosioca', 'html', 'pdf', 'resenje', 'reference'] :
-                                     ['brojPrijaveZiga', 'nazivPodnosioca', 'html', 'pdf', 'rdf', 'json', 'odobravanje', 'odbijanje', 'resenje', 'reference'];
+                                     ['brojPrijaveZiga', 'nazivPodnosioca', 'html', 'pdf', 'rdf', 'json', 'odobravanje', 'odbijanje', 'resenje'];
   }
 
   downloadHTML(brojPrijaveZiga: string){  
@@ -176,16 +176,17 @@ export class RequestListComponent {
   }
 
   makeJsonResenje(xmlString: string): DialogResenjeData{
-    let results = JSON.parse(this.tokenUtilService.xml2Json(xmlString)).resenje;     
-    
+    let results = JSON.parse(this.tokenUtilService.xml2Json(xmlString));     
+    console.log(results)
     let val: DialogResenjeData = {
-      brojResenja: results.broj_resenja,
-      imeSluzbenika: results.ime_sluzbenika,
-      prezimeSluzbenika: results.prezime_sluzbenika,
-      datumOdgovora: results.datum_odgovora,
-      prihvacena: results.prihvacena,
-      razlog: results.razlog
+      brojResenja: results["zh-1:resenje"]["zh-1:broj_resenja"],
+      imeSluzbenika: results["zh-1:resenje"]["zh-1:ime_sluzbenika"],
+      prezimeSluzbenika: results["zh-1:resenje"]["zh-1:prezime_sluzbenika"],
+      datumOdgovora: results["zh-1:resenje"]["zh-1:datum_odgovora"],
+      prihvacena: results["zh-1:resenje"]["zh-1:prihvacena"],
+      razlog: results["zh-1:resenje"]["zh-1:obrazlozenje"]
     }
+    console.log(val)
 
     return val;
   }
