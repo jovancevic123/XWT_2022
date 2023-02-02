@@ -85,7 +85,7 @@ export class XonomyService {
         hasText: true,
         oneliner: true,
         asker: Xonomy.askPicklist,
-        askerParameter: ["elektronska", "papirna"]
+        askerParameter: ["elektronska_forma", "papirna_forma"]
       },
 
       //PRIJAVA
@@ -99,15 +99,14 @@ export class XonomyService {
                   return jsElement.hasChildElement("vrsta_prijave")
                 },
               },
-              {
-                caption: 'Add <broj_prvobitne_prijave>',
-                action: Xonomy.newElementChild,
-                actionParameter: '<broj_prvobitne_prijave></broj_prvobitne_prijave>',
-                hideIf: function(jsElement: any){
-                  return jsElement.hasChildElement("broj_prvobitne_prijave")
-                },
-              },
           ],
+      },
+
+      vrsta_prijave:{
+        hasText: true,
+        oneliner: true,
+        asker: Xonomy.askPicklist,
+        askerParameter: ["izdvojena", "dopunska"]
       },
 
       // PRONALAZAK
@@ -232,23 +231,14 @@ export class XonomyService {
             },
           },
           {
-            caption: 'Add @tip',
-            action: Xonomy.newAttribute,
-            actionParameter: { name: 'tip', value: 'punomocnik_za_zastupanje'},
+            caption: 'Add <tip>',
+            action: Xonomy.newElementChild,
+            actionParameter: '<tip></tip>',
             hideIf: function(jsElement: any){
-              return jsElement.hasAttribute("tip")
+              return jsElement.hasChildElement("tip")
             }
           },
         ],
-        attributes:{
-          "tip":{
-            asker: Xonomy.askPicklist,
-            askerParameter: [
-              {value: "punomocnik_za_zastupanje", caption: "punomocnik za zastupanje"},
-              {value: "punomocnik_za_prijem_pismena", caption: "punomocnik za prijem pismena"},
-            ]
-          }
-        }
       },
 
 
@@ -276,13 +266,13 @@ export class XonomyService {
             }
           },
           {
-            caption: 'Add <postanskiBroj>',
+            caption: 'Add <postanski_broj>',
             action: Xonomy.newElementChild,
-            actionParameter: '<postanskiBroj></postanskiBroj>',
+            actionParameter: '<postanski_broj></postanski_broj>',
             hasText: true,
             asker: Xonomy.askString,
             hideIf: function(jsElement: any){
-              return jsElement.hasChildElement("postanskiBroj")
+              return jsElement.hasChildElement("postanski_broj")
             }
           },
           {
@@ -332,13 +322,13 @@ export class XonomyService {
             }
           },
           {
-            caption: 'Add <postanskiBroj>',
+            caption: 'Add <postanski_broj>',
             action: Xonomy.newElementChild,
-            actionParameter: '<postanskiBroj></postanskiBroj>',
+            actionParameter: '<postanski_broj></postanski_broj>',
             hasText: true,
             asker: Xonomy.askString,
             hideIf: function(jsElement: any){
-              return jsElement.hasChildElement("postanskiBroj")
+              return jsElement.hasChildElement("postanski_broj")
             }
           },
           {
@@ -446,7 +436,7 @@ export class XonomyService {
         asker: Xonomy.askString,
       },
 
-      postanskiBroj:{
+      postanski_broj:{
         hasText: true,
         oneliner: true,
         asker: Xonomy.askString,
@@ -464,6 +454,33 @@ export class XonomyService {
         asker: Xonomy.askString,
       },
 
+      naziv_pronalaska_srb:{
+        hasText: true,
+        oneliner: true,
+        asker: Xonomy.askString,
+      },
+
+      naziv_pronalaska_eng:{
+        hasText: true,
+        oneliner: true,
+        asker: Xonomy.askString,
+      },
+
+      drzavljanstvo: {
+        hasText: true,
+        oneliner: true,
+        asker: Xonomy.askString,
+      },
+
+      tip:{
+        hasText: true,
+        oneliner: true,
+        asker: Xonomy.askPicklist,
+          askerParameter: [
+            {value: "punomocnik_za_zastupanje", caption: "punomocnik za zastupanje"},
+            {value: "punomocnik_za_prijem_pismena", caption: "punomocnik za prijem pismena"},
+          ]
+      },
 
       // FIZICKO_LICE  
       fizicko_lice:{
@@ -512,11 +529,11 @@ export class XonomyService {
           },
         },
         {
-          caption: 'Add <konktakt>',
+          caption: 'Add <kontakt>',
           action: Xonomy.newElementChild,
-          actionParameter: '<konktakt></konktakt>',
+          actionParameter: '<kontakt></kontakt>',
           hideIf: function(jsElement: any){
-            return jsElement.hasChildElement("konktakt")
+            return jsElement.hasChildElement("kontakt")
           },
         },
         {

@@ -46,7 +46,7 @@ public class P1DocumentController {
     }
 
     @PostMapping(value="/add-request-xonomy", consumes = "application/xml", produces = "application/xml")
-    public ResponseEntity<?> submitRequestXonomy(@RequestBody XonomyRequestDto dto) throws JAXBException {
+    public ResponseEntity<?> submitRequestXonomy(@RequestBody XonomyRequestDto dto) throws Exception {
         JAXBContext context = JAXBContext.newInstance(Zahtev.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
 

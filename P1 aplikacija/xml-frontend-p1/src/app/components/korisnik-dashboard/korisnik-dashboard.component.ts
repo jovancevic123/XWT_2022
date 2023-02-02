@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Component } from '@angular/core';
 import { SearchResult } from 'src/app/model/PendingRequest';
 import { TokenUtilService } from 'src/app/services/token-util.service';
@@ -16,7 +17,7 @@ export class KorisnikDashboardComponent {
   startingList: SearchResult[] = [];
   isLoading = true;
 
-  constructor(private tokenUtilService: TokenUtilService, private patentService: PatentService){}
+  constructor(private tokenUtilService: TokenUtilService, private patentService: PatentService, private toastService: ToastrService){}
 
   ngOnInit(){
     let role: string | null = this.tokenUtilService.getRoleFromToken();        
@@ -50,18 +51,14 @@ export class KorisnikDashboardComponent {
 
   getAllMyRequests(){
       let email: string = this.tokenUtilService.getEmailFromToken() as string;
-      email = "jovancevicjovan5@gmail.com";
-      console.log(email);
       
       this.patentService.getUserRequests(email).subscribe({
         next: res => {    
             this.startingList = this.makeJsonListOutOfSearchResults(res);    
-            this.isLoading = false;     
-            console.log("JOVAN");
-            
+            this.isLoading = false;                 
         },
         error: error => {
-            console.error(error);
+            this.toastService.warning("Something went wrong!");
         }
       });
   }
