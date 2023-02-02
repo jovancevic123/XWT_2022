@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?><zahtev xmlns:sh="https://schema.org/" xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:zh1="http://www.ftn.uns.ac.rs/xwt" about="http://www.ftn.uns.ac.rs/xwt/zahtev/320242117" vocab="http://www.ftn.uns.ac.rs/rdf/examples/predicate/">
-    <zh-1:naziv xmlns:zh-1="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">ZAHTEV ZA PRIZNANJE ZIGA</zh-1:naziv>
-    <zh-1:zavod xmlns:zh-1="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<zh-1:zahtev xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:zh-1="http://www.ftn.uns.ac.rs/xwt">
+    <zh-1:naziv>ZAHTEV ZA PRIZNANJE ZIGA</zh-1:naziv>
+    <zh-1:zavod>
         <zh-1:naziv>ZAHTEV ZA PRIZNANJE ZIGA</zh-1:naziv>
         <zh-1:adresa>
             <zh-1:ulica>Kneginje Ljubice</zh-1:ulica>
@@ -10,7 +11,7 @@
             <zh-1:drzava>Srbija</zh-1:drzava>
         </zh-1:adresa>
     </zh-1:zavod>
-    <zh-1:podnosilac xmlns:zh-1="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="zh-1:TFizickoLice">
+    <zh-1:podnosilac xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="zh-1:TFizickoLice">
         <zh-1:adresa>
             <zh-1:ulica>gdsagsd</zh-1:ulica>
             <zh-1:broj>34</zh-1:broj>
@@ -20,13 +21,13 @@
         </zh-1:adresa>
         <zh-1:kontakt>
             <zh-1:telefon>dsagdsa</zh-1:telefon>
-            <PodnosilacEmail xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:podnosilac_email">gdsagdsa</PodnosilacEmail>
+            <zh-1:email>gdsagdsa</zh-1:email>
             <zh-1:fax>sdagdsag</zh-1:fax>
         </zh-1:kontakt>
         <zh-1:ime>gdsa</zh-1:ime>
         <zh-1:prezime>dsagdsa</zh-1:prezime>
     </zh-1:podnosilac>
-    <zh-1:punomocnik xmlns:zh-1="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="zh-1:TFizickoLice">
+    <zh-1:punomocnik xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="zh-1:TFizickoLice">
         <zh-1:adresa>
             <zh-1:ulica>dsagasd</zh-1:ulica>
             <zh-1:broj>3</zh-1:broj>
@@ -36,13 +37,13 @@
         </zh-1:adresa>
         <zh-1:kontakt>
             <zh-1:telefon>gdsagdsa</zh-1:telefon>
-            <PunomocnikEmail xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:punomocnik_email">gdsagdsa</PunomocnikEmail>
+            <zh-1:email>gdsagdsa</zh-1:email>
             <zh-1:fax>gdsagdsa</zh-1:fax>
         </zh-1:kontakt>
         <zh-1:ime>gsa</zh-1:ime>
         <zh-1:prezime>gfsagfsa</zh-1:prezime>
     </zh-1:punomocnik>
-    <zh-1:zig xmlns:zh-1="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <zh-1:zig>
         <zh-1:tip_ziga>Individualni zig</zh-1:tip_ziga>
         <zh-1:znak>
             <zh-1:tip_znaka>Graficki znak</zh-1:tip_znaka>
@@ -59,10 +60,10 @@
             <zh-1:broj>25</zh-1:broj>
         </zh-1:brojevi_klasa_robe>
         <zh-1:zatrazeno_pravo>gdasgs</zh-1:zatrazeno_pravo>
-        <BrojPrijaveZiga xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:broj_prijave_ziga">320242117</BrojPrijaveZiga>
-        <DatumPodnosenja xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:date" property="pred:datum_podnosenja">2023-02-02</DatumPodnosenja>
+        <zh-1:broj_prijave_ziga>320191846</zh-1:broj_prijave_ziga>
+        <zh-1:datum_podnosenja>2023-02-02</zh-1:datum_podnosenja>
     </zh-1:zig>
-    <zh-1:placene_takse xmlns:zh-1="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <zh-1:placene_takse>
         <zh-1:taksa valuta="RSD">
             <zh-1:tip_takse>Osnovna taksa</zh-1:tip_takse>
             <zh-1:iznos>343.0</zh-1:iznos>
@@ -72,7 +73,7 @@
             <zh-1:iznos>333.0</zh-1:iznos>
         </zh-1:taksa>
     </zh-1:placene_takse>
-    <zh-1:prilozi xmlns:zh-1="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <zh-1:prilozi>
         <zh-1:primerak_znaka src=""/>
         <zh-1:spisak_robe_i_usluga src=""/>
         <zh-1:punomocje src=""/>
@@ -82,4 +83,4 @@
         <zh-1:dokaz_o_pravu_prvenstva src=""/>
         <zh-1:dokaz_o_uplati_takse src=""/>
     </zh-1:prilozi>
-</zahtev>
+</zh-1:zahtev>
