@@ -1,5 +1,9 @@
 package com.xml.xmlbackendzh1.service;
 
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import com.xml.xmlbackendzh1.dao.ExistDao;
 import com.xml.xmlbackendzh1.dto.RequestDto;
 import com.xml.xmlbackendzh1.dto.ResponseToPendingRequestDto;
@@ -15,7 +19,9 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.stereotype.Service;
 import org.xmldb.api.base.XMLDBException;
 import org.xmldb.api.modules.XMLResource;
-
+import org.xmldb.api.base.XMLDBException;
+import org.xmldb.api.modules.XMLResource;
+import org.json.*;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -24,11 +30,35 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamReader;
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.stereotype.Service;
+import org.xmldb.api.base.XMLDBException;
+import org.xmldb.api.modules.XMLResource;
+import org.json.*;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamReader;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Stream;
 
 @Service
 @Getter
@@ -258,6 +288,21 @@ public class ZH1DocumentService {
         transformer.transformToHtml(xmlData);
         String html = Files.readString(Paths.get("src/main/resources/xml/GeneratedHTML.html"));
         return html;
+    }
+
+    public String getMetadataRDF(String brojPrijave) throws XMLDBException, IOException {
+        String xsltFIlePath = "./src/main/resources/xml/metadata.xsl";
+        String outputPath = "./src/main/resources/static/rdf/";
+        XMLResource res = this.repository.findById(brojPrijave + ".xml", "/db/zig/zahtevi");
+
+        this.metadataService.transformRDF(res.getContent().toString(), xsltFIlePath, outputPath); // 1. xml u obliku string-a
+        String resultMetaFile = this.metadataService.extractMetadataToRdf(new FileInputStream(new File("./src/main/resources/static/rdf")), "./src/main/resources/static/extracted_rdf.xml");
+        return Files.readString(Path.of(resultMetaFile));
+    }
+
+    public String getMetadataJSON(String brojPrijave) throws XMLDBException, IOException {
+        JSONObject json = XML.toJSONObject(getMetadataRDF(brojPrijave));
+        return json.toString();
     }
 }
 

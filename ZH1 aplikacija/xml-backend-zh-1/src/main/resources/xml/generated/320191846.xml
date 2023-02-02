@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <zh-1:zahtev xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:zh-1="http://www.ftn.uns.ac.rs/xwt">
     <zh-1:naziv>ZAHTEV ZA PRIZNANJE ZIGA</zh-1:naziv>
     <zh-1:zavod>
@@ -59,7 +60,7 @@
             <zh-1:broj>25</zh-1:broj>
         </zh-1:brojevi_klasa_robe>
         <zh-1:zatrazeno_pravo>gdasgs</zh-1:zatrazeno_pravo>
-        <zh-1:broj_prijave_ziga>320242117</zh-1:broj_prijave_ziga>
+        <zh-1:broj_prijave_ziga>320191846</zh-1:broj_prijave_ziga>
         <zh-1:datum_podnosenja>2023-02-02</zh-1:datum_podnosenja>
     </zh-1:zig>
     <zh-1:placene_takse>
