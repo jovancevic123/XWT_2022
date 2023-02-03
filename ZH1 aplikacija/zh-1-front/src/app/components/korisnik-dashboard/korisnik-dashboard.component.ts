@@ -54,6 +54,7 @@ export class KorisnikDashboardComponent {
       
       this.zigService.getUserRequests(email).subscribe({
         next: res => {    
+            console.log(res)
             this.startingList = this.makeJsonListOutOfSearchResults(res);    
             this.isLoading = false;     
             console.log("NIKOLA");

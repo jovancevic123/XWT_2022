@@ -37,7 +37,7 @@ export class RequestListComponent {
 
   ngOnInit(): void {
     console.log(this.requests)
-    this.displayedColumns = this.isUser ? ['brojPrijaveZiga', 'nazivPodnosioca', 'html', 'pdf', 'resenje', 'reference'] :
+    this.displayedColumns = this.isUser ? ['brojPrijaveZiga', 'nazivPodnosioca', 'html', 'pdf', 'resenje'] :
                                      ['brojPrijaveZiga', 'nazivPodnosioca', 'html', 'pdf', 'rdf', 'json', 'odobravanje', 'odbijanje', 'resenje'];
   }
 

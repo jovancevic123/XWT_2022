@@ -410,5 +410,9 @@ public class ZH1DocumentService {
         table.addCell(text);
         table.addCell(counter + "");
     }
+
+    public List<SearchResultsDto> getUsersRequests(String email) throws JAXBException, XMLDBException {
+        return this.metadataService.getUsersRequests(email, "./data/sparql/userRequests.rq");
+    }
 }
 

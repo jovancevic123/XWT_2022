@@ -148,4 +148,14 @@ public class ZH1DocumentController {
             return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
+
+    @GetMapping(value="/user-requests", produces = "application/xml")
+    public ResponseEntity<?> getUsersRequests(@RequestParam("email") String email){
+        try{
+            SearchResultsListDto requestDtos = new SearchResultsListDto(this.service.getUsersRequests(email));
+            return ResponseEntity.ok(requestDtos);
+        }catch(Exception ex){
+            return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
 }

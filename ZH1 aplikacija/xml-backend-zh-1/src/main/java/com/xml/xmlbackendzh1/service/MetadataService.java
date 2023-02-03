@@ -477,4 +477,37 @@ public class MetadataService {
         return resenja.size();
     }
 
+    public List<SearchResultsDto> getUsersRequests(String email, String queryPath) throws JAXBException, XMLDBException {   //String querySelectPath = "./data/sparql/userRequests.rq";
+        String sparqlQuery = null;
+        List<SearchResultsDto> prijave = new ArrayList<>();
+
+        try {
+            sparqlQuery = String.format(readFile(queryPath, StandardCharsets.UTF_8), email);
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+
+        QueryExecution query = QueryExecutionFactory.sparqlService(connectionProperties.queryEndpoint, sparqlQuery);
+        ResultSet results = query.execSelect();
+
+        String varName;
+        RDFNode varValue;
+
+        while(results.hasNext()){
+            QuerySolution querySolution = results.next();
+            Iterator<String> variableBindings = querySolution.varNames();
+
+            String broj = querySolution.get("brojPrijaveZiga").toString();
+
+            Zahtev zahtev = this.existDao.findUnmarshalledZahtevById(broj);
+
+            String brojResenja = "";
+            if(zahtev.getBrojResenja() != null){
+                brojResenja = zahtev.getBrojResenja();
+            }
+            prijave.add(new SearchResultsDto(Integer.toString(zahtev.getZig().getBrojPrijaveZiga()), zahtev.getPodnosilac().getKontakt().getEmail(), brojResenja));
+        }
+        return prijave;
+    }
+
 }
