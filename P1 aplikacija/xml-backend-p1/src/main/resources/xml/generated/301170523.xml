@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<zahtev xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.ftn.uns.ac.rs/xwt">
+    <prijava>
+        <broj_prijave>301170523</broj_prijave>
+        <datum_prijema>2023-02-02</datum_prijema>
+        <vrsta_prijave>izdvojena</vrsta_prijave>
+    </prijava>
+    <zavod>
+        <naziv>Zavod za intelektualnu svojinu</naziv>
+        <adresa>
+            <ulica>Kneginje Ljubice</ulica>
+            <broj>5</broj>
+            <postanski_broj>11000</postanski_broj>
+            <mesto>Beograd</mesto>
+            <drzava>Republika Srbija</drzava>
+        </adresa>
+    </zavod>
+    <pronalazak>
+        <naziv_pronalaska_srb>Monitor</naziv_pronalaska_srb>
+        <naziv_pronalaska_eng>Monitorcina</naziv_pronalaska_eng>
+    </pronalazak>
+    <podnosilac pronalazac="false">
+        <drzavljanstvo></drzavljanstvo>
+        <lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TPravnoLice">
+            <adresa>
+                <ulica>Mihajla Pupina\</ulica>
+                <broj>1</broj>
+                <postanski_broj>11000</postanski_broj>
+                <mesto>Beograd</mesto>
+                <drzava>Srbija</drzava>
+            </adresa>
+            <kontakt>
+                <telefon>12890</telefon>
+                <email>aktiva@gmail.com</email>
+                <fax>faks</fax>
+            </kontakt>
+            <poslovno_ime>Aktiva Doo</poslovno_ime>
+        </lice>
+    </podnosilac>
+    <pronalazac naveden_u_prijavi="false">
+        <lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TPravnoLice">
+            <adresa>
+                <ulica>Blvr</ulica>
+                <broj>111</broj>
+                <postanski_broj>21000</postanski_broj>
+                <mesto>Novi Sad</mesto>
+                <drzava>Srbija</drzava>
+            </adresa>
+            <kontakt>
+                <telefon>1238931</telefon>
+                <email>jovancevic@gmial.com</email>
+                <fax>fafd</fax>
+            </kontakt>
+            <poslovno_ime>Srbija Vode</poslovno_ime>
+        </lice>
+    </pronalazac>
+    <punomoc>
+        <lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TFizickoLice">
+            <adresa>
+                <ulica>atar</ulica>
+                <broj>33</broj>
+                <postanski_broj>21000</postanski_broj>
+                <mesto>veternik</mesto>
+                <drzava>srbija</drzava>
+            </adresa>
+            <kontakt>
+                <telefon>123</telefon>
+                <email>markovic@mmgmail.com</email>
+                <fax>faks</fax>
+            </kontakt>
+            <ime>Jovan</ime>
+            <prezime>Markovic</prezime>
+        </lice>
+    </punomoc>
+    <ranije_prijave/>
+    <nacin_dostavljanja>elektronska_forma</nacin_dostavljanja>
+</zahtev>

@@ -69,7 +69,7 @@
                         <mat-radio-button class="example-radio-button" value="1" (change)="onTipLicaChangedPronalazac()">Fizičko lice</mat-radio-button>
                         <mat-radio-button class="example-radio-button" value="2" (change)="onTipLicaChangedPronalazac()">Pravno lice</mat-radio-button>
                     </mat-radio-group>
-                    <mat-checkbox>Želi da bude naveden u prijavi</mat-checkbox>
+                    <mat-checkbox formControlName="navedenUPrijavi">Želi da bude naveden u prijavi</mat-checkbox>
                 </div>
                 <div class="podnosilac-name">
                     <mat-form-field [style.width.%]="50" *ngIf="fizikoLicePronalazacChecked">
@@ -112,7 +112,7 @@
                     <mat-radio-button class="example-radio-button" value="1" (change)="onTipLicaChangedPunomoc()">Fizičko lice</mat-radio-button>
                     <mat-radio-button class="example-radio-button" value="2" (change)="onTipLicaChangedPunomoc()">Pravno lice</mat-radio-button>
                 </mat-radio-group>
-                <mat-checkbox>Druga adresa za dostavljanje</mat-checkbox>
+                <mat-checkbox formControlName="drugaAdresaDostave">Druga adresa za dostavljanje</mat-checkbox>
             </div>
             <div class="podnosilac-first-line">
                 <mat-radio-group
@@ -164,8 +164,8 @@
             </mat-radio-group>
         </div>
      
-        <div class="adresa-dostave" *ngIf="elektronskaDostavaChecked">
-            <app-address></app-address>
+        <div class="adresa-dostave" *ngIf="!elektronskaDostavaChecked">
+            <app-address (formRawValue)="onAdresaDostave($event)"></app-address>
         </div>
 
         <h2>Vrsta prijave:</h2>

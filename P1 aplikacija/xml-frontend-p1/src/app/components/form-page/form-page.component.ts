@@ -18,6 +18,7 @@ export class FormPageComponent implements OnInit{
     podnosilacAdresa: Adresa;
     pronalazacAdresa: Adresa;
     punomocAdresa: Adresa;
+    adresaDostave: Adresa;
 
     //kontakti
     podnosilacKontakt: Kontakt;
@@ -67,7 +68,7 @@ export class FormPageComponent implements OnInit{
 
         //ostalo
         elektronskaDostava: new FormControl('1'),
-        vrstaPrijave: new FormControl('1'),
+        vrstaPrijave: new FormControl('1')
       });
     }
 
@@ -113,7 +114,11 @@ export class FormPageComponent implements OnInit{
          "pronalazacKontakt": this.podnosilacJePronalazacChecked ? this.podnosilacKontakt : this.pronalazacKontakt,
          "punomocKontakt": this.punomocKontakt,
          "ranijePrijave": this.ranijePrijave,
+         "adresaDostave": body.drugaAdresaDostave ?  this.adresaDostave : this.punomocAdresa
         }
+
+      console.log(body);
+      
       this.patentService.submitRequest(body).subscribe({
           next: data => {
             console.log(data);           
@@ -174,6 +179,10 @@ export class FormPageComponent implements OnInit{
       this.punomocAdresa = event;
     }
 
+    onAdresaDostave(event: Adresa){
+      this.adresaDostave = event;
+    }
+
     //Contact events
     onPodnosilacKontakt(event: Kontakt){
       this.podnosilacKontakt = event;
@@ -188,9 +197,7 @@ export class FormPageComponent implements OnInit{
       this.punomocKontakt = event;
     }
 
-    onPodnosilacPronalazacChange(){
-      console.log(this.podnosilacJePronalazacChecked);
-      
+    onPodnosilacPronalazacChange(){      
       this.podnosilacJePronalazacChecked = !this.podnosilacJePronalazacChecked;
     }
 }
