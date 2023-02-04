@@ -14,6 +14,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class ZahtevRequestDto {
     private AutorskoDeloDto autorskoDelo;
     private DeloPreradeDto deloPrerade;
-    private LiceDto podnosilacDto;
-    private LiceDto punomocnikDto;
+    private LiceDto podnosilac;
+    private LiceDto punomocnik;
 }

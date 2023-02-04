@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<zah:zahtev xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:zah="http://www.ftn.uns.ac.rs/xwt">
+    <zah:prijava>
+        <zah:broj_prijave>302290231</zah:broj_prijave>
+        <zah:datum_podnosenja>2023-02-02</zah:datum_podnosenja>
+    </zah:prijava>
+    <zah:podnosilac podnosilac_je_autor="false">
+        <zah:lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="zah:TFizickoLice">
+            <zah:kontakt>
+                <zah:telefon>45646546</zah:telefon>
+                <zah:email>sabi@gmail.com</zah:email>
+                <zah:fax></zah:fax>
+            </zah:kontakt>
+            <zah:ime>Mihal</zah:ime>
+            <zah:prezime>Sabadoš</zah:prezime>
+            <zah:adresa>
+                <zah:ulica>Štefanikova</zah:ulica>
+                <zah:broj>120</zah:broj>
+                <zah:postanski_broj>21211</zah:postanski_broj>
+                <zah:mesto>Kisač</zah:mesto>
+                <zah:drzava>Srbija</zah:drzava>
+            </zah:adresa>
+            <zah:drzavljanstvo>Srpsko</zah:drzavljanstvo>
+        </zah:lice>
+    </zah:podnosilac>
+    <zah:autorsko_delo>
+        <zah:naslov>Novi Naslov</zah:naslov>
+        <zah:delo_prerade>
+            <zah:naslov_dela_prerade>Stari naslov</zah:naslov_dela_prerade>
+            <zah:autori>
+                <zah:autor>
+                    <zah:kontakt>
+                        <zah:telefon>456464646</zah:telefon>
+                        <zah:email>asdas@gmail.com</zah:email>
+                        <zah:fax></zah:fax>
+                    </zah:kontakt>
+                    <zah:ime>Ban</zah:ime>
+                    <zah:adresa>
+                        <zah:ulica>Bariceva</zah:ulica>
+                        <zah:broj>12</zah:broj>
+                        <zah:postanski_broj>20000</zah:postanski_broj>
+                        <zah:mesto>NS</zah:mesto>
+                        <zah:drzava>Srb</zah:drzava>
+                    </zah:adresa>
+                    <zah:drzavljanstvo>Bub</zah:drzavljanstvo>
+                    <zah:pseudonim>sad</zah:pseudonim>
+                    <zah:godinaSmrti>0</zah:godinaSmrti>
+                </zah:autor>
+            </zah:autori>
+        </zah:delo_prerade>
+        <zah:vrsta_dela>književno delo</zah:vrsta_dela>
+        <zah:forma_zapisa_dela>štampani tekst</zah:forma_zapisa_dela>
+        <zah:stvoreno_u_radnom_odnosu>false</zah:stvoreno_u_radnom_odnosu>
+        <zah:nacin_koriscenja>hgfjggh</zah:nacin_koriscenja>
+        <zah:autori>
+            <zah:autor>
+                <zah:kontakt>
+                    <zah:telefon>4546546465</zah:telefon>
+                    <zah:email>bob@gmail.com</zah:email>
+                    <zah:fax></zah:fax>
+                </zah:kontakt>
+                <zah:ime>Bob</zah:ime>
+                <zah:prezime>Barli</zah:prezime>
+                <zah:adresa>
+                    <zah:ulica>Gorana</zah:ulica>
+                    <zah:broj>45</zah:broj>
+                    <zah:postanski_broj>20000</zah:postanski_broj>
+                    <zah:mesto>Novi Sad</zah:mesto>
+                    <zah:drzava>Sr</zah:drzava>
+                </zah:adresa>
+                <zah:drzavljanstvo>Srb</zah:drzavljanstvo>
+                <zah:pseudonim>bili</zah:pseudonim>
+                <zah:godinaSmrti>0</zah:godinaSmrti>
+            </zah:autor>
+        </zah:autori>
+        <zah:anoniman_autor>false</zah:anoniman_autor>
+    </zah:autorsko_delo>
+    <zah:zavod>
+        <zah:naziv>Zavod za intelektualnu svojinu</zah:naziv>
+        <zah:adresa>
+            <zah:ulica>Kneginje Ljubice</zah:ulica>
+            <zah:broj>5</zah:broj>
+            <zah:postanski_broj>11000</zah:postanski_broj>
+            <zah:mesto>Beograd</zah:mesto>
+            <zah:drzava>Srbija</zah:drzava>
+        </zah:adresa>
+    </zah:zavod>
+    <zah:broj_resenja></zah:broj_resenja>
+</zah:zahtev>

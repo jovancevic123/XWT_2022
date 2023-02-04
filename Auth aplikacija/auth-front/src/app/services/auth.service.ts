@@ -21,7 +21,7 @@ export class AuthService {
     
     let xmlZahtev = JsonToXML.parse("loginDto", data);    
 
-    return this.http.post("http://localhost:8085/api/auth/login", xmlZahtev, {headers: new HttpHeaders().set('Content-Type', 'application/xml'), responseType:'text'})
+    return this.http.post("http://localhost:8086/api/auth/login", xmlZahtev, {headers: new HttpHeaders().set('Content-Type', 'application/xml'), responseType:'text'})
   }
 
   register(credentials: FormGroup) : Observable<any> {
@@ -36,6 +36,6 @@ export class AuthService {
     
     let xmlZahtev = JsonToXML.parse("registerDto", data);    
 
-    return this.http.post("http://localhost:8085/api/auth/register", xmlZahtev, {headers: new HttpHeaders().set('Content-Type', 'application/xml'), responseType:'text'})
+    return this.http.post("http://localhost:8086/api/auth/register", xmlZahtev, {headers: new HttpHeaders().set('Content-Type', 'application/xml'), responseType:'text'})
   }
 }

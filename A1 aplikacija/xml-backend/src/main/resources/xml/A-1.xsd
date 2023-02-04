@@ -9,7 +9,7 @@
                 <xs:element name="podnosilac" type="zah:TPodnosilac"/>
                 <xs:element minOccurs="0" name="punomocnik" type="zah:TLice"/>
                 <xs:element name="autorsko_delo" type="zah:TAutorskoDelo"/>
-                <xs:element name="prilozi">
+                <xs:element name="prilozi" minOccurs="0">
                     <xs:complexType>
                         <xs:sequence>
                             <xs:element maxOccurs="unbounded" name="prilog" type="zah:TPrilog"/>
@@ -17,6 +17,9 @@
                     </xs:complexType>
                 </xs:element>
                 <xs:element name="zavod" type="zah:TZavod"/>
+                <xs:element minOccurs="0" name="broj_resenja" type="xs:string" />
+                <xs:element minOccurs="0" name="opis_dela" type="xs:string" />
+                <xs:element minOccurs="0" name="primer_dela" type="xs:string" />
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -56,7 +59,7 @@
     <xs:complexType name="TAutorskoDelo">
         <xs:sequence>
             <xs:element name="naslov" type="xs:string"/>
-            <xs:element name="delo_prerade" type="zah:TDeloPrerade"/>
+            <xs:element name="delo_prerade" type="zah:TDeloPrerade" minOccurs="0"/>
             <xs:element name="vrsta_dela" type="xs:string"/>
             <xs:element name="forma_zapisa_dela" type="xs:string"/>
             <xs:element name="stvoreno_u_radnom_odnosu">
@@ -97,7 +100,7 @@
             <xs:extension base="zah:TFizickoLice">
                 <xs:sequence>
                     <xs:element name="pseudonim" type="xs:string" minOccurs="0"/>
-                    <xs:element name="godina_smrti" type="xs:positiveInteger" minOccurs="0"/>
+                    <xs:element name="godina_smrti" type="xs:nonNegativeInteger" minOccurs="0"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>

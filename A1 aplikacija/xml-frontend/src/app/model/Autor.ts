@@ -5,5 +5,6 @@ export interface Autor{
     ime:string,
     prezime:string,
     adresa:Adresa
-    drzavljanstvo:string
+    drzavljanstvo:string,
+    pseudonim?:string
 }

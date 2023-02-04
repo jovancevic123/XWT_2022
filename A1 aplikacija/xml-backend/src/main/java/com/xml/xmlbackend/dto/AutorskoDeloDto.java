@@ -20,4 +20,5 @@ public class AutorskoDeloDto {
     private boolean uRadnomOdnosu;
     private String vrstaDela;
     private List<AutorDto> autoriDela;
+    private boolean podnosilacJeAutor;
 }

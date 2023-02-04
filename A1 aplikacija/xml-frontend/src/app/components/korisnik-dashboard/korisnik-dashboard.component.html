@@ -2,8 +2,10 @@
     <a href="#" [routerLink]="['/user', {outlets: {'user-outlet': ['form']}}]">Servis za autorska dela</a>
     <a href="#">Servis za patente</a>
     <a href="#">Servis za žigove</a>
-    <!-- <a href="javascript:;" (click)="changePage()">{{otherPageName}}</a>
-    <a href="javascript:;" (click)="changePageTo2()">Pretraga</a> -->
+    
+    <a href="javascript:;" [routerLink]="['/user/a', {outlets: {'user-outlet': ['form']}}]">Novi zahtev</a>
+    <a href="javascript:;" [routerLink]="['/user/a', {outlets: {'user-outlet': ['search']}}]">Pretraga</a>
+    <a *ngIf="role !== 'KORISNIK'" href="javascript:;" [routerLink]="['/user', {outlets: {'user-outlet': ['report']}}]">Izveštaj</a>
 </div>
 
 <router-outlet name="user-outlet"></router-outlet>

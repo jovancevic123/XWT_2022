@@ -12,8 +12,9 @@ import lombok.Setter;
 @NoArgsConstructor
 public class AutorDto {
     private KontaktDto kontakt;
-    private AdresaDto adresaDto;
+    private AdresaDto adresa;
     private String ime;
     private String prezime;
     private String drzavljanstvo;
+    private String pseudonim;
 }

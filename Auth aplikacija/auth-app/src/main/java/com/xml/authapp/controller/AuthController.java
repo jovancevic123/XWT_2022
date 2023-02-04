@@ -7,10 +7,7 @@ import com.xml.authapp.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
@@ -38,6 +35,16 @@ public class AuthController {
         try {
             this.service.register(dto);
             return ResponseEntity.ok("You have successfully registrated!");
+        } catch (Exception e) {
+            return new ResponseEntity<String>("Something went wrong, try again!", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping(value = "get-user-by-email", produces = "application/xml")
+    public ResponseEntity<?> getUserByEmail(@RequestParam("email") String email) {
+        try {
+            User u = this.service.getUserByEmail(email);
+            return ResponseEntity.ok(u);
         } catch (Exception e) {
             return new ResponseEntity<String>("Something went wrong, try again!", HttpStatus.BAD_REQUEST);
         }

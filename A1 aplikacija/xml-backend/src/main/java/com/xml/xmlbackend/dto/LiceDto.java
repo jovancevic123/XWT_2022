@@ -14,7 +14,7 @@ public class LiceDto {
     private String prezime;
     private String drzavljanstvo;
     private AdresaDto adresa;
-    private KontaktDto kontaktDto;
+    private KontaktDto kontakt;
 
     private String poslovnoIme;
     private String sediste;

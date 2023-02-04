@@ -1,22 +1,24 @@
 package com.xml.xmlbackend.service;
 
+import com.xml.xmlbackend.dao.A1DocumentDAO;
 import com.xml.xmlbackend.dto.SearchMetadataDto;
+import com.xml.xmlbackend.dto.SearchResultDto;
 import com.xml.xmlbackend.exception.OperationFailedException;
-import com.xml.xmlbackend.util.AuthenticationUtilities;
+import com.xml.xmlbackend.model.a1.Zahtev;
 import com.xml.xmlbackend.util.FusekiAuthentication;
 import com.xml.xmlbackend.util.SparqlUtil;
 import org.apache.commons.io.FileUtils;
-import org.apache.http.client.HttpClient;
 import org.apache.jena.query.*;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.rdf.model.RDFNode;
+import org.apache.jena.rdf.model.*;
 import org.apache.jena.update.UpdateExecutionFactory;
 import org.apache.jena.update.UpdateFactory;
 import org.apache.jena.update.UpdateProcessor;
 import org.apache.jena.update.UpdateRequest;
 import org.springframework.stereotype.Service;
+import org.xmldb.api.base.XMLDBException;
 
+import javax.swing.text.DateFormatter;
+import javax.xml.bind.JAXBException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.*;
@@ -28,6 +30,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -37,15 +40,16 @@ import java.util.stream.Stream;
 public class MetadataService {
     public final String XSL_TO_RDF_FILE = "xml/metadata.xsl";
     private FusekiAuthentication.ConnectionProperties connectionProperties;
+    private final A1DocumentDAO existDao;
 
-    public MetadataService() throws IOException {
+    public MetadataService(A1DocumentDAO existDao) throws IOException {
+        this.existDao = existDao;
         connectionProperties = FusekiAuthentication.loadProperties();
     }
 
-    public void uploadMetadata() throws IOException {
+    public void uploadMetadata(String filePath, String SPARQL_NAMED_GRAPH_URI) throws IOException {
         // Creates a default model
         Model model = ModelFactory.createDefaultModel();
-        String filePath = "./src/main/resources/static/extracted_rdf.xml";
         model.read(filePath);
 
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -55,7 +59,7 @@ public class MetadataService {
         model.write(System.out, SparqlUtil.RDF_XML);
 
         // Creating the first named graph and updating it with RDF data
-        String sparqlUpdate = insertData(connectionProperties.dataEndpoint, new String(out.toByteArray()));
+        String sparqlUpdate = insertData(connectionProperties.dataEndpoint+SPARQL_NAMED_GRAPH_URI, new String(out.toByteArray()));
         System.out.println(sparqlUpdate);
         // UpdateRequest represents a unit of execution
         UpdateRequest update = UpdateFactory.create(sparqlUpdate);
@@ -65,19 +69,19 @@ public class MetadataService {
         processor.execute();
 
 
-        // populating what has been inserted
-        String sparqlQuery = SparqlUtil.selectData(connectionProperties.dataEndpoint, "?s ?p ?o");
-
-        // Create a QueryExecution that will access a SPARQL service over HTTP
-        QueryExecution query = QueryExecutionFactory.sparqlService(connectionProperties.queryEndpoint, sparqlQuery);
-
-
-        // Query the collection, dump output response as XML
-        ResultSet results = query.execSelect();
-
-        ResultSetFormatter.out(System.out, results);
-
-        query.close() ;
+//        // populating what has been inserted
+//        String sparqlQuery = SparqlUtil.selectData(connectionProperties.dataEndpoint, "?s ?p ?o");
+//
+//        // Create a QueryExecution that will access a SPARQL service over HTTP
+//        QueryExecution query = QueryExecutionFactory.sparqlService(connectionProperties.queryEndpoint, sparqlQuery);
+//
+//
+//        // Query the collection, dump output response as XML
+//        ResultSet results = query.execSelect();
+//
+//        ResultSetFormatter.out(System.out, results);
+//
+//        query.close() ;
     }
 
     public String extractMetadataToRdf(InputStream in, String id) {
@@ -250,4 +254,201 @@ public class MetadataService {
     public String selectData(String graphURI, String sparqlCondition) {
         return String.format("SELECT * FROM <%1$s> WHERE { %2$s }", graphURI, sparqlCondition);
     }
+
+    public List<SearchResultDto> basicSearch(String text, String queryPath) {
+        String sparqlQuery = null;
+
+        List<SearchResultDto> prijave = new ArrayList<>();
+        try {
+            sparqlQuery = String.format(readFile(queryPath, StandardCharsets.UTF_8), text);
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+
+        QueryExecution query = QueryExecutionFactory.sparqlService(connectionProperties.queryEndpoint, sparqlQuery);
+        ResultSet results = query.execSelect();
+
+        boolean indicator = false;
+        while (results.hasNext()) {
+            indicator = false;
+            QuerySolution querySolution = results.next();
+            Iterator<String> variableBindings = querySolution.varNames();
+            String brojResenja = "";
+            try{
+                brojResenja = querySolution.get("brojResenja").toString();
+            }catch(NullPointerException ex){}
+
+            String broj = querySolution.get("brojPrijave").toString();
+            String podnosilac = querySolution.get("podnosilacEmail").toString();
+            String datumPodnosenja = querySolution.get("datumPodnosenja").toString();
+            String naslovDela = querySolution.get("naslovDela").toString();
+
+            for(SearchResultDto dto : prijave){
+                if(dto.getBrojPrijave().equals(broj)){
+                    indicator = true;
+                    if(dto.getBrojResenja().equals("")){
+                        dto.setBrojResenja(brojResenja);
+                    }
+                }
+            }
+            if(!indicator){
+                prijave.add(new SearchResultDto(broj, datumPodnosenja, podnosilac, naslovDela, ""));
+            }
+        }
+        return prijave;
+    }
+
+    public void uploadResenjeMetadata(String extractedRdfFilePath, String SPARQL_NAMED_GRAPH_URI) throws IOException { //String filePath = "./src/main/resources/static/extracted_rdf.xml";  graphURI = "/resenje"
+        // Creates a default model
+        Model model = ModelFactory.createDefaultModel();
+        model.read(extractedRdfFilePath);
+
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+        model.write(out, SparqlUtil.NTRIPLES);
+
+        model.write(System.out, SparqlUtil.RDF_XML);
+
+        // Creating the first named graph and updating it with RDF data
+        String sparqlUpdate = insertData(connectionProperties.dataEndpoint + SPARQL_NAMED_GRAPH_URI, new String(out.toByteArray()));
+        System.out.println(sparqlUpdate);
+        // UpdateRequest represents a unit of execution
+        UpdateRequest update = UpdateFactory.create(sparqlUpdate);
+
+        UpdateProcessor processor = UpdateExecutionFactory.createRemote(update, connectionProperties.updateEndpoint);
+
+        processor.execute();
+    }
+
+    public void updateBrojResenjaMetaInZahtev(String extractedRdfFilePath, String xmlData, String brojPrijave, String noviBrojResenja){
+        Model model = ModelFactory.createDefaultModel();
+        model.read(extractedRdfFilePath);
+
+        Resource resource = model.createResource("http://www.ftn.uns.ac.rs/xwt/zahtev/" + brojPrijave);
+        Property property1 = model.createProperty("http://www.ftn.uns.ac.rs/rdf/examples/predicate/", "broj_resenja");
+
+        System.out.println("NOVI: "+noviBrojResenja);
+        Literal literal1 = model.createLiteral(noviBrojResenja);
+        Statement statement1 = model.createStatement(resource, property1, literal1);
+        model.add(statement1);
+
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+        model.write(out, SparqlUtil.NTRIPLES);
+
+        model.write(System.out, SparqlUtil.RDF_XML);
+        String sparqlUpdate = SparqlUtil.insertData(connectionProperties.dataEndpoint + "", out.toString());
+        System.out.println(sparqlUpdate);
+
+        // UpdateRequest represents a unit of execution
+        UpdateRequest update = UpdateFactory.create(sparqlUpdate);
+
+        // UpdateProcessor sends update request to a remote SPARQL update service.
+        UpdateProcessor processor = UpdateExecutionFactory.createRemote(update, connectionProperties.updateEndpoint);
+        processor.execute();
+    }
+
+
+    public void uploadZahtevMetadata(String SPARQL_NAMED_GRAPH_URI){
+        // Creates a default model
+        Model model = ModelFactory.createDefaultModel();
+        String filePath = "./src/main/resources/static/extracted_rdf.xml";
+        model.read(filePath);
+
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+        model.write(out, SparqlUtil.NTRIPLES);
+
+        model.write(System.out, SparqlUtil.RDF_XML);
+
+        // Creating the first named graph and updating it with RDF data
+        String sparqlUpdate = insertData(connectionProperties.dataEndpoint + SPARQL_NAMED_GRAPH_URI, new String(out.toByteArray()));
+        System.out.println(sparqlUpdate);
+        // UpdateRequest represents a unit of execution
+        UpdateRequest update = UpdateFactory.create(sparqlUpdate);
+
+        UpdateProcessor processor = UpdateExecutionFactory.createRemote(update, connectionProperties.updateEndpoint);
+
+        processor.execute();
+    }
+
+    public List<SearchResultDto> advancedSearch(String sparqlQuery) throws JAXBException, XMLDBException {
+        List<SearchResultDto> prijave = new ArrayList<>();
+
+        QueryExecution query = QueryExecutionFactory.sparqlService(connectionProperties.queryEndpoint, sparqlQuery);
+        ResultSet results = query.execSelect();
+
+        while (results.hasNext()) {
+
+            QuerySolution querySolution = results.next();
+            Iterator<String> variableBindings = querySolution.varNames();
+
+            String broj = querySolution.get("brojPrijave").toString();
+
+            Zahtev zahtev = this.existDao.findUnmarshalledZahtevById(broj);
+
+            String brojResenja = "";
+            if(zahtev.getBrojResenja() != null){
+                brojResenja = zahtev.getBrojResenja();
+            }
+            DateTimeFormatter  formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+            prijave.add(new SearchResultDto(zahtev.getPrijava().getBrojPrijave()+"", zahtev.getPrijava().getDatumPodnosenja().format(formatter), zahtev.getPodnosilac().getLice().getKontakt().getEmail(), zahtev.getAutorskoDelo().getNaslov(), zahtev.getBrojResenja()));
+        }
+        return prijave;
+    }
+
+    public int requestsThatAreReceivedBetween(String startDate, String endDate, String querySelectPath) {
+        String sparqlQuery = null;
+
+        List<String> brojeviPrijava = new ArrayList<>();
+        try {
+            sparqlQuery = String.format(readFile(querySelectPath, StandardCharsets.UTF_8),
+                    startDate,
+                    endDate);
+        }catch (IOException e){
+        }
+
+        QueryExecution query = QueryExecutionFactory.sparqlService(connectionProperties.queryEndpoint, sparqlQuery);
+        ResultSet results = query.execSelect();
+
+        while (results.hasNext()) {
+            QuerySolution querySolution = results.next();
+            Iterator<String> variableBindings = querySolution.varNames();
+
+            String broj = querySolution.get("brojPrijave").toString();
+            brojeviPrijava.add(broj);
+        }
+        return brojeviPrijava.size();
+    }
+
+    public int numberOfResponsesBetween(String startDate, String endDate, String querySelectPath) {
+        String sparqlQuery = null;
+
+        List<String> resenja = new ArrayList<>();
+        try {
+
+            sparqlQuery = String.format(readFile(querySelectPath, StandardCharsets.UTF_8),
+                    startDate,
+                    endDate);
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+
+        QueryExecution query = QueryExecutionFactory.sparqlService(connectionProperties.queryEndpoint, sparqlQuery);
+        ResultSet results = query.execSelect();
+
+        String varName;
+        RDFNode varValue;
+        while (results.hasNext()) {
+            QuerySolution querySolution = results.next();
+            Iterator<String> variableBindings = querySolution.varNames();
+
+            String broj = querySolution.get("brojResenja").toString();
+            resenja.add(broj);
+        }
+        return resenja.size();
+    }
+
+
 }

@@ -13,24 +13,30 @@
     text-align: center;
     display: flex;
     flex-direction: row;
+    gap: 10px;
 }
 
 .ripple{
     padding: 15vh;
     text-align: center;
+    font-size: 25px;
+    font-weight: 500;
     justify-content: center;
 }
 
 .first-service{
     background-color: rgba(229, 221, 161, 0.622);
+    cursor:pointer;
 }
 
 .second-service{
     background-color: rgba(125, 221, 154, 0.622);
+    cursor:pointer;
 }
 
 .third-service{
     background-color: rgba(232, 116, 116, 0.622);
+    cursor:pointer;
 }
 
 .logout{

@@ -1,10 +1,19 @@
 package com.xml.xmlbackend.model.a1;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.xml.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
         "naslov", "deloPrerade", "vrstaDela", "formaZapiseDela", "stvorenoURadnomOdnosu",
@@ -15,7 +24,7 @@ public class AutorskoDelo {
     @XmlElement(name="naslov", required=true)
     private String naslov;
 
-    @XmlElement(name="delo_prerade", required=true)
+    @XmlElement(name="delo_prerade", required=false)
     private DeloPrerade deloPrerade;
 
     @XmlElement(name="vrsta_dela", required=true)
@@ -24,7 +33,7 @@ public class AutorskoDelo {
     @XmlElement(name="forma_zapisa_dela", required=true)
     private String formaZapiseDela;
 
-    @XmlElement(name="stvoren_u_radnom_odnosu", required=true)
+    @XmlElement(name="stvoreno_u_radnom_odnosu", required=true)
     private boolean stvorenoURadnomOdnosu;
 
 

@@ -332,9 +332,7 @@ public class MetadataService {
 
         List<SearchResultsDto> prijave = new ArrayList<>();
         try {
-
-            sparqlQuery = String.format(readFile(queryPath, StandardCharsets.UTF_8),
-                    text);
+            sparqlQuery = String.format(readFile(queryPath, StandardCharsets.UTF_8), text);
         }catch (IOException e){
             System.out.println(e.getMessage());
         }
