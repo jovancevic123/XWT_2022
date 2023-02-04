@@ -29,7 +29,7 @@ public class AuthService {
     }
 
     public XMLResource findUserByEmail(String email) throws XMLDBException {
-        return this.daoLayer.findById(email + ".xml", "/db/patent/users");
+        return this.daoLayer.findById(email + ".xml", "/db/users");
     }
 
     public void register(RegisterDto dto) throws Exception {
@@ -41,7 +41,7 @@ public class AuthService {
         m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         m.marshal(user, stringWriter);
 
-        this.daoLayer.save(user.getEmail(), stringWriter.toString(), "/db/patent/users");
+        this.daoLayer.save(user.getEmail(), stringWriter.toString(), "/db/users");
     }
 
     public User login(LoginDto dto) throws XMLDBException, JAXBException, PasswordException {

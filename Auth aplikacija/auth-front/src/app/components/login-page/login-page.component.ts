@@ -7,8 +7,8 @@ import { catchError, lastValueFrom, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { TokenUtilsService } from 'src/app/services/token-utils.service';
 import { ToastrService } from 'ngx-toastr';
-import * as JsonToXML from "js2xmlparser";
-import { NgxXmlToJsonService } from 'ngx-xml-to-json';
+import * as converter from 'xml-js';
+// import { NgxXmlToJsonService } from 'ngx-xml-to-json';
 
 @Component({
   selector: 'app-login-page',
@@ -20,7 +20,7 @@ export class LoginPageComponent {
   loginForm: FormGroup;
 
   constructor(private authService: AuthService, private router: Router, private tokenUtilsService: TokenUtilsService,
-              private toastService: ToastrService, private ngxXmlToJsonService: NgxXmlToJsonService) {}
+              private toastService: ToastrService/*, private ngxXmlToJsonService: NgxXmlToJsonService*/) {}
   
   ngOnInit() {
       this.loginForm = new FormGroup({
@@ -40,7 +40,8 @@ export class LoginPageComponent {
             let token = this.xml2Json(res);            
             localStorage.setItem("user", JSON.stringify(token));
             this.toastService.success("Successful login!");
-            window.location.href="http://localhost:4205/service-picker";
+            this.router.navigateByUrl("service-picker");
+            // window.location.href="http://localhost:4205/service-picker";
           },
           error: (err) => {
             this.toastService.error(err.error);
@@ -59,15 +60,21 @@ export class LoginPageComponent {
       cdataKey: 'cdata', // tag for cdata nodes (ignored if mergeCDATA is true)
     };
 
-    let token = this.ngxXmlToJsonService.xmlToJson(xml, options);
+    console.log(xml);
+    let result1 = converter.xml2js(xml, options);
+    console.log(result1);
+    // const JSONData = JSON.parse(result1);
+    // console.log(JSONData);
 
-    return {
-      firstname: token.User.firstname.text,
-      lastname: token.User.lastname.text,
-      email: token.User.email.text,
-      password: token.User.password.text,
-      role: token.User.role.text,
-    };
+    // let token = this.ngxXmlToJsonService.xmlToJson(xml, options);
+
+    // return {
+    //   firstname: token.User.firstname.text,
+    //   lastname: token.User.lastname.text,
+    //   email: token.User.email.text,
+    //   password: token.User.password.text,
+    //   role: token.User.role.text,
+    // };
   }
 
 }
