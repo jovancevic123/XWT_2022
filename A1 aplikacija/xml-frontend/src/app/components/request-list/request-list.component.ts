@@ -30,8 +30,9 @@ export class RequestListComponent {
 
 
   ngOnInit(): void {
-    this.displayedColumns = this.isUser ? ['brojPrijave', 'datumPodnosenja', 'podnosilacEmail', 'naslovDela', 'html', 'pdf', 'resenje', 'reference'] :
-                                      ['brojPrijave', 'datumPodnosenja', 'podnosilacEmail', 'naslovDela', 'html', 'pdf', 'rdf', 'json', 'odobravanje', 'odbijanje', 'resenje', 'reference'];
+    this.displayedColumns = this.isUser ? ['brojPrijave', 'datumPodnosenja', 'podnosilacEmail', 'naslovDela', 'html', 'pdf', 'resenje'] :
+                                      ['brojPrijave', 'datumPodnosenja', 'podnosilacEmail', 'naslovDela', 'html', 'pdf', 'rdf', 'json', 'odobravanje', 'odbijanje', 'resenje'];
+    console.log(this.isUser);
   }
 
   downloadHTML(brojPrijave: string){  

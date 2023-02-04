@@ -283,6 +283,9 @@ public class MetadataService {
             String datumPodnosenja = querySolution.get("datumPodnosenja").toString();
             String naslovDela = querySolution.get("naslovDela").toString();
 
+            if(datumPodnosenja.contains("^"))
+                datumPodnosenja = datumPodnosenja.substring(0, datumPodnosenja.indexOf("^"));
+
             for(SearchResultDto dto : prijave){
                 if(dto.getBrojPrijave().equals(broj)){
                     indicator = true;

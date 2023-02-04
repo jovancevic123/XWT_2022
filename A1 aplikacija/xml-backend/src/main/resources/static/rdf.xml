@@ -1,33 +1,25 @@
-<?xml version="1.0" encoding="UTF-8"?><zahtev xmlns:sh="https://schema.org/" xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:a1="http://www.ftn.uns.ac.rs/xwt" about="http://www.ftn.uns.ac.rs/xwt/zahtev/319173325" vocab="http://www.ftn.uns.ac.rs/rdf/examples/predicate/">
+<?xml version="1.0" encoding="UTF-8"?><zahtev xmlns:sh="https://schema.org/" xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:a1="http://www.ftn.uns.ac.rs/xwt" about="http://www.ftn.uns.ac.rs/xwt/zahtev/508339992" vocab="http://www.ftn.uns.ac.rs/rdf/examples/predicate/">
     <zah:prijava xmlns:zah="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-        <BrojPrijave xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:broj_prijave">319173325</BrojPrijave>
-        <DatumPodnosenja xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:datum_podnosenja">2023-02-02</DatumPodnosenja>
+        <BrojPrijave xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:broj_prijave">508339992</BrojPrijave>
+        <DatumPodnosenja xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:date" property="pred:datum_podnosenja">2023-02-04</DatumPodnosenja>
     </zah:prijava>
     <zah:podnosilac xmlns:zah="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema" podnosilac_je_autor="false">
-        <zah:lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="zah:TFizickoLice">
+        <zah:lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="zah:TPravnoLice">
             <zah:kontakt>
-                <zah:telefon>064444555</zah:telefon>
-                <PodnosilacEmail xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:podnosilac_email">sabadosmihal@gmail.com</PodnosilacEmail>
+                <zah:telefon>065421333</zah:telefon>
+                <PodnosilacEmail xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:podnosilac_email">nikolasovilj@gmail.com</PodnosilacEmail>
                 <zah:fax/>
             </zah:kontakt>
-            <zah:ime>Mihal</zah:ime>
-            <zah:prezime>Sabadoš</zah:prezime>
-            <zah:adresa>
-                <zah:ulica>Štefanonikova</zah:ulica>
-                <zah:broj>120</zah:broj>
-                <zah:postanski_broj>21211</zah:postanski_broj>
-                <zah:mesto>Kisač</zah:mesto>
-                <zah:drzava>Srbija</zah:drzava>
-            </zah:adresa>
-            <zah:drzavljanstvo>Srpsko</zah:drzavljanstvo>
+            <zah:poslovno_ime>NikolaS</zah:poslovno_ime>
+            <zah:sediste>Ns</zah:sediste>
         </zah:lice>
     </zah:podnosilac>
     <zah:autorsko_delo xmlns:zah="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-        <NaslovDela xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:naslov_dela">Nova knjiga</NaslovDela>
+        <NaslovDela xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:naslov_dela">Novi Naslov</NaslovDela>
         <zah:vrsta_dela>književno delo</zah:vrsta_dela>
         <zah:forma_zapisa_dela>štampani tekst</zah:forma_zapisa_dela>
         <zah:stvoreno_u_radnom_odnosu>false</zah:stvoreno_u_radnom_odnosu>
-        <zah:nacin_koriscenja>Čitanje</zah:nacin_koriscenja>
+        <zah:nacin_koriscenja>Novi nacin</zah:nacin_koriscenja>
         <zah:anoniman_autor>true</zah:anoniman_autor>
     </zah:autorsko_delo>
     <zah:zavod xmlns:zah="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">
@@ -41,4 +33,6 @@
         </zah:adresa>
     </zah:zavod>
     <BrojResenja datatype="xs:string" property="pred:broj_resenja"/>
+    <zah:opis_dela xmlns:zah="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema"/>
+    <zah:primer_dela xmlns:zah="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema"/>
 </zahtev>

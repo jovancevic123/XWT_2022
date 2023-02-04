@@ -12,10 +12,11 @@ import { TokenUtilService } from 'src/app/services/token-util.service';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit{
+  role:string | null;
 
   
   startingList: SearchResult[] = [];
-  @Input() isUser: boolean;
+  isUser: boolean;
 
   protected vrstaPretrage: number = 1;
   basicSearchInput: string = "";
@@ -25,7 +26,15 @@ export class SearchComponent implements OnInit{
   constructor(private searchService: SearchService, private autorskoDeloService:AutorskoDeloServiceService, private tokenUtilService: TokenUtilService, private toastr:ToastrService){}
 
   ngOnInit(): void {
-    this.basicSearch();
+    this.role = this.tokenUtilService.getRoleFromToken();
+    if(this.role === "SLUZBENIK"){
+      this.basicSearch();
+      this.isUser = false;
+    }
+    else{
+      this.getAllRequestForUser();
+      this.isUser = true;
+    }
     // this.autorskoDeloService.getPendingRequests().subscribe({
     //   next: res => {
     //     console.log(res);
@@ -35,6 +44,19 @@ export class SearchComponent implements OnInit{
     //       console.error(error);
     //   }
     // });
+  }
+
+
+  getAllRequestForUser() {
+    let userEmail = this.tokenUtilService.getEmailFromToken();
+    let searchInput:AdvancedSearchMeta = {
+      meta: 'podnosilac_email',
+      value: userEmail as string,
+      operator: ''
+    }
+
+    this.advancedSearchInput = [searchInput];
+    this.advancedSearch();
   }
   
   basicSearch(){    

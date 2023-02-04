@@ -44,4 +44,9 @@ export class KorisnikDashboardComponent implements OnInit{
     // console.log(role);
   }
 
+  logOut(){
+    localStorage.removeItem("user");
+    window.location.href = "http://localhost:4205/login";
+  }
+
 }

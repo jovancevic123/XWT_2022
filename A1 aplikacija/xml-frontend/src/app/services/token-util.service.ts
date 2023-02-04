@@ -54,7 +54,7 @@ export class TokenUtilService {
       parentElement._parent[keyName] = value;
     }
       catch(e){}
-    }
+  }
 
 
   setUser(email: string) {//get-user-by-email

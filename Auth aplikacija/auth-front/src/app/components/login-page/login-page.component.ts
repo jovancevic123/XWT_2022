@@ -25,6 +25,7 @@ export class LoginPageComponent {
           'email': new FormControl('', Validators.required),
           'password': new FormControl('', Validators.required)
       });
+      localStorage.removeItem("user");
   }
   
   get formFields() { return this.loginForm.controls; }

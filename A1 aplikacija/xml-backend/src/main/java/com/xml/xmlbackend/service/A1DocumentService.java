@@ -44,6 +44,7 @@ public class A1DocumentService {
     private final A1DocumentDAO repository;
     private final MetadataService metadataService;
     private final XmlTransformer transformer;
+    private final EmailService emailService;
 
     public void addAutorskoDelo(ZahtevRequestDto dto) throws Exception {
         int brojPrijave = (int)new Date().getTime();
@@ -295,7 +296,8 @@ public class A1DocumentService {
 
         this.repository.save(resenje.getBrojResenja(), stringWriter.toString(), "/db/autorskoDelo/resenja");
         uploadConclusionMetadata(stringWriter.toString(), resenje.getBrojResenja());
-        updateBrojResenjaInZahtev(dto.getBrojPrijave(), resenje.getBrojResenja());
+        updateBrojResenjaInZahtev(dto.getBrojPrijave(), resenje);
+
         return resenje.getBrojResenja();
     }
 
@@ -310,7 +312,8 @@ public class A1DocumentService {
         metadataService.uploadResenjeMetadata(extractedRdfPath, "");
     }
 
-    private void updateBrojResenjaInZahtev(String brojPrijave, String brojResenja) throws Exception {
+    private void updateBrojResenjaInZahtev(String brojPrijave, Resenje resenje) throws Exception {
+        String brojResenja = resenje.getBrojResenja();
         XMLResource res = this.repository.findById(brojPrijave + ".xml", "/db/autorskoDelo/zahtevi");
         JAXBContext context = JAXBContext.newInstance(Zahtev.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
@@ -329,6 +332,8 @@ public class A1DocumentService {
         this.metadataService.extractMetadataToRdf(new FileInputStream(new File("./src/main/resources/static/rdf.xml")), "./src/main/resources/static/extracted_rdf.xml");
         this.metadataService.updateBrojResenjaMetaInZahtev("./src/main/resources/static/extracted_rdf.xml", stringWriter.toString(), brojPrijave, brojResenja);
         this.metadataService.uploadZahtevMetadata("");
+
+        emailService.sendResenje(zahtev.getPodnosilac().getLice().getKontakt().getEmail(), resenje);
     }
 
 
