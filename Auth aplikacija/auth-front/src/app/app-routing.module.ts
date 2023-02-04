@@ -5,6 +5,7 @@ import { RegistrationPageComponent } from './components/registration-page/regist
 import { ServicePickerComponent } from './components/service-picker/service-picker.component';
 
 const routes: Routes = [
+  { path: '', component: LoginPageComponent},
   { path: 'login', component: LoginPageComponent},
   { path: 'register', component: RegistrationPageComponent},
   { path: 'service-picker', component: ServicePickerComponent},

@@ -1,17 +1,14 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
-  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/423609584">
-    <pred:podnosilac_email xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">soviljnikola3@gmail.com</pred:podnosilac_email>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/511235960">
+    <pred:podnosilac_email xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">sasalukic@gmail.com</pred:podnosilac_email>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/423609584">
-    <pred:punomocnik_email xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">sfgsa</pred:punomocnik_email>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/511235960">
+    <pred:punomocnik_email xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">gdsag</pred:punomocnik_email>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/423609584">
-    <pred:broj_prijave_ziga xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">423609584</pred:broj_prijave_ziga>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/511235960">
+    <pred:broj_prijave_ziga xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">511235960</pred:broj_prijave_ziga>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/423609584">
-    <pred:datum_podnosenja xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2023-02-03</pred:datum_podnosenja>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/423609584">
-    <pred:broj_resenja xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1675460994947</pred:broj_resenja>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/xwt/zahtev/511235960">
+    <pred:datum_podnosenja xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2023-02-04</pred:datum_podnosenja>
   </rdf:Description>
 </rdf:RDF>

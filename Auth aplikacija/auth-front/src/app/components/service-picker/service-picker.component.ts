@@ -25,13 +25,13 @@ export class ServicePickerComponent {
     }
 
     zigServiceChoosen(){
-      let role: string | null = this.tokenUtilsService.getRoleFromToken();        
+      let role: string | null = this.tokenUtilsService.getRoleFromToken();  
+      let userEmail = this.tokenUtilsService.getUserEmailFromToken();      
       if(role === "KORISNIK"){
-        window.location.href = "";
+        window.location.href = `http://localhost:4202/korisnik-dashboard/${userEmail}`;
       }else{
-        window.location.href = "";
+        window.location.href = `http://localhost:4202/sluzbenik-dashboard/${userEmail}`;
       }
-     
     }
 
     autorskoDeloServiceChoosen(){

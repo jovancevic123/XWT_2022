@@ -1,3 +1,4 @@
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 var convert = require('xml-js');
@@ -7,7 +8,9 @@ var convert = require('xml-js');
 })
 export class TokenUtilService {
 
-  constructor() { }
+  private apiURL: String = "http://localhost:8086/api";
+
+  constructor(private http: HttpClient) { }
 
   getRoleFromToken(): string | null{
     try{
@@ -51,5 +54,12 @@ export class TokenUtilService {
       parentElement._parent[keyName] = value;
     }
       catch(e){}
+    }
+
+    setUser(email: string) {//get-user-by-email
+      let queryParams = new HttpParams();
+      queryParams = queryParams.append("email", email);
+  
+      return this.http.get(this.apiURL + '/auth/get-user-by-email', {params: queryParams, headers: new HttpHeaders().set('Content-Type', 'application/xml'), responseType:'text'});
     }
 }
