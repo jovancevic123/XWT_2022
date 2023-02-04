@@ -14,7 +14,7 @@ export class ServicePickerComponent {
   constructor(private router: Router, private tokenUtilsService: TokenUtilsService,
     private toastService: ToastrService) {}
 
-    firstChosen(){
+    patentServiceChoosen(){
       let role: string | null = this.tokenUtilsService.getRoleFromToken();        
   
       if(role === "KORISNIK"){
@@ -24,26 +24,21 @@ export class ServicePickerComponent {
       }
     }
 
-    secondChosen(){
+    zigServiceChoosen(){
       let role: string | null = this.tokenUtilsService.getRoleFromToken();        
-  
       if(role === "KORISNIK"){
         window.location.href = "";
       }else{
         window.location.href = "";
       }
-      
+     
     }
 
-    thirdChosen(){
-      let role: string | null = this.tokenUtilsService.getRoleFromToken();        
-
-      if(role === "KORISNIK"){
-        window.location.href = "";
-      }else{
-        window.location.href = "";
-      }
-
+    autorskoDeloServiceChoosen(){
+      let role: string | null = this.tokenUtilsService.getRoleFromToken();    
+      let userEmail = this.tokenUtilsService.getUserEmailFromToken();
+      console.log(userEmail);
+      window.location.href = `http://localhost:4201/user/${userEmail}/(user-outlet:form)`;
     }
 
     logout(){

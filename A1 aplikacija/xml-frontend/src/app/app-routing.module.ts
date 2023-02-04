@@ -7,7 +7,27 @@ import { SearchComponent } from './components/search/search.component';
 
 const routes: Routes = [
   { 
-    path:"user", 
+    path:"user/:email",
+    component: KorisnikDashboardComponent,
+    children:[
+      {
+        path:'form',
+        component:FormPageComponent,
+        outlet:'user-outlet'
+      },
+      {
+        path:'search',
+        component:SearchComponent,
+        outlet:'user-outlet'
+      },
+      {
+        path:'report',
+        component:ReportPageComponent,
+        outlet:'user-outlet'
+      },
+    ]
+  },{ 
+    path:"user",
     component: KorisnikDashboardComponent,
     children:[
       {

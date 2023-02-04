@@ -23,14 +23,17 @@
 
 .first-service{
     background-color: rgba(229, 221, 161, 0.622);
+    cursor:pointer;
 }
 
 .second-service{
     background-color: rgba(125, 221, 154, 0.622);
+    cursor:pointer;
 }
 
 .third-service{
     background-color: rgba(232, 116, 116, 0.622);
+    cursor:pointer;
 }
 
 .logout{

@@ -1,3 +1,4 @@
+import { TokenUtilService } from './../../services/token-util.service';
 import { AutorskoDeloServiceService } from './../../services/autorsko-delo-service.service';
 
 import { Component } from '@angular/core';
@@ -6,7 +7,7 @@ import { Adresa } from 'src/app/model/Adresa';
 import { Autor } from 'src/app/model/Autor';
 import { Kontakt } from 'src/app/model/Kontakt';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-page',

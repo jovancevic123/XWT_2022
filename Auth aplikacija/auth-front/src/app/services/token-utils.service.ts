@@ -26,4 +26,14 @@ export class TokenUtilsService {
         return null;
     }
   }
+  
+  getUserEmailFromToken(): string | null {
+    try{
+        let token: any = JSON.parse(localStorage.getItem("user") as string);
+        return token.email;
+    }
+    catch{
+        return null;
+    }
+  }
 }

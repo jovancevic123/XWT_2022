@@ -3,8 +3,8 @@
     <a href="#">Servis za patente</a>
     <a href="#">Servis za žigove</a>
     
-    <a href="javascript:;" [routerLink]="['/user', {outlets: {'user-outlet': ['form']}}]">Novi zahtev</a>
-    <a href="javascript:;" [routerLink]="['/user', {outlets: {'user-outlet': ['search']}}]">Pretraga</a>
+    <a href="javascript:;" [routerLink]="['/user/a', {outlets: {'user-outlet': ['form']}}]">Novi zahtev</a>
+    <a href="javascript:;" [routerLink]="['/user/a', {outlets: {'user-outlet': ['search']}}]">Pretraga</a>
     <a *ngIf="role !== 'KORISNIK'" href="javascript:;" [routerLink]="['/user', {outlets: {'user-outlet': ['report']}}]">Izveštaj</a>
 </div>
 

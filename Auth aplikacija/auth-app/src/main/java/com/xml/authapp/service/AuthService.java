@@ -60,4 +60,14 @@ public class AuthService {
         return user;
     }
 
+    public User getUserByEmail(String email) throws XMLDBException, JAXBException {
+        XMLResource res = findUserByEmail(email);
+        if(res == null){
+            throw new UserNotFoundException();
+        }
+        JAXBContext context = JAXBContext.newInstance(User.class);
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+
+        return (User) unmarshaller.unmarshal(new StringInputSource(res.getContent().toString()));
+    }
 }

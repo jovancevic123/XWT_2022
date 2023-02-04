@@ -7,8 +7,6 @@ import { catchError, lastValueFrom, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { TokenUtilsService } from 'src/app/services/token-utils.service';
 import { ToastrService } from 'ngx-toastr';
-import * as converter from 'xml-js';
-// import { NgxXmlToJsonService } from 'ngx-xml-to-json';
 
 @Component({
   selector: 'app-login-page',
@@ -37,10 +35,26 @@ export class LoginPageComponent {
         this.authService.logIn(this.loginForm)
         .subscribe({
           next: (res) => {            
-            let token = this.xml2Json(res);            
-            localStorage.setItem("user", JSON.stringify(token));
-            this.toastService.success("Successful login!");
-            this.router.navigateByUrl("service-picker");
+            // let token = this.xml2Json(res);   
+            var parseString = require('xml2js').parseString;
+            var that = this;
+            parseString(res, function (err:any, result:any) {
+              console.dir(result);
+              let token = {
+                    firstname: result.User.firstname[0],
+                    lastname: result.User.lastname[0],
+                    email: result.User.email[0],
+                    password: result.User.password[0],
+                    role: result.User.role[0],
+              };
+
+              localStorage.setItem("user", JSON.stringify(token));
+              that.toastService.success("Successful login!");
+              that.router.navigateByUrl("service-picker");
+
+            });
+
+            
             // window.location.href="http://localhost:4205/service-picker";
           },
           error: (err) => {
@@ -51,30 +65,6 @@ export class LoginPageComponent {
 
   goToRegistration():void{
     this.router.navigateByUrl('/registration');
-  }
-
-  xml2Json(xml: any){
-    const options = { // set up the default options 
-      textKey: 'text', // tag name for text nodes
-      attrKey: 'attr', // tag for attr groups
-      cdataKey: 'cdata', // tag for cdata nodes (ignored if mergeCDATA is true)
-    };
-
-    console.log(xml);
-    let result1 = converter.xml2js(xml, options);
-    console.log(result1);
-    // const JSONData = JSON.parse(result1);
-    // console.log(JSONData);
-
-    // let token = this.ngxXmlToJsonService.xmlToJson(xml, options);
-
-    // return {
-    //   firstname: token.User.firstname.text,
-    //   lastname: token.User.lastname.text,
-    //   email: token.User.email.text,
-    //   password: token.User.password.text,
-    //   role: token.User.role.text,
-    // };
   }
 
 }
