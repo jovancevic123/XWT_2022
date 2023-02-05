@@ -135,7 +135,7 @@
                     <br/>
                     <p class="content">
                         <xsl:choose>
-                            <xsl:when test="zahtev/podnosilac/lice[@type='TFizickoLice']">
+                            <xsl:when test="zahtev/podnosilac/lice[@type='zah:TFizickoLice']">
                                 <xsl:value-of  select="zahtev/podnosilac/lice/ime"/>,
                                 <xsl:value-of  select="zahtev/podnosilac/lice/prezime"/>,<br/>
                                 <xsl:value-of  select="zahtev/podnosilac/lice/adresa/ulica"/>&#160;
@@ -144,7 +144,7 @@
                                 <xsl:value-of  select="zahtev/podnosilac/lice/adresa/drzava"/>,<br/>
                                 <xsl:value-of  select="zahtev/podnosilac/lice/drzavljanstvo"/>
                             </xsl:when>
-                            <xsl:when test="zahtev/podnosilac/lice[@type='TPravnoLice']">
+                            <xsl:when test="zahtev/podnosilac/lice[@type='zah:TPravnoLice']">
                                 <xsl:value-of  select="zahtev/podnosilac/lice/poslovno_ime"/>,
                                 <xsl:value-of  select="zahtev/podnosilac/lice/sediste"/>,
                             </xsl:when>
@@ -153,6 +153,7 @@
                             <tr>
                                 <td>telefon:&#160; <xsl:value-of  select="zahtev/podnosilac/lice/kontakt/telefon"/></td>
                                 <td>email:&#160;<xsl:value-of  select="zahtev/podnosilac/lice/kontakt/email"/></td>
+                                <td>fax:&#160;<xsl:value-of  select="zahtev/podnosilac/lice/kontakt/fax"/></td>
                             </tr>
                         </table>
                     </p>
@@ -168,10 +169,13 @@
                         <xsl:if test="zahtev/punomocnik">
                             <xsl:value-of  select="zahtev/punomocnik/ime"/>,
                             <xsl:value-of  select="zahtev/punomocnik/prezime"/>,<br/>
-                            <xsl:value-of  select="zahtev/punomocnik/lice/adresa/ulica"/>&#160;
-                            <xsl:value-of  select="zahtev/punomocnik/lice/adresa/broj"/>,
-                            <xsl:value-of  select="zahtev/punomocnik/lice/adresa/mesto"/>,
-                            <xsl:value-of  select="zahtev/punomocnik/lice/adresa/drzava"/><br/>
+                            <xsl:value-of  select="zahtev/punomocnik/adresa/ulica"/>&#160;
+                            <xsl:value-of  select="zahtev/punomocnik/adresa/broj"/>,
+                            <xsl:value-of  select="zahtev/punomocnik/adresa/mesto"/>,
+                            <xsl:value-of  select="zahtev/punomocnik/adresa/drzava"/><br/>
+                            <xsl:value-of  select="zahtev/punomocnik/kontakt/email"/>,
+                            <xsl:value-of  select="zahtev/punomocnik/kontakt/telefon"/>,
+                            <xsl:value-of  select="zahtev/punomocnik/kontakt/fax"/>
                         </xsl:if>
                     </p>
                     <p class="paragraph">4) Naslov autorskog dela, odnosno alternativni naslov, ako ga ima, po kome autorsko delo može da se identifikuje*:</p><br/>
@@ -179,27 +183,27 @@
                         <xsl:value-of  select="zahtev/autorsko_delo/naslov"/>
                     </p>
                     <p class="paragraph">5) Podaci o naslovu autorskog dela na kome se zasniva delo prerade, ako je u pitanju autorsko delo prerade, kao i podatak o autoru izvornog dela:</p><br/>
-                    <div class="flex-div">
-                        <xsl:if test="zahtev/autorsko_delo/delo_prerade">
-                            <p class="naslov-dela">
-                                Zasniva se na naslov dela: <xsl:value-of  select="zahtev/autorsko_delo/delo_prerade/naslov_dela_prerade"/><br/>
-                                Autori:
-                            </p>
-                            <xsl:for-each select="zahtev/autorsko_delo/delo_prerade/autori">
-                                <p class="content">
-                                    <xsl:value-of  select="autor/ime"/>,
-                                    <xsl:value-of  select="autor/prezime"/>,<br/>
-                                    <xsl:value-of  select="autor/adresa/ulica"/>&#160;
-                                    <xsl:value-of  select="autor/adresa/broj"/>,
-                                    <xsl:value-of  select="autor/adresa/mesto"/>,
-                                    <xsl:value-of  select="autor/adresa/drzava"/>,<br/>
-                                    <xsl:value-of  select="autor/drzavljanstvo"/>,<br/>
-                                    <xsl:value-of  select="autor/kontakt/telefon"/>,&#160;
-                                    <xsl:value-of  select="autor/kontakt/email"/><br/><br/>
+                    <xsl:if test="zahtev/autorsko_delo/delo_prerade">
+                        <div class="flex-div">
+                                <p class="naslov-dela">
+                                    Zasniva se na naslov dela: <xsl:value-of  select="zahtev/autorsko_delo/delo_prerade/naslov_dela_prerade"/><br/>
+                                    Autori:
                                 </p>
-                            </xsl:for-each>
-                        </xsl:if>
-                    </div>
+                                <xsl:for-each select="zahtev/autorsko_delo/delo_prerade/autori">
+                                    <p class="content">
+                                        <xsl:value-of  select="autor/ime"/>,
+                                        <xsl:value-of  select="autor/prezime"/>,<br/>
+                                        <xsl:value-of  select="autor/adresa/ulica"/>&#160;
+                                        <xsl:value-of  select="autor/adresa/broj"/>,
+                                        <xsl:value-of  select="autor/adresa/mesto"/>,
+                                        <xsl:value-of  select="autor/adresa/drzava"/>,<br/>
+                                        <xsl:value-of  select="autor/drzavljanstvo"/>,<br/>
+                                        <xsl:value-of  select="autor/kontakt/telefon"/>,&#160;
+                                        <xsl:value-of  select="autor/kontakt/email"/><br/><br/>
+                                    </p>
+                                </xsl:for-each>
+                        </div>
+                    </xsl:if>
 
                     <p class="paragraph">6) Podaci o vrsti autorskog dela (književno delo, muzičko delo, likovno delo, računarski program i dr.) *:</p><br/>
                     <p class="content">
@@ -228,7 +232,7 @@
                                     <xsl:value-of  select="autor/prezime"/>,
                                     <xsl:value-of  select="autor/ime"/>,<br/>
                                     <xsl:choose>
-                                        <xsl:when test="autor/godina_smrti">
+                                        <xsl:when test="autor/godina_smrti > 0">
                                             <xsl:value-of  select="autor/godina_smrti"/>,
                                         </xsl:when>
                                         <xsl:otherwise>

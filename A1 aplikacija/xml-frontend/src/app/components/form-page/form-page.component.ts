@@ -281,8 +281,7 @@ export class FormPageComponent {
   }
   
   onPunomocnikAdresa(event: Adresa){
-    this.podnosilacAdresa = event;
-    
+    this.punomocAdresa = event;
   }
   //Contact events
   onPunomocnikKontakt(event: Kontakt){

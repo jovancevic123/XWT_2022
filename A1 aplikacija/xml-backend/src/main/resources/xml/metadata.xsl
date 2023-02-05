@@ -38,6 +38,12 @@
         </PodnosilacEmail>
     </xsl:template>
 
+    <xsl:template match="a1:zahtev/a1:punomocnik/a1:lice/a1:kontakt/a1:email">
+        <PunomocnikEmail property="pred:punomocnik_email" datatype="xs:string">
+            <xsl:apply-templates select="node()|@*"/>
+        </PunomocnikEmail>
+    </xsl:template>
+
     <xsl:template match="a1:zahtev/a1:autorsko_delo/a1:autori/a1:autor/a1:kontakt/a1:email">
         <AutorEmail property="pred:autor_email" datatype="xs:string">
             <xsl:apply-templates select="node()|@*"/>

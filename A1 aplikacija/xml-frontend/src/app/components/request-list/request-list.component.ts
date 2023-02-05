@@ -66,6 +66,8 @@ export class RequestListComponent {
         console.log(data);
         this.requests[i].brojResenja = data;
         this.toastr.success("","Uspešno prihvatanje");
+        if(this.requests && this.requests.length > 1)
+          this.requests.sort((a:any,b:any)=>{ return a.brojResenja < b.brojResenja?1:a.brojResenja > b.brojResenja?-1:0})
       },
       error: error => {
         console.error(error);
@@ -80,6 +82,8 @@ export class RequestListComponent {
         console.log(data);
         this.requests[i].brojResenja = data;
         this.toastr.success("","Uspešno odbijanje");
+        if(this.requests && this.requests.length > 1)
+          this.requests.sort((a:any,b:any)=>{ return a.brojResenja < b.brojResenja?1:a.brojResenja > b.brojResenja?-1:0})
       },
       error: error => {
         console.error(error);

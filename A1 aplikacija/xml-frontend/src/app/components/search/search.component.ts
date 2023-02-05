@@ -48,50 +48,71 @@ export class SearchComponent implements OnInit{
 
 
   getAllRequestForUser() {
-    let userEmail = this.tokenUtilService.getEmailFromToken();
-    let searchInput:AdvancedSearchMeta = {
-      meta: 'podnosilac_email',
-      value: userEmail as string,
-      operator: ''
-    }
-
-    this.advancedSearchInput = [searchInput];
-    this.advancedSearch();
+    this.basicSearch()  ;
   }
   
-  basicSearch(){    
-    this.searchService.basicSearch(this.basicSearchInput).subscribe({
-      next: res => {
-        console.log(res);
-        this.searchResults = this.makeJsonListOutOfSearchResults(res);       
-      },
-      error: error => {
-          console.error(error);
-      }
-    });
+  basicSearch(){
+    if(this.tokenUtilService.getRoleFromToken() === "SLUZBENIK"){
+      this.searchService.basicSearch(this.basicSearchInput).subscribe({
+        next: res => {
+          console.log(res);
+          this.searchResults = this.makeJsonListOutOfSearchResults(res);       
+        },
+        error: error => {
+            console.error(error);
+        }
+      });
+    }
+    else{
+      this.searchService.basicSearchForUser(this.basicSearchInput).subscribe({
+        next: res => {
+          console.log(res);
+          this.searchResults = this.makeJsonListOutOfSearchResults(res);    
+        },
+        error: error => {
+            console.error(error);
+        }
+      });}
   }
 
   advancedSearch(){
-    console.log(this.advancedSearchInput);
-    this.searchService.advancedSearch(this.advancedSearchInput).subscribe({
-      next: res => {
-        this.searchResults = this.makeJsonListOutOfSearchResults(res);
-        console.log(this.searchResults);
-      },
-      error: error => {
-          console.error(error);
-          this.toastr.error("","Neuspešna pretraga");
-      }
-    });
+    if(this.tokenUtilService.getRoleFromToken() === "SLUZBENIK"){
+      console.log(this.advancedSearchInput);
+      this.searchService.advancedSearch(this.advancedSearchInput).subscribe({
+        next: res => {
+          this.searchResults = this.makeJsonListOutOfSearchResults(res);
+          console.log(this.searchResults);
+        },
+        error: error => {
+            console.error(error);
+            this.toastr.error("","Neuspešna pretraga");
+        }
+      });
+    }
+    else{
+      console.log(this.advancedSearchInput);
+      this.searchService.advancedSearchForUser(this.advancedSearchInput).subscribe({
+        next: res => {
+          this.searchResults = this.makeJsonListOutOfSearchResults(res);
+          console.log(this.searchResults);
+        },
+        error: error => {
+            console.error(error);
+            this.toastr.error("","Neuspešna pretraga");
+        }
+      });
+    }
   }
 
   makeJsonListOutOfSearchResults(xmlString: string): any {
     let results = JSON.parse(this.tokenUtilService.xml2Json(xmlString)).searchResultsDto.results;     
     console.log(results);
-    
     if(!results){
       return [];
     }
+    if(results.length > 1)
+      results.sort((a:any,b:any)=>{ return a.brojResenja < b.brojResenja?1:a.brojResenja > b.brojResenja?-1:0})
+    
     
     if(results.length){
       results = results;

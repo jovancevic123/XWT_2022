@@ -30,10 +30,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.stream.Stream;
 
 @RequiredArgsConstructor
@@ -246,6 +246,10 @@ public class A1DocumentService {
         return this.metadataService.basicSearch(text, "./data/sparql/basicSearch.rq");
     }
 
+    public List<SearchResultDto> basicSearchForUser(String text, String email) {
+        return this.metadataService.basicSearchForUser(text,email, "./data/sparql/basicSearchForUser.rq");
+    }
+
     public String getRequestHTML(String brojPrijave) throws XMLDBException, IOException {
         XMLResource res = this.findZahtevById(brojPrijave);
         String xmlData = res.getContent().toString();
@@ -333,7 +337,9 @@ public class A1DocumentService {
         this.metadataService.updateBrojResenjaMetaInZahtev("./src/main/resources/static/extracted_rdf.xml", stringWriter.toString(), brojPrijave, brojResenja);
         this.metadataService.uploadZahtevMetadata("");
 
-        emailService.sendResenje(zahtev.getPodnosilac().getLice().getKontakt().getEmail(), resenje);
+        File file = generateResenjePdf(resenje);
+
+        emailService.sendResenje(zahtev.getPodnosilac().getLice().getKontakt().getEmail(), file);
     }
 
 
@@ -354,7 +360,7 @@ public class A1DocumentService {
 
         this.repository.save(resenje.getBrojResenja(), stringWriter.toString(), "/db/autorskoDelo/resenja");
         uploadConclusionMetadata(stringWriter.toString(), resenje.getBrojResenja());
-        updateBrojResenjaInZahtev(dto.getBrojPrijave(), resenje.getBrojResenja());
+        updateBrojResenjaInZahtev(dto.getBrojPrijave(), resenje);
 
         return resenje.getBrojResenja();
     }
@@ -369,8 +375,13 @@ public class A1DocumentService {
                         "WHERE {\n ?zahtev  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/broj_prijave> ?brojPrijave . \n" ;
 
         for(AdvancedSearchDto dto : list.getConditions()){
-            if(!dto.getMeta().equals("broj_prijave"))
+            if(!dto.getMeta().equals("broj_prijave")) {
+                if(dto.getMeta().equals("punomocnik_email"))
+                    queryString = queryString.concat("OPTIONAL { \n");
                 queryString = queryString.concat(String.format("?zahtev <%s%s> ?%s . \n", pred, dto.getMeta(), namingConversion(dto.getMeta())));
+                if(dto.getMeta().equals("autor_email"))
+                    queryString = queryString.concat("} \n");
+            }
         }
 
         queryString = queryString.concat("FILTER( \n");
@@ -389,11 +400,49 @@ public class A1DocumentService {
         return this.metadataService.advancedSearch(queryString);
     }
 
+    public List<SearchResultDto> advancedSearchForUser(AdvancedSearchListDto list) throws JAXBException, XMLDBException {
+        String pred = "http://www.ftn.uns.ac.rs/rdf/examples/predicate/";
+
+        String queryString =
+                "PREFIX schema: <http://www.ftn.uns.ac.rs/rdf/examples/predicate>\n" +
+                        "prefix xsd: <http://www.w3.org/2001/XMLSchema#>\n" +
+                        "SELECT * from <http://localhost:3030/AutorskoDeloDataset/data>\n" +
+                        "WHERE {\n ?zahtev  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/broj_prijave> ?brojPrijave . \n" ;
+
+        for(AdvancedSearchDto dto : list.getConditions()){
+            if(!dto.getMeta().equals("broj_prijave")) {
+                if(dto.getMeta().equals("punomocnik_email"))
+                    queryString = queryString.concat("OPTIONAL { \n");
+                queryString = queryString.concat(String.format("?zahtev <%s%s> ?%s . \n", pred, dto.getMeta(), namingConversion(dto.getMeta())));
+                if(dto.getMeta().equals("autor_email"))
+                    queryString = queryString.concat("} \n");
+            }
+        }
+
+        queryString = queryString.concat("FILTER( \n");
+
+        int i = 0;
+        for(AdvancedSearchDto dto : list.getConditions()){
+            i++;
+            queryString = queryString.concat(String.format("CONTAINS(UCASE(str(?%s)), UCASE('%s'))\n ", namingConversion(dto.getMeta()), dto.getValue()));
+            if(i < list.getConditions().size()){
+                queryString = queryString.concat(String.format("%s ", getQueryOperator(dto.getOperator())));
+            }
+            if(dto.getMeta().equals("podnosilac_email"))
+                queryString = queryString.concat(" (");
+        }
+
+        queryString = queryString.concat(")).\n}");
+        System.out.println(queryString);
+        return this.metadataService.advancedSearch(queryString);
+    }
+
     private Object namingConversion(String undercase) {
         switch (undercase){
             case "broj_prijave": return "brojPrijave";
             case "datum_podnosenja": return "datumPodnosenja";
             case "podnosilac_email": return "podnosilacEmail";
+            case "punomocnik_email": return "punomocnikEmail";
             case "naslov_dela": return "naslovDela";
             case "broj_resenja": return "brojResenja";
             case "autor_email": return "autorEmail";
@@ -410,6 +459,62 @@ public class A1DocumentService {
             case "":return "";
             default: throw new QueryFormatException("Malformed query!");
         }
+    }
+
+    public File generateResenjePdf(Resenje resenje) throws IOException, DocumentException {
+        Document document = new Document();
+        String path = "./src/main/resources/xml/resenja/" + new Date().getTime() + ".pdf";
+        File file = null;
+
+        try {
+            file = new File(path);
+            if (file.createNewFile()) {
+                System.out.println("File created: " + file.getName());
+            } else {
+                System.out.println("File already exists.");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
+        PdfWriter.getInstance(document, new FileOutputStream(path));
+        document.open();
+
+        Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
+        Chunk chunk = new Chunk("Rešenje zahteva: " + resenje.getBrojPrijave() + "\n\n\n\n\n", font);
+
+        PdfPTable table = new PdfPTable(2);
+        addTableHeader(table);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String prihvaceno = "Ne";
+        String obrazlozenje = "";
+        if(resenje.isPrihvacena())
+            prihvaceno = "Da";
+        else
+            obrazlozenje = resenje.getObrazlozenje();
+
+
+        addStringRows(table, "Broj resenja:", resenje.getBrojResenja());
+        addStringRows(table, "Ime sluzbenika:", resenje.getImeSluzbenika());
+        addStringRows(table, "Prezime sluzbenika:", resenje.getPrezimeSluzbenika());
+        addStringRows(table, "Datum odgovora:", resenje.getDatumOdgovora().format(formatter));
+        addStringRows(table, "Prihvaceno:", prihvaceno);
+        addStringRows(table, "Obrazlozenje:", obrazlozenje);
+
+        Paragraph paragraph1 = new Paragraph(chunk);
+        document.add(paragraph1);
+
+        document.add(table);
+
+        document.close();
+
+        return file;
+
+//        byte[] fileContent = Files.readAllBytes(file.toPath());
+//        ByteArrayResource body = new ByteArrayResource(fileContent);
+
     }
 
     public ByteArrayResource generateReport(String startDate, String endDate) throws IOException, DocumentException {
@@ -462,6 +567,11 @@ public class A1DocumentService {
     private void addRows(PdfPTable table, String text, int counter) {
         table.addCell(text);
         table.addCell(counter + "");
+    }
+
+    private void addStringRows(PdfPTable table, String text, String addition) {
+        table.addCell(text);
+        table.addCell(addition + "");
     }
 
     private void addTableHeader(PdfPTable table) {

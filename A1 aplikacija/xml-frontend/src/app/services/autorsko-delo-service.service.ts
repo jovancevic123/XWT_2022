@@ -43,7 +43,7 @@ export class AutorskoDeloServiceService {
     let body = {
       brojPrijave: broj,
       obrazlozenje: "",
-      imeSluzbenika: "Nevena Simic", // this.tokenUtilService.getUserFromToken(),
+      imeSluzbenika: this.tokenUtilService.getUserFromToken(), 
       prihvacena: true
     };
 
@@ -56,7 +56,7 @@ export class AutorskoDeloServiceService {
     let body = {
       brojPrijave: broj,
       obrazlozenje: obrazlozenje,
-      imeSluzbenika: "Nevena Simic", //this.tokenUtilService.getUserFromToken(),
+      imeSluzbenika: this.tokenUtilService.getUserFromToken(),
       prihvacena: false
     };
 

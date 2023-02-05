@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<zah:zahtev xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:zah="http://www.ftn.uns.ac.rs/xwt">
+    <zah:prijava>
+        <zah:broj_prijave>572201186</zah:broj_prijave>
+        <zah:datum_podnosenja>2023-02-05</zah:datum_podnosenja>
+    </zah:prijava>
+    <zah:podnosilac podnosilac_je_autor="false">
+        <zah:lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="zah:TPravnoLice">
+            <zah:kontakt>
+                <zah:telefon>0655193962</zah:telefon>
+                <zah:email>sabadosmihal00@gmail.com</zah:email>
+                <zah:fax></zah:fax>
+            </zah:kontakt>
+            <zah:poslovno_ime>MihalS</zah:poslovno_ime>
+            <zah:sediste>Ns</zah:sediste>
+        </zah:lice>
+    </zah:podnosilac>
+    <zah:autorsko_delo>
+        <zah:naslov>Nestooo</zah:naslov>
+        <zah:vrsta_dela>muzicko delo</zah:vrsta_dela>
+        <zah:forma_zapisa_dela>stampani tekst</zah:forma_zapisa_dela>
+        <zah:stvoreno_u_radnom_odnosu>false</zah:stvoreno_u_radnom_odnosu>
+        <zah:nacin_koriscenja>citanje</zah:nacin_koriscenja>
+        <zah:anoniman_autor>true</zah:anoniman_autor>
+    </zah:autorsko_delo>
+    <zah:zavod>
+        <zah:naziv>Zavod za intelektualnu svojinu</zah:naziv>
+        <zah:adresa>
+            <zah:ulica>Kneginje Ljubice</zah:ulica>
+            <zah:broj>5</zah:broj>
+            <zah:postanski_broj>11000</zah:postanski_broj>
+            <zah:mesto>Beograd</zah:mesto>
+            <zah:drzava>Srbija</zah:drzava>
+        </zah:adresa>
+    </zah:zavod>
+    <zah:broj_resenja></zah:broj_resenja>
+    <zah:opis_dela></zah:opis_dela>
+    <zah:primer_dela></zah:primer_dela>
+</zah:zahtev>

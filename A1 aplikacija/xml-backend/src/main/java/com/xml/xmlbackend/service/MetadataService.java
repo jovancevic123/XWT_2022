@@ -301,6 +301,52 @@ public class MetadataService {
         return prijave;
     }
 
+    public List<SearchResultDto> basicSearchForUser(String text,String email, String queryPath) {
+        String sparqlQuery = null;
+
+        List<SearchResultDto> prijave = new ArrayList<>();
+        try {
+            sparqlQuery = String.format(readFile(queryPath, StandardCharsets.UTF_8), email, text);
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+
+        QueryExecution query = QueryExecutionFactory.sparqlService(connectionProperties.queryEndpoint, sparqlQuery);
+        ResultSet results = query.execSelect();
+
+        boolean indicator = false;
+        while (results.hasNext()) {
+            indicator = false;
+            QuerySolution querySolution = results.next();
+            Iterator<String> variableBindings = querySolution.varNames();
+            String brojResenja = "";
+            try{
+                brojResenja = querySolution.get("brojResenja").toString();
+            }catch(NullPointerException ex){}
+
+            String broj = querySolution.get("brojPrijave").toString();
+            String podnosilac = querySolution.get("podnosilacEmail").toString();
+            String datumPodnosenja = querySolution.get("datumPodnosenja").toString();
+            String naslovDela = querySolution.get("naslovDela").toString();
+
+            if(datumPodnosenja.contains("^"))
+                datumPodnosenja = datumPodnosenja.substring(0, datumPodnosenja.indexOf("^"));
+
+            for(SearchResultDto dto : prijave){
+                if(dto.getBrojPrijave().equals(broj)){
+                    indicator = true;
+                    if(dto.getBrojResenja().equals("")){
+                        dto.setBrojResenja(brojResenja);
+                    }
+                }
+            }
+            if(!indicator){
+                prijave.add(new SearchResultDto(broj, datumPodnosenja, podnosilac, naslovDela, ""));
+            }
+        }
+        return prijave;
+    }
+
     public void uploadResenjeMetadata(String extractedRdfFilePath, String SPARQL_NAMED_GRAPH_URI) throws IOException { //String filePath = "./src/main/resources/static/extracted_rdf.xml";  graphURI = "/resenje"
         // Creates a default model
         Model model = ModelFactory.createDefaultModel();
