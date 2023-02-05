@@ -68,7 +68,7 @@ export class RequestListComponent implements OnInit{
       this.patentService.approveRequest(brojPrijave).subscribe({
         next: data => {
           console.log(data);
-          this.requests.splice(i, 1);
+          this.requests = this.requests.filter(request => request.brojPrijave !== brojPrijave)
         },
         error: error => {
           console.error(error);
@@ -80,7 +80,7 @@ export class RequestListComponent implements OnInit{
     this.patentService.rejectRequest(brojPrijave, obrazlozenje).subscribe({
       next: data => {
         console.log(data);   
-        this.requests.splice(i, 1);
+        this.requests = this.requests.filter(request => request.brojPrijave !== brojPrijave)
       },
       error: error => {
         console.error(error);
@@ -142,7 +142,7 @@ export class RequestListComponent implements OnInit{
   pogledajResenje(i: number){
     this.resenjeService.getResenje(this.requests[i].brojResenja)
     .subscribe({
-      next: res => {    
+      next: res => {   
           let r: DialogResenjeData = this.makeJsonResenje(res);
           this.openResenjeDialog(r);
           console.log(r);
@@ -182,7 +182,7 @@ export class RequestListComponent implements OnInit{
       prezimeSluzbenika: results.prezime_sluzbenika,
       datumOdgovora: results.datum_odgovora,
       prihvacena: results.prihvacena,
-      razlog: results.razlog
+      obrazlozenje: results.obrazlozenje
     }
 
     return val;

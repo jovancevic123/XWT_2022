@@ -39,9 +39,13 @@ export class KorisnikDashboardComponent implements OnInit{
             console.error(error);
         }
       });;
-
+      
     // let role: string | null = this.tokenUtilService.getRoleFromToken();
     // console.log(role);
+  }
+
+  backToServicePicker(){
+    window.location.href="http://localhost:4205/service-picker";
   }
 
 }

@@ -1,13 +1,14 @@
 <div class="nav">
-    <a href="#">Servis za autorska dela</a>
-    <a href="#">Servis za patente</a>
-    <a href="{{zigLink}}">Servis za žigove</a>
-    <a href="javascript:;" (click)="changePage()">{{otherPageName}}</a>
-    <a href="javascript:;" (click)="changePageTo2()">Pretraga</a>
+    <button mat-raised-button style="margin-right: 5rem; padding: 1rem;" (click)="backToServicePicker()">
+        <mat-icon>arrow_left</mat-icon>
+        Back to service picker
+    </button>
+    <a href="javascript:;" (click)="formPage()">Forma za zahtev</a>
+    <a href="javascript:;" (click)="tablePage()">Pretraga</a>
 </div>
 
-<app-form-page *ngIf="currentPage == 0"></app-form-page>
-<app-search *ngIf="currentPage == 2 && !isLoading" [startingList]="startingList" [isUser]="true"></app-search>
+<app-form-page *ngIf="currentPage == 'forma'"></app-form-page>
+<app-search *ngIf="currentPage == 'tabela' && !isLoading" [startingList]="startingList" [isUser]="true"></app-search>
 
 <button mat-fab aria-label="Example icon button with a home icon" class="logout-button" (click)="logout()">
     <mat-icon>logout</mat-icon>

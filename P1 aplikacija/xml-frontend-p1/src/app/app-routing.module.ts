@@ -13,7 +13,9 @@ const routes: Routes = [
   { path:"xonomy", component: XonomyFormComponent},
   { path:"report-page", component: ReportPageComponent},
   { path:"sluzbenik-dashboard", component: SluzbenikDashboardComponent},
+  { path:"sluzbenik-dashboard/:email", component: SluzbenikDashboardComponent},
   { path:"korisnik-dashboard", component: KorisnikDashboardComponent},
+  { path:"korisnik-dashboard/:email", component: KorisnikDashboardComponent},
 ];
 
 @NgModule({

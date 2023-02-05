@@ -4,9 +4,9 @@
   <p>{{data.brojResenja}}</p>
   <br>
   <h3>Prijava prihvacena?</h3>
-  <p *ngIf="data.prihvacena">Da</p>
-  <p *ngIf="!data.prihvacena">Ne</p>
-  <p *ngIf="!data.prihvacena">Razlog: {{data.razlog}}</p>
+  <p *ngIf="data.prihvacena === 'true'">Da</p>
+  <p *ngIf="data.prihvacena === 'false'">Ne</p>
+  <p *ngIf="data.prihvacena === 'false'">Razlog: {{data.obrazlozenje}}</p>
   <br>
   <h3>Sluzbenik:</h3>
   <p>{{data.imeSluzbenika}} {{data.prezimeSluzbenika}}</p>

@@ -15,19 +15,15 @@ export class SluzbenikDashboardComponent {
   otherPageName: string = "Izveštaj";
   startingList: SearchResult[] = [];
   isLoading = true;
+  email: string | null;
 
   constructor(private tokenUtilService: TokenUtilService, private zigService: ZigService){}
   
   ngOnInit(){
+    this.email = this.tokenUtilService.getEmailFromToken();
     this.getPendingRequests();
     
     let role: string | null = this.tokenUtilService.getRoleFromToken();        
-  
-    if(role === "KORISNIK"){
-      this.zigLink = "http://localhost:4202/korisnik-dashboard";
-    }else{
-      this.zigLink = "http://localhost:4202/sluzbenik-dashboard";
-    }
   }
 
   tiles: Tile[] = [
@@ -84,5 +80,9 @@ export class SluzbenikDashboardComponent {
   changePage(){
       this.currentPage = 1 - this.currentPage;
       this.otherPageName = this.currentPage == 0 ? "Izveštaj" : "Zahtevi";
+  }
+
+  backToServicePicker(){
+    window.location.href="http://localhost:4205/service-picker";
   }
 }
