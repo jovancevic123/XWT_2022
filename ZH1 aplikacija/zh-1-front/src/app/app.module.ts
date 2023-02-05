@@ -77,7 +77,8 @@ import { RouterModule } from '@angular/router';
     MatGridListModule,
     MatChipsModule,
     NgxExtendedPdfViewerModule,
-    RouterModule
+    RouterModule,
+    ToastrModule.forRoot({positionClass: 'toast-bottom-right', timeOut: 2000,}),
   ],
   providers: [],
   bootstrap: [AppComponent]

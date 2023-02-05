@@ -414,5 +414,9 @@ public class ZH1DocumentService {
     public List<SearchResultsDto> getUsersRequests(String email) throws JAXBException, XMLDBException {
         return this.metadataService.getUsersRequests(email, "./data/sparql/userRequests.rq");
     }
+
+    public List<SearchResultsDto> basicSearchUser(String text, String email) {
+        return this.metadataService.basicSearchUser(text, "./data/sparql/basicSearchUser.rq", email);
+    }
 }
 

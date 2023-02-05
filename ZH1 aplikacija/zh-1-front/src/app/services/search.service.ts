@@ -20,6 +20,14 @@ export class SearchService {
     return this.http.get(this.apiURL + '/zh1/basic-search', {params: queryParams, headers: new HttpHeaders().set('Content-Type', 'application/xml'), responseType:'text'})
   }
 
+  basicSearchUser(textToSearch: string, email: string){
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("textToSearch", textToSearch);
+    queryParams = queryParams.append("email", email);
+    
+    return this.http.get(this.apiURL + '/zh1/basic-search-user', {params: queryParams, headers: new HttpHeaders().set('Content-Type', 'application/xml'), responseType:'text'})
+  }
+
   advancedSearch(meta: AdvancedSearchMeta[]){
     let dto: any = {};
     dto.conditions = [];

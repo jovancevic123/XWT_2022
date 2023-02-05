@@ -129,6 +129,16 @@ public class ZH1DocumentController {
         }
     }
 
+    @GetMapping(value="/basic-search-user", produces = "application/xml")
+    public ResponseEntity<?> basicSearchUser(@RequestParam("textToSearch") String text, @RequestParam("email") String email){
+        try{
+            SearchResultsListDto requestDtos = new SearchResultsListDto(this.service.basicSearchUser(text, email));
+            return ResponseEntity.ok(requestDtos);
+        }catch(Exception ex){
+            return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @PostMapping(value="/advanced-search", produces = "application/xml")
     public ResponseEntity<?> advancedSearch(@RequestBody AdvancedSearchListDto dto){
         try{
