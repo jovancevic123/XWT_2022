@@ -233,9 +233,18 @@
                     <table>
                         <tr>
                             <td colspan="3">
-                                Polje broj IV  &#160;&#160;&#160; <b>Punomoćnik za zastupanje</b> <input type="checkbox" disabled="false'" checked="select='zahtev/punomoc/tip' == 'punomocnik_za_zastupanje'"/> <br/>
-                                <b>Punomoćnik za prijem pismena</b> <input type="checkbox" checked="select='zahtev/punomoc/tip' != 'punomocnik_za_zastupanje'"/>
-                                <br/>
+                                <xsl:choose>
+                                    <xsl:when test="zahtev/punomoc/tip='punomocnik_za_zastupanje'">
+                                        Polje broj IV  &#160;&#160;&#160; <b>Punomoćnik za zastupanje</b> <input type="checkbox"  checked="true"/> <br/>
+                                        <b>Punomoćnik za prijem pismena</b> <input type="checkbox" />
+                                        <br/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        Polje broj IV  &#160;&#160;&#160; <b>Punomoćnik za zastupanje</b> <input type="checkbox" /> <br/>
+                                        <b>Punomoćnik za prijem pismena</b> <input type="checkbox" checked="true" />
+                                        <br/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
                                 <p class="opis">
                                     *Punomoćnik za zastupanje je lice koje po ovlašćenju podnosioca prijave preduzima radnje u upravnom
                                     postupku u granicama punomoćja <br/>
@@ -295,18 +304,36 @@
                         <tr>
                             <td colspan="3">
                                 <p class="opis">
-                                <input type="checkbox"/> &#160; Podnosilac prijave je saglasan da Zavod vrši dostavljanje pismena isključivo elektronskim
-                                putem u formi elektronskog dokumenta(u ovom slučaju neophodna je registracija na portalu
-                                "еУправе") <br/>
-                                    <input type="checkbox"/> &#160; Podnosilac prijave je saglasan da Zavod vrši dostavljanje pismena u papirnoj formi
+                                    <xsl:choose>
+                                        <xsl:when test="zahtev/nacin_dostavljanja='elektronska_forma'">
+                                            <input type="checkbox" checked="true"/> &#160; Podnosilac prijave je saglasan da Zavod vrši dostavljanje pismena isključivo elektronskim
+                                            putem u formi elektronskog dokumenta(u ovom slučaju neophodna je registracija na portalu
+                                            "еУправе") <br/>
+                                            <input type="checkbox"/> &#160; Podnosilac prijave je saglasan da Zavod vrši dostavljanje pismena u papirnoj formi
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <input type="checkbox" /> &#160; Podnosilac prijave je saglasan da Zavod vrši dostavljanje pismena isključivo elektronskim
+                                            putem u formi elektronskog dokumenta(u ovom slučaju neophodna je registracija na portalu
+                                            "еУправе") <br/>
+                                            <input type="checkbox" checked="true"/> &#160; Podnosilac prijave je saglasan da Zavod vrši dostavljanje pismena u papirnoj formi
+                                        </xsl:otherwise>
+                                </xsl:choose>
                                 </p>
                             </td>
                         </tr>
 
                         <tr>
                             <td colspan="3">
-                                Polje broj VII  &#160;&#160;&#160; <b>Dopunska prijava</b> &#160; <input type="checkbox"/>
-                                                &#160;&#160;&#160; <b>Izdvojena prijava</b> &#160; <input type="checkbox"/>
+                                <xsl:choose>
+                                    <xsl:when test="zahtev/prijava/vrsta_prijave='dopunska'">
+                                        Polje broj VII  &#160;&#160;&#160; <b>Dopunska prijava</b> &#160; <input type="checkbox" checked="true"/>
+                                        &#160;&#160;&#160; <b>Izdvojena prijava</b> &#160; <input type="checkbox" />
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        Polje broj VII  &#160;&#160;&#160; <b>Dopunska prijava</b> &#160; <input type="checkbox" />
+                                        &#160;&#160;&#160; <b>Izdvojena prijava</b> &#160; <input type="checkbox" checked="true"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
                             </td>
                         </tr>
 
