@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { SearchResult } from 'src/app/model/PendingRequest';
 import { TokenUtilService } from 'src/app/services/token-util.service';
 import { PatentService } from 'src/app/services/patent.service';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-korisnik-dashboard',
@@ -17,16 +18,37 @@ export class KorisnikDashboardComponent {
   startingList: SearchResult[] = [];
   isLoading = true;
 
-  constructor(private tokenUtilService: TokenUtilService, private patentService: PatentService, private toastService: ToastrService){}
+  email: string | null;
+  role: string;
+
+  constructor(private tokenUtilService: TokenUtilService, private patentService: PatentService, private toastService: ToastrService,  private route: ActivatedRoute, private router: RouterModule){}
 
   ngOnInit(){
-    let role: string | null = this.tokenUtilService.getRoleFromToken();        
-  
-    if(role === "KORISNIK"){
-      this.patentLink = "http://localhost:4200/korisnik-dashboard";
-    }else{
-      this.patentLink = "http://localhost:4200/sluzbenik-dashboard";
-    }
+    this.email = this.route.snapshot?.paramMap?.get('email');
+    console.log(this.email);
+    if(this.email && this.email != 'a')
+      this.tokenUtilService.setUser(this.email).subscribe({
+        next: (res: any) => {
+          console.log(res); 
+          var parseString = require('xml2js').parseString;
+          var that = this;
+          parseString(res, function (err:any, result:any) {
+            console.dir(result);
+            let token = {
+                  firstname: result.User.firstname[0],
+                  lastname: result.User.lastname[0],
+                  email: result.User.email[0],
+                  password: result.User.password[0],
+                  role: result.User.role[0],
+            };
+            localStorage.setItem("user", JSON.stringify(token));
+            that.role = token.role;
+          });
+        },
+        error: (error: any) => {
+            console.error(error);
+        }
+      });      
   }
 
   changePage(){
@@ -44,15 +66,17 @@ export class KorisnikDashboardComponent {
       this.currentPage = 2;
   }
 
+  backToServicePicker(){
+    window.location.href="http://localhost:4205/service-picker";
+  }
+
   logout(){
     localStorage.clear();
     window.location.href="http://localhost:4205/login";
   }
 
-  getAllMyRequests(){
-      let email: string = this.tokenUtilService.getEmailFromToken() as string;
-      
-      this.patentService.getUserRequests(email).subscribe({
+  getAllMyRequests(){      
+      this.patentService.getUserRequests(this.email as string).subscribe({
         next: res => {    
             this.startingList = this.makeJsonListOutOfSearchResults(res);    
             this.isLoading = false;                 

@@ -510,4 +510,45 @@ public class MetadataService {
         return prijave;
     }
 
+    public List<SearchResultsDto> basicSearchUser(String text, String queryPath, String email) {
+        String sparqlQuery = null;
+
+        List<SearchResultsDto> prijave = new ArrayList<>();
+        try {
+            sparqlQuery = String.format(readFile(queryPath, StandardCharsets.UTF_8), text, email);
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+
+        QueryExecution query = QueryExecutionFactory.sparqlService(connectionProperties.queryEndpoint, sparqlQuery);
+        ResultSet results = query.execSelect();
+
+        String varName;
+        RDFNode varValue;
+        boolean indicator = false;
+        while (results.hasNext()) {
+            indicator = false;
+            QuerySolution querySolution = results.next();
+            Iterator<String> variableBindings = querySolution.varNames();
+            String brojResenja = "";
+            try{
+                brojResenja = querySolution.get("brojResenja").toString();
+            }catch(NullPointerException ex){}
+
+            String broj = querySolution.get("brojPrijaveZiga").toString();
+            String podnosilac = querySolution.get("podnosilacEmail").toString();
+
+            for(SearchResultsDto dto : prijave){
+                if(dto.getBrojPrijaveZiga().equals(broj)){
+                    indicator = true;
+                    if(dto.getBrojResenja().equals("")){
+                        dto.setBrojResenja(brojResenja);
+                    }
+                }
+            }
+            if(!indicator)
+                prijave.add(new SearchResultsDto(broj, podnosilac, brojResenja));
+        }
+        return prijave;
+    }
 }

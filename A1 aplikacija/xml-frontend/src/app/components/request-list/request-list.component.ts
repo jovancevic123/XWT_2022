@@ -190,7 +190,7 @@ export class RequestListComponent {
       prezimeSluzbenika: results["zah:prezime_sluzbenika"],
       datumOdgovora: results["zah:datum_odgovora"],
       prihvacena: results["zah:prihvacena"],
-      razlog: results["zah:obrazlozenje"]
+      obrazlozenje: results["zah:obrazlozenje"]
     }
 
     return val;

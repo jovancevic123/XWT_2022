@@ -51,5 +51,9 @@ export class KorisnikDashboardComponent implements OnInit{
     localStorage.removeItem("user");
     window.location.href = "http://localhost:4205/login";
   }
+  
+  backToServicePicker(){
+    window.location.href="http://localhost:4205/service-picker";
+  }
 
 }

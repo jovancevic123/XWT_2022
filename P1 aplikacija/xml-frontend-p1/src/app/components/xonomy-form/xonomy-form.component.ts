@@ -2,6 +2,7 @@ import { XonomyRequest } from './../../model/XonomyRequest';
 import { PatentService } from './../../services/patent.service';
 import { XonomyService } from './../../services/xonomy.service';
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 declare const Xonomy: any;
 
@@ -14,7 +15,7 @@ export class XonomyFormComponent implements OnInit{
 
     private editor: HTMLElement;
 
-    constructor(private xonomyService: XonomyService, private patentService: PatentService){}
+    constructor(private xonomyService: XonomyService, private patentService: PatentService, private toastService: ToastrService){}
 
     ngOnInit(): void {
     }
@@ -33,10 +34,12 @@ export class XonomyFormComponent implements OnInit{
       };
       this.patentService.submitRequestXonomy(requestToSend).subscribe({
         next: data => {
-          console.log(data);           
+          console.log(data);    
+          this.toastService.success("Success");          
         },
         error: error => {
           console.error(error);
+          this.toastService.success("Something went wrong!");   
           }
       });
     }

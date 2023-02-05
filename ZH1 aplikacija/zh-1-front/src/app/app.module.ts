@@ -35,6 +35,7 @@ import { KorisnikDashboardComponent } from './components/korisnik-dashboard/kori
 import { SearchComponent } from './components/search/search.component';
 import { SluzbenikDashboardComponent } from './components/sluzbenik-dashboard/sluzbenik-dashboard.component';
 import { ReportPageComponent } from './report-page/report-page.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -75,7 +76,9 @@ import { ReportPageComponent } from './report-page/report-page.component';
     MatNativeDateModule,
     MatGridListModule,
     MatChipsModule,
-    NgxExtendedPdfViewerModule
+    NgxExtendedPdfViewerModule,
+    RouterModule,
+    ToastrModule.forRoot({positionClass: 'toast-bottom-right', timeOut: 2000,}),
   ],
   providers: [],
   bootstrap: [AppComponent]

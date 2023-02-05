@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<zahtev xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.ftn.uns.ac.rs/xwt">
+    <prijava>
+        <broj_prijave>567544010</broj_prijave>
+        <datum_prijema>2023-02-05</datum_prijema>
+        <vrsta_prijave>izdvojena</vrsta_prijave>
+    </prijava>
+    <zavod>
+        <naziv>Zavod za intelektualnu svojinu</naziv>
+        <adresa>
+            <ulica>Kneginje Ljubice</ulica>
+            <broj>5</broj>
+            <postanski_broj>11000</postanski_broj>
+            <mesto>Beograd</mesto>
+            <drzava>Republika Srbija</drzava>
+        </adresa>
+    </zavod>
+    <pronalazak>
+        <naziv_pronalaska_srb>srb</naziv_pronalaska_srb>
+        <naziv_pronalaska_eng>eng</naziv_pronalaska_eng>
+    </pronalazak>
+    <podnosilac pronalazac="true">
+        <drzavljanstvo>gsad</drzavljanstvo>
+        <lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TFizickoLice">
+            <adresa>
+                <ulica>gdsagdsa</ulica>
+                <broj>3</broj>
+                <postanski_broj>11111</postanski_broj>
+                <mesto>gdsa</mesto>
+                <drzava>gdsa</drzava>
+            </adresa>
+            <kontakt>
+                <telefon>dsa</telefon>
+                <email>soviljnikola3@gmail.com</email>
+                <fax>gdsa</fax>
+            </kontakt>
+            <ime>gdsag</ime>
+            <prezime>gdsa</prezime>
+        </lice>
+    </podnosilac>
+    <pronalazac naveden_u_prijavi="true">
+        <lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TFizickoLice">
+            <adresa>
+                <ulica>gdsagdsa</ulica>
+                <broj>3</broj>
+                <postanski_broj>11111</postanski_broj>
+                <mesto>gdsa</mesto>
+                <drzava>gdsa</drzava>
+            </adresa>
+            <kontakt>
+                <telefon>dsa</telefon>
+                <email>soviljnikola3@gmail.com</email>
+                <fax>gdsa</fax>
+            </kontakt>
+            <ime>gdsag</ime>
+            <prezime>gdsa</prezime>
+        </lice>
+    </pronalazac>
+    <punomoc>
+        <tip>punomocnik_za_zastupanje</tip>
+        <lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TPravnoLice">
+            <adresa>
+                <ulica>gfsa</ulica>
+                <broj>3</broj>
+                <postanski_broj>22222</postanski_broj>
+                <mesto>gdsa</mesto>
+                <drzava>safd</drzava>
+            </adresa>
+            <kontakt>
+                <telefon>gdsagsa</telefon>
+                <email>gdsa</email>
+                <fax>gdsagda</fax>
+            </kontakt>
+            <poslovno_ime>gsdagsafd</poslovno_ime>
+        </lice>
+    </punomoc>
+    <ranije_prijave/>
+    <nacin_dostavljanja>elektronska_forma</nacin_dostavljanja>
+</zahtev>

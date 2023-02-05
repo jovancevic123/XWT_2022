@@ -1,7 +1,8 @@
 <div class="nav">
-    <a href="#">Servis za autorska dela</a>
-    <a href="{{patentLink}}">Servis za patente</a>
-    <a href="#">Servis za žigove</a>
+    <button mat-raised-button style="margin-right: 5rem; padding: 1rem;" (click)="backToServicePicker()">
+        <mat-icon>arrow_left</mat-icon>
+        Back to service picker
+    </button>
     <a href="javascript:;" (click)="changePage()">{{otherPageName}}</a>
 </div>
 

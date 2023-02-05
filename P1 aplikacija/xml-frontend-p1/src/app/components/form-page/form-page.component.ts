@@ -4,6 +4,7 @@ import { RanijaPrijava } from 'src/app/model/RanijaPrijava';
 import { Adresa } from 'src/app/model/Adresa';
 import { Kontakt } from 'src/app/model/Kontakt';
 import { PatentService } from 'src/app/services/patent.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-form-page',
@@ -34,7 +35,7 @@ export class FormPageComponent implements OnInit{
     podnosilacJePronalazacChecked: boolean = false;
     ranijePrijave: RanijaPrijava[] = [];
 
-    constructor(private patentService: PatentService){}
+    constructor(private patentService: PatentService, private toastService: ToastrService){}
 
     ngOnInit(){
       this.form = new FormGroup({
@@ -121,10 +122,12 @@ export class FormPageComponent implements OnInit{
       
       this.patentService.submitRequest(body).subscribe({
           next: data => {
-            console.log(data);           
+            console.log(data);        
+            this.toastService.success("Success");   
           },
           error: error => {
             console.error(error);
+            this.toastService.success("Something went wrong!");   
             }
         });
     }
