@@ -1,0 +1,15 @@
+<div class="nav">
+    <button mat-raised-button style="margin-right: 5rem; padding: 1rem;" (click)="backToServicePicker()">
+        <mat-icon>arrow_left</mat-icon>
+        Back to service picker
+    </button>
+    <a href="javascript:;" (click)="formPage()">Forma za zahtev</a>
+    <a href="javascript:;" (click)="tablePage()">Pretraga</a>
+</div>
+
+<app-form-page *ngIf="currentPage == 'forma'"></app-form-page>
+<app-search *ngIf="currentPage == 'tabela' && !isLoading" [startingList]="startingList" [isUser]="true"></app-search>
+
+<button mat-fab aria-label="Example icon button with a home icon" class="logout-button" (click)="logout()">
+    <mat-icon>logout</mat-icon>
+</button>

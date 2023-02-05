@@ -1,0 +1,15 @@
+<div class="nav">
+    <button mat-raised-button style="margin-right: 5rem; padding: 1rem;" (click)="backToServicePicker()">
+        <mat-icon>arrow_left</mat-icon>
+        Back to service picker
+    </button>
+    <a href="javascript:;" [routerLink]="['/user/a', {outlets: {'user-outlet': ['form']}}]">Novi zahtev</a>
+    <a href="javascript:;" [routerLink]="['/user/a', {outlets: {'user-outlet': ['search']}}]">Pretraga</a>
+    <a *ngIf="role !== 'KORISNIK'" href="javascript:;" [routerLink]="['/user/a', {outlets: {'user-outlet': ['report']}}]">Izveštaj</a>
+</div>
+
+<router-outlet name="user-outlet"></router-outlet>
+
+<button mat-fab aria-label="Example icon button with a home icon" class="logout-button" (click)="logOut()">
+    <mat-icon>logout</mat-icon>
+</button>

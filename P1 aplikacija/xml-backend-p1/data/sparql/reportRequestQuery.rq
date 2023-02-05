@@ -1,0 +1,11 @@
+PREFIX schema: <http://www.ftn.uns.ac.rs/rdf/examples/predicate>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT * from <http://localhost:3030/PatentDataset/data/graph/metadata/p1>
+WHERE
+    {
+      ?patent  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/broj_prijave> ?brojPrijave .
+      ?patent  <http://www.ftn.uns.ac.rs/rdf/examples/predicate/datum_prijema> ?datumPrijema .
+      FILTER((?datumPrijema >=  "%1$s"^^xsd:date)
+      && (?datumPrijema <=  "%2$s"^^xsd:date)
+      ).
+    }

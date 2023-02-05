@@ -1,0 +1,209 @@
+<div class="container">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-container">
+
+        <div class="header">
+            <h1>Zahtev za priznanje patenta</h1>
+        </div>
+
+        <h2>Naziv pronalska:</h2>
+        <div class="pronalazak">
+            <mat-form-field class="example-full-width">
+                <mat-label>Na srpskom jeziku:</mat-label>
+                <input matInput formControlName="nazivSRB">
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Na engleskom jeziku:</mat-label>
+                <input matInput formControlName="nazivENG">
+            </mat-form-field>
+        </div>
+
+        <h2>Podnosilac prijave:</h2>
+        <div class="podnosilac">
+            <div class="podnosilac-first-line">
+                <mat-radio-group
+                    aria-labelledby="example-radio-group-label"
+                    class="example-radio-group" formControlName="tipLicaPodnosilac">
+                    <mat-radio-button class="example-radio-button" value="1" (change)="onTipLicaChangedPodnosilac()">Fizičko lice</mat-radio-button>
+                    <mat-radio-button class="example-radio-button" value="2" (change)="onTipLicaChangedPodnosilac()">Pravno lice</mat-radio-button>
+                </mat-radio-group>
+                <mat-checkbox formControlName="podnosilacJePronalazac" (change)="onPodnosilacPronalazacChange()">Podnosilac je i pronalazač</mat-checkbox>
+            </div>
+            <div class="podnosilac-name">
+                <mat-form-field [style.width.%]="50" *ngIf="fizikoLicePodnosilacChecked">
+                    <mat-label>Ime:</mat-label>
+                    <input matInput formControlName="imePodnosilac">
+                </mat-form-field>
+                <mat-form-field [style.width.%]="50" *ngIf="fizikoLicePodnosilacChecked">
+                    <mat-label>Prezime:</mat-label>
+                    <input matInput formControlName="prezimePodnosilac">
+                </mat-form-field>
+                <mat-form-field [style.width.%]="50" *ngIf="fizikoLicePodnosilacChecked">
+                    <mat-label>Državljanstvo:</mat-label>
+                    <input matInput formControlName="drzavljanstvoPodnosilac">
+                </mat-form-field>
+    
+                <mat-form-field [style.width.%]="50" *ngIf="!fizikoLicePodnosilacChecked">
+                    <mat-label>Poslovno ime:</mat-label>
+                    <input matInput formControlName="poslovnoImePodnosilac">
+                </mat-form-field>
+            </div>
+        </div>        
+        <div class="address-contact">
+            <span class="flex-grow-ac">
+                <h3>Adresa:</h3>
+                <app-address (formRawValue)="onPodnosilacAdresa($event)"></app-address>
+            </span>
+            <span class="flex-grow-ac">
+                <h3>Kontakt:</h3>
+                <app-contact (formRawValue)="onPodnosilacKontakt($event)"></app-contact>
+            </span>
+        </div>
+
+        <div *ngIf="!podnosilacJePronalazacChecked">
+            <h2>Pronalazac:</h2>
+            <div class="podnosilac">
+                <div class="podnosilac-first-line">
+                    <mat-radio-group
+                        aria-labelledby="example-radio-group-label"
+                        class="example-radio-group" formControlName="tipLicaPronalazac">
+                        <mat-radio-button class="example-radio-button" value="1" (change)="onTipLicaChangedPronalazac()">Fizičko lice</mat-radio-button>
+                        <mat-radio-button class="example-radio-button" value="2" (change)="onTipLicaChangedPronalazac()">Pravno lice</mat-radio-button>
+                    </mat-radio-group>
+                    <mat-checkbox formControlName="navedenUPrijavi">Želi da bude naveden u prijavi</mat-checkbox>
+                </div>
+                <div class="podnosilac-name">
+                    <mat-form-field [style.width.%]="50" *ngIf="fizikoLicePronalazacChecked">
+                        <mat-label>Ime:</mat-label>
+                        <input matInput formControlName="imePronalazac">
+                    </mat-form-field>
+                    <mat-form-field [style.width.%]="50" *ngIf="fizikoLicePronalazacChecked">
+                        <mat-label>Prezime:</mat-label>
+                        <input matInput formControlName="prezimePronalazac">
+                    </mat-form-field>
+                    <mat-form-field [style.width.%]="50" *ngIf="fizikoLicePronalazacChecked">
+                        <mat-label>Državljanstvo:</mat-label>
+                        <input matInput formControlName="drzavljanstvoPronalazac">
+                    </mat-form-field>
+        
+                    <mat-form-field [style.width.%]="50" *ngIf="!fizikoLicePronalazacChecked">
+                        <mat-label>Poslovno ime:</mat-label>
+                        <input matInput formControlName="poslovnoImePronalazac">
+                    </mat-form-field>
+                </div>
+            </div>        
+            <div class="address-contact">
+                <span class="flex-grow-ac">
+                    <h3>Adresa:</h3>
+                    <app-address (formRawValue)="onPronalazacAdresa($event)"></app-address>
+                </span>
+                <span class="flex-grow-ac">
+                    <h3>Kontakt:</h3>
+                    <app-contact (formRawValue)="onPronalazacKontakt($event)"></app-contact>
+                </span>
+            </div>
+        </div>
+
+        <h2>Punomoć:</h2>
+        <div class="podnosilac">
+            <div class="podnosilac-first-line">
+                <mat-radio-group
+                    aria-labelledby="example-radio-group-label"
+                    class="example-radio-group" formControlName="tipLicaPunomoc">
+                    <mat-radio-button class="example-radio-button" value="1" (change)="onTipLicaChangedPunomoc()">Fizičko lice</mat-radio-button>
+                    <mat-radio-button class="example-radio-button" value="2" (change)="onTipLicaChangedPunomoc()">Pravno lice</mat-radio-button>
+                </mat-radio-group>
+                <mat-checkbox formControlName="drugaAdresaDostave">Druga adresa za dostavljanje</mat-checkbox>
+            </div>
+            <div class="podnosilac-first-line">
+                <mat-radio-group
+                    aria-labelledby="example-radio-group-label"
+                    class="example-radio-group" formControlName="tipPunomocnika">
+                    <mat-radio-button class="example-radio-button" value="1" (change)="onTipPunomocnikaChanged()">Punomoćnik za zastupanje</mat-radio-button>
+                    <mat-radio-button class="example-radio-button" value="2" (change)="onTipPunomocnikaChanged()">Punomoćnik za prijem pismena</mat-radio-button>
+                </mat-radio-group>
+            </div>
+            <div class="podnosilac-name">
+                <mat-form-field [style.width.%]="50" *ngIf="fizikoLicePunomocChecked">
+                    <mat-label>Ime:</mat-label>
+                    <input matInput formControlName="imePunomoc">
+                </mat-form-field>
+                <mat-form-field [style.width.%]="50" *ngIf="fizikoLicePunomocChecked">
+                    <mat-label>Prezime:</mat-label>
+                    <input matInput formControlName="prezimePunomoc">
+                </mat-form-field>
+                <mat-form-field [style.width.%]="50" *ngIf="fizikoLicePunomocChecked">
+                    <mat-label>Državljanstvo:</mat-label>
+                    <input matInput formControlName="drzavljanstvoPunomoc">
+                </mat-form-field>
+    
+                <mat-form-field [style.width.%]="50" *ngIf="!fizikoLicePunomocChecked">
+                    <mat-label>Poslovno ime:</mat-label>
+                    <input matInput formControlName="poslovnoImePunomoc">
+                </mat-form-field>
+            </div>
+        </div>        
+        <div class="address-contact">
+            <span class="flex-grow-ac">
+                <h3>Adresa:</h3>
+                <app-address (formRawValue)="onPunomocAdresa($event)"></app-address>
+            </span>
+            <span class="flex-grow-ac">
+                <h3>Kontakt:</h3>
+                <app-contact (formRawValue)="onPunomocKontakt($event)"></app-contact>
+            </span>
+        </div>
+
+        <h2>Adresa dostave:</h2>
+        <h3>(u slučaju elektronske forme šalje se na email punomoćnika)</h3>
+        <div class="podnosilac-first-line">
+            <mat-radio-group
+                aria-labelledby="example-radio-group-label"
+                class="example-radio-group" formControlName="elektronskaDostava">
+                <mat-radio-button class="example-radio-button" value="1" (change)="onNacinDostaveChanged()">Elektronska forma</mat-radio-button>
+                <mat-radio-button class="example-radio-button" value="2" (change)="onNacinDostaveChanged()">Papirna forma</mat-radio-button>
+            </mat-radio-group>
+        </div>
+     
+        <div class="adresa-dostave" *ngIf="!elektronskaDostavaChecked">
+            <app-address (formRawValue)="onAdresaDostave($event)"></app-address>
+        </div>
+
+        <h2>Vrsta prijave:</h2>
+        <div class="podnosilac-first-line">
+            <mat-radio-group
+                aria-labelledby="example-radio-group-label"
+                class="example-radio-group" formControlName="vrstaPrijave">
+                <mat-radio-button class="example-radio-button" value="1" (change)="onVrstaPrijaveChanged()">Dopunska prijava</mat-radio-button>
+                <mat-radio-button class="example-radio-button" value="2" (change)="onVrstaPrijaveChanged()">Izdvojena prijava</mat-radio-button>
+            </mat-radio-group>
+            <button type="button" mat-fab extended (click)="onNewRanijaPrijava()" *ngIf="dopunskaPrijavaChecked">
+                <mat-icon>add-new</mat-icon>
+                Nova ranija prijava
+            </button>
+        </div>
+        
+        <div class="ranije-prijave" *ngIf="dopunskaPrijavaChecked">
+            <div class="podnosilac-name" *ngFor="let rp of ranijePrijave; let i = index">
+                <mat-form-field [style.width.%]="50" *ngIf="fizikoLicePodnosilacChecked">
+                    <mat-label>Datum podnošenja ranije prijave:</mat-label>
+                    <input matInput placeholder="dd/MM/yyyy" [ngModelOptions]="{standalone: true}" [(ngModel)]="ranijePrijave[i].datumPodnosenja">
+                </mat-form-field>
+                <mat-form-field [style.width.%]="50" *ngIf="fizikoLicePodnosilacChecked">
+                    <mat-label>Broj ranije prijave:</mat-label>
+                    <input matInput [ngModelOptions]="{standalone: true}" [(ngModel)]="ranijePrijave[i].brojPrijave">
+                </mat-form-field>
+                <mat-form-field [style.width.%]="50" *ngIf="fizikoLicePodnosilacChecked">
+                    <mat-label>Dvoslovna oznaka države:</mat-label>
+                    <input matInput [ngModelOptions]="{standalone: true}" [(ngModel)]="ranijePrijave[i].dvoslovnaOznaka">
+                </mat-form-field>
+                <button mat-fab (click)="onDeleteRanijaPrijava(i)">
+                    <mat-icon>delete-forever</mat-icon>
+                </button>
+            </div>
+        </div>
+      
+        <div class="submit-button-div">
+            <button mat-raised-button>Pošalji zahtev</button>
+        </div>        
+    </form>
+</div>

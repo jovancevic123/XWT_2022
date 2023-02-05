@@ -1,0 +1,72 @@
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+body{
+    margin: 5%;
+}
+
+td, th {
+    border: 3px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr{
+    height: 3rem;
+}
+
+th{
+    background-color: #b6b6b6;
+}
+
+h2{
+    text-align: center;
+}
+
+.popunjava-zavod{
+    width: 50%;
+}
+
+.zavod-info{
+    margin-bottom: 10%;
+}
+
+.ranije-prijave{
+    width: 80%;
+    margin: auto;
+}
+
+.podnosioc{
+    width: 80%;
+    margin: auto;
+    margin-bottom: 10%;
+}
+
+.pronalazac{
+    width: 80%;
+    margin: auto;
+    margin-bottom: 10%;
+}
+
+.opis{
+    font-size: 0.7rem;
+}
+
+.tdfill {
+    vertical-align: top;
+    text-align: left;
+}
+
+.ins{
+    font-size: 0.85rem;
+    color: gray;
+}
+
+.punomocnik{
+    width: 80%;
+    margin: auto;
+    margin-bottom: 3%;
+}

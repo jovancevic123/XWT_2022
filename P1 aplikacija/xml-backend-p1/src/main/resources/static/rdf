@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><zahtev xmlns:sh="https://schema.org/" xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:p1="http://www.ftn.uns.ac.rs/xwt" about="http://www.ftn.uns.ac.rs/xwt/zahtev/581003319" vocab="http://www.ftn.uns.ac.rs/rdf/examples/predicate/">
+    <prijava xmlns="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+        <BrojPrijave xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:broj_prijave">581003319</BrojPrijave>
+        <DatumPrijema xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:date" property="pred:datum_prijema">2023-02-05</DatumPrijema>
+        <vrsta_prijave>dopunska</vrsta_prijave>
+    </prijava>
+    <zavod xmlns="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+        <naziv>Zavod za intelektualnu svojinu</naziv>
+        <adresa>
+            <ulica>Kneginje Ljubice</ulica>
+            <broj>5</broj>
+            <postanski_broj>11000</postanski_broj>
+            <mesto>Beograd</mesto>
+            <drzava>Republika Srbija</drzava>
+        </adresa>
+    </zavod>
+    <pronalazak xmlns="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+        <NazivSRB xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:naziv_srb">Kljuc</NazivSRB>
+        <NazivENG xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:naziv_eng">Key</NazivENG>
+    </pronalazak>
+    <podnosilac xmlns="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema" pronalazac="true">
+        <drzavljanstvo>Srpsko</drzavljanstvo>
+        <lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TFizickoLice">
+            <adresa>
+                <ulica>Atar Prvi</ulica>
+                <broj>3</broj>
+                <postanski_broj>21000</postanski_broj>
+                <mesto>Veternik</mesto>
+                <drzava>Srbija</drzava>
+            </adresa>
+            <kontakt>
+                <telefon>389048904890</telefon>
+                <PodnosilacEmail xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:podnosilac_email">jovancevic@gmail.com</PodnosilacEmail>
+                <fax>34423444</fax>
+            </kontakt>
+            <ime>Jovan</ime>
+            <prezime>Jovancevic</prezime>
+        </lice>
+    </podnosilac>
+    <pronalazac xmlns="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema" naveden_u_prijavi="true">
+        <lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TFizickoLice">
+            <adresa>
+                <ulica>Atar Prvi</ulica>
+                <broj>3</broj>
+                <postanski_broj>21000</postanski_broj>
+                <mesto>Veternik</mesto>
+                <drzava>Srbija</drzava>
+            </adresa>
+            <kontakt>
+                <telefon>389048904890</telefon>
+                <PronalazacEmail xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:pronalazac_email">jovancevic@gmail.com</PronalazacEmail>
+                <fax>34423444</fax>
+            </kontakt>
+            <ime>Jovan</ime>
+            <prezime>Jovancevic</prezime>
+        </lice>
+    </pronalazac>
+    <punomoc xmlns="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+        <tip>punomocnik_za_prijem_pismena</tip>
+        <lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TPravnoLice">
+            <adresa>
+                <ulica>Pap Pavla</ulica>
+                <broj>3</broj>
+                <postanski_broj>21000</postanski_broj>
+                <mesto>Novi Sad</mesto>
+                <drzava>Srbija</drzava>
+            </adresa>
+            <kontakt>
+                <telefon>12344545545</telefon>
+                <PunomocEmail xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:punomoc_email">ak@gmail.com</PunomocEmail>
+                <fax>42343444</fax>
+            </kontakt>
+            <poslovno_ime>AktivaBla</poslovno_ime>
+        </lice>
+    </punomoc>
+    <ranije_prijave xmlns="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+        <ranija_prijava>
+            <broj_prijave>580360607</broj_prijave>
+            <datum_podnosenja>2023-02-05</datum_podnosenja>
+            <dvoslovna_oznaka>sr</dvoslovna_oznaka>
+        </ranija_prijava>
+        <ranija_prijava>
+            <broj_prijave>573341487</broj_prijave>
+            <datum_podnosenja>2023-02-05</datum_podnosenja>
+            <dvoslovna_oznaka>sr</dvoslovna_oznaka>
+        </ranija_prijava>
+    </ranije_prijave>
+    <nacin_dostavljanja xmlns="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">papirna_forma</nacin_dostavljanja>
+    <adresa_dostave xmlns="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+        <ulica>Bulever Cara Lazara</ulica>
+        <broj>33</broj>
+        <postanski_broj>21000</postanski_broj>
+        <mesto>Novi Sad</mesto>
+        <drzava>Srbija</drzava>
+    </adresa_dostave>
+</zahtev>

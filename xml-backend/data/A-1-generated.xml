@@ -12,7 +12,7 @@
                 <telefon></telefon>
                 <email></email>
             </kontakt>
-            <ime>Mihal</ime>
+            <ime></ime>
             <prezime></prezime>
             <drzavljanstvo></drzavljanstvo>
         </lice>
@@ -21,11 +21,47 @@
         <naslov></naslov>
         <delo_prerade>
             <naslov_dela_prerade></naslov_dela_prerade>
+            <autori>
+                <autor>
+                    <kontakt>
+                        <telefon></telefon>
+                        <email></email>
+                    </kontakt>
+                    <ime>ALo</ime>
+                    <prezime>Aaaa</prezime>
+                    <drzavljanstvo></drzavljanstvo>
+                    <adresa>
+                        <ulica></ulica>
+                        <broj>54</broj>
+                        <postanski_broj>11521</postanski_broj>
+                        <mesto></mesto>
+                        <drzava></drzava>
+                    </adresa>
+                </autor>
+            </autori>
         </delo_prerade>
         <vrsta_dela></vrsta_dela>
         <forma_zapisa_dela></forma_zapisa_dela>
         <stvoreno_u_radnom_odnosu>true</stvoreno_u_radnom_odnosu>
         <nacin_koriscenja></nacin_koriscenja>
+        <autori>
+            <autor>
+                <kontakt>
+                    <telefon></telefon>
+                    <email></email>
+                </kontakt>
+                <ime>Mihal</ime>
+                <prezime>Sabados</prezime>
+                <drzavljanstvo></drzavljanstvo>
+                <adresa>
+                    <ulica></ulica>
+                    <broj>24</broj>
+                    <postanski_broj>21211</postanski_broj>
+                    <mesto></mesto>
+                    <drzava></drzava>
+                </adresa>
+            </autor>
+        </autori>
         <anoniman_autor>false</anoniman_autor>
     </autorsko_delo>
     <prilozi>

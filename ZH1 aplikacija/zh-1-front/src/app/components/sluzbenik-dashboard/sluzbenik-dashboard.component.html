@@ -1,0 +1,15 @@
+<div class="nav">
+    <button mat-raised-button style="margin-right: 5rem; padding: 1rem;" (click)="backToServicePicker()">
+        <mat-icon>arrow_left</mat-icon>
+        Back to service picker
+    </button>
+    <a href="javascript:;" (click)="changePage()">{{otherPageName}}</a>
+</div>
+
+
+<app-search *ngIf="currentPage == 0 && !isLoading" [startingList]="startingList" [isUser]="false"></app-search>
+<app-report-page *ngIf="currentPage == 1"></app-report-page>
+
+<button mat-fab aria-label="Example icon button with a home icon" class="logout-button" (click)="logout()">
+    <mat-icon>logout</mat-icon>
+</button>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resenje xmlns="http://www.ftn.uns.ac.rs/xwt"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.ftn.uns.ac.rs/xwt file:/C:/Users/Joco/Desktop/IV/XML/Projekat/XWT_2022/P1%20aplikacija/xml-backend-p1/src/main/resources/xml/resenje.xsd">
+    <broj_resenja>R-123</broj_resenja>
+    <broj_prijave>P-123</broj_prijave>
+    <ime_sluzbenika>Dusan</ime_sluzbenika>
+    <prezime_sluzbenika>Peric</prezime_sluzbenika>
+    <datum_odgovora>2022-11-25</datum_odgovora>
+    <prihvacena>true</prihvacena>
+</resenje>

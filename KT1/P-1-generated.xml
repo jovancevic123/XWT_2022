@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zahtev xmlns="http://www.ftn.uns.ac.rs/xwt"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.ftn.uns.ac.rs/xwt P-1.xsd">
+    xsi:schemaLocation="http://www.ftn.uns.ac.rs/xwt file:/C:/Users/Joco/Desktop/IV/XML/Projekat/XWT_2022/xml-backend-p1/data/P-1.xsd">
     <prijava>
-        <broj_prijave></broj_prijave>
-        <datum_prijema></datum_prijema>
-        <priznati_datum_podnosenja></priznati_datum_podnosenja>
-        <vrsta_prijave></vrsta_prijave>
+        <broj_prijave>123</broj_prijave>
+        <datum_prijema>2022-11-25</datum_prijema>
+        <priznati_datum_podnosenja>2022-11-26</priznati_datum_podnosenja>
+        <vrsta_prijave>dopunska</vrsta_prijave>
     </prijava>
     <zavod>
         <naziv></naziv>
         <adresa>
             <ulica></ulica>
-            <broj></broj>
-            <postanski_broj></postanski_broj>
+            <broj>37</broj>
+            <postanski_broj>21000</postanski_broj>
             <mesto></mesto>
             <drzava></drzava>
         </adresa>
@@ -23,47 +23,63 @@
         <naziv_pronalaska_eng></naziv_pronalaska_eng>
     </pronalazak>
     <podnosilac>
-        <adresa>
-            <ulica></ulica>
-            <broj></broj>
-            <postanski_broj></postanski_broj>
-            <mesto></mesto>
-            <drzava></drzava>
-        </adresa>
-        <kontakt>
-            <telefon></telefon>
-            <email></email>
-        </kontakt>
         <drzavljanstvo></drzavljanstvo>
+        <lice xsi:type="TPravnoLice">
+            <adresa>
+                <ulica></ulica>
+                <broj>1</broj>
+                <postanski_broj>21203</postanski_broj>
+                <mesto></mesto>
+                <drzava></drzava>
+            </adresa>
+            <kontakt>
+                <telefon></telefon>
+                <email></email>
+            </kontakt>
+            <poslovno_ime>STR BLA</poslovno_ime>
+        </lice>
     </podnosilac>
     <pronalazac>
-        <adresa>
-            <ulica></ulica>
-            <broj></broj>
-            <postanski_broj></postanski_broj>
-            <mesto></mesto>
-            <drzava></drzava>
-        </adresa>
-        <kontakt>
-            <telefon></telefon>
-            <email></email>
-        </kontakt>
+        <lice xsi:type="TFizickoLice">
+            <adresa>
+                <ulica></ulica>
+                <broj>33</broj>
+                <postanski_broj>21000</postanski_broj>
+                <mesto></mesto>
+                <drzava></drzava>
+            </adresa>
+            <kontakt>
+                <telefon></telefon>
+                <email></email>
+            </kontakt>
+            <ime>Jovan</ime>
+            <prezime>Jovancevic</prezime>
+        </lice>
     </pronalazac>
     <punomoc>
-        <poslovno_ime></poslovno_ime>
-        <tip></tip>
-        <adresa>
-            <ulica></ulica>
-            <broj></broj>
-            <postanski_broj></postanski_broj>
-            <mesto></mesto>
-            <drzava></drzava>
-        </adresa>
-        <kontakt>
-            <telefon></telefon>
-            <email></email>
-        </kontakt>
+        <tip>punomocnik_za_zastupanje</tip>
+        <lice xsi:type="TFizickoLice">
+            <adresa>
+                <ulica></ulica>
+                <broj>55</broj>
+                <postanski_broj>11000</postanski_broj>
+                <mesto></mesto>
+                <drzava></drzava>
+            </adresa>
+            <kontakt>
+                <telefon></telefon>
+                <email></email>
+            </kontakt>
+            <ime>Jovan</ime>
+            <prezime>Jovancevic</prezime>
+        </lice>
     </punomoc>
-    <ranije_prijave></ranije_prijave>
-    <nacin_dostavljanja></nacin_dostavljanja>
+    <ranije_prijave>
+        <ranija_prijava>
+            <broj_prijave>123</broj_prijave>
+            <datum_podnosenja>2022-07-07</datum_podnosenja>
+            <dvoslovna_oznaka>hl</dvoslovna_oznaka>
+        </ranija_prijava>
+    </ranije_prijave>
+    <nacin_dostavljanja>elektronska_forma</nacin_dostavljanja>
 </zahtev>

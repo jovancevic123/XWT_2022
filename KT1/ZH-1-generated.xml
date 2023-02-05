@@ -7,62 +7,75 @@
         <naziv></naziv>
         <adresa>
             <ulica></ulica>
-            <broj></broj>
-            <postanski_broj></postanski_broj>
+            <broj>1</broj>
+            <postanski_broj>21000</postanski_broj>
             <mesto></mesto>
             <drzava></drzava>
         </adresa>
     </zavod>
-    <podnosilac>
+    <podnosilac xsi:type="TFizickoLice">
         <adresa>
             <ulica></ulica>
-            <broj></broj>
-            <postanski_broj></postanski_broj>
+            <broj>1</broj>
+            <postanski_broj>21000</postanski_broj>
             <mesto></mesto>
             <drzava></drzava>
         </adresa>
         <kontakt>
             <telefon></telefon>
             <email></email>
+            <fax></fax>
         </kontakt>
+        <ime></ime>
+        <prezime></prezime>
     </podnosilac>
-    <punomocnik>
+    <punomocnik  xsi:type="TFizickoLice">
         <adresa>
             <ulica></ulica>
-            <broj></broj>
-            <postanski_broj></postanski_broj>
+            <broj>1</broj>
+            <postanski_broj>21000</postanski_broj>
             <mesto></mesto>
             <drzava></drzava>
         </adresa>
         <kontakt>
             <telefon></telefon>
             <email></email>
+            <fax></fax>
         </kontakt>
+        <ime></ime>
+        <prezime></prezime>
     </punomocnik>
     <zig>
         <tip_ziga></tip_ziga>
-        <newElement>
+        <znak>
             <tip_znaka></tip_znaka>
-            <izgled_znaka></izgled_znaka>
-            <boje></boje>
+            <izgled_znaka/>
+            <boje>
+                <boja></boja>
+            </boje>
             <opis_znaka></opis_znaka>
-        </newElement>
+        </znak>
         <brojevi_klasa_robe>
-            <broj></broj>
+            <broj>1</broj>
         </brojevi_klasa_robe>
-        <zatrazeno_pravo></zatrazeno_pravo>
-        <broj_prijave_ziga></broj_prijave_ziga>
-        <datum_podnosenja></datum_podnosenja>
+        <zatrazeno_pravo>gdsa</zatrazeno_pravo>
+        <broj_prijave_ziga>1</broj_prijave_ziga>
+        <datum_podnosenja>2020-10-10</datum_podnosenja>
     </zig>
-    <placene_takse></placene_takse>
+    <placene_takse>
+        <taksa>
+            <tip_takse></tip_takse>
+            <iznos>2</iznos>
+        </taksa>
+    </placene_takse>
     <prilozi>
-        <primerak_znaka></primerak_znaka>
-        <spisak_robe_i_usluga></spisak_robe_i_usluga>
-        <punomocje></punomocje>
-        <generalno_punomocje></generalno_punomocje>
-        <punomocje_naknadno_dostavljeno></punomocje_naknadno_dostavljeno>
-        <opsti_akt></opsti_akt>
-        <dokaz_o_pravu_prvenstva></dokaz_o_pravu_prvenstva>
-        <dokaz_o_uplati_takse></dokaz_o_uplati_takse>
+        <primerak_znaka/>
+        <spisak_robe_i_usluga/>
+        <punomocje/>
+        <generalno_punomocje/>
+        <punomocje_naknadno_dostavljeno/>
+        <opsti_akt/>
+        <dokaz_o_pravu_prvenstva/>
+        <dokaz_o_uplati_takse/>
     </prilozi>
 </zahtev>

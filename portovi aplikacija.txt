@@ -1,0 +1,12 @@
+A1 aplikacija:
+	back: 8084
+	front: 4201
+P1 aplikacija:
+	back: 8083
+	front: 4200
+Z1 aplikacija:
+	back: 8085
+	front: 4202
+Auth aplikacija:
+	back: 8086
+	front: 4205

@@ -10,26 +10,37 @@
                 <xs:element name="pronalazak" type="TPronalazak"/>
                 <xs:element name="podnosilac">
                     <xs:complexType>
-                        <xs:complexContent>
-                            <xs:extension base="TLice">
-                                <xs:sequence>
-                                    <xs:element name="drzavljanstvo" type="xs:string"/>
-                                </xs:sequence>
-                                <xs:attribute name="pronalazac" type="xs:boolean"/>
-                            </xs:extension>
-                        </xs:complexContent>
+                        <xs:sequence>
+                            <xs:element name="drzavljanstvo" type="xs:string"/>
+                            <xs:element name="lice" type="TLice"/>
+                        </xs:sequence>
+                        <xs:attribute name="pronalazac" type="xs:boolean"/>
                     </xs:complexType>
                 </xs:element>
                 <xs:element name="pronalazac">
                     <xs:complexType>
-                        <xs:complexContent>
-                            <xs:extension base="TLice">
-                                <xs:attribute name="naveden_u_prijavi" type="xs:boolean"/>
-                            </xs:extension>
-                        </xs:complexContent>
+                        <xs:sequence>
+                            <xs:element name="lice" type="TLice"/>
+                        </xs:sequence>
+                        <xs:attribute name="naveden_u_prijavi" type="xs:boolean"/>
                     </xs:complexType>
                 </xs:element>
-                <xs:element name="punomoc" type="Punomoc"/>
+                <xs:element name="punomoc">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="tip">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:enumeration value="punomocnik_za_zastupanje"/>
+                                        <xs:enumeration value="punomocnik_za_prijem_pismena"/>
+                                        <xs:enumeration value="zajednicki_predstavnik"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="lice" type="TLice"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
                 <xs:element name="ranije_prijave">
                     <xs:complexType>
                         <xs:sequence>
@@ -77,25 +88,6 @@
         <xs:sequence>
             <xs:element name="naziv_pronalaska_srb" type="xs:string"/>
             <xs:element name="naziv_pronalaska_eng" type="xs:string"/>
-        </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="Punomoc">
-        <xs:sequence>
-            <xs:choice>
-                <xs:element name="poslovno_ime"/>
-                <xs:group ref="ImePrezime"/>
-            </xs:choice>
-            <xs:element name="tip">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:enumeration value="punomocnik_za_zastupanje"/>
-                        <xs:enumeration value="punomocnik_za_prijem_pismena"/>
-                        <xs:enumeration value="zajednicki_predstavnik"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
-            <xs:element name="adresa" type="TAdresa"/>
-            <xs:element name="kontakt" type="TKontakt"/>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="TAdresa">

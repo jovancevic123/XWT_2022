@@ -1,0 +1,84 @@
+<table mat-table [dataSource]="requests" class="mat-elevation-z8 tabela">
+
+
+    <ng-container matColumnDef="brojPrijave">
+      <th mat-header-cell *matHeaderCellDef> Broj prijave </th>
+      <td mat-cell *matCellDef="let element"> {{element.brojPrijave}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="datumPodnosenja">
+      <th mat-header-cell *matHeaderCellDef> Datum podnosenja </th>
+      <td mat-cell *matCellDef="let element"> {{element.datumPodnosenja}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="podnosilacEmail" style="flex: 0 0 50px;">
+      <th mat-header-cell *matHeaderCellDef> Podnosilac email</th>
+      <td mat-cell *matCellDef="let element" style="flex: 0 0 50px;"> {{element.podnosilacEmail}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="naslovDela">
+      <th mat-header-cell *matHeaderCellDef> Naslov dela</th>
+      <td mat-cell *matCellDef="let element"> {{element.naslovDela}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="html">
+        <th mat-header-cell *matHeaderCellDef> HTML </th>
+        <td mat-cell *matCellDef="let element">
+            <button mat-flat-button (click)="downloadHTML(element.brojPrijave)">
+                <mat-icon>cloud_download</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="pdf">
+        <th mat-header-cell *matHeaderCellDef> PDF </th>
+        <td mat-cell *matCellDef="let element">
+            <button mat-flat-button (click)="downloadPDF(element.brojPrijave)">
+                <mat-icon>cloud_download</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="rdf" *ngIf="!isUser">
+      <th mat-header-cell *matHeaderCellDef> RDF meta </th>
+      <td mat-cell *matCellDef="let element">
+          <button mat-flat-button (click)="downloadRDF(element.brojPrijave)">
+              <mat-icon>cloud_download</mat-icon>
+          </button>
+      </td>
+  </ng-container>
+
+  <ng-container matColumnDef="json" *ngIf="!isUser">
+      <th mat-header-cell *matHeaderCellDef> JSON meta </th>
+      <td mat-cell *matCellDef="let element">
+          <button mat-flat-button (click)="downloadJSON(element.brojPrijave)">
+              <mat-icon>cloud_download</mat-icon>
+          </button>
+      </td>
+  </ng-container>
+
+    <ng-container matColumnDef="odobravanje" *ngIf="!isUser">
+      <th mat-header-cell *matHeaderCellDef> Odobravanje zahteva </th>
+      <td mat-cell *matCellDef="let element;let i = index">
+        <button mat-button color="primary" (click)="odobri(element.brojPrijave, i)" [disabled]="element.brojResenja != ''">Odobri</button>
+      </td>
+  </ng-container>
+
+  <ng-container matColumnDef="odbijanje" *ngIf="!isUser">
+      <th mat-header-cell *matHeaderCellDef> Odbijanje zahteva </th>
+      <td mat-cell *matCellDef="let element;let i = index">
+        <button mat-button color="primary" (click)="openDialog(element.brojPrijave, i)" color="warn" [disabled]="element.brojResenja != ''">Odbij</button>
+      </td>
+  </ng-container>
+
+  <ng-container matColumnDef="resenje">
+    <th mat-header-cell *matHeaderCellDef> Resenje </th>
+    <td mat-cell *matCellDef="let element;let i = index">
+      <button mat-button color="primary" (click)="pogledajResenje(i)" color="warn" [disabled]="!element.brojResenja">Pogledaj resenje</button>
+    </td>
+  </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  
