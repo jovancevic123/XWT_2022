@@ -24,7 +24,7 @@ export class KorisnikDashboardComponent {
   constructor(private tokenUtilService: TokenUtilService, private patentService: PatentService, private toastService: ToastrService,  private route: ActivatedRoute, private router: RouterModule){}
 
   ngOnInit(){
-    this.email = this.route.snapshot?.paramMap?.get('email')
+    this.email = this.route.snapshot?.paramMap?.get('email');
     console.log(this.email);
     if(this.email && this.email != 'a')
       this.tokenUtilService.setUser(this.email).subscribe({
@@ -75,10 +75,8 @@ export class KorisnikDashboardComponent {
     window.location.href="http://localhost:4205/login";
   }
 
-  getAllMyRequests(){
-      let email: string = this.tokenUtilService.getEmailFromToken() as string;
-      
-      this.patentService.getUserRequests(email).subscribe({
+  getAllMyRequests(){      
+      this.patentService.getUserRequests(this.email as string).subscribe({
         next: res => {    
             this.startingList = this.makeJsonListOutOfSearchResults(res);    
             this.isLoading = false;                 

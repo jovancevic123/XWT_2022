@@ -344,6 +344,10 @@ public class P1DocumentService {
         return json.toString();
     }
 
+    public List<SearchResultsDto> basicSearchUser(String text, String email) {
+        return this.metadataService.basicSearchUser(text, "./data/sparql/basicSearchUser.rq", email);
+    }
+
     public List<SearchResultsDto> basicSearch(String text) throws JAXBException, XMLDBException {
         return this.metadataService.basicSearch(text, "./data/sparql/basicSearch.rq");
     }
@@ -384,14 +388,14 @@ public class P1DocumentService {
 
     private String namingConversion(String undercase){
         switch (undercase){
-            case "broj_prijave": return "brojPrijave"; 
-            case "broj_resenja": return "brojResenja"; 
-            case "naziv_srb": return "nazivSRB"; 
-            case "naziv_eng": return "nazivENG"; 
-            case "pronalazac_email": return "pronalazacEmail"; 
-            case "podnosilac_email": return "podnosilacEmail"; 
-            case "punomoc_email": return "punomocEmail"; 
-            case "datum_prijema": return "datumPrijema"; 
+            case "broj_prijave": return "brojPrijave";
+            case "broj_resenja": return "brojResenja";
+            case "naziv_srb": return "nazivSRB";
+            case "naziv_eng": return "nazivENG";
+            case "pronalazac_email": return "pronalazacEmail";
+            case "podnosilac_email": return "podnosilacEmail";
+            case "punomoc_email": return "punomocEmail";
+            case "datum_prijema": return "datumPrijema";
             default: throw new QueryFormatException("Malformed query!");
         }
     }

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<zahtev xmlns="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<zahtev xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.ftn.uns.ac.rs/xwt">
     <prijava>
-        <broj_prijave>569806525</broj_prijave>
+        <broj_prijave>573341487</broj_prijave>
         <datum_prijema>2023-02-05</datum_prijema>
-        <priznati_datum_podnosenja>2023-02-05</priznati_datum_podnosenja>
         <vrsta_prijave>izdvojena</vrsta_prijave>
     </prijava>
     <zavod>
@@ -17,66 +16,64 @@
         </adresa>
     </zavod>
     <pronalazak>
-        <naziv_pronalaska_srb>srbv</naziv_pronalaska_srb>
-        <naziv_pronalaska_eng>eng</naziv_pronalaska_eng>
+        <naziv_pronalaska_srb>Cekic</naziv_pronalaska_srb>
+        <naziv_pronalaska_eng>Hammer</naziv_pronalaska_eng>
     </pronalazak>
     <podnosilac pronalazac="true">
-        <drzavljanstvo>gdsa</drzavljanstvo>
-        <lice xsi:type="TFizickoLice" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <drzavljanstvo>Srpsko</drzavljanstvo>
+        <lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TFizickoLice">
             <adresa>
-                <ulica>gdsa</ulica>
-                <broj>2</broj>
-                <postanski_broj>11111</postanski_broj>
-                <mesto>fa</mesto>
-                <drzava>FGSAD</drzava>
+                <ulica>Atar Prvi</ulica>
+                <broj>3</broj>
+                <postanski_broj>21000</postanski_broj>
+                <mesto>Veternik</mesto>
+                <drzava>Srbija</drzava>
             </adresa>
             <kontakt>
-                <telefon>gdsa</telefon>
-                <email>soviljnikola3@gmail.com</email>
-                <fax>gdsa</fax>
+                <telefon>90890484</telefon>
+                <email>jovancevic@gmail.com</email>
+                <fax>12389090</fax>
             </kontakt>
-            <ime>gdgsa</ime>
-            <prezime>gdsa</prezime>
+            <ime>Jovan</ime>
+            <prezime>Jovancevic</prezime>
         </lice>
     </podnosilac>
     <pronalazac naveden_u_prijavi="true">
-        <lice xsi:type="TFizickoLice" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TFizickoLice">
             <adresa>
-                <ulica>gdsa</ulica>
-                <broj>2</broj>
-                <postanski_broj>11111</postanski_broj>
-                <mesto>fa</mesto>
-                <drzava>FGSAD</drzava>
+                <ulica>Atar Prvi</ulica>
+                <broj>3</broj>
+                <postanski_broj>21000</postanski_broj>
+                <mesto>Veternik</mesto>
+                <drzava>Srbija</drzava>
             </adresa>
             <kontakt>
-                <telefon>gdsa</telefon>
-                <email>soviljnikola3@gmail.com</email>
-                <fax>gdsa</fax>
+                <telefon>90890484</telefon>
+                <email>jovancevic@gmail.com</email>
+                <fax>12389090</fax>
             </kontakt>
-            <ime>gdgsa</ime>
-            <prezime>gdsa</prezime>
+            <ime>Jovan</ime>
+            <prezime>Jovancevic</prezime>
         </lice>
     </pronalazac>
     <punomoc>
-        <tip>punomocnik_za_zastupanje</tip>
-        <lice xsi:type="TFizickoLice" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <tip>punomocnik_za_prijem_pismena</tip>
+        <lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TPravnoLice">
             <adresa>
-                <ulica>g</ulica>
-                <broj>1</broj>
-                <postanski_broj>11111</postanski_broj>
-                <mesto>gdsa</mesto>
-                <drzava>gdsa</drzava>
+                <ulica>Pa Pavla</ulica>
+                <broj>11</broj>
+                <postanski_broj>21000</postanski_broj>
+                <mesto>Novi Sad</mesto>
+                <drzava>Srbija</drzava>
             </adresa>
             <kontakt>
-                <telefon>gfsad</telefon>
-                <email>gdsa</email>
-                <fax>fgsa</fax>
+                <telefon>063312333</telefon>
+                <email>aktiva@gmail.com</email>
+                <fax>48312333</fax>
             </kontakt>
-            <ime>gdsa</ime>
-            <prezime>gdsa</prezime>
+            <poslovno_ime>Aktiva doo</poslovno_ime>
         </lice>
     </punomoc>
     <ranije_prijave/>
     <nacin_dostavljanja>elektronska_forma</nacin_dostavljanja>
-    <broj_resenja>1675607103727</broj_resenja>
 </zahtev>

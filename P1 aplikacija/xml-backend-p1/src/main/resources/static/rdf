@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?><zahtev xmlns:sh="https://schema.org/" xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:p1="http://www.ftn.uns.ac.rs/xwt" about="http://www.ftn.uns.ac.rs/xwt/zahtev/569806525" vocab="http://www.ftn.uns.ac.rs/rdf/examples/predicate/">
+<?xml version="1.0" encoding="UTF-8"?><zahtev xmlns:sh="https://schema.org/" xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:p1="http://www.ftn.uns.ac.rs/xwt" about="http://www.ftn.uns.ac.rs/xwt/zahtev/573341487" vocab="http://www.ftn.uns.ac.rs/rdf/examples/predicate/">
     <prijava xmlns="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-        <BrojPrijave xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:broj_prijave">569806525</BrojPrijave>
+        <BrojPrijave xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:broj_prijave">573341487</BrojPrijave>
         <DatumPrijema xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:date" property="pred:datum_prijema">2023-02-05</DatumPrijema>
-        <priznati_datum_podnosenja>2023-02-05</priznati_datum_podnosenja>
         <vrsta_prijave>izdvojena</vrsta_prijave>
     </prijava>
     <zavod xmlns="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">
@@ -16,66 +15,64 @@
         </adresa>
     </zavod>
     <pronalazak xmlns="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-        <NazivSRB xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:naziv_srb">srbv</NazivSRB>
-        <NazivENG xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:naziv_eng">eng</NazivENG>
+        <NazivSRB xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:naziv_srb">Cekic</NazivSRB>
+        <NazivENG xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:naziv_eng">Hammer</NazivENG>
     </pronalazak>
     <podnosilac xmlns="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema" pronalazac="true">
-        <drzavljanstvo>gdsa</drzavljanstvo>
+        <drzavljanstvo>Srpsko</drzavljanstvo>
         <lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TFizickoLice">
             <adresa>
-                <ulica>gdsa</ulica>
-                <broj>2</broj>
-                <postanski_broj>11111</postanski_broj>
-                <mesto>fa</mesto>
-                <drzava>FGSAD</drzava>
+                <ulica>Atar Prvi</ulica>
+                <broj>3</broj>
+                <postanski_broj>21000</postanski_broj>
+                <mesto>Veternik</mesto>
+                <drzava>Srbija</drzava>
             </adresa>
             <kontakt>
-                <telefon>gdsa</telefon>
-                <PodnosilacEmail xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:podnosilac_email">soviljnikola3@gmail.com</PodnosilacEmail>
-                <fax>gdsa</fax>
+                <telefon>90890484</telefon>
+                <PodnosilacEmail xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:podnosilac_email">jovancevic@gmail.com</PodnosilacEmail>
+                <fax>12389090</fax>
             </kontakt>
-            <ime>gdgsa</ime>
-            <prezime>gdsa</prezime>
+            <ime>Jovan</ime>
+            <prezime>Jovancevic</prezime>
         </lice>
     </podnosilac>
     <pronalazac xmlns="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema" naveden_u_prijavi="true">
         <lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TFizickoLice">
             <adresa>
-                <ulica>gdsa</ulica>
-                <broj>2</broj>
-                <postanski_broj>11111</postanski_broj>
-                <mesto>fa</mesto>
-                <drzava>FGSAD</drzava>
+                <ulica>Atar Prvi</ulica>
+                <broj>3</broj>
+                <postanski_broj>21000</postanski_broj>
+                <mesto>Veternik</mesto>
+                <drzava>Srbija</drzava>
             </adresa>
             <kontakt>
-                <telefon>gdsa</telefon>
-                <PronalazacEmail xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:pronalazac_email">soviljnikola3@gmail.com</PronalazacEmail>
-                <fax>gdsa</fax>
+                <telefon>90890484</telefon>
+                <PronalazacEmail xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:pronalazac_email">jovancevic@gmail.com</PronalazacEmail>
+                <fax>12389090</fax>
             </kontakt>
-            <ime>gdgsa</ime>
-            <prezime>gdsa</prezime>
+            <ime>Jovan</ime>
+            <prezime>Jovancevic</prezime>
         </lice>
     </pronalazac>
     <punomoc xmlns="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-        <tip>punomocnik_za_zastupanje</tip>
-        <lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TFizickoLice">
+        <tip>punomocnik_za_prijem_pismena</tip>
+        <lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TPravnoLice">
             <adresa>
-                <ulica>g</ulica>
-                <broj>1</broj>
-                <postanski_broj>11111</postanski_broj>
-                <mesto>gdsa</mesto>
-                <drzava>gdsa</drzava>
+                <ulica>Pa Pavla</ulica>
+                <broj>11</broj>
+                <postanski_broj>21000</postanski_broj>
+                <mesto>Novi Sad</mesto>
+                <drzava>Srbija</drzava>
             </adresa>
             <kontakt>
-                <telefon>gfsad</telefon>
-                <PunomocEmail xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:punomoc_email">gdsa</PunomocEmail>
-                <fax>fgsa</fax>
+                <telefon>063312333</telefon>
+                <PunomocEmail xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:punomoc_email">aktiva@gmail.com</PunomocEmail>
+                <fax>48312333</fax>
             </kontakt>
-            <ime>gdsa</ime>
-            <prezime>gdsa</prezime>
+            <poslovno_ime>Aktiva doo</poslovno_ime>
         </lice>
     </punomoc>
     <ranije_prijave xmlns="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema"/>
     <nacin_dostavljanja xmlns="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">elektronska_forma</nacin_dostavljanja>
-    <BrojResenja datatype="xs:string" property="pred:broj_resenja">1675607103727</BrojResenja>
 </zahtev>
