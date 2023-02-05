@@ -1,10 +1,13 @@
 package com.xml.xmlbackendzh1.model.zh1;
 
+import lombok.NoArgsConstructor;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+@NoArgsConstructor
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(name="TPravnoLice", propOrder={"adresa", "kontakt", "poslovnoIme"})
 public class PravnoLice extends Lice{
