@@ -82,11 +82,7 @@ export class SluzbenikDashboardComponent {
       this.otherPageName = this.currentPage == 0 ? "Izveštaj" : "Zahtevi";
   }
 
-  changeToPatentServis(){
-    window.location.href=`http://localhost:4200/korisnik-dashboard/${this.email}`;
-  }
-
-  changeToAutorskoDeloServis(){
-    window.location.href=`http://localhost:4201/korisnik-dashboard/${this.email}`;
+  backToServicePicker(){
+    window.location.href="http://localhost:4205/service-picker";
   }
 }

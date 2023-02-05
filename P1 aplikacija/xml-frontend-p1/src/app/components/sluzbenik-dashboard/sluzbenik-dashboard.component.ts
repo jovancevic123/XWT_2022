@@ -16,7 +16,7 @@ export interface DialogResenjeData {
   prezimeSluzbenika: string,
   datumOdgovora: string,
   prihvacena: string,
-  razlog: string;
+  obrazlozenje: string;
 }
 
 export interface DialogReferenceData{
@@ -48,12 +48,6 @@ export class SluzbenikDashboardComponent {
     this.getPendingRequests();
     
     let role: string | null = this.tokenUtilService.getRoleFromToken();        
-  
-    if(role === "KORISNIK"){
-      this.patentLink = "http://localhost:4200/korisnik-dashboard";
-    }else{
-      this.patentLink = "http://localhost:4200/sluzbenik-dashboard";
-    }
   }
 
   tiles: Tile[] = [
@@ -112,4 +106,7 @@ export class SluzbenikDashboardComponent {
       this.otherPageName = this.currentPage == 0 ? "Izveštaj" : "Zahtevi";
   }
 
+  backToServicePicker(){
+    window.location.href="http://localhost:4205/service-picker";
+  }
 }

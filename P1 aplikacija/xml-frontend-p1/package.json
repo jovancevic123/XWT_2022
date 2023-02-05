@@ -40,8 +40,10 @@
     "rxjs": "~7.5.0",
     "sockjs-client": "^1.6.1",
     "stompjs": "^2.3.3",
+    "timers": "^0.1.1",
     "tslib": "^2.3.0",
     "xml-js": "^1.6.11",
+    "xml2js": "^0.4.23",
     "zone.js": "~0.12.0"
   },
   "devDependencies": {

@@ -16,11 +16,11 @@ export class ServicePickerComponent {
 
     patentServiceChoosen(){
       let role: string | null = this.tokenUtilsService.getRoleFromToken();        
-  
+      let userEmail = this.tokenUtilsService.getUserEmailFromToken();
       if(role === "KORISNIK"){
-        window.location.href = "http://localhost:4200/korisnik-dashboard";
+        window.location.href = `http://localhost:4200/korisnik-dashboard/${userEmail}`;
       }else{
-        window.location.href = "http://localhost:4200/sluzbenik-dashboard";
+        window.location.href = `http://localhost:4200/sluzbenik-dashboard/${userEmail}`;
       }
     }
 

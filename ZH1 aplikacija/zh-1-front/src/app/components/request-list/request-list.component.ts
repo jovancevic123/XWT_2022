@@ -184,7 +184,7 @@ export class RequestListComponent {
       prezimeSluzbenika: results["zh-1:resenje"]["zh-1:prezime_sluzbenika"],
       datumOdgovora: results["zh-1:resenje"]["zh-1:datum_odgovora"],
       prihvacena: results["zh-1:resenje"]["zh-1:prihvacena"],
-      razlog: results["zh-1:resenje"]["zh-1:obrazlozenje"]
+      obrazlozenje: results["zh-1:resenje"]["zh-1:obrazlozenje"]
     }
     console.log(val)
 

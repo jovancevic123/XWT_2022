@@ -4,5 +4,5 @@ export interface DialogResenjeData {
     prezimeSluzbenika: string,
     datumOdgovora: string,
     prihvacena: string,
-    razlog: string;
+    obrazlozenje: string;
   }
