@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { AdvancedSearchMeta } from 'src/app/model/AdvancedSearchMeta';
 import { SearchResult } from 'src/app/model/SearchResult';
 import { SearchService } from 'src/app/services/search.service';
@@ -18,33 +19,57 @@ export class SearchComponent {
   advancedSearchInput: AdvancedSearchMeta[] = [];
   searchResults: SearchResult[];
 
-  constructor(private searchService: SearchService, private tokenUtilService: TokenUtilService){}
+  constructor(private searchService: SearchService, private tokenUtilService: TokenUtilService,private toastService: ToastrService){}
 
   ngOnInit(): void {
     this.searchResults = [...this.startingList];    
     console.log(this.searchResults)    
   }
 
-  basicSearch(){    
-    this.searchService.basicSearch(this.basicSearchInput).subscribe({
-      next: res => {
-        this.searchResults = this.makeJsonListOutOfSearchResults(res);       
-      },
-      error: error => {
-          console.error(error);
-      }
-    });
+  basicSearch(){  
+    let role: string = this.tokenUtilService.getRoleFromToken() as string;
+    if(role === "KORISNIK"){
+      this.searchService.basicSearchUser(this.basicSearchInput, this.tokenUtilService.getEmailFromToken() as string).subscribe({
+        next: res => {
+          this.searchResults = this.makeJsonListOutOfSearchResults(res);       
+        },
+        error: error => {
+          this.toastService.warning("Something went wrong!");
+        }
+      });
+    }else{
+      this.searchService.basicSearch(this.basicSearchInput).subscribe({
+        next: res => {
+          this.searchResults = this.makeJsonListOutOfSearchResults(res);       
+        },
+        error: error => {
+          this.toastService.warning("Something went wrong!");
+        }
+      });
+    }
   }
 
   advancedSearch(){
-      this.searchService.advancedSearch(this.advancedSearchInput).subscribe({
-        next: res => {
-          this.searchResults = this.makeJsonListOutOfSearchResults(res);
-        },
-        error: error => {
-            console.error(error);
-        }
-      });
+    let role: string = this.tokenUtilService.getRoleFromToken() as string;
+    let lista = [...this.advancedSearchInput];
+    if(role === "KORISNIK"){
+      let newRow = {
+        meta: "podnosilac_email",
+        value: this.tokenUtilService.getEmailFromToken() as string,
+        operator: "&&"
+      };
+
+      lista.unshift(newRow);
+    }
+
+    this.searchService.advancedSearch(lista).subscribe({
+      next: res => {
+        this.searchResults = this.makeJsonListOutOfSearchResults(res);
+      },
+      error: error => {
+        this.toastService.warning(error.error);
+      }
+    });
   }
 
   onDeleteAdvancedSeachInput(index: number){

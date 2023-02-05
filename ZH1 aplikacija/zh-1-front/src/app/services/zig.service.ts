@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import * as JsonToXML from "js2xmlparser";
+import { TokenUtilService } from './token-util.service';
+import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +12,7 @@ export class ZigService {
   
   private apiURL: String = "http://localhost:8085/api";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private tokenUtilService: TokenUtilService, private toastService: ToastrService,  private route: ActivatedRoute, private router: RouterModule) { }
 
   submitRequest(request: any){
     
@@ -37,7 +40,7 @@ export class ZigService {
     let body = {
       brojPrijaveZiga: broj,
       obrazlozenje: "",
-      imeSluzbenika: "Nevena Simic", // this.tokenUtilService.getUserFromToken(),
+      imeSluzbenika: this.tokenUtilService.getUserFromToken(),
       prihvacena: true
     };
 
@@ -50,7 +53,7 @@ export class ZigService {
     let body = {
       brojPrijaveZiga: broj,
       obrazlozenje: obrazlozenje,
-      imeSluzbenika: "Nevena Simic", //this.tokenUtilService.getUserFromToken(),
+      imeSluzbenika: this.tokenUtilService.getUserFromToken(),
       prihvacena: false
     };
 

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { SearchResult } from 'src/app/model/SearchResult';
 import { TokenUtilService } from 'src/app/services/token-util.service';
 import { ZigService } from 'src/app/services/zig.service';
@@ -18,7 +19,7 @@ export class KorisnikDashboardComponent {
   email: string | null;
   role: string;
 
-  constructor(private tokenUtilService: TokenUtilService, private zigService: ZigService, private route: ActivatedRoute, private router: RouterModule){}
+  constructor(private tokenUtilService: TokenUtilService, private zigService: ZigService, private route: ActivatedRoute, private router: RouterModule, private toastService: ToastrService){}
 
   ngOnInit(){
     this.email = this.route.snapshot?.paramMap?.get('email')
@@ -74,7 +75,7 @@ export class KorisnikDashboardComponent {
           this.isLoading = false;      
       },
       error: error => {
-          console.error(error);
+        console.log(error);
       }
     });
   }
