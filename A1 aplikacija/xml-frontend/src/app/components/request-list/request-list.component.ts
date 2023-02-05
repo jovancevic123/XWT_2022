@@ -30,8 +30,9 @@ export class RequestListComponent {
 
 
   ngOnInit(): void {
-    this.displayedColumns = this.isUser ? ['brojPrijave', 'datumPodnosenja', 'podnosilacEmail', 'naslovDela', 'html', 'pdf', 'resenje', 'reference'] :
-                                      ['brojPrijave', 'datumPodnosenja', 'podnosilacEmail', 'naslovDela', 'html', 'pdf', 'rdf', 'json', 'odobravanje', 'odbijanje', 'resenje', 'reference'];
+    this.displayedColumns = this.isUser ? ['brojPrijave', 'datumPodnosenja', 'podnosilacEmail', 'naslovDela', 'html', 'pdf', 'resenje'] :
+                                      ['brojPrijave', 'datumPodnosenja', 'podnosilacEmail', 'naslovDela', 'html', 'pdf', 'rdf', 'json', 'odobravanje', 'odbijanje', 'resenje'];
+    console.log(this.isUser);
   }
 
   downloadHTML(brojPrijave: string){  
@@ -65,6 +66,8 @@ export class RequestListComponent {
         console.log(data);
         this.requests[i].brojResenja = data;
         this.toastr.success("","Uspešno prihvatanje");
+        if(this.requests && this.requests.length > 1)
+          this.requests.sort((a:any,b:any)=>{ return a.brojResenja < b.brojResenja?1:a.brojResenja > b.brojResenja?-1:0})
       },
       error: error => {
         console.error(error);
@@ -79,6 +82,8 @@ export class RequestListComponent {
         console.log(data);
         this.requests[i].brojResenja = data;
         this.toastr.success("","Uspešno odbijanje");
+        if(this.requests && this.requests.length > 1)
+          this.requests.sort((a:any,b:any)=>{ return a.brojResenja < b.brojResenja?1:a.brojResenja > b.brojResenja?-1:0})
       },
       error: error => {
         console.error(error);

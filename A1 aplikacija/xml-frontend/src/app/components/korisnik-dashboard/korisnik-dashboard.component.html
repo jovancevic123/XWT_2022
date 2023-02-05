@@ -5,11 +5,11 @@
     </button>
     <a href="javascript:;" [routerLink]="['/user/a', {outlets: {'user-outlet': ['form']}}]">Novi zahtev</a>
     <a href="javascript:;" [routerLink]="['/user/a', {outlets: {'user-outlet': ['search']}}]">Pretraga</a>
-    <a *ngIf="role !== 'KORISNIK'" href="javascript:;" [routerLink]="['/user', {outlets: {'user-outlet': ['report']}}]">Izveštaj</a>
+    <a *ngIf="role !== 'KORISNIK'" href="javascript:;" [routerLink]="['/user/a', {outlets: {'user-outlet': ['report']}}]">Izveštaj</a>
 </div>
 
 <router-outlet name="user-outlet"></router-outlet>
 
-<button mat-fab aria-label="Example icon button with a home icon" class="logout-button" >
+<button mat-fab aria-label="Example icon button with a home icon" class="logout-button" (click)="logOut()">
     <mat-icon>logout</mat-icon>
 </button>

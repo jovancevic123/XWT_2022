@@ -206,7 +206,7 @@ export class FormPageComponent {
       next: data => {
         console.log(data);
         this.toastr.success("","Successfully saved");
-        this.router.navigate(['/user', {outlets: {'user-outlet': ['search']}}]);
+        this.router.navigate(['/user/a', {outlets: {'user-outlet': ['search']}}]);
       },
       error: error => {
         console.error(error);
@@ -281,8 +281,7 @@ export class FormPageComponent {
   }
   
   onPunomocnikAdresa(event: Adresa){
-    this.podnosilacAdresa = event;
-    
+    this.punomocAdresa = event;
   }
   //Contact events
   onPunomocnikKontakt(event: Kontakt){

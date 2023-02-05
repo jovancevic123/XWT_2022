@@ -1,5 +1,5 @@
 <div class="background">
-    <div class="left">
+    <div class="left" >
         <mat-radio-group
             aria-labelledby="example-radio-group-label"
             class="example-radio-group">
@@ -8,7 +8,7 @@
         </mat-radio-group>
     </div>
     
-    <div class="right">
+    <div class="right" >
         <div *ngIf="vrstaPretrage == 1">
             <mat-form-field class="example-full-width">
                 <mat-label>Tekst pretrage</mat-label>
@@ -17,7 +17,7 @@
             <button mat-raised-button class="dugme-pretraga" (click)="basicSearch()">Pretraži</button>                
         </div>
     
-        <div *ngIf="vrstaPretrage == 2">
+        <div *ngIf="vrstaPretrage == 2" >
             <span *ngFor="let rp of advancedSearchInput; let i = index">
                 <mat-form-field class="example-full-width" *ngIf="advancedSearchInput.length != 0">
                     <mat-label>Metapodatak</mat-label>

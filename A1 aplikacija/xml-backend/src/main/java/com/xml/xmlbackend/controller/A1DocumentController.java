@@ -39,6 +39,13 @@ public class A1DocumentController {
         return ResponseEntity.ok(searchResultsDto);
     }
 
+    @GetMapping(value="/basic-search-user", consumes = "application/xml", produces = "application/xml")
+    public ResponseEntity<?> searchRequests(@RequestParam("textToSearch") String text, @RequestParam("email") String email) {
+        List<SearchResultDto> resultDtoList = this.service.basicSearchForUser(text, email);
+        SearchResultsDto searchResultsDto = new SearchResultsDto(resultDtoList);
+        return ResponseEntity.ok(searchResultsDto);
+    }
+
     @GetMapping("/pdf")
     public ResponseEntity<?> getRequestPDF(@RequestParam("brojPrijave") String brojPrijave)  {
         try {
@@ -114,6 +121,16 @@ public class A1DocumentController {
     public ResponseEntity<?> advancedSearch(@RequestBody AdvancedSearchListDto dto){
         try{
             SearchResultsDto requestDtos = new SearchResultsDto(this.service.advancedSearch(dto));
+            return ResponseEntity.ok(requestDtos);
+        }catch(Exception ex){
+            return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping(value="/advanced-search-user", produces = "application/xml")
+    public ResponseEntity<?> advancedSearchForUser(@RequestBody AdvancedSearchListDto dto){
+        try{
+            SearchResultsDto requestDtos = new SearchResultsDto(this.service.advancedSearchForUser(dto));
             return ResponseEntity.ok(requestDtos);
         }catch(Exception ex){
             return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);

@@ -12,10 +12,11 @@ import { TokenUtilService } from 'src/app/services/token-util.service';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit{
+  role:string | null;
 
   
   startingList: SearchResult[] = [];
-  @Input() isUser: boolean;
+  isUser: boolean;
 
   protected vrstaPretrage: number = 1;
   basicSearchInput: string = "";
@@ -25,7 +26,15 @@ export class SearchComponent implements OnInit{
   constructor(private searchService: SearchService, private autorskoDeloService:AutorskoDeloServiceService, private tokenUtilService: TokenUtilService, private toastr:ToastrService){}
 
   ngOnInit(): void {
-    this.basicSearch();
+    this.role = this.tokenUtilService.getRoleFromToken();
+    if(this.role === "SLUZBENIK"){
+      this.basicSearch();
+      this.isUser = false;
+    }
+    else{
+      this.getAllRequestForUser();
+      this.isUser = true;
+    }
     // this.autorskoDeloService.getPendingRequests().subscribe({
     //   next: res => {
     //     console.log(res);
@@ -36,40 +45,74 @@ export class SearchComponent implements OnInit{
     //   }
     // });
   }
+
+
+  getAllRequestForUser() {
+    this.basicSearch()  ;
+  }
   
-  basicSearch(){    
-    this.searchService.basicSearch(this.basicSearchInput).subscribe({
-      next: res => {
-        console.log(res);
-        this.searchResults = this.makeJsonListOutOfSearchResults(res);       
-      },
-      error: error => {
-          console.error(error);
-      }
-    });
+  basicSearch(){
+    if(this.tokenUtilService.getRoleFromToken() === "SLUZBENIK"){
+      this.searchService.basicSearch(this.basicSearchInput).subscribe({
+        next: res => {
+          console.log(res);
+          this.searchResults = this.makeJsonListOutOfSearchResults(res);       
+        },
+        error: error => {
+            console.error(error);
+        }
+      });
+    }
+    else{
+      this.searchService.basicSearchForUser(this.basicSearchInput).subscribe({
+        next: res => {
+          console.log(res);
+          this.searchResults = this.makeJsonListOutOfSearchResults(res);    
+        },
+        error: error => {
+            console.error(error);
+        }
+      });}
   }
 
   advancedSearch(){
-    console.log(this.advancedSearchInput);
-    this.searchService.advancedSearch(this.advancedSearchInput).subscribe({
-      next: res => {
-        this.searchResults = this.makeJsonListOutOfSearchResults(res);
-        console.log(this.searchResults);
-      },
-      error: error => {
-          console.error(error);
-          this.toastr.error("","Neuspešna pretraga");
-      }
-    });
+    if(this.tokenUtilService.getRoleFromToken() === "SLUZBENIK"){
+      console.log(this.advancedSearchInput);
+      this.searchService.advancedSearch(this.advancedSearchInput).subscribe({
+        next: res => {
+          this.searchResults = this.makeJsonListOutOfSearchResults(res);
+          console.log(this.searchResults);
+        },
+        error: error => {
+            console.error(error);
+            this.toastr.error("","Neuspešna pretraga");
+        }
+      });
+    }
+    else{
+      console.log(this.advancedSearchInput);
+      this.searchService.advancedSearchForUser(this.advancedSearchInput).subscribe({
+        next: res => {
+          this.searchResults = this.makeJsonListOutOfSearchResults(res);
+          console.log(this.searchResults);
+        },
+        error: error => {
+            console.error(error);
+            this.toastr.error("","Neuspešna pretraga");
+        }
+      });
+    }
   }
 
   makeJsonListOutOfSearchResults(xmlString: string): any {
     let results = JSON.parse(this.tokenUtilService.xml2Json(xmlString)).searchResultsDto.results;     
     console.log(results);
-    
     if(!results){
       return [];
     }
+    if(results.length > 1)
+      results.sort((a:any,b:any)=>{ return a.brojResenja < b.brojResenja?1:a.brojResenja > b.brojResenja?-1:0})
+    
     
     if(results.length){
       results = results;

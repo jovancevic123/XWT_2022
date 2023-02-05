@@ -16,7 +16,7 @@ export class KorisnikDashboardComponent implements OnInit{
   ngOnInit(){
     this.email = this.route.snapshot?.paramMap?.get('email')
     console.log(this.email);
-    if(this.email && this.email != 'a')
+    if(this.email && this.email != 'a'){
       this.tokenUtilService.setUser(this.email).subscribe({
         next: (res: any) => {
           console.log(res); 
@@ -38,12 +38,20 @@ export class KorisnikDashboardComponent implements OnInit{
         error: (error: any) => {
             console.error(error);
         }
-      });;
-      
+      });}
+    else{
+      this.role = this.tokenUtilService.getRoleFromToken() as string;
+    }
+
     // let role: string | null = this.tokenUtilService.getRoleFromToken();
     // console.log(role);
   }
 
+  logOut(){
+    localStorage.removeItem("user");
+    window.location.href = "http://localhost:4205/login";
+  }
+  
   backToServicePicker(){
     window.location.href="http://localhost:4205/service-picker";
   }
