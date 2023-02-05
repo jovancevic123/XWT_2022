@@ -112,6 +112,9 @@ public class P1DocumentService {
         zahtev.setPronalazak(pronalazak);
         zahtev.setNacinDostavljanja(nacinDostavljanja);
         zahtev.setRanijePrijave(ranijePrijave);
+        if(dto.getAdresaDostave() != null){
+            zahtev.setAdresaDostave(new Adresa(dto.getAdresaDostave()));
+        }
 //        zahtev.setBrojResenja("");
 
         JAXBContext context = JAXBContext.newInstance(Zahtev.class);

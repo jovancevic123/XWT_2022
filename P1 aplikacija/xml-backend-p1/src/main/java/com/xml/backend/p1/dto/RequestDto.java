@@ -47,6 +47,7 @@ public class RequestDto {
     private AdresaDto podnosilacAdresa;
     private AdresaDto pronalazacAdresa;
     private AdresaDto punomocAdresa;
+    private AdresaDto adresaDostave;
 
     private KontaktDto podnosilacKontakt;
     private KontaktDto pronalazacKontakt;

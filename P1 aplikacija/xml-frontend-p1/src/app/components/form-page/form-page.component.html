@@ -176,7 +176,7 @@
                 <mat-radio-button class="example-radio-button" value="1" (change)="onVrstaPrijaveChanged()">Dopunska prijava</mat-radio-button>
                 <mat-radio-button class="example-radio-button" value="2" (change)="onVrstaPrijaveChanged()">Izdvojena prijava</mat-radio-button>
             </mat-radio-group>
-            <button mat-fab extended (click)="onNewRanijaPrijava()" *ngIf="dopunskaPrijavaChecked">
+            <button type="button" mat-fab extended (click)="onNewRanijaPrijava()" *ngIf="dopunskaPrijavaChecked">
                 <mat-icon>add-new</mat-icon>
                 Nova ranija prijava
             </button>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<zahtev xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.ftn.uns.ac.rs/xwt">
+    <prijava>
+        <broj_prijave>581003319</broj_prijave>
+        <datum_prijema>2023-02-05</datum_prijema>
+        <vrsta_prijave>dopunska</vrsta_prijave>
+    </prijava>
+    <zavod>
+        <naziv>Zavod za intelektualnu svojinu</naziv>
+        <adresa>
+            <ulica>Kneginje Ljubice</ulica>
+            <broj>5</broj>
+            <postanski_broj>11000</postanski_broj>
+            <mesto>Beograd</mesto>
+            <drzava>Republika Srbija</drzava>
+        </adresa>
+    </zavod>
+    <pronalazak>
+        <naziv_pronalaska_srb>Kljuc</naziv_pronalaska_srb>
+        <naziv_pronalaska_eng>Key</naziv_pronalaska_eng>
+    </pronalazak>
+    <podnosilac pronalazac="true">
+        <drzavljanstvo>Srpsko</drzavljanstvo>
+        <lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TFizickoLice">
+            <adresa>
+                <ulica>Atar Prvi</ulica>
+                <broj>3</broj>
+                <postanski_broj>21000</postanski_broj>
+                <mesto>Veternik</mesto>
+                <drzava>Srbija</drzava>
+            </adresa>
+            <kontakt>
+                <telefon>389048904890</telefon>
+                <email>jovancevic@gmail.com</email>
+                <fax>34423444</fax>
+            </kontakt>
+            <ime>Jovan</ime>
+            <prezime>Jovancevic</prezime>
+        </lice>
+    </podnosilac>
+    <pronalazac naveden_u_prijavi="true">
+        <lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TFizickoLice">
+            <adresa>
+                <ulica>Atar Prvi</ulica>
+                <broj>3</broj>
+                <postanski_broj>21000</postanski_broj>
+                <mesto>Veternik</mesto>
+                <drzava>Srbija</drzava>
+            </adresa>
+            <kontakt>
+                <telefon>389048904890</telefon>
+                <email>jovancevic@gmail.com</email>
+                <fax>34423444</fax>
+            </kontakt>
+            <ime>Jovan</ime>
+            <prezime>Jovancevic</prezime>
+        </lice>
+    </pronalazac>
+    <punomoc>
+        <tip>punomocnik_za_prijem_pismena</tip>
+        <lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TPravnoLice">
+            <adresa>
+                <ulica>Pap Pavla</ulica>
+                <broj>3</broj>
+                <postanski_broj>21000</postanski_broj>
+                <mesto>Novi Sad</mesto>
+                <drzava>Srbija</drzava>
+            </adresa>
+            <kontakt>
+                <telefon>12344545545</telefon>
+                <email>ak@gmail.com</email>
+                <fax>42343444</fax>
+            </kontakt>
+            <poslovno_ime>AktivaBla</poslovno_ime>
+        </lice>
+    </punomoc>
+    <ranije_prijave>
+        <ranija_prijava>
+            <broj_prijave>580360607</broj_prijave>
+            <datum_podnosenja>2023-02-05</datum_podnosenja>
+            <dvoslovna_oznaka>sr</dvoslovna_oznaka>
+        </ranija_prijava>
+        <ranija_prijava>
+            <broj_prijave>573341487</broj_prijave>
+            <datum_podnosenja>2023-02-05</datum_podnosenja>
+            <dvoslovna_oznaka>sr</dvoslovna_oznaka>
+        </ranija_prijava>
+    </ranije_prijave>
+    <nacin_dostavljanja>papirna_forma</nacin_dostavljanja>
+    <adresa_dostave>
+        <ulica>Bulever Cara Lazara</ulica>
+        <broj>33</broj>
+        <postanski_broj>21000</postanski_broj>
+        <mesto>Novi Sad</mesto>
+        <drzava>Srbija</drzava>
+    </adresa_dostave>
+</zahtev>

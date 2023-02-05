@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<zahtev xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.ftn.uns.ac.rs/xwt">
+<zahtev xmlns="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">
     <prijava>
-        <broj_prijave>573341487</broj_prijave>
+        <broj_prijave>581003319</broj_prijave>
         <datum_prijema>2023-02-05</datum_prijema>
-        <vrsta_prijave>izdvojena</vrsta_prijave>
+        <vrsta_prijave>dopunska</vrsta_prijave>
     </prijava>
     <zavod>
         <naziv>Zavod za intelektualnu svojinu</naziv>
@@ -16,8 +15,8 @@
         </adresa>
     </zavod>
     <pronalazak>
-        <naziv_pronalaska_srb>Cekic</naziv_pronalaska_srb>
-        <naziv_pronalaska_eng>Hammer</naziv_pronalaska_eng>
+        <naziv_pronalaska_srb>Kljuc</naziv_pronalaska_srb>
+        <naziv_pronalaska_eng>Key</naziv_pronalaska_eng>
     </pronalazak>
     <podnosilac pronalazac="true">
         <drzavljanstvo>Srpsko</drzavljanstvo>
@@ -30,9 +29,9 @@
                 <drzava>Srbija</drzava>
             </adresa>
             <kontakt>
-                <telefon>90890484</telefon>
+                <telefon>389048904890</telefon>
                 <email>jovancevic@gmail.com</email>
-                <fax>12389090</fax>
+                <fax>34423444</fax>
             </kontakt>
             <ime>Jovan</ime>
             <prezime>Jovancevic</prezime>
@@ -48,9 +47,9 @@
                 <drzava>Srbija</drzava>
             </adresa>
             <kontakt>
-                <telefon>90890484</telefon>
+                <telefon>389048904890</telefon>
                 <email>jovancevic@gmail.com</email>
-                <fax>12389090</fax>
+                <fax>34423444</fax>
             </kontakt>
             <ime>Jovan</ime>
             <prezime>Jovancevic</prezime>
@@ -60,20 +59,38 @@
         <tip>punomocnik_za_prijem_pismena</tip>
         <lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TPravnoLice">
             <adresa>
-                <ulica>Pa Pavla</ulica>
-                <broj>11</broj>
+                <ulica>Pap Pavla</ulica>
+                <broj>3</broj>
                 <postanski_broj>21000</postanski_broj>
                 <mesto>Novi Sad</mesto>
                 <drzava>Srbija</drzava>
             </adresa>
             <kontakt>
-                <telefon>063312333</telefon>
-                <email>aktiva@gmail.com</email>
-                <fax>48312333</fax>
+                <telefon>12344545545</telefon>
+                <email>ak@gmail.com</email>
+                <fax>42343444</fax>
             </kontakt>
-            <poslovno_ime>Aktiva doo</poslovno_ime>
+            <poslovno_ime>AktivaBla</poslovno_ime>
         </lice>
     </punomoc>
-    <ranije_prijave/>
-    <nacin_dostavljanja>elektronska_forma</nacin_dostavljanja>
+    <ranije_prijave>
+        <ranija_prijava>
+            <broj_prijave>580360607</broj_prijave>
+            <datum_podnosenja>2023-02-05</datum_podnosenja>
+            <dvoslovna_oznaka>sr</dvoslovna_oznaka>
+        </ranija_prijava>
+        <ranija_prijava>
+            <broj_prijave>573341487</broj_prijave>
+            <datum_podnosenja>2023-02-05</datum_podnosenja>
+            <dvoslovna_oznaka>sr</dvoslovna_oznaka>
+        </ranija_prijava>
+    </ranije_prijave>
+    <nacin_dostavljanja>papirna_forma</nacin_dostavljanja>
+    <adresa_dostave>
+        <ulica>Bulever Cara Lazara</ulica>
+        <broj>33</broj>
+        <postanski_broj>21000</postanski_broj>
+        <mesto>Novi Sad</mesto>
+        <drzava>Srbija</drzava>
+    </adresa_dostave>
 </zahtev>

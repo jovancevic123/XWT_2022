@@ -339,13 +339,13 @@
 
                         <tr>
                             <td colspan="3">
-                                Broj prvobitne prijave / osnovne prijave, odnosno osnovnog patenta:
+                                Broj prvobitne prijave / osnovne prijave, odnosno osnovnog patenta:   <xsl:value-of  select="zahtev/ranije_prijave/ranija_prijava/broj_prijave"/>
                             </td>
                         </tr>
 
                         <tr>
                             <td colspan="3">
-                                Datum podnošenja prvobitne prijave / osnovne prijave:
+                                Datum podnošenja prvobitne prijave / osnovne prijave:  <xsl:value-of  select="zahtev/ranije_prijave/ranija_prijava/datum_podnosenja"/>
                             </td>
                         </tr>
 
