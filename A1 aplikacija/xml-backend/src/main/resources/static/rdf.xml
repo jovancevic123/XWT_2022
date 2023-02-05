@@ -1,97 +1,56 @@
-<?xml version="1.0" encoding="UTF-8"?><zahtev xmlns:sh="https://schema.org/" xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:a1="http://www.ftn.uns.ac.rs/xwt" about="http://www.ftn.uns.ac.rs/xwt/zahtev/578213206" vocab="http://www.ftn.uns.ac.rs/rdf/examples/predicate/">
+<?xml version="1.0" encoding="UTF-8"?><zahtev xmlns:sh="https://schema.org/" xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/" xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:a1="http://www.ftn.uns.ac.rs/xwt" about="http://www.ftn.uns.ac.rs/xwt/zahtev/582248938" vocab="http://www.ftn.uns.ac.rs/rdf/examples/predicate/">
     <zah:prijava xmlns:zah="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-        <BrojPrijave xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:broj_prijave">578213206</BrojPrijave>
+        <BrojPrijave xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:broj_prijave">582248938</BrojPrijave>
         <DatumPodnosenja xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:date" property="pred:datum_podnosenja">2023-02-05</DatumPodnosenja>
     </zah:prijava>
-    <zah:podnosilac xmlns:zah="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema" podnosilac_je_autor="false">
+    <zah:podnosilac xmlns:zah="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema" podnosilac_je_autor="true">
         <zah:lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="zah:TFizickoLice">
             <zah:kontakt>
-                <zah:telefon>0655193962</zah:telefon>
-                <PodnosilacEmail xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:podnosilac_email">sabadosmihal00@gmail.com</PodnosilacEmail>
-                <zah:fax/>
+                <zah:telefon>123444137</zah:telefon>
+                <PodnosilacEmail xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:podnosilac_email">soviljnikola3@gmail.com</PodnosilacEmail>
+                <zah:fax>1401904890</zah:fax>
             </zah:kontakt>
-            <zah:ime>Mihal</zah:ime>
-            <zah:prezime>Sabados</zah:prezime>
+            <zah:ime>Nikola</zah:ime>
+            <zah:prezime>Sovilj</zah:prezime>
             <zah:adresa>
-                <zah:ulica>Štefanikova</zah:ulica>
-                <zah:broj>120</zah:broj>
-                <zah:postanski_broj>21211</zah:postanski_broj>
-                <zah:mesto>Kisač</zah:mesto>
+                <zah:ulica>Cara Lazara</zah:ulica>
+                <zah:broj>13</zah:broj>
+                <zah:postanski_broj>21000</zah:postanski_broj>
+                <zah:mesto>Detelinara</zah:mesto>
                 <zah:drzava>Srbija</zah:drzava>
             </zah:adresa>
-            <zah:drzavljanstvo>Srbija</zah:drzavljanstvo>
+            <zah:drzavljanstvo>Srpsko</zah:drzavljanstvo>
         </zah:lice>
     </zah:podnosilac>
-    <zah:punomocnik xmlns:zah="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="zah:TFizickoLice">
-        <zah:kontakt>
-            <zah:telefon>4546654654</zah:telefon>
-            <zah:email>nikola@gmail.com</zah:email>
-            <zah:fax/>
-        </zah:kontakt>
-        <zah:ime>Nikola</zah:ime>
-        <zah:prezime>Sovilj</zah:prezime>
-        <zah:adresa>
-            <zah:ulica>Milana</zah:ulica>
-            <zah:broj>423</zah:broj>
-            <zah:postanski_broj>11111</zah:postanski_broj>
-            <zah:mesto>Novi Sad</zah:mesto>
-            <zah:drzava>Srbija</zah:drzava>
-        </zah:adresa>
-        <zah:drzavljanstvo>Srpsko</zah:drzavljanstvo>
-    </zah:punomocnik>
     <zah:autorsko_delo xmlns:zah="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-        <NaslovDela xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:naslov_dela">Novi zavet</NaslovDela>
-        <zah:delo_prerade>
-            <zah:naslov_dela_prerade>Stari zavet</zah:naslov_dela_prerade>
-            <zah:autori>
-                <zah:autor>
-                    <zah:kontakt>
-                        <zah:telefon>456465464</zah:telefon>
-                        <zah:email>bobi@gmail.com</zah:email>
-                        <zah:fax/>
-                    </zah:kontakt>
-                    <zah:ime>Boban</zah:ime>
-                    <zah:prezime>Basic</zah:prezime>
-                    <zah:adresa>
-                        <zah:ulica>Cvijica</zah:ulica>
-                        <zah:broj>12</zah:broj>
-                        <zah:postanski_broj>21000</zah:postanski_broj>
-                        <zah:mesto>NS</zah:mesto>
-                        <zah:drzava>Srb</zah:drzava>
-                    </zah:adresa>
-                    <zah:drzavljanstvo>Srbija</zah:drzavljanstvo>
-                    <zah:pseudonim>Bobi</zah:pseudonim>
-                    <zah:godina_smrti>0</zah:godina_smrti>
-                </zah:autor>
-            </zah:autori>
-        </zah:delo_prerade>
-        <zah:vrsta_dela>književno delo</zah:vrsta_dela>
-        <zah:forma_zapisa_dela>štampani tekst</zah:forma_zapisa_dela>
+        <NaslovDela xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:naslov_dela">Novi Zavet</NaslovDela>
+        <zah:vrsta_dela>Knjizevno delo</zah:vrsta_dela>
+        <zah:forma_zapisa_dela>Preferencije</zah:forma_zapisa_dela>
         <zah:stvoreno_u_radnom_odnosu>false</zah:stvoreno_u_radnom_odnosu>
-        <zah:nacin_koriscenja>pusenje</zah:nacin_koriscenja>
+        <zah:nacin_koriscenja>Citanje</zah:nacin_koriscenja>
         <zah:autori>
             <zah:autor>
                 <zah:kontakt>
-                    <zah:telefon>064123</zah:telefon>
-                    <AutorEmail xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:autor_email">joca@gmail.com</AutorEmail>
-                    <zah:fax/>
+                    <zah:telefon>123444137</zah:telefon>
+                    <AutorEmail xmlns:xs="http://www.w3.org/2001/XMLSchema#" datatype="xs:string" property="pred:autor_email">soviljnikola3@gmail.com</AutorEmail>
+                    <zah:fax>1401904890</zah:fax>
                 </zah:kontakt>
-                <zah:ime>Jovan</zah:ime>
-                <zah:prezime>Jovancevic</zah:prezime>
+                <zah:ime>Nikola</zah:ime>
+                <zah:prezime>Sovilj</zah:prezime>
                 <zah:adresa>
-                    <zah:ulica>Nova</zah:ulica>
-                    <zah:broj>12</zah:broj>
+                    <zah:ulica>Cara Lazara</zah:ulica>
+                    <zah:broj>13</zah:broj>
                     <zah:postanski_broj>21000</zah:postanski_broj>
-                    <zah:mesto>Veternik</zah:mesto>
+                    <zah:mesto>Detelinara</zah:mesto>
                     <zah:drzava>Srbija</zah:drzava>
                 </zah:adresa>
-                <zah:drzavljanstvo>Srbija</zah:drzavljanstvo>
-                <zah:pseudonim>joca</zah:pseudonim>
+                <zah:drzavljanstvo>Srpsko</zah:drzavljanstvo>
                 <zah:godina_smrti>0</zah:godina_smrti>
             </zah:autor>
         </zah:autori>
         <zah:anoniman_autor>false</zah:anoniman_autor>
     </zah:autorsko_delo>
+    <zah:prilozi xmlns:zah="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema"/>
     <zah:zavod xmlns:zah="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema">
         <zah:naziv>Zavod za intelektualnu svojinu</zah:naziv>
         <zah:adresa>
@@ -102,7 +61,7 @@
             <zah:drzava>Srbija</zah:drzava>
         </zah:adresa>
     </zah:zavod>
-    <BrojResenja datatype="xs:string" property="pred:broj_resenja"/>
+    <BrojResenja datatype="xs:string" property="pred:broj_resenja">1675619733638</BrojResenja>
     <zah:opis_dela xmlns:zah="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema"/>
     <zah:primer_dela xmlns:zah="http://www.ftn.uns.ac.rs/xwt" xmlns:xs="http://www.w3.org/2001/XMLSchema"/>
 </zahtev>
